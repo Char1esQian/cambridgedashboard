@@ -1,0 +1,152 @@
+{
+  "Monday": {
+    "Breakfast": {
+      "name": "Croissant, Egg, Cheese",
+      "description": "",
+      "price": "$2.90–$4.95"
+    },
+    "Soup": {
+      "name": "Vegetable Beef",
+      "description": "",
+      "price": "$2.90–$3.85"
+    },
+    "Deli": {
+      "name": "Tofu Bahn Mi",
+      "description": "Pickled Vegetables, Spicy Aioli",
+      "price": "$8.25"
+    },
+    "Plant Power": {
+      "name": "Spinach, Mushroom, Caramelized Onion, Pesto",
+      "description": "Flatbread/Cauliflower Crust",
+      "price": "$8.95"
+    },
+    "Action": {
+      "name": "Wing Bar: Chicken Wings, Potato Salad",
+      "description": "Sauces, Carrots and Celery, Blue Cheese Dressing",
+      "price": "$11.95"
+    }
+  },
+  "Tuesday": {
+    "Breakfast": {
+      "name": "Ham, Egg, Tomato, English Muffin",
+      "description": "",
+      "price": "$2.90–$4.95"
+    },
+    "Soup": {
+      "name": "Turkey Gumbo",
+      "description": "",
+      "price": "$2.90–$3.85"
+    },
+    "Deli": {
+      "name": "Buffalo Chicken Wrap",
+      "description": "",
+      "price": "$8.25"
+    },
+    "Carving": {
+      "name": "Baked Pasta, Ricotta and Mozzarella, Marinara, Italian Sausage",
+      "description": "",
+      "price": "$11.95"
+    },
+    "Charred": {
+      "name": "Chicken, Broccoli, Mozzarella",
+      "description": "Flatbread/Cauliflower Crust",
+      "price": "$8.95"
+    },
+    "Action": {
+      "name": "Taco Tuesday",
+      "description": "Chicken, Beef, Assorted Toppings, Tortillas",
+      "price": "$11.95"
+    }
+  },
+  "Wednesday": {
+    "Breakfast": {
+      "name": "Egg, Sausage, Cheddar, Croissant",
+      "description": "",
+      "price": "$2.90–$4.95"
+    },
+    "Soup": {
+      "name": "Pasta e Fagioli",
+      "description": "",
+      "price": "$2.90–$3.85"
+    },
+    "Deli": {
+      "name": "Portabello Mushroom, Balsamic Glaze, Mozzarella, Tomato",
+      "description": "",
+      "price": "$8.25"
+    },
+    "Carving": {
+      "name": "Beef Pot Roast",
+      "description": "Garlic Mashed Potatoes, Green Beans",
+      "price": "$12.95"
+    },
+    "Charred": {
+      "name": "Hawaiian: Ham, Pineapple",
+      "description": "Flatbread/Cauliflower Crust",
+      "price": "$8.95"
+    },
+    "Action": {
+      "name": "Jerk Chicken, Rasta Pasta",
+      "description": "Spiced Sweet Pepper Cream Sauce",
+      "price": "$11.95"
+    }
+  },
+  "Thursday": {
+    "Breakfast": {
+      "name": "Egg, American, Bagel",
+      "description": "",
+      "price": "$2.90–$4.95"
+    },
+    "Soup": {
+      "name": "Spicy Bean and Corn",
+      "description": "",
+      "price": "$2.90–$3.85"
+    },
+    "Deli": {
+      "name": "Cubano",
+      "description": "Ham, Pork, Swiss, Pickles, Mustard, Sub Roll",
+      "price": "$8.25"
+    },
+    "Charred": {
+      "name": "Chicken Ranch",
+      "description": "Flatbread/Cauliflower Crust",
+      "price": "$8.95"
+    },
+    "Carving": {
+      "name": "Pork Loin Roast",
+      "description": "Ratatouille, Roasted Potatoes",
+      "price": "$11.95"
+    },
+    "Action": {
+      "name": "Chicken and/or Vegetable Vindaloo",
+      "description": "Basmati Rice, Spicy Cauliflower, Potatoes and Peas",
+      "price": "$12.95"
+    }
+  },
+  "Friday": {
+    "Breakfast": {
+      "name": "Ham, Egg, Swiss, Croissant",
+      "description": "",
+      "price": "$2.90–$4.95"
+    },
+    "Soup": {
+      "name": "New England Clam Chowder",
+      "description": "",
+      "price": "$3.65–$4.35"
+    },
+    "Deli": {
+      "name": "Tuna Melt",
+      "description": "Tomato, American, Multi Grain",
+      "price": "$8.25"
+    },
+    "Charred": {
+      "name": "Create Your Own",
+      "description": "Flatbread/Cauliflower Crust",
+      "price": "$8.95"
+    },
+    "Action": {
+      "name": "Pan-Roasted Haddock",
+      "description": "Air-Fried Potatoes, Tartar Sauce, Small Salad",
+      "price": "$12.95"
+    }
+  }
+}
