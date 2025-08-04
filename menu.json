@@ -6,13 +6,13 @@
       "price": "$2.90–$4.95"
     },
     "Soup": {
-      "name": "Turkey and Andouille Gumbo",
+      "name": "Tom Kha Gai – Thai Coconut Chicken Soup",
       "description": "",
       "price": "$2.90–$3.85"
     },
     "Deli": {
-      "name": "Tofu Bahn Mi",
-      "description": "Pickled Vegetables, Spicy Aioli",
+      "name": "Meatball Sub",
+      "description": "Provolone, Marinara Sauce",
       "price": "$8.25"
     },
     "Plant Power": {
@@ -21,8 +21,8 @@
       "price": "$8.95"
     },
     "Action": {
-      "name": "Wing Bar: Chicken Wings, Roasted Potatoes",
-      "description": "Sauces, Carrots and Celery, Blue Cheese Dressing",
+      "name": "Scampi",
+      "description": "Shrimp, Chicken, Zucchini, Tomatoes, Penne, Garlic-Wine Sauce",
       "price": "$11.95"
     }
   },
@@ -32,8 +32,8 @@
       "description": "",
       "price": "$2.90–$4.95"
     },
-    "Soup": {
-      "name": "Lentil and Spinach",
+    "Plant Power": {
+      "name": "Gazpacho",
       "description": "",
       "price": "$2.90–$3.85"
     },
@@ -43,9 +43,9 @@
       "price": "$8.25"
     },
     "Carving": {
-      "name": "Beef Pot Roast",
-      "description": "Rosemary and Garlic Mashed Potatoes, Green Beans",
-      "price": "$11.95"
+      "name": "Spinach and Goat Cheese Stuffed Portabello Mushroom",
+      "description": "Wild Rice Pilaf",
+      "price": "$10.95"
     },
     "Charred": {
       "name": "Chicken, Broccoli, Mozzarella",
@@ -54,13 +54,13 @@
     },
     "Action": {
       "name": "Taco Tuesday",
-      "description": "Chicken, Beef, Assorted Toppings, Tortillas",
+      "description": "Chicken, Beef, Assorted Toppings, Choice of Taco Bowl or Tortillas",
       "price": "$11.95"
     }
   },
   "Wednesday": {
     "Breakfast": {
-      "name": "Egg, Sausage, Cheddar, Croissant",
+      "name": "Egg, Sausage, American, Croissant",
       "description": "",
       "price": "$2.90–$4.95"
     },
@@ -75,14 +75,19 @@
       "price": "$8.25"
     },
     "Carving": {
-      "name": "Grilled Pork Loin",
-      "description": "Pineapple Salsa, Rice and Beans",
+      "name": "Pulled Pork",
+      "description": "Bulkie Roll, Coleslaw, Green Beans",
       "price": "$11.95"
     },
     "Charred": {
-      "name": "Jerk Chicken, Rasta Pasta",
-      "description": "Spiced Sweet Pepper Cream Sauce",
-      "price": "$11.95"
+      "name": "Hawaiian: Ham, Pineapple",
+      "description": "Flatbread/Cauliflower Crust",
+      "price": "$8.95"
+    },
+    "Plant Power": {
+      "name": "Beef Stroganoff",
+      "description": "Buttered Egg Noodles, Peas, Mushrooms",
+      "price": "$12.95"
     }
   },
   "Thursday": {
@@ -92,7 +97,39 @@
       "price": "$2.90–$4.95"
     },
     "Soup": {
-      "name": "Spicy Bean and Corn",
+      "name": "Spicy Black Bean",
+      "description": "",
+      "price": "$2.90–$3.85"
+    },
+    "Deli": {
+      "name": "Ham and Brie",
+      "description": "",
+      "price": "$8.25"
+    },
+    "Charred": {
+      "name": "Pepperoni and Mushroom",
+      "description": "Flatbread/Cauliflower Crust",
+      "price": "$8.95"
+    },
+    "Carving": {
+      "name": "Grilled Vegetable and Ricotta Lasagna",
+      "description": "",
+      "price": "$10.95"
+    },
+    "Action": {
+      "name": "Stir-Fried Chicken and Baby Bok Choy",
+      "description": "Sesame Garlic Sauce, Vegetable Fried Rice",
+      "price": "$11.95"
+    }
+  },
+  "Friday": {
+    "Breakfast": {
+      "name": "Egg, American, Bagel",
+      "description": "",
+      "price": "$2.90–$4.95"
+    },
+    "Soup": {
+      "name": "New England Clam Chowder",
       "description": "",
       "price": "$2.90–$3.85"
     },
@@ -106,41 +143,9 @@
       "description": "Flatbread/Cauliflower Crust",
       "price": "$8.95"
     },
-    "Carving": {
-      "name": "Grilled Lamb Top Round",
-      "description": "Zucchini and Tomatoes, Roasted Potatoes",
-      "price": "$12.95"
-    },
     "Action": {
-      "name": "Risotto Bar",
-      "description": "Lemon, Spinach and Sweet Pea Risotto, Chicken, Shrimp",
-      "price": "$11.95"
-    }
-  },
-  "Friday": {
-    "Breakfast": {
-      "name": "Ham, Egg, Swiss, Croissant",
-      "description": "",
-      "price": "$2.90–$4.95"
-    },
-    "Soup": {
-      "name": "New England Clam Chowder",
-      "description": "",
-      "price": "$3.65–$4.35"
-    },
-    "Deli": {
-      "name": "Tuna Melt",
-      "description": "Tomato, American, Multi Grain",
-      "price": "$8.25"
-    },
-    "Charred": {
-      "name": "Create Your Own",
-      "description": "Flatbread/Cauliflower Crust",
-      "price": "$8.95"
-    },
-    "Action": {
-      "name": "Baked Stuffed Sole",
-      "description": "Shrimp, Farro, Asparagus",
+      "name": "Grilled Salmon Fillet",
+      "description": "Pesto, Roasted Potatoes, Mixed Vegetables",
       "price": "$12.95"
     }
   }
