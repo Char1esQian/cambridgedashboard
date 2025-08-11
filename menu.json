@@ -6,7 +6,7 @@
       "price": "$2.90–$4.95"
     },
     "Soup": {
-      "name": "Tom Kha Gai – Thai Coconut Chicken Soup",
+      "name": "Cream of Mushroom",
       "description": "",
       "price": "$2.90–$3.85"
     },
@@ -21,9 +21,9 @@
       "price": "$8.95"
     },
     "Action": {
-      "name": "Scampi",
-      "description": "Shrimp, Chicken, Zucchini, Tomatoes, Penne, Garlic-Wine Sauce",
-      "price": "$11.95"
+      "name": "Shrimp Creole",
+      "description": "Creamy Polenta, Braised Okra",
+      "price": "$12.95"
     }
   },
   "Tuesday": {
@@ -33,7 +33,7 @@
       "price": "$2.90–$4.95"
     },
     "Plant Power": {
-      "name": "Gazpacho",
+      "name": "French Onion",
       "description": "",
       "price": "$2.90–$3.85"
     },
@@ -43,9 +43,9 @@
       "price": "$8.25"
     },
     "Carving": {
-      "name": "Spinach and Goat Cheese Stuffed Portabello Mushroom",
-      "description": "Wild Rice Pilaf",
-      "price": "$10.95"
+      "name": "Steak Tips",
+      "description": "Onions and Peppers, Rosemary and Garlic Roasted Potatoes",
+      "price": "$12.95"
     },
     "Charred": {
       "name": "Chicken, Broccoli, Mozzarella",
@@ -54,7 +54,7 @@
     },
     "Action": {
       "name": "Taco Tuesday",
-      "description": "Chicken, Beef, Assorted Toppings, Choice of Taco Bowl or Tortillas",
+      "description": "Chicken, Beef, Assorted Toppings, Corn Tortillas",
       "price": "$11.95"
     }
   },
@@ -75,19 +75,19 @@
       "price": "$8.25"
     },
     "Carving": {
-      "name": "Pulled Pork",
-      "description": "Bulkie Roll, Coleslaw, Green Beans",
-      "price": "$11.95"
+      "name": "Roasted Turkey Breast",
+      "description": "Mushroom Gravy, Mashed Potatoes, Stuffing, Green Beans",
+      "price": "$12.95"
     },
     "Charred": {
       "name": "Hawaiian: Ham, Pineapple",
       "description": "Flatbread/Cauliflower Crust",
       "price": "$8.95"
     },
-    "Plant Power": {
-      "name": "Beef Stroganoff",
-      "description": "Buttered Egg Noodles, Peas, Mushrooms",
-      "price": "$12.95"
+    "Action": {
+      "name": "Orange-Flavored Beef",
+      "description": "Steamed Rice and Broccoli",
+      "price": "$11.95"
     }
   },
   "Thursday": {
@@ -102,38 +102,6 @@
       "price": "$2.90–$3.85"
     },
     "Deli": {
-      "name": "Ham and Brie",
-      "description": "",
-      "price": "$8.25"
-    },
-    "Charred": {
-      "name": "Pepperoni and Mushroom",
-      "description": "Flatbread/Cauliflower Crust",
-      "price": "$8.95"
-    },
-    "Carving": {
-      "name": "Grilled Vegetable and Ricotta Lasagna",
-      "description": "",
-      "price": "$10.95"
-    },
-    "Action": {
-      "name": "Stir-Fried Chicken and Baby Bok Choy",
-      "description": "Sesame Garlic Sauce, Vegetable Fried Rice",
-      "price": "$11.95"
-    }
-  },
-  "Friday": {
-    "Breakfast": {
-      "name": "Egg, American, Bagel",
-      "description": "",
-      "price": "$2.90–$4.95"
-    },
-    "Soup": {
-      "name": "New England Clam Chowder",
-      "description": "",
-      "price": "$2.90–$3.85"
-    },
-    "Deli": {
       "name": "Cubano",
       "description": "Ham, Pork, Swiss, Pickles, Mustard, Sub Roll",
       "price": "$8.25"
@@ -143,9 +111,41 @@
       "description": "Flatbread/Cauliflower Crust",
       "price": "$8.95"
     },
+    "Carving": {
+      "name": "Smoked Pork Ribs",
+      "description": "Sweet BBQ Sauce, Potato Salad, Ginger Glazed Carrots",
+      "price": "$11.95"
+    },
     "Action": {
-      "name": "Grilled Salmon Fillet",
-      "description": "Pesto, Roasted Potatoes, Mixed Vegetables",
+      "name": "Jerk Chicken, Rasta Pasta",
+      "description": "Spiced Sweet Pepper Cream Sauce",
+      "price": "$11.95"
+    }
+  },
+  "Friday": {
+    "Breakfast": {
+      "name": "Bacon, Egg, Cheddar, Croissant",
+      "description": "",
+      "price": "$2.90–$4.95"
+    },
+    "Soup": {
+      "name": "New England Clam Chowder",
+      "description": "",
+      "price": "$3.65–$4.35"
+    },
+    "Deli": {
+      "name": "Tuna Melt",
+      "description": "Tomato, American, Multi Grain",
+      "price": "$8.25"
+    },
+    "Charred": {
+      "name": "Create Your Own",
+      "description": "Flatbread/Cauliflower Crust",
+      "price": "$8.95"
+    },
+    "Action": {
+      "name": "Grilled Salmon",
+      "description": "Vegetable Lo Mein, Scallion Vinaigrette",
       "price": "$12.95"
     }
   }
