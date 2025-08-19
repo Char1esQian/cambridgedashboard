@@ -66,3 +66,87 @@
     },
     "Soup": {
       "name": "Pasta e Fagioli",
+      "description": "",
+      "price": "$2.90–$3.85"
+    },
+    "Deli": {
+      "name": "Portabello Mushroom, Balsamic Glaze, Mozzarella, Tomato",
+      "description": "",
+      "price": "$8.25"
+    },
+    "Carving": {
+      "name": "Roast Pork Shoulder",
+      "description": "Peach Salsa, Rice and Beans",
+      "price": "$11.95"
+    },
+    "Charred": {
+      "name": "Hawaiian: Ham, Pineapple",
+      "description": "Flatbread/Cauliflower Crust",
+      "price": "$8.95"
+    },
+    "Action": {
+      "name": "Lo Mein",
+      "description": "Sauces, Chicken, Shrimp, Vegetables",
+      "price": "$11.95"
+    }
+  },
+  "Thursday": {
+    "Breakfast": {
+      "name": "Egg, American, Bagel",
+      "description": "",
+      "price": "$2.90–$4.95"
+    },
+    "Soup": {
+      "name": "Spicy Bean and Corn",
+      "description": "",
+      "price": "$2.90–$3.85"
+    },
+    "Deli": {
+      "name": "Cubano",
+      "description": "Ham, Pork, Swiss, Pickles, Mustard, Sub Roll",
+      "price": "$8.25"
+    },
+    "Charred": {
+      "name": "Chicken Ranch",
+      "description": "Flatbread/Cauliflower Crust",
+      "price": "$8.95"
+    },
+    "Carving": {
+      "name": "Beef Pot Roast",
+      "description": "Rosemary and Garlic Mashed Potatoes, Green Beans",
+      "price": "$12.95"
+    },
+    "Action": {
+      "name": "Risotto Bar",
+      "description": "Lemon, Tomato, Basil and Sweet Pea Risotto, Chicken, Shrimp",
+      "price": "$11.95"
+    }
+  },
+  "Friday": {
+    "Breakfast": {
+      "name": "Ham, Egg, Swiss, Croissant",
+      "description": "",
+      "price": "$2.90–$4.95"
+    },
+    "Soup": {
+      "name": "New England Clam Chowder",
+      "description": "",
+      "price": "$3.65–$4.35"
+    },
+    "Deli": {
+      "name": "Tuna Melt",
+      "description": "Tomato, American, Multi Grain",
+      "price": "$8.25"
+    },
+    "Charred": {
+      "name": "Create Your Own",
+      "description": "Flatbread/Cauliflower Crust",
+      "price": "$8.95"
+    },
+    "Action": {
+      "name": "Sole a la Meuniere",
+      "description": "Brown Butter and Lemon, Lentils, Swiss Chard",
+      "price": "$12.95"
+    }
+  }
+}
