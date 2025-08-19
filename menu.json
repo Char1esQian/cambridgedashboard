@@ -6,13 +6,13 @@
       "price": "$2.90–$4.95"
     },
     "Soup": {
-      "name": "Cream of Mushroom",
+      "name": "Turkey and Andouille Gumbo",
       "description": "",
       "price": "$2.90–$3.85"
     },
     "Deli": {
-      "name": "Meatball Sub",
-      "description": "Provolone, Marinara Sauce",
+      "name": "Tofu Bahn Mi",
+      "description": "Pickled Vegetables, Spicy Aioli",
       "price": "$8.25"
     },
     "Plant Power": {
@@ -21,9 +21,9 @@
       "price": "$8.95"
     },
     "Action": {
-      "name": "Shrimp Creole",
-      "description": "Creamy Polenta, Braised Okra",
-      "price": "$12.95"
+      "name": "Wing Bar",
+      "description": "Chicken Wings, Roasted Potatoes, Sauces, Carrots and Celery, Blue Cheese Dressing",
+      "price": "$11.95"
     }
   },
   "Tuesday": {
@@ -32,8 +32,8 @@
       "description": "",
       "price": "$2.90–$4.95"
     },
-    "Plant Power": {
-      "name": "French Onion",
+    "Soup": {
+      "name": "Lentil and Spinach",
       "description": "",
       "price": "$2.90–$3.85"
     },
@@ -43,9 +43,9 @@
       "price": "$8.25"
     },
     "Carving": {
-      "name": "Steak Tips",
-      "description": "Onions and Peppers, Rosemary and Garlic Roasted Potatoes",
-      "price": "$12.95"
+      "name": "Baked Penne",
+      "description": "Three Cheeses, Spinach and Sweet Italian Sausage",
+      "price": "$11.95"
     },
     "Charred": {
       "name": "Chicken, Broccoli, Mozzarella",
@@ -54,13 +54,13 @@
     },
     "Action": {
       "name": "Taco Tuesday",
-      "description": "Chicken, Beef, Assorted Toppings, Corn Tortillas",
+      "description": "Chicken, Beef, Assorted Toppings, Tortillas",
       "price": "$11.95"
     }
   },
   "Wednesday": {
     "Breakfast": {
-      "name": "Egg, Sausage, American, Croissant",
+      "name": "Egg, Sausage, Cheddar, Croissant",
       "description": "",
       "price": "$2.90–$4.95"
     },
@@ -75,9 +75,9 @@
       "price": "$8.25"
     },
     "Carving": {
-      "name": "Roasted Turkey Breast",
-      "description": "Mushroom Gravy, Mashed Potatoes, Stuffing, Green Beans",
-      "price": "$12.95"
+      "name": "Roast Pork Shoulder",
+      "description": "Peach Salsa, Rice and Beans",
+      "price": "$11.95"
     },
     "Charred": {
       "name": "Hawaiian: Ham, Pineapple",
@@ -85,8 +85,8 @@
       "price": "$8.95"
     },
     "Action": {
-      "name": "Orange-Flavored Beef",
-      "description": "Steamed Rice and Broccoli",
+      "name": "Lo Mein",
+      "description": "Sauces, Chicken, Shrimp, Vegetables",
       "price": "$11.95"
     }
   },
@@ -97,7 +97,7 @@
       "price": "$2.90–$4.95"
     },
     "Soup": {
-      "name": "Spicy Black Bean",
+      "name": "Spicy Bean and Corn",
       "description": "",
       "price": "$2.90–$3.85"
     },
@@ -112,19 +112,19 @@
       "price": "$8.95"
     },
     "Carving": {
-      "name": "Smoked Pork Ribs",
-      "description": "Sweet BBQ Sauce, Potato Salad, Ginger Glazed Carrots",
-      "price": "$11.95"
+      "name": "Beef Pot Roast",
+      "description": "Rosemary and Garlic Mashed Potatoes, Green Beans",
+      "price": "$12.95"
     },
     "Action": {
-      "name": "Jerk Chicken, Rasta Pasta",
-      "description": "Spiced Sweet Pepper Cream Sauce",
+      "name": "Risotto Bar",
+      "description": "Lemon, Tomato, Basil and Sweet Pea Risotto, Chicken, Shrimp",
       "price": "$11.95"
     }
   },
   "Friday": {
     "Breakfast": {
-      "name": "Bacon, Egg, Cheddar, Croissant",
+      "name": "Ham, Egg, Swiss, Croissant",
       "description": "",
       "price": "$2.90–$4.95"
     },
@@ -144,8 +144,8 @@
       "price": "$8.95"
     },
     "Action": {
-      "name": "Grilled Salmon",
-      "description": "Vegetable Lo Mein, Scallion Vinaigrette",
+      "name": "Sole a la Meuniere",
+      "description": "Brown Butter and Lemon, Lentils, Swiss Chard",
       "price": "$12.95"
     }
   }
