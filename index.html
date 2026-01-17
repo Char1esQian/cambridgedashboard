@@ -1,172 +1,471 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Bluebikes Lobby Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg-clear: linear-gradient(to bottom, #1e3c72, #2a5298);
-      --bg-clouds: linear-gradient(to bottom, #616161, #9e9e9e);
-      --bg-rain: linear-gradient(to bottom, #3a3a3a, #4f5b62);
-      --bg-snow: linear-gradient(to bottom, #dfe9f3, #ffffff);
-      --bg-thunder: linear-gradient(to bottom, #232526, #414345);
-      --card-bg: rgba(0, 0, 0, 0.3);
+      --bg-clear: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      --bg-clouds: linear-gradient(135deg, #373B44 0%, #4286f4 100%);
+      --bg-rain: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+      --bg-snow: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+      --bg-thunder: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+      --card-bg: rgba(255, 255, 255, 0.08);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --card-hover: rgba(255, 255, 255, 0.12);
       --primary: #ffffff;
-      --secondary: #d1d5db;
-      --accent: #60a5fa;
+      --secondary: rgba(255, 255, 255, 0.7);
+      --accent: #6366f1;
+      --accent-glow: rgba(99, 102, 241, 0.4);
+      --success: #10b981;
+      --warning: #f59e0b;
     }
+
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
-    html, body {
-      height: 100%;
-    }
+
+    html,
     body {
-      font-family: 'Inter', sans-serif;
+      height: 100%;
+      overflow-x: hidden;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg-clear);
-      background-size: cover;
+      background-attachment: fixed;
       color: var(--primary);
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background 1s ease;
-    }
-    .dashboard {
-      backdrop-filter: blur(10px);
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      width: 90vw;
-      max-width: 1200px;
+      transition: background 1.5s ease;
+      min-height: 100vh;
       padding: 2rem;
     }
-    .greeting {
-      font-size: 2rem;
-      font-weight: 600;
-      color: var(--secondary);
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(ellipse at 20% 20%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
     }
+
+    .dashboard {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 1100px;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.6;
+      }
+    }
+
+    @keyframes shimmer {
+      0% {
+        background-position: -200% 0;
+      }
+
+      100% {
+        background-position: 200% 0;
+      }
+    }
+
+    .greeting {
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--secondary);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
     .header {
       display: flex;
       justify-content: space-between;
-      align-items: end;
-      font-size: clamp(2rem, 6vw, 4rem);
-      font-weight: 700;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      padding-bottom: 0.5rem;
+      align-items: flex-end;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 0.5rem;
     }
+
+    #clock {
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 700;
+      letter-spacing: -2px;
+      background: linear-gradient(135deg, #fff 0%, rgba(255, 255, 255, 0.8) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
     #date {
-      font-size: 0.4em;
+      font-size: 1.2rem;
       color: var(--secondary);
       font-weight: 400;
+      padding-bottom: 0.5rem;
     }
-    .stations {
+
+    .cards-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
     }
-    .station-card {
+
+    .card {
       background: var(--card-bg);
-      border-radius: 1rem;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--card-border);
+      border-radius: 1.25rem;
       padding: 1.5rem;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      gap: 0.75rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
     }
-    .station-card h2 {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--primary);
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
     }
-    .status {
-      font-size: 3rem;
-      font-weight: 700;
+
+    .card:hover {
+      background: var(--card-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-header {
       display: flex;
-      gap: 0.5rem;
-      align-items: baseline;
+      align-items: center;
+      gap: 0.75rem;
     }
-    .status span {
-      font-size: 0.4em;
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      background: linear-gradient(135deg, var(--accent) 0%, #8b5cf6 100%);
+      box-shadow: 0 4px 15px var(--accent-glow);
+    }
+
+    .card-icon.home {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+    }
+
+    .card-icon.work {
+      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+    }
+
+    .card-icon.menu {
+      background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+      box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4);
+    }
+
+    .card h2 {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .status-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1.1;
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+    }
+
+    .status-value .label {
+      font-size: 0.9rem;
       font-weight: 400;
       color: var(--secondary);
     }
-    .footer {
-      font-size: 1.5rem;
-      color: var(--secondary);
+
+    .status-row {
       display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      padding-top: 1rem;
-    }
-    .footer .main {
-      font-size: 2.2rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    .footer .icon {
-      font-size: 3rem;
-    }
-    .footer .details {
-      font-size: 1.2rem;
-      color: var(--primary);
-    }
-    #menuContent {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
       gap: 1.5rem;
     }
+
+    .status-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .status-item .number {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .status-item .label {
+      font-size: 0.8rem;
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .menu-card {
+      grid-column: span 2;
+    }
+
+    #menuContent {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
     .menu-item {
       display: flex;
       align-items: flex-start;
       gap: 1rem;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      transition: all 0.2s ease;
     }
+
+    .menu-item:hover {
+      background: rgba(255, 255, 255, 0.06);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
     .menu-item-icon {
-      font-size: 1.75rem;
+      font-size: 1.5rem;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      flex-shrink: 0;
     }
+
     .menu-item-content {
       flex: 1;
+      min-width: 0;
     }
+
+    .menu-item-content .category {
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.25rem;
+    }
+
     .menu-item-content .name {
       font-weight: 600;
+      font-size: 1rem;
+      line-height: 1.3;
+      margin-bottom: 0.25rem;
     }
+
     .menu-item-content .desc {
-      font-size: 0.9rem;
-      color: var(--secondary);
-    }
-    .menu-item-content .price {
       font-size: 0.85rem;
       color: var(--secondary);
+      line-height: 1.4;
+    }
+
+    .menu-item-content .price {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--success);
+      margin-top: 0.5rem;
+    }
+
+    .weather-card {
+      grid-column: span 2;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.1) 100%);
+    }
+
+    .weather-main {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .weather-icon {
+      font-size: 3.5rem;
+      line-height: 1;
+    }
+
+    .weather-info {
+      flex: 1;
+    }
+
+    .weather-temp {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    .weather-condition {
+      font-size: 1.1rem;
+      color: var(--secondary);
+    }
+
+    .weather-details {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--card-border);
+    }
+
+    .weather-detail {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .weather-detail .value {
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .weather-detail .label {
+      font-size: 0.75rem;
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .loading {
+      animation: pulse 1.5s infinite;
+    }
+
+    @media (max-width: 768px) {
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .menu-card,
+      .weather-card {
+        grid-column: span 1;
+      }
+
+      #menuContent {
+        grid-template-columns: 1fr;
+      }
+
+      .weather-details {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
     }
   </style>
 </head>
+
 <body>
   <div class="dashboard">
-    <div class="greeting">Good day, Charles!</div>
+    <div class="greeting" id="greeting">Good day, Charles!</div>
     <div class="header">
       <div id="clock">--:--</div>
       <div id="date">--</div>
     </div>
-    <div class="station-card" id="menuCard">
-      <h2>Today's Café Menu</h2>
-      <div id="menuContent">Loading menu…</div>
-    </div>
-    <div class="stations">
-      <div class="station-card">
-        <h2>Home Station</h2>
-        <div class="status" id="homeStatus">Loading&nbsp;<span>bikes</span></div>
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon home">🏠</div>
+          <h2>Home Station</h2>
+        </div>
+        <div class="status-row" id="homeStatus">
+          <div class="status-item">
+            <span class="number loading">--</span>
+            <span class="label">Bikes</span>
+          </div>
+          <div class="status-item">
+            <span class="number loading">--</span>
+            <span class="label">Docks</span>
+          </div>
+        </div>
       </div>
-      <div class="station-card">
-        <h2>Work Station</h2>
-        <div class="status" id="workStatus">Loading&nbsp;<span>bikes</span></div>
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon work">💼</div>
+          <h2>Work Station</h2>
+        </div>
+        <div class="status-row" id="workStatus">
+          <div class="status-item">
+            <span class="number loading">--</span>
+            <span class="label">Bikes</span>
+          </div>
+          <div class="status-item">
+            <span class="number loading">--</span>
+            <span class="label">Docks</span>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="footer" id="weather">
-      <div class="main"><span class="icon">⛅</span><span>Loading weather…</span></div>
+      <div class="card menu-card">
+        <div class="card-header">
+          <div class="card-icon menu">🍽️</div>
+          <h2>Today's Café Menu</h2>
+        </div>
+        <div id="menuContent"><span class="loading">Loading menu…</span></div>
+      </div>
+      <div class="card weather-card" id="weather">
+        <div class="weather-main">
+          <div class="weather-icon loading">⛅</div>
+          <div class="weather-info">
+            <div class="weather-temp loading">--°C</div>
+            <div class="weather-condition">Loading weather…</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <script>
@@ -181,13 +480,23 @@
       "Soup": "🍲",
       "Deli": "🥪",
       "Plant Power": "🌱",
-      "Action": "🔥"
+      "Action": "🔥",
+      "Carving": "🍖",
+      "Charred": "🍕"
     };
+
+    function updateGreeting() {
+      const hour = new Date().getHours();
+      let greeting = "Good evening";
+      if (hour < 12) greeting = "Good morning";
+      else if (hour < 17) greeting = "Good afternoon";
+      document.getElementById("greeting").textContent = `${greeting}, Charles!`;
+    }
 
     function updateClock() {
       const now = new Date();
       const clock = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-      const date = now.toLocaleDateString([], { weekday: "short", month: "short", day: "numeric" });
+      const date = now.toLocaleDateString([], { weekday: "long", month: "long", day: "numeric" });
       document.getElementById("clock").textContent = clock;
       document.getElementById("date").textContent = date;
       setTimeout(updateClock, 1000);
@@ -199,11 +508,19 @@
         const data = await res.json();
         const st = data.data.stations.find(s => s.station_id === stationId);
         if (!st) throw new Error("Station not found");
-        document.getElementById(elementId).innerHTML =
-          `${st.num_bikes_available} <span>bikes</span> · ${st.num_docks_available} <span>docks</span>`;
+        document.getElementById(elementId).innerHTML = `
+          <div class="status-item">
+            <span class="number">${st.num_bikes_available}</span>
+            <span class="label">Bikes</span>
+          </div>
+          <div class="status-item">
+            <span class="number">${st.num_docks_available}</span>
+            <span class="label">Docks</span>
+          </div>
+        `;
       } catch (err) {
         console.error(err);
-        document.getElementById(elementId).textContent = "Unavailable";
+        document.getElementById(elementId).innerHTML = `<span class="status-item"><span class="number">--</span><span class="label">Unavailable</span></span>`;
       }
     }
 
@@ -224,15 +541,15 @@
     }
 
     function updateBackgroundByWeather(main) {
-      const bg = getComputedStyle(document.documentElement);
+      const root = document.documentElement;
       const b = document.body.style;
       main = main.toLowerCase();
-      if (main.includes("clear")) b.background = bg.getPropertyValue("--bg-clear");
-      else if (main.includes("cloud")) b.background = bg.getPropertyValue("--bg-clouds");
-      else if (main.includes("rain") || main.includes("drizzle")) b.background = bg.getPropertyValue("--bg-rain");
-      else if (main.includes("snow")) b.background = bg.getPropertyValue("--bg-snow");
-      else if (main.includes("thunder")) b.background = bg.getPropertyValue("--bg-thunder");
-      else b.background = bg.getPropertyValue("--bg-clear");
+      if (main.includes("clear")) b.background = getComputedStyle(root).getPropertyValue("--bg-clear");
+      else if (main.includes("cloud")) b.background = getComputedStyle(root).getPropertyValue("--bg-clouds");
+      else if (main.includes("rain") || main.includes("drizzle")) b.background = getComputedStyle(root).getPropertyValue("--bg-rain");
+      else if (main.includes("snow")) b.background = getComputedStyle(root).getPropertyValue("--bg-snow");
+      else if (main.includes("thunder")) b.background = getComputedStyle(root).getPropertyValue("--bg-thunder");
+      else b.background = getComputedStyle(root).getPropertyValue("--bg-clear");
     }
 
     async function fetchMenu() {
@@ -247,7 +564,7 @@
         const todayMenu = data[today];
 
         if (!todayMenu) {
-          menuCard.innerHTML = `<em>No menu available for ${today}.</em>`;
+          menuCard.innerHTML = `<em style="color: var(--secondary)">No menu available for ${today}.</em>`;
           return;
         }
 
@@ -255,15 +572,16 @@
           <div class="menu-item">
             <div class="menu-item-icon">${categoryIcons[category] || "🍽️"}</div>
             <div class="menu-item-content">
-              <div class="name">${category}: ${item.name}</div>
-              <div class="desc">${item.description || ""}</div>
+              <div class="category">${category}</div>
+              <div class="name">${item.name}</div>
+              ${item.description ? `<div class="desc">${item.description}</div>` : ''}
               <div class="price">${item.price}</div>
             </div>
           </div>
         `).join("");
       } catch (err) {
         console.error(err);
-        menuCard.innerHTML = `<em>Unable to load menu.</em>`;
+        menuCard.innerHTML = `<em style="color: var(--secondary)">Unable to load menu.</em>`;
       }
     }
 
@@ -282,21 +600,49 @@
         updateBackgroundByWeather(main);
 
         document.getElementById("weather").innerHTML = `
-          <div class="main"><span class="icon">${icon}</span> <span>${main} · ${temp}°C</span></div>
-          <div class="details">Feels like: ${feels}°C · Humidity: ${humidity}% · Wind: ${wind} m/s</div>
+          <div class="weather-main">
+            <div class="weather-icon">${icon}</div>
+            <div class="weather-info">
+              <div class="weather-temp">${temp}°C</div>
+              <div class="weather-condition">${main}</div>
+            </div>
+          </div>
+          <div class="weather-details">
+            <div class="weather-detail">
+              <span class="value">${feels}°C</span>
+              <span class="label">Feels Like</span>
+            </div>
+            <div class="weather-detail">
+              <span class="value">${humidity}%</span>
+              <span class="label">Humidity</span>
+            </div>
+            <div class="weather-detail">
+              <span class="value">${wind} m/s</span>
+              <span class="label">Wind</span>
+            </div>
+          </div>
         `;
       } catch (err) {
         console.error(err);
-        document.getElementById("weather").innerHTML =
-          `<div class="main"><span class="icon">⚠️</span> Weather unavailable</div>`;
+        document.getElementById("weather").innerHTML = `
+          <div class="weather-main">
+            <div class="weather-icon">⚠️</div>
+            <div class="weather-info">
+              <div class="weather-temp">--</div>
+              <div class="weather-condition">Weather unavailable</div>
+            </div>
+          </div>
+        `;
       }
       setTimeout(fetchWeather, 600000);
     }
 
+    updateGreeting();
     updateClock();
     refreshBikes();
     fetchWeather();
     fetchMenu();
   </script>
 </body>
+
 </html>
