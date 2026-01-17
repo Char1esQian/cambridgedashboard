@@ -8,9 +8,10 @@ import os
 import sys
 import json
 import requests
-import google.generativeai as genai
 from PIL import Image
 from io import BytesIO
+from google import genai
+from google.genai import types
 
 MENU_IMAGE_URL = "https://cafe.sebastians.com/sebclients/3130alewife.jpg"
 
@@ -59,20 +60,31 @@ def fetch_menu_image():
     response.raise_for_status()
     image = Image.open(BytesIO(response.content))
     print(f"Image downloaded: {image.size[0]}x{image.size[1]}", file=sys.stderr)
-    return image
+    return image, response.content
 
 
-def extract_menu_with_gemini(image):
+def extract_menu_with_gemini(image_bytes):
     """Use Gemini Vision API to extract menu text and convert to JSON."""
     api_key = os.environ.get("GEMINI_API_KEY")
     if not api_key:
         raise ValueError("GEMINI_API_KEY environment variable not set")
 
     print("Sending image to Gemini API...", file=sys.stderr)
-    genai.configure(api_key=api_key)
-
-    model = genai.GenerativeModel("gemini-1.5-flash")
-    response = model.generate_content([EXTRACTION_PROMPT, image])
+    
+    # Initialize the client with API key
+    client = genai.Client(api_key=api_key)
+    
+    # Create the image part
+    image_part = types.Part.from_bytes(
+        data=image_bytes,
+        mime_type="image/jpeg"
+    )
+    
+    # Generate content
+    response = client.models.generate_content(
+        model="gemini-2.0-flash",
+        contents=[EXTRACTION_PROMPT, image_part]
+    )
 
     raw_text = response.text.strip()
 
@@ -114,10 +126,10 @@ def validate_menu_json(menu_json):
 def main():
     try:
         # Fetch the menu image
-        image = fetch_menu_image()
+        image, image_bytes = fetch_menu_image()
 
         # Extract menu using Gemini
-        raw_json = extract_menu_with_gemini(image)
+        raw_json = extract_menu_with_gemini(image_bytes)
 
         # Parse and validate
         menu_data = json.loads(raw_json)
