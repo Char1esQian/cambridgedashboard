@@ -32,16 +32,24 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
           # Run the extraction script and capture output
-          python scripts/update_menu.py > menu_new.json 2> extraction.log
+          # Use || true to prevent immediate exit on failure
+          python scripts/update_menu.py > menu_new.json 2> extraction.log || EXTRACT_FAILED=true
 
-          # Show extraction log
+          # Always show extraction log
           echo "=== Extraction Log ==="
-          cat extraction.log
+          cat extraction.log || echo "(no log)"
 
-          # Show extracted menu
+          # Show extracted menu if it exists
           echo ""
           echo "=== Extracted Menu ==="
-          cat menu_new.json
+          cat menu_new.json || echo "(no output)"
+
+          # Exit with error if extraction failed
+          if [ "$EXTRACT_FAILED" = "true" ]; then
+            echo ""
+            echo "ERROR: Menu extraction failed. See log above."
+            exit 1
+          fi
 
           # Store menu content for summary
           echo "MENU_JSON<<EOF" >> $GITHUB_OUTPUT
