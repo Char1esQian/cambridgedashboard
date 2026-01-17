@@ -1,0 +1,90 @@
+name: Update Cafe Menu
+
+on:
+  schedule:
+    # Run every Monday at 8:00 AM EST (13:00 UTC)
+    - cron: '0 13 * * 1'
+  workflow_dispatch:
+    # Allow manual trigger from GitHub UI
+
+jobs:
+  update-menu:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Required to push commits
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r scripts/requirements.txt
+
+      - name: Fetch and extract menu
+        id: extract
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          # Run the extraction script and capture output
+          python scripts/update_menu.py > menu_new.json 2> extraction.log
+
+          # Show extraction log
+          echo "=== Extraction Log ==="
+          cat extraction.log
+
+          # Show extracted menu
+          echo ""
+          echo "=== Extracted Menu ==="
+          cat menu_new.json
+
+          # Store menu content for summary
+          echo "MENU_JSON<<EOF" >> $GITHUB_OUTPUT
+          cat menu_new.json >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
+      - name: Update menu.json
+        run: |
+          # Replace the old menu with the new one
+          mv menu_new.json menu.json
+
+          # Check if there are changes
+          if git diff --quiet menu.json; then
+            echo "No changes detected in menu"
+            echo "MENU_CHANGED=false" >> $GITHUB_ENV
+          else
+            echo "Menu has been updated"
+            echo "MENU_CHANGED=true" >> $GITHUB_ENV
+          fi
+
+      - name: Commit and push changes
+        if: env.MENU_CHANGED == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add menu.json
+          git commit -m "🍽️ Update cafe menu for week of $(date +'%B %d, %Y')"
+          git push
+
+      - name: Write job summary
+        run: |
+          echo "## 🍽️ Cafe Menu Update" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          if [ "$MENU_CHANGED" == "true" ]; then
+            echo "✅ **Menu updated successfully!**" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "ℹ️ **No changes detected** - menu.json is already up to date." >> $GITHUB_STEP_SUMMARY
+          fi
+
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Extracted Menu Content" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo '```json' >> $GITHUB_STEP_SUMMARY
+          cat menu.json >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
