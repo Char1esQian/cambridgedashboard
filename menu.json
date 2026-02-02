@@ -6,7 +6,7 @@
       "price": "$2.90-$4.95"
     },
     "Soup": {
-      "name": "Vegetable Beef",
+      "name": "Turkey and Andouille Gumbo",
       "description": "",
       "price": "$2.90-$3.85"
     },
@@ -21,7 +21,7 @@
       "price": "$8.95"
     },
     "Action": {
-      "name": "Omelet Bar: Cage-Free Egg Omelet, Cheeses, Vegetables, Meats, Home Fries",
+      "name": "Lo Mein Noodles, Sauces, Chicken, Shrimp, Vegetables",
       "description": "",
       "price": "$11.95"
     }
@@ -33,27 +33,27 @@
       "price": "$2.90-$4.95"
     },
     "Soup": {
-      "name": "Cream of Broccoli",
+      "name": "Lentil and Spinach",
       "description": "",
       "price": "$2.90-$3.85"
     },
     "Deli": {
-      "name": "Buffalo Chicken Wrap",
+      "name": "Ham and Brie, Bulkie Roll",
       "description": "",
       "price": "$8.25"
     },
+    "Carving": {
+      "name": "Baked Penne Pasta, Three Cheeses, Spinach, Marinara, Sweet Italian Sausage",
+      "description": "",
+      "price": "$10.95"
+    },
     "Charred": {
-      "name": "Ham, Broccoli, Mozzarella Flatbread/Cauliflower Crust",
+      "name": "Chicken, Broccoli, Mozzarella Flatbread/Cauliflower Crust",
       "description": "",
       "price": "$8.95"
     },
-    "Carving": {
-      "name": "Roasted Pork Loin, Fig Chutney, Sweet Potatoes, Swiss Chard",
-      "description": "",
-      "price": "$11.95"
-    },
     "Action": {
-      "name": "Taco Tuesday, Chicken, Beef, Assorted Toppings, Flour Tortillas",
+      "name": "Taco Tuesday, Chicken, Beef, Assorted Toppings, Tortillas",
       "description": "",
       "price": "$11.95"
     }
@@ -65,7 +65,7 @@
       "price": "$2.90-$4.95"
     },
     "Soup": {
-      "name": "Pasta e Fagioli",
+      "name": "Vegan Minestrone",
       "description": "",
       "price": "$2.90-$3.85"
     },
@@ -80,24 +80,24 @@
       "price": "$8.95"
     },
     "Action": {
-      "name": "Chicken Cacciatore, Tomato, Red Wine, Mushrooms and Peppers, Pasta",
+      "name": "Wing Bar: Chicken Wings, Roasted Potatoes, Sauces, Carrots and Celery, Blue Cheese Dressing",
       "description": "",
       "price": "$11.95"
     }
   },
   "Thursday": {
     "Breakfast": {
-      "name": "Egg, American, Bagel",
+      "name": "Egg, American, Bulkie Roll",
       "description": "",
       "price": "$2.90-$4.95"
     },
     "Soup": {
-      "name": "Chicken and Andouille Gumbo",
+      "name": "Spicy Bean and Corn",
       "description": "",
       "price": "$2.90-$3.85"
     },
     "Deli": {
-      "name": "Ham and Brie, Ciabatta, Tomato, Mustard",
+      "name": "Chicken Parmesan Sub",
       "description": "",
       "price": "$8.25"
     },
@@ -106,15 +106,10 @@
       "description": "",
       "price": "$8.95"
     },
-    "Carving": {
-      "name": "Slow-Cooked Pork Shoulder 'Pernil', Rice and Beans, Pineapple Salsa",
+    "Action": {
+      "name": "Risotto Bar:Spinach, Tomatoes, Peas and Mushrooms, Chicken, Shrimp",
       "description": "",
       "price": "$11.95"
-    },
-    "Action": {
-      "name": "Scampi: Shrimp and/or Chicken, Garlic White Wine Sauce, Pasta, Vegetables",
-      "description": "",
-      "price": "$12.95"
     }
   },
   "Friday": {
@@ -139,7 +134,7 @@
       "price": "$8.95"
     },
     "Action": {
-      "name": "Grilled Sea Bass Fillet, Sesame-Scallion Vinaigrette, Vegetable Fried Rice",
+      "name": "Miso-Glazed Cod Loin, Jasmine Rice, Baby Bok Choy",
       "description": "",
       "price": "$12.95"
     }
