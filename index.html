@@ -21,6 +21,10 @@
       --secondary: rgba(255, 255, 255, 0.8);
       --accent: #60a5fa;
       --success: #4ade80;
+      --shadow: 0 20px 45px rgba(15, 23, 42, 0.25);
+      --glass: rgba(15, 23, 42, 0.2);
+      --glass-strong: rgba(15, 23, 42, 0.35);
+      --card-radius: 1.25rem;
     }
 
     * {
@@ -261,7 +265,7 @@
       flex-direction: column;
       gap: 1rem;
       width: 100%;
-      max-width: 900px;
+      max-width: 980px;
       margin: 0 auto;
     }
 
@@ -300,18 +304,27 @@
       font-weight: 500;
     }
 
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
     .card {
-      background: var(--card-bg);
+      background: var(--glass);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--card-border);
-      border-radius: 1rem;
-      padding: 1.125rem 1.25rem;
-      transition: background 0.2s;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: var(--card-radius);
+      padding: 1.25rem 1.35rem;
+      transition: transform 0.2s ease, background 0.2s ease, border 0.2s ease;
+      box-shadow: var(--shadow);
     }
 
     .card:hover {
       background: var(--card-hover);
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.3);
     }
 
     .card-header {
@@ -337,6 +350,10 @@
 
     .icon-bike {
       background: rgba(74, 222, 128, 0.2);
+    }
+
+    .icon-train {
+      background: rgba(248, 113, 113, 0.25);
     }
 
     .card-title {
@@ -546,6 +563,54 @@
       color: var(--secondary);
     }
 
+    .card-wide {
+      grid-column: span 2;
+    }
+
+    .transit-list {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .transit-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.65rem 0.85rem;
+      border-radius: 0.75rem;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .transit-label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .transit-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .transit-subtitle {
+      font-size: 0.6875rem;
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .transit-time {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .transit-note {
+      font-size: 0.75rem;
+      color: var(--secondary);
+      margin-top: 0.25rem;
+    }
+
     @media (max-width: 600px) {
       body {
         padding: 1rem;
@@ -571,6 +636,14 @@
 
       .weather-stat {
         text-align: left;
+      }
+
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card-wide {
+        grid-column: span 1;
       }
 
       .stations-grid {
@@ -627,61 +700,80 @@
       <div id="date">--</div>
     </div>
 
-    <div class="card weather-card" id="weather">
-      <div class="weather-main">
-        <div class="weather-icon">--</div>
-        <div>
-          <div class="weather-temp loading">--°</div>
-          <div class="weather-condition">Loading...</div>
-        </div>
-      </div>
-      <div class="weather-stats">
-        <div class="weather-stat">
-          <div class="weather-stat-value">--</div>
-          <div class="weather-stat-label">Feels like</div>
-        </div>
-        <div class="weather-stat">
-          <div class="weather-stat-value">--</div>
-          <div class="weather-stat-label">Humidity</div>
-        </div>
-        <div class="weather-stat">
-          <div class="weather-stat-value">--</div>
-          <div class="weather-stat-label">Wind</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="card-header">
-        <div class="card-icon icon-menu">🍽</div>
-        <span class="card-title">Today's Menu</span>
-        <span style="margin-left:auto;font-size:0.75rem;color:var(--secondary);font-weight:500;" id="menuDay"></span>
-      </div>
-      <div id="menuContent"><span class="loading">Loading...</span></div>
-    </div>
-
-    <div class="expandable" id="bikeExpandable">
-      <div class="expandable-header" onclick="toggleBikes()">
-        <div class="expandable-left">
-          <div class="card-icon icon-bike">🚲</div>
-          <span class="expandable-title">Bluebikes Stations</span>
-        </div>
-        <span class="expandable-arrow">▼</span>
-      </div>
-      <div class="expandable-content">
-        <div class="stations-grid">
-          <div class="station">
-            <div class="station-name">Home Station</div>
-            <div class="station-stats" id="homeStatus">
-              <div class="stat"><span class="stat-value loading">--</span><span class="stat-label">Bikes</span></div>
-              <div class="stat"><span class="stat-value loading">--</span><span class="stat-label">Docks</span></div>
-            </div>
+    <div class="dashboard-grid">
+      <div class="card weather-card" id="weather">
+        <div class="weather-main">
+          <div class="weather-icon">--</div>
+          <div>
+            <div class="weather-temp loading">--°</div>
+            <div class="weather-condition">Loading...</div>
           </div>
-          <div class="station">
-            <div class="station-name">Work Station</div>
-            <div class="station-stats" id="workStatus">
-              <div class="stat"><span class="stat-value loading">--</span><span class="stat-label">Bikes</span></div>
-              <div class="stat"><span class="stat-value loading">--</span><span class="stat-label">Docks</span></div>
+        </div>
+        <div class="weather-stats">
+          <div class="weather-stat">
+            <div class="weather-stat-value">--</div>
+            <div class="weather-stat-label">Feels like</div>
+          </div>
+          <div class="weather-stat">
+            <div class="weather-stat-value">--</div>
+            <div class="weather-stat-label">Humidity</div>
+          </div>
+          <div class="weather-stat">
+            <div class="weather-stat-value">--</div>
+            <div class="weather-stat-label">Wind</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon icon-train">🚇</div>
+          <span class="card-title">MBTA Red Line</span>
+        </div>
+        <div class="transit-list" id="mbtaDepartures">
+          <div class="transit-item">
+            <div class="transit-label">
+              <span class="transit-title loading">Loading...</span>
+              <span class="transit-subtitle">Alewife → Southbound</span>
+            </div>
+            <span class="transit-time">--</span>
+          </div>
+        </div>
+        <div class="transit-note" id="mbtaUpdated">Last updated --</div>
+      </div>
+
+      <div class="card card-wide">
+        <div class="card-header">
+          <div class="card-icon icon-menu">🍽</div>
+          <span class="card-title">Today's Menu</span>
+          <span style="margin-left:auto;font-size:0.75rem;color:var(--secondary);font-weight:500;" id="menuDay"></span>
+        </div>
+        <div id="menuContent"><span class="loading">Loading...</span></div>
+      </div>
+
+      <div class="expandable card-wide" id="bikeExpandable">
+        <div class="expandable-header" onclick="toggleBikes()">
+          <div class="expandable-left">
+            <div class="card-icon icon-bike">🚲</div>
+            <span class="expandable-title">Bluebikes Stations</span>
+          </div>
+          <span class="expandable-arrow">▼</span>
+        </div>
+        <div class="expandable-content">
+          <div class="stations-grid">
+            <div class="station">
+              <div class="station-name">Home Station</div>
+              <div class="station-stats" id="homeStatus">
+                <div class="stat"><span class="stat-value loading">--</span><span class="stat-label">Bikes</span></div>
+                <div class="stat"><span class="stat-value loading">--</span><span class="stat-label">Docks</span></div>
+              </div>
+            </div>
+            <div class="station">
+              <div class="station-name">Work Station</div>
+              <div class="station-stats" id="workStatus">
+                <div class="stat"><span class="stat-value loading">--</span><span class="stat-label">Bikes</span></div>
+                <div class="stat"><span class="stat-value loading">--</span><span class="stat-label">Docks</span></div>
+              </div>
             </div>
           </div>
         </div>
@@ -695,6 +787,9 @@
     const LAT = 42.39;
     const LON = -71.14;
     const WEATHER_KEY = "bd5e378503939ddaee76f12ad7a97608";
+    const MBTA_STOP_ID = "place-alfcl";
+    const MBTA_ROUTE_ID = "Red";
+    const MBTA_DIRECTION_ID = 1;
 
     function toggleBikes() {
       document.getElementById('bikeExpandable').classList.toggle('open');
@@ -826,6 +921,65 @@
       setTimeout(refreshBikes, 60000);
     }
 
+    function formatMinutesUntil(time) {
+      const diffMs = time - new Date();
+      const diffMin = Math.round(diffMs / 60000);
+      if (diffMin <= 0) return "Now";
+      return `${diffMin} min`;
+    }
+
+    async function fetchMbtaDepartures() {
+      const listEl = document.getElementById("mbtaDepartures");
+      const updatedEl = document.getElementById("mbtaUpdated");
+      try {
+        const url = `https://api-v3.mbta.com/predictions?filter[stop]=${MBTA_STOP_ID}&filter[route]=${MBTA_ROUTE_ID}&filter[direction_id]=${MBTA_DIRECTION_ID}&sort=departure_time`;
+        const res = await fetch(url);
+        const data = await res.json();
+        const upcoming = data.data
+          .map(item => item.attributes.departure_time || item.attributes.arrival_time)
+          .filter(Boolean)
+          .map(time => new Date(time))
+          .filter(time => time > new Date(Date.now() - 60000))
+          .sort((a, b) => a - b)
+          .slice(0, 3);
+
+        if (!upcoming.length) {
+          listEl.innerHTML = `
+            <div class="transit-item">
+              <div class="transit-label">
+                <span class="transit-title">No imminent departures</span>
+                <span class="transit-subtitle">Alewife → Southbound</span>
+              </div>
+              <span class="transit-time">--</span>
+            </div>
+          `;
+        } else {
+          listEl.innerHTML = upcoming.map(time => `
+            <div class="transit-item">
+              <div class="transit-label">
+                <span class="transit-title">${formatMinutesUntil(time)}</span>
+                <span class="transit-subtitle">Departs ${time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
+              </div>
+              <span class="transit-time">${formatMinutesUntil(time)}</span>
+            </div>
+          `).join("");
+        }
+        updatedEl.textContent = `Last updated ${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`;
+      } catch (err) {
+        listEl.innerHTML = `
+          <div class="transit-item">
+            <div class="transit-label">
+              <span class="transit-title">Unable to load</span>
+              <span class="transit-subtitle">Alewife → Southbound</span>
+            </div>
+            <span class="transit-time">--</span>
+          </div>
+        `;
+        updatedEl.textContent = "Last updated --";
+      }
+      setTimeout(fetchMbtaDepartures, 60000);
+    }
+
     function getWeatherIcon(main) {
       main = main.toLowerCase();
       if (main.includes("clear")) return isNight() ? "🌙" : "☀️";
@@ -897,6 +1051,7 @@
     refreshBikes();
     fetchWeather();
     fetchMenu();
+    fetchMbtaDepartures();
   </script>
 </body>
 
