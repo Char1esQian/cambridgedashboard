@@ -372,6 +372,72 @@
       margin-top: 0.32rem;
     }
 
+    .temp-toggle-inline {
+      margin-top: 0.42rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.36rem;
+      width: fit-content;
+      padding: 0.2rem 0.38rem;
+      border-radius: 999px;
+      border: 1px solid rgba(20, 58, 98, 0.18);
+      background: rgba(255, 255, 255, 0.52);
+    }
+
+    .temp-toggle-label {
+      font-size: 0.66rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #21466f;
+    }
+
+    .temp-unit {
+      font-size: 0.67rem;
+      font-weight: 700;
+      color: #55708e;
+      opacity: 0.6;
+      transition: opacity 140ms ease, color 140ms ease;
+    }
+
+    .temp-unit.active {
+      opacity: 1;
+      color: #163d65;
+    }
+
+    .temp-toggle-inline .toggle {
+      width: 36px;
+      height: 20px;
+    }
+
+    .temp-toggle-inline .toggle-slider::after {
+      width: 12px;
+      height: 12px;
+      top: 3px;
+      left: 3px;
+    }
+
+    .temp-toggle-inline .toggle input:checked + .toggle-slider::after {
+      transform: translateX(16px);
+    }
+
+    body[data-night="true"] .temp-toggle-inline {
+      border-color: rgba(210, 228, 248, 0.26);
+      background: rgba(18, 36, 56, 0.52);
+    }
+
+    body[data-night="true"] .temp-toggle-label {
+      color: #d6e7fb;
+    }
+
+    body[data-night="true"] .temp-unit {
+      color: #9eb6d3;
+    }
+
+    body[data-night="true"] .temp-unit.active {
+      color: #e2efff;
+    }
+
     .quick-link {
       text-decoration: none;
       font-size: 0.7rem;
@@ -1555,6 +1621,15 @@
           <a class="quick-link" href="#menuSection">Lifestyle</a>
           <a class="quick-link" href="about.html">About</a>
         </div>
+        <div class="temp-toggle-inline" id="tempToggleControl">
+          <span class="temp-toggle-label">Temp</span>
+          <span class="temp-unit" id="tempUnitCLabel">&deg;C</span>
+          <label class="toggle">
+            <input type="checkbox" id="tempUnitToggle" aria-label="Toggle Fahrenheit temperature" />
+            <span class="toggle-slider"></span>
+          </label>
+          <span class="temp-unit" id="tempUnitFLabel">&deg;F</span>
+        </div>
       </div>
       <div id="date">--</div>
       <div class="hero-right">
@@ -1730,6 +1805,7 @@
     const WEATHER_CACHE_KEY = "cachedWeatherMain";
     const WEATHER_CACHE_TS_KEY = "cachedWeatherMainTs";
     const WEATHER_CACHE_MAX_AGE_MS = 45 * 60 * 1000;
+    const TEMP_UNIT_STORAGE_KEY = "temperatureUnit";
     const SPORTS_LOOKAHEAD_DAYS = 7;
     const SPORTS_REFRESH_MS = 30 * 60 * 1000;
     const EVENTS_PER_CITY = 6;
@@ -1817,6 +1893,8 @@
     let weatherSceneSyncKey = "";
     let currentBackgroundKey = "";
     let weatherSceneReady = !!currentWeatherMain;
+    let latestWeatherPayload = null;
+    let temperatureUnit = localStorage.getItem(TEMP_UNIT_STORAGE_KEY) === "F" ? "F" : "C";
     let latestRealEventsByCity = { cambridge: [], boston: [] };
     const celestialPlacementCache = new Map();
     let celestialPlacementRequestId = 0;
@@ -3018,6 +3096,45 @@
       return "WEATHER";
     }
 
+    function celsiusToFahrenheit(valueC) {
+      return (valueC * 9) / 5 + 32;
+    }
+
+    function formatWeatherTemp(valueC, withUnit = true) {
+      const normalized = Number(valueC);
+      if (!Number.isFinite(normalized)) return withUnit ? "--" : "--";
+      const shown = temperatureUnit === "F" ? celsiusToFahrenheit(normalized) : normalized;
+      const rounded = Math.round(shown);
+      return withUnit ? `${rounded}&deg;${temperatureUnit}` : `${rounded}&deg;`;
+    }
+
+    function updateTempToggleUI() {
+      const toggle = document.getElementById("tempUnitToggle");
+      const cLabel = document.getElementById("tempUnitCLabel");
+      const fLabel = document.getElementById("tempUnitFLabel");
+      if (toggle) toggle.checked = temperatureUnit === "F";
+      if (cLabel) cLabel.classList.toggle("active", temperatureUnit === "C");
+      if (fLabel) fLabel.classList.toggle("active", temperatureUnit === "F");
+    }
+
+    function renderWeatherCard(weatherPayload) {
+      if (!weatherPayload) return;
+      document.getElementById("heroWeather").innerHTML = `
+        <div class="weather-main">
+          <div class="weather-icon">${getWeatherIcon(weatherPayload.weather[0].main)}</div>
+          <div>
+            <div class="weather-temp">${formatWeatherTemp(weatherPayload.main.temp, true)}</div>
+            <div class="weather-condition">${weatherPayload.weather[0].main}</div>
+          </div>
+        </div>
+        <div class="weather-stats">
+          <div class="weather-stat"><div class="weather-stat-value">${formatWeatherTemp(weatherPayload.main.feels_like, false)}</div><div class="weather-stat-label">Feels like</div></div>
+          <div class="weather-stat"><div class="weather-stat-value">${weatherPayload.main.humidity}%</div><div class="weather-stat-label">Humidity</div></div>
+          <div class="weather-stat"><div class="weather-stat-value">${weatherPayload.wind.speed} m/s</div><div class="weather-stat-label">Wind</div></div>
+        </div>
+      `;
+    }
+
     async function fetchMenu() {
       const menuUrl = "https://raw.githubusercontent.com/Char1esQian/cambridgedashboard/refs/heads/main/menu.json";
       const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -3068,26 +3185,14 @@
         currentWeatherMain = w.weather[0].main || currentWeatherMain || "Clouds";
         localStorage.setItem(WEATHER_CACHE_KEY, currentWeatherMain);
         localStorage.setItem(WEATHER_CACHE_TS_KEY, String(Date.now()));
+        latestWeatherPayload = w;
         weatherSceneReady = true;
         weatherSceneSyncKey = "";
         updateWeatherScene(currentWeatherMain);
-
-        document.getElementById("heroWeather").innerHTML = `
-          <div class="weather-main">
-            <div class="weather-icon">${getWeatherIcon(w.weather[0].main)}</div>
-            <div>
-              <div class="weather-temp">${Math.round(w.main.temp)}&deg;C</div>
-              <div class="weather-condition">${w.weather[0].main}</div>
-            </div>
-          </div>
-          <div class="weather-stats">
-            <div class="weather-stat"><div class="weather-stat-value">${Math.round(w.main.feels_like)}&deg;</div><div class="weather-stat-label">Feels like</div></div>
-            <div class="weather-stat"><div class="weather-stat-value">${w.main.humidity}%</div><div class="weather-stat-label">Humidity</div></div>
-            <div class="weather-stat"><div class="weather-stat-value">${w.wind.speed} m/s</div><div class="weather-stat-label">Wind</div></div>
-          </div>
-        `;
+        renderWeatherCard(w);
       } catch (err) {
         currentWeatherMain = currentWeatherMain || "Clouds";
+        latestWeatherPayload = null;
         weatherSceneReady = true;
         weatherSceneSyncKey = "";
         updateWeatherScene(currentWeatherMain);
@@ -3100,6 +3205,7 @@
 
     updateGreeting();
     applyWeekendLayoutState();
+    updateTempToggleUI();
     if (currentWeatherMain) {
       weatherSceneReady = true;
       updateWeatherScene(currentWeatherMain);
@@ -3135,6 +3241,17 @@
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
           toggleSportsPanel();
+        }
+      });
+    }
+    const tempUnitToggle = document.getElementById("tempUnitToggle");
+    if (tempUnitToggle) {
+      tempUnitToggle.addEventListener("change", event => {
+        temperatureUnit = event.target.checked ? "F" : "C";
+        localStorage.setItem(TEMP_UNIT_STORAGE_KEY, temperatureUnit);
+        updateTempToggleUI();
+        if (latestWeatherPayload) {
+          renderWeatherCard(latestWeatherPayload);
         }
       });
     }
