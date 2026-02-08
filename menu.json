@@ -1,5 +1,31 @@
 {
-  "Monday": {},
+  "Monday": {
+    "Breakfast": {
+      "name": "Croissant, Egg, Cheese",
+      "description": "",
+      "price": "$2.90-$4.95"
+    },
+    "Soup": {
+      "name": "Turkey and Andouille Gumbo",
+      "description": "",
+      "price": "$2.90-$3.85"
+    },
+    "Deli": {
+      "name": "Tofu Bahn Mi, Pickled Vegetables, Spicy Aioli",
+      "description": "",
+      "price": "$8.25"
+    },
+    "Plant Power": {
+      "name": "Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust",
+      "description": "",
+      "price": "$8.95"
+    },
+    "Action": {
+      "name": "Lo Mein Noodles, Sauces, Chicken, Shrimp, Vegetables",
+      "description": "",
+      "price": "$11.95"
+    }
+  },
   "Tuesday": {
     "Breakfast": {
       "name": "Ham, Egg, Tomato, English Muffin",
@@ -12,12 +38,12 @@
       "price": "$2.90-$3.85"
     },
     "Deli": {
-      "name": "Buffalo Chicken Wrap, Romaine, Blue Cheese",
+      "name": "Ham and Brie, Bulkie Roll",
       "description": "",
       "price": "$8.25"
     },
     "Carving": {
-      "name": "Pork Shoulder 'Pernil', Rice and Beans, Swiss Chard",
+      "name": "Baked Penne Pasta, Three Cheeses, Spinach, Marinara, Sweet Italian Sausage",
       "description": "",
       "price": "$10.95"
     },
@@ -53,20 +79,15 @@
       "description": "",
       "price": "$8.95"
     },
-    "Carving": {
-      "name": "Roast Turkey Breast, Mashed Potatoes, Gravy, Butternut Squash, Cranberry Sauce",
-      "description": "",
-      "price": "$11.95"
-    },
     "Action": {
-      "name": "Sweet and Sour Beef or Tofu, Mixed Vegetables, Steamed Rice",
+      "name": "Wing Bar: Chicken Wings, Roasted Potatoes, Sauces, Carrots and Celery, Blue Cheese Dressing",
       "description": "",
       "price": "$11.95"
     }
   },
   "Thursday": {
     "Breakfast": {
-      "name": "Egg, American, Bagel",
+      "name": "Egg, American, Bulkie Roll",
       "description": "",
       "price": "$2.90-$4.95"
     },
@@ -76,7 +97,7 @@
       "price": "$2.90-$3.85"
     },
     "Deli": {
-      "name": "Buffalo Chicken Wrap, Blue Cheese Dressing",
+      "name": "Chicken Parmesan Sub",
       "description": "",
       "price": "$8.25"
     },
@@ -85,13 +106,8 @@
       "description": "",
       "price": "$8.95"
     },
-    "Carving": {
-      "name": "Vegan Chili, Squashes, Beans, Onions, Garlic, Tomato, Chipotle Peppers",
-      "description": "",
-      "price": "$11.95"
-    },
     "Action": {
-      "name": "Chicken Piccata: Lemon, Capers, Butter, Pasta",
+      "name": "Risotto Bar:Spinach, Tomatoes, Peas and Mushrooms, Chicken, Shrimp",
       "description": "",
       "price": "$11.95"
     }
@@ -118,7 +134,7 @@
       "price": "$8.95"
     },
     "Action": {
-      "name": "Spaghetti, Littleneck Clams, Garlic, Italian Parsley, Cherry Tomatoes, White Wine, Butter, Toasted Breadcrumbs",
+      "name": "Miso-Glazed Cod Loin, Jasmine Rice, Baby Bok Choy",
       "description": "",
       "price": "$12.95"
     }
