@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>About | Cambridge Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: linear-gradient(155deg, #edf4ff 0%, #dbe8f8 47%, #c9d8ea 100%);
+      --panel: linear-gradient(122deg, rgba(255, 255, 255, 0.64) 0%, rgba(255, 255, 255, 0.28) 100%);
+      --border: rgba(255, 255, 255, 0.66);
+      --title: #16314e;
+      --text: #2e4965;
+      --muted: #5b738f;
+      --accent: #1f6feb;
+      --ok: #0b7a56;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Manrope", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 1.4rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      width: min(980px, 100%);
+      margin: 0 auto;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 20px 44px rgba(8, 24, 46, 0.14);
+      backdrop-filter: blur(22px) saturate(155%);
+      -webkit-backdrop-filter: blur(22px) saturate(155%);
+      padding: 1rem 1.15rem;
+    }
+
+    .title {
+      color: var(--title);
+      font-size: clamp(1.3rem, 3.2vw, 1.95rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+      margin-top: 0.32rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    h2 {
+      color: var(--title);
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    ul {
+      display: grid;
+      gap: 0.36rem;
+      list-style: none;
+    }
+
+    li {
+      font-size: 0.87rem;
+      line-height: 1.45;
+    }
+
+    .tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.18rem 0.45rem;
+      border-radius: 999px;
+      border: 1px solid rgba(31, 111, 235, 0.24);
+      color: #17467a;
+      background: rgba(31, 111, 235, 0.1);
+      margin-right: 0.35rem;
+    }
+
+    .source {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .source a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .source a:hover {
+      text-decoration: underline;
+    }
+
+    .ok {
+      color: var(--ok);
+      font-weight: 700;
+    }
+
+    .back {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 0.35rem;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #12385f;
+      border: 1px solid rgba(18, 56, 95, 0.2);
+      background: rgba(255, 255, 255, 0.62);
+      border-radius: 999px;
+      padding: 0.35rem 0.62rem;
+    }
+
+    @media (max-width: 760px) {
+      .row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="back" href="index.html">Back to Dashboard</a>
+
+    <section class="card">
+      <div class="title">About Cambridge Dashboard</div>
+      <div class="subtitle">Personal operations dashboard for commute, food, sports, EV charging, weather, and local activities.</div>
+    </section>
+
+    <section class="row">
+      <article class="card">
+        <h2>What It Shows</h2>
+        <ul>
+          <li><span class="tag">Commute</span>Live Alewife Red Line departures.</li>
+          <li><span class="tag">Lifestyle</span>Alewife Bistro daily menu and weekend visual state.</li>
+          <li><span class="tag">Sports</span>Boston pro-team games, status, logos, and venues.</li>
+          <li><span class="tag">EV</span>Garage B ChargePoint port availability and notify toggle.</li>
+          <li><span class="tag">Weather</span>Current weather and adaptive visual scene.</li>
+          <li><span class="tag">City</span>Boston/Cambridge event feeds with de-duplication and filtering.</li>
+        </ul>
+      </article>
+
+      <article class="card">
+        <h2>Refresh Behavior</h2>
+        <ul>
+          <li><span class="ok">Every 30s:</span> MBTA departures, ChargePoint station status.</li>
+          <li><span class="ok">Every 60s:</span> Bluebikes station status.</li>
+          <li><span class="ok">Every 10m:</span> Weather data refresh.</li>
+          <li><span class="ok">Every 30m:</span> Sports + local activities refresh.</li>
+          <li>Weekend layout auto-adjusts panel order and activity columns.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="card">
+      <h2>Data Sources</h2>
+      <div class="source">Menu JSON: <a href="https://raw.githubusercontent.com/Char1esQian/cambridgedashboard/refs/heads/main/menu.json">GitHub raw menu</a></div>
+      <div class="source">Weather: <a href="https://openweathermap.org/current">OpenWeather Current API</a></div>
+      <div class="source">MBTA schedules: <a href="https://api-v3.mbta.com/docs/swagger/index.html">MBTA v3 API</a></div>
+      <div class="source">Bluebikes station status: <a href="https://gbfs.bluebikes.com/gbfs/en/station_status.json">GBFS feed</a></div>
+      <div class="source">ChargePoint station endpoint: <a href="https://mc.chargepoint.com/map-prod/v3/station">ChargePoint map API endpoint</a></div>
+      <div class="source">Sports scoreboards: <a href="https://site.api.espn.com/">ESPN site API</a></div>
+      <div class="source">Events feeds: <a href="https://www.boston.gov/rss/events">Boston.gov RSS</a> and <a href="https://www.cambridgeusa.org/events/rss">CambridgeUSA RSS</a></div>
+    </section>
+  </div>
+</body>
+</html>

@@ -4,27 +4,42 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <title>Cambridge Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg-clear-day: linear-gradient(180deg, #4a90d9 0%, #87ceeb 50%, #b5d6e8 100%);
-      --bg-clear-night: linear-gradient(180deg, #0f1c3f 0%, #1a2a4a 50%, #2d3f5e 100%);
-      --bg-clouds: linear-gradient(180deg, #6b7b8c 0%, #8b9cad 50%, #a5b5c5 100%);
-      --bg-rain: linear-gradient(180deg, #4a5568 0%, #5a6a7a 50%, #6b7a8a 100%);
-      --bg-snow: linear-gradient(180deg, #8ca0b3 0%, #a8bcc9 50%, #c4d4df 100%);
-      --bg-thunder: linear-gradient(180deg, #2d3748 0%, #3d4a5c 50%, #4a5a6c 100%);
-      --card-bg: rgba(255, 255, 255, 0.15);
-      --card-border: rgba(255, 255, 255, 0.2);
-      --card-hover: rgba(255, 255, 255, 0.22);
-      --primary: #ffffff;
-      --secondary: rgba(255, 255, 255, 0.8);
-      --accent: #60a5fa;
-      --success: #4ade80;
-      --shadow: 0 20px 45px rgba(15, 23, 42, 0.25);
-      --glass: rgba(15, 23, 42, 0.2);
-      --glass-strong: rgba(15, 23, 42, 0.35);
-      --card-radius: 1.25rem;
+      --bg-clear-day: linear-gradient(155deg, #edf4ff 0%, #dbe8f8 47%, #c9d8ea 100%);
+      --bg-clear-night: linear-gradient(150deg, #0b1422 0%, #15253b 47%, #22344c 100%);
+      --bg-clouds: linear-gradient(152deg, #d9e2ec 0%, #c7d3df 55%, #b8c6d4 100%);
+      --bg-rain: linear-gradient(152deg, #8b99ac 0%, #77889e 52%, #66798f 100%);
+      --bg-snow: linear-gradient(152deg, #f2f6fb 0%, #dfe8f1 56%, #cfdbe9 100%);
+      --bg-thunder: linear-gradient(152deg, #334154 0%, #2a3748 51%, #1f2d3e 100%);
+
+      --panel: rgba(255, 255, 255, 0.4);
+      --panel-strong: rgba(255, 255, 255, 0.5);
+      --panel-border: rgba(255, 255, 255, 0.62);
+      --panel-shadow: 0 28px 72px rgba(8, 24, 46, 0.16);
+      --panel-inner-glow: inset 0 1px 0 rgba(255, 255, 255, 0.82), inset 0 -24px 42px rgba(255, 255, 255, 0.1);
+      --panel-edge-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.34);
+      --text-primary: #0d2238;
+      --text-secondary: #485d77;
+      --text-muted: #6e839b;
+      --accent: #1f6feb;
+      --accent-soft: rgba(31, 111, 235, 0.14);
+      --success: #0e9f6e;
+      --success-soft: rgba(14, 159, 110, 0.13);
+      --glass-hero-bg: linear-gradient(122deg, rgba(255, 255, 255, 0.46) 0%, rgba(255, 255, 255, 0.18) 40%, rgba(255, 255, 255, 0.11) 100%);
+      --glass-card-bg: linear-gradient(122deg, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0.15) 42%, rgba(255, 255, 255, 0.09) 100%);
+      --glass-border: rgba(255, 255, 255, 0.58);
+      --glass-hero-blur: 34px;
+      --glass-card-blur: 36px;
+      --glass-saturation: 195%;
+      --glass-contrast: 108%;
+      --glass-specular: linear-gradient(116deg, rgba(255, 255, 255, 0.58) 0%, rgba(255, 255, 255, 0.1) 30%, transparent 64%);
+      --glass-caustic:
+        radial-gradient(80% 45% at 50% -10%, rgba(255, 255, 255, 0.44), transparent 70%),
+        linear-gradient(160deg, transparent 40%, rgba(255, 255, 255, 0.08) 60%, transparent 72%);
+      --bg-image-filter: saturate(108%) contrast(102%);
     }
 
     * {
@@ -35,74 +50,137 @@
 
     html,
     body {
-      height: 100%;
-      overflow-x: hidden;
+      min-height: 100%;
+      scroll-behavior: smooth;
+    }
+
+    body[data-weather*="cloud"] {
+      --glass-saturation: 170%;
+      --glass-specular: linear-gradient(116deg, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0.12) 34%, transparent 64%);
+      --bg-image-filter: saturate(98%) contrast(100%);
+    }
+
+    body[data-weather*="rain"],
+    body[data-weather*="drizzle"],
+    body[data-weather*="thunder"] {
+      --glass-hero-bg: linear-gradient(122deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.14) 44%, rgba(255, 255, 255, 0.08) 100%);
+      --glass-card-bg: linear-gradient(122deg, rgba(255, 255, 255, 0.36) 0%, rgba(255, 255, 255, 0.13) 46%, rgba(255, 255, 255, 0.07) 100%);
+      --glass-border: rgba(255, 255, 255, 0.5);
+      --glass-hero-blur: 38px;
+      --glass-card-blur: 40px;
+      --glass-saturation: 155%;
+      --glass-specular: linear-gradient(116deg, rgba(255, 255, 255, 0.54) 0%, rgba(255, 255, 255, 0.08) 35%, transparent 64%);
+      --bg-image-filter: saturate(90%) contrast(100%);
+    }
+
+    body[data-weather*="snow"] {
+      --glass-hero-bg: linear-gradient(122deg, rgba(255, 255, 255, 0.52) 0%, rgba(255, 255, 255, 0.22) 42%, rgba(255, 255, 255, 0.14) 100%);
+      --glass-card-bg: linear-gradient(122deg, rgba(255, 255, 255, 0.48) 0%, rgba(255, 255, 255, 0.2) 44%, rgba(255, 255, 255, 0.12) 100%);
+      --glass-border: rgba(255, 255, 255, 0.62);
+      --glass-saturation: 165%;
+      --glass-specular: linear-gradient(116deg, rgba(255, 255, 255, 0.84) 0%, rgba(255, 255, 255, 0.2) 32%, transparent 64%);
+      --bg-image-filter: saturate(95%) contrast(102%);
+    }
+
+    body[data-night="true"] {
+      --glass-hero-bg: linear-gradient(122deg, rgba(28, 48, 72, 0.34) 0%, rgba(24, 44, 68, 0.2) 45%, rgba(18, 38, 62, 0.14) 100%);
+      --glass-card-bg: linear-gradient(122deg, rgba(28, 48, 72, 0.3) 0%, rgba(24, 44, 68, 0.18) 46%, rgba(18, 38, 62, 0.12) 100%);
+      --glass-border: rgba(203, 223, 248, 0.26);
+      --glass-saturation: 145%;
+      --glass-contrast: 104%;
+      --glass-specular: linear-gradient(116deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.06) 34%, transparent 64%);
+      --glass-caustic:
+        radial-gradient(80% 45% at 50% -10%, rgba(200, 222, 255, 0.2), transparent 72%),
+        linear-gradient(160deg, transparent 40%, rgba(180, 212, 255, 0.08) 60%, transparent 72%);
+      --bg-image-filter: saturate(100%) contrast(106%);
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg-clear-day);
-      color: var(--primary);
-      min-height: 100vh;
-      padding: 1.5rem;
-      transition: background 1.5s ease;
-      -webkit-font-smoothing: antialiased;
+      font-family: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", "Manrope", sans-serif;
+      background: var(--bg-clouds);
+      color: var(--text-primary);
+      padding: 1.75rem;
+      transition: background 1.2s ease;
       position: relative;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Weather Background */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.52), transparent 38%),
+        radial-gradient(circle at 85% 8%, rgba(255, 255, 255, 0.34), transparent 34%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0));
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(45% 38% at 8% 90%, rgba(110, 163, 231, 0.22), transparent 80%),
+        radial-gradient(36% 30% at 95% 88%, rgba(99, 211, 171, 0.2), transparent 82%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
     .weather-bg {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      inset: 0;
       pointer-events: none;
       overflow: hidden;
       z-index: 0;
     }
 
-    /* Realistic Sun */
+    .ai-bg {
+      position: absolute;
+      inset: 0;
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      opacity: 0;
+      filter: var(--bg-image-filter);
+      transition: background-image 700ms ease, opacity 500ms ease;
+    }
+
     .sun {
       position: absolute;
-      top: 6%;
-      right: 10%;
-      width: 100px;
-      height: 100px;
-      background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 0%, rgba(255, 250, 220, 0.9) 20%, rgba(255, 220, 100, 0.6) 50%, transparent 70%);
-      border-radius: 50%;
-      box-shadow: 0 0 80px 40px rgba(255, 255, 200, 0.3), 0 0 150px 80px rgba(255, 200, 100, 0.15);
+      top: 5%;
+      right: 8%;
+      width: 110px;
+      height: 110px;
+      background: radial-gradient(circle, rgba(255, 247, 218, 1) 0%, rgba(255, 227, 148, 0.65) 52%, transparent 75%);
+      border-radius: 999px;
+      filter: blur(0.2px);
+      box-shadow: 0 0 90px 35px rgba(255, 218, 120, 0.22);
       display: none;
     }
 
-    .sun.visible {
-      display: block;
-    }
-
-    /* Realistic Moon */
     .moon {
       position: absolute;
-      top: 8%;
-      right: 12%;
-      width: 70px;
-      height: 70px;
-      background: radial-gradient(circle at 35% 35%, #fafafa 0%, #e8e4d8 50%, #d4d0c4 100%);
-      border-radius: 50%;
-      box-shadow: 0 0 40px 15px rgba(255, 255, 240, 0.15), inset -12px -8px 20px rgba(0, 0, 0, 0.15);
+      top: 7%;
+      left: 8%;
+      width: 72px;
+      height: 72px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 34% 32%, #fdfdfb 0%, #deddd5 60%, #c7c6c0 100%);
+      box-shadow: 0 0 55px 20px rgba(229, 236, 255, 0.2);
       display: none;
     }
 
+    .sun.visible,
     .moon.visible {
       display: block;
     }
 
-    /* Stars */
     .stars {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      inset: 0;
       display: none;
     }
 
@@ -114,29 +192,25 @@
       position: absolute;
       width: 2px;
       height: 2px;
-      background: #fff;
-      border-radius: 50%;
-      opacity: 0.6;
-      animation: twinkle 3s ease-in-out infinite;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.95);
+      animation: twinkle 2.8s ease-in-out infinite;
     }
 
     @keyframes twinkle {
-
       0%,
       100% {
         opacity: 0.4;
       }
 
       50% {
-        opacity: 0.9;
+        opacity: 1;
       }
     }
 
-    /* Realistic Clouds - layered atmospheric effect */
     .cloud-layer {
       position: absolute;
-      width: 100%;
-      height: 100%;
+      inset: 0;
       display: none;
     }
 
@@ -146,48 +220,48 @@
 
     .atmospheric-cloud {
       position: absolute;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.15) 100%);
-      border-radius: 100px;
-      filter: blur(30px);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0.13));
+      border-radius: 999px;
+      filter: blur(28px);
       animation: driftCloud linear infinite;
     }
 
     .cloud-1 {
-      top: 5%;
-      width: 400px;
-      height: 80px;
-      animation-duration: 80s;
-      left: -400px;
+      top: 6%;
+      width: 460px;
+      height: 95px;
+      left: -460px;
+      animation-duration: 88s;
     }
 
     .cloud-2 {
-      top: 15%;
-      width: 500px;
-      height: 100px;
-      animation-duration: 100s;
-      animation-delay: -30s;
-      left: -500px;
-      opacity: 0.7;
+      top: 14%;
+      width: 550px;
+      height: 112px;
+      left: -550px;
+      animation-duration: 112s;
+      animation-delay: -32s;
+      opacity: 0.72;
     }
 
     .cloud-3 {
-      top: 25%;
-      width: 350px;
-      height: 70px;
-      animation-duration: 90s;
-      animation-delay: -50s;
-      left: -350px;
-      opacity: 0.5;
+      top: 24%;
+      width: 360px;
+      height: 76px;
+      left: -360px;
+      animation-duration: 95s;
+      animation-delay: -54s;
+      opacity: 0.52;
     }
 
     .cloud-4 {
       top: 10%;
-      width: 600px;
-      height: 120px;
-      animation-duration: 120s;
+      width: 630px;
+      height: 124px;
+      left: -630px;
+      animation-duration: 126s;
       animation-delay: -70s;
-      left: -600px;
-      opacity: 0.4;
+      opacity: 0.42;
     }
 
     @keyframes driftCloud {
@@ -196,29 +270,27 @@
       }
 
       to {
-        transform: translateX(calc(100vw + 700px));
+        transform: translateX(calc(100vw + 760px));
       }
     }
 
-    /* Rain */
-    .rain-container {
+    .rain-container,
+    .snow-container {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      inset: 0;
       display: none;
     }
 
-    .rain-container.visible {
+    .rain-container.visible,
+    .snow-container.visible {
       display: block;
     }
 
     .raindrop {
       position: absolute;
-      width: 1px;
-      height: 20px;
-      background: linear-gradient(to bottom, transparent, rgba(200, 220, 240, 0.5));
+      width: 1.5px;
+      height: 21px;
+      background: linear-gradient(to bottom, transparent, rgba(209, 225, 240, 0.62));
       animation: fall linear infinite;
     }
 
@@ -228,26 +300,10 @@
       }
     }
 
-    /* Snow */
-    .snow-container {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      display: none;
-    }
-
-    .snow-container.visible {
-      display: block;
-    }
-
     .snowflake {
       position: absolute;
-      width: 4px;
-      height: 4px;
-      background: rgba(255, 255, 255, 0.8);
-      border-radius: 50%;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.85);
       animation: snowfall linear infinite;
     }
 
@@ -257,249 +313,798 @@
       }
     }
 
-    /* Dashboard Content */
     .dashboard {
       position: relative;
       z-index: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      width: 100%;
-      max-width: 980px;
+      width: min(1240px, 100%);
       margin: 0 auto;
+      display: grid;
+      gap: 1.22rem;
     }
 
-    .header {
+    .hero {
+      background:
+        var(--glass-hero-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 28px;
+      box-shadow: var(--panel-shadow), var(--panel-inner-glow), var(--panel-edge-shadow);
+      backdrop-filter: blur(var(--glass-hero-blur)) saturate(var(--glass-saturation)) contrast(var(--glass-contrast));
+      -webkit-backdrop-filter: blur(var(--glass-hero-blur)) saturate(var(--glass-saturation)) contrast(var(--glass-contrast));
+      padding: 1.35rem 1.45rem;
       display: flex;
       justify-content: space-between;
-      align-items: flex-end;
-      padding: 0.5rem 0.25rem 1rem;
+      align-items: center;
+      gap: 1.2rem;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      animation: riseIn 540ms ease-out;
+      position: relative;
+      z-index: 1;
+      isolation: isolate;
+      overflow: hidden;
     }
 
-    .header-left {
+    .hero-left {
+      display: grid;
+      gap: 0.15rem;
+    }
+
+    .hero-right {
+      margin-left: auto;
       display: flex;
-      flex-direction: column;
-      gap: 0.125rem;
+      align-items: center;
+      gap: 0.95rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
 
     .greeting {
-      font-size: 0.9375rem;
-      color: var(--secondary);
-      font-weight: 500;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+    }
+
+    .quick-nav {
+      display: flex;
+      gap: 0.45rem;
+      flex-wrap: wrap;
+      margin-top: 0.32rem;
+    }
+
+    .quick-link {
+      text-decoration: none;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #143a62;
+      border: 1px solid rgba(20, 58, 98, 0.2);
+      background: rgba(255, 255, 255, 0.52);
+      border-radius: 999px;
+      padding: 0.34rem 0.6rem;
+      transition: background 180ms ease, border-color 180ms ease;
+    }
+
+    .quick-link:hover {
+      background: rgba(255, 255, 255, 0.72);
+      border-color: rgba(20, 58, 98, 0.32);
     }
 
     #clock {
-      font-size: clamp(2.5rem, 8vw, 3.5rem);
-      font-weight: 700;
-      letter-spacing: -1.5px;
-      line-height: 1.1;
-      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      font-size: clamp(2.2rem, 5.7vw, 3.75rem);
+      color: #10243c;
     }
 
     #date {
-      font-size: clamp(0.875rem, 2.5vw, 1rem);
-      color: var(--secondary);
-      font-weight: 500;
+      color: var(--text-secondary);
+      font-size: 0.98rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
     }
 
-    .dashboard-grid {
+    .brand-pill {
+      padding: 0.6rem 0.98rem;
+      border-radius: 999px;
+      border: 1px solid rgba(31, 111, 235, 0.3);
+      background: linear-gradient(135deg, rgba(31, 111, 235, 0.18), rgba(31, 111, 235, 0.08));
+      color: #0f2c4a;
+      font-weight: 800;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .hero-weather {
+      min-width: 310px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.62);
+      background: linear-gradient(125deg, rgba(255, 255, 255, 0.52), rgba(255, 255, 255, 0.2));
+      box-shadow:
+        0 14px 30px rgba(10, 30, 55, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.82);
+      padding: 0.72rem 0.8rem;
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .hero-weather .weather-main {
+      gap: 0.55rem;
+    }
+
+    .hero-weather .weather-icon {
+      min-width: 42px;
+      min-height: 42px;
+      border-radius: 10px;
+      font-size: 0.68rem;
+    }
+
+    .hero-weather .weather-temp {
+      font-size: clamp(1.28rem, 2.4vw, 1.6rem);
+      color: #16314e;
+    }
+
+    .hero-weather .weather-condition {
+      margin-top: 0;
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+    }
+
+    .hero-weather .weather-stats {
+      gap: 0.4rem;
+    }
+
+    .hero-weather .weather-stat {
+      min-height: 52px;
+      border-radius: 10px;
+      padding: 0.42rem 0.5rem;
+      background: rgba(255, 255, 255, 0.6);
+    }
+
+    .hero-weather .weather-stat-value {
+      font-size: 0.85rem;
+      font-weight: 800;
+    }
+
+    .hero-weather .weather-stat-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.03em;
+    }
+
+    .main-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1rem;
+      gap: 1.22rem;
+      align-items: start;
+    }
+
+    body.weekend-layout .main-grid {
+      grid-template-columns: minmax(300px, 0.82fr) minmax(460px, 1.18fr);
+    }
+
+    .stack {
+      display: grid;
+      gap: 1.22rem;
+    }
+
+    .stack[id] {
+      scroll-margin-top: 6.5rem;
+    }
+
+    .stack-label {
+      width: fit-content;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #12385f;
+      padding: 0.22rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(18, 56, 95, 0.2);
+      background: rgba(255, 255, 255, 0.62);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+    }
+
+    body[data-night="true"] .stack-label {
+      color: #dce9fb;
+      border-color: rgba(220, 233, 251, 0.35);
+      background: rgba(16, 33, 52, 0.54);
+      text-shadow: none;
+    }
+
+    .full-span {
+      grid-column: 1 / -1;
+    }
+
+    .card,
+    .expandable {
+      background:
+        var(--glass-card-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 26px;
+      box-shadow: var(--panel-shadow), var(--panel-inner-glow), var(--panel-edge-shadow);
+      backdrop-filter: blur(var(--glass-card-blur)) saturate(var(--glass-saturation)) contrast(var(--glass-contrast));
+      -webkit-backdrop-filter: blur(var(--glass-card-blur)) saturate(var(--glass-saturation)) contrast(var(--glass-contrast));
+      overflow: hidden;
+      animation: riseIn 620ms ease-out;
+      position: relative;
+      isolation: isolate;
+      transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+    }
+
+    .hero::before,
+    .card::before,
+    .expandable::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--glass-specular);
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.88;
+    }
+
+    .hero::after,
+    .card::after,
+    .expandable::after {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      border-radius: inherit;
+      background: var(--glass-caustic);
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.95;
+    }
+
+    .hero > *,
+    .card > *,
+    .expandable > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    .card:hover,
+    .expandable:hover {
+      border-color: rgba(255, 255, 255, 0.78);
+      box-shadow:
+        0 38px 90px rgba(8, 24, 46, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.76),
+        inset 0 -24px 38px rgba(255, 255, 255, 0.12),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.38);
+      transform: translateY(-2px);
     }
 
     .card {
-      background: var(--glass);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: var(--card-radius);
-      padding: 1.25rem 1.35rem;
-      transition: transform 0.2s ease, background 0.2s ease, border 0.2s ease;
-      box-shadow: var(--shadow);
-    }
-
-    .card:hover {
-      background: var(--card-hover);
-      transform: translateY(-2px);
-      border-color: rgba(255, 255, 255, 0.3);
+      padding: 1.05rem 1.15rem 1.2rem;
     }
 
     .card-header {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 0.875rem;
+      gap: 0.58rem;
+      margin-bottom: 0.85rem;
     }
 
     .card-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 7px;
-      display: flex;
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.875rem;
+      font-size: 0.69rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: #11406b;
+      border: 1px solid rgba(17, 64, 107, 0.16);
+      background: rgba(17, 64, 107, 0.08);
     }
 
     .icon-menu {
-      background: rgba(251, 191, 36, 0.2);
+      color: #1a4e85;
+      border-color: rgba(26, 78, 133, 0.18);
+      background: rgba(26, 78, 133, 0.1);
     }
 
     .icon-bike {
-      background: rgba(74, 222, 128, 0.2);
+      color: #0f7a56;
+      border-color: rgba(15, 122, 86, 0.2);
+      background: rgba(15, 122, 86, 0.12);
     }
 
-    .icon-train {
-      background: rgba(248, 113, 113, 0.25);
+    .icon-transit {
+      color: #9b1c1c;
+      border-color: rgba(155, 28, 28, 0.25);
+      background: rgba(155, 28, 28, 0.12);
     }
 
-    .card-title {
-      font-size: 0.8125rem;
-      font-weight: 600;
-      color: var(--secondary);
+    .icon-charge {
+      color: #0b5f2a;
+      border-color: rgba(11, 95, 42, 0.24);
+      background: rgba(11, 95, 42, 0.12);
     }
 
-    /* Menu styles */
-    #menuContent {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 0.625rem;
+    .icon-sports {
+      color: #7a1f1f;
+      border-color: rgba(122, 31, 31, 0.24);
+      background: rgba(122, 31, 31, 0.12);
     }
 
-    .menu-item {
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 0.625rem;
-      padding: 0.875rem 1rem;
-      transition: background 0.2s;
-    }
-
-    .menu-item:hover {
-      background: rgba(255, 255, 255, 0.12);
-    }
-
-    .menu-category {
-      font-size: 0.625rem;
-      font-weight: 600;
-      color: var(--accent);
+    .card-title,
+    .expandable-title {
+      font-size: 0.84rem;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.25rem;
+      letter-spacing: 0.06em;
+      color: #274b72;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
     }
 
-    .menu-name {
-      font-size: 0.875rem;
-      font-weight: 600;
-      line-height: 1.3;
+    body[data-night="true"] .card-title,
+    body[data-night="true"] .expandable-title {
+      color: #d7e7fc;
+      text-shadow: none;
     }
 
-    .menu-desc {
-      font-size: 0.75rem;
-      color: var(--secondary);
-      line-height: 1.4;
-      margin-top: 0.125rem;
+    #menuDay {
+      margin-left: auto;
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
     }
 
-    .menu-price {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--success);
-      margin-top: 0.375rem;
-    }
-
-    /* Weather card */
     .weather-card {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      flex-wrap: wrap;
+      display: grid;
+      gap: 0.95rem;
     }
 
     .weather-main {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.7rem;
     }
 
     .weather-icon {
-      font-size: 2.25rem;
-      line-height: 1;
+      min-width: 52px;
+      min-height: 52px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-soft);
+      color: #12438a;
+      font-weight: 800;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+      padding: 0 0.45rem;
     }
 
     .weather-temp {
-      font-size: 2rem;
-      font-weight: 700;
+      font-size: clamp(1.7rem, 4.8vw, 2.25rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: #102a46;
     }
 
     .weather-condition {
-      font-size: 0.875rem;
-      color: var(--secondary);
-      font-weight: 500;
-    }
-
-    .weather-stats {
-      display: flex;
-      gap: 1.25rem;
-      flex-wrap: wrap;
-    }
-
-    .weather-stat {
-      text-align: right;
-    }
-
-    .weather-stat-value {
-      font-size: 1rem;
+      margin-top: 0.1rem;
+      font-size: 0.87rem;
+      color: var(--text-secondary);
       font-weight: 600;
     }
 
-    .weather-stat-label {
-      font-size: 0.6875rem;
-      color: var(--secondary);
-      font-weight: 500;
+    .weather-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.6rem;
     }
 
-    /* Expandable Bike Stations */
-    .expandable {
-      background: var(--card-bg);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--card-border);
-      border-radius: 1rem;
+    .weather-stat {
+      background: rgba(255, 255, 255, 0.66);
+      border: 1px solid rgba(15, 31, 51, 0.08);
+      border-radius: 12px;
+      padding: 0.58rem 0.6rem;
+      min-height: 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .weather-stat-value {
+      font-size: 1.03rem;
+      font-weight: 800;
+      line-height: 1.1;
+      color: #16324f;
+    }
+
+    .weather-stat-label {
+      margin-top: 0.16rem;
+      font-size: 0.71rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+
+    #menuContent {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.66rem;
+    }
+
+    .menu-item {
+      border: 1px solid rgba(15, 31, 51, 0.09);
+      background: rgba(255, 255, 255, 0.72);
+      border-radius: 12px;
+      padding: 0.8rem 0.86rem;
+      transition: transform 180ms ease, box-shadow 180ms ease;
+    }
+
+    .menu-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px rgba(18, 43, 74, 0.09);
+    }
+
+    .menu-category {
+      font-size: 0.68rem;
+      font-weight: 800;
+      color: #225ea6;
+      text-transform: uppercase;
+      letter-spacing: 0.055em;
+      margin-bottom: 0.25rem;
+    }
+
+    .menu-name {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: #132b46;
+      line-height: 1.3;
+    }
+
+    .menu-desc {
+      font-size: 0.77rem;
+      color: var(--text-secondary);
+      line-height: 1.35;
+      margin-top: 0.18rem;
+    }
+
+    .menu-price {
+      margin-top: 0.4rem;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: var(--success);
+      text-transform: uppercase;
+      letter-spacing: 0.035em;
+    }
+
+    .menu-image-panel {
+      border: 1px solid rgba(15, 31, 51, 0.09);
+      background: rgba(255, 255, 255, 0.72);
+      border-radius: 14px;
+      padding: 0.75rem 0.85rem;
+      display: grid;
+      gap: 0.55rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .menu-image-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+
+    .menu-image-title {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .menu-action-name {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #173a5b;
+    }
+
+    .menu-image-status {
+      font-size: 0.74rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .menu-image-frame {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 12px;
+      border: 1px solid rgba(15, 31, 51, 0.12);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.75), rgba(240, 245, 252, 0.9));
+      display: flex;
+      align-items: center;
+      justify-content: center;
       overflow: hidden;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .menu-image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-left: auto;
+    }
+
+    .toggle-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .toggle {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      inset: 0;
+      border-radius: 999px;
+      background: rgba(16, 32, 50, 0.18);
+      border: 1px solid rgba(16, 32, 50, 0.2);
+      transition: background 160ms ease, border 160ms ease;
+    }
+
+    .toggle-slider::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      background: #ffffff;
+      box-shadow: 0 2px 4px rgba(12, 24, 40, 0.2);
+      transition: transform 160ms ease;
+    }
+
+    .toggle input:checked + .toggle-slider {
+      background: rgba(14, 159, 110, 0.35);
+      border-color: rgba(14, 159, 110, 0.4);
+    }
+
+    .toggle input:checked + .toggle-slider::after {
+      transform: translateX(20px);
+    }
+
+    .toggle input:disabled + .toggle-slider {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .charger-summary {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+
+    .charger-grid {
+      display: grid;
+      gap: 0.65rem;
+    }
+
+    .charger-station {
+      border: 1px solid rgba(14, 33, 54, 0.09);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.72);
+      padding: 0.7rem 0.75rem;
+      display: grid;
+      gap: 0.45rem;
+    }
+
+    .charger-name {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: #14314d;
+    }
+
+    .charger-meta {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .plug-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.4rem;
+    }
+
+    .plug {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 10px;
+      padding: 0.35rem 0.5rem;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      border: 1px solid rgba(16, 32, 50, 0.1);
+      background: rgba(255, 255, 255, 0.7);
+      color: var(--text-secondary);
+    }
+
+    .plug.available {
+      color: #0b5f2a;
+      border-color: rgba(11, 95, 42, 0.22);
+      background: rgba(11, 95, 42, 0.1);
+    }
+
+    .plug.in-use {
+      color: #9b1c1c;
+      border-color: rgba(155, 28, 28, 0.22);
+      background: rgba(155, 28, 28, 0.1);
+    }
+
+    .plug.unavailable {
+      color: #5b6b7f;
+      border-color: rgba(16, 32, 50, 0.12);
+      background: rgba(16, 32, 50, 0.05);
+    }
+
+    .departures-list {
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .departure-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto auto;
+      gap: 0.65rem;
+      align-items: center;
+      border: 1px solid rgba(14, 33, 54, 0.09);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.72);
+      padding: 0.58rem 0.7rem;
+    }
+
+    .departure-destination {
+      font-size: 0.83rem;
+      font-weight: 700;
+      color: #173a5b;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .departure-time {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      white-space: nowrap;
+    }
+
+    .departure-eta {
+      min-width: 62px;
+      text-align: center;
+      font-size: 0.73rem;
+      letter-spacing: 0.03em;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #7a1a1a;
+      border: 1px solid rgba(155, 28, 28, 0.22);
+      background: rgba(155, 28, 28, 0.1);
+      border-radius: 999px;
+      padding: 0.24rem 0.44rem;
+    }
+
+    .departure-empty {
+      border: 1px dashed rgba(14, 33, 54, 0.16);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.62);
+      padding: 0.8rem;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .card-note {
+      margin-top: 0.58rem;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    #sportsUpdated {
+      width: fit-content;
+      margin-top: 0.2rem;
+      padding: 0.22rem 0.5rem;
+      border-radius: 999px;
+      border: 1px solid rgba(26, 78, 133, 0.2);
+      background: rgba(255, 255, 255, 0.62);
+      color: #214a74;
+      font-weight: 700;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+    }
+
+    body[data-night="true"] #sportsUpdated {
+      border-color: rgba(209, 226, 248, 0.35);
+      background: rgba(16, 33, 52, 0.56);
+      color: #d3e4f9;
+      text-shadow: none;
     }
 
     .expandable-header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 1rem 1.25rem;
+      align-items: center;
       cursor: pointer;
-      transition: background 0.2s;
+      padding: 0.98rem 1.15rem;
+      transition: background 160ms ease;
     }
 
     .expandable-header:hover {
-      background: var(--card-hover);
+      background: rgba(10, 30, 55, 0.04);
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    .expandable-header:focus-visible {
+      outline: 2px solid rgba(31, 111, 235, 0.75);
+      outline-offset: 2px;
+      border-radius: 10px;
     }
 
     .expandable-left {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-    }
-
-    .expandable-title {
-      font-size: 0.8125rem;
-      font-weight: 600;
-      color: var(--secondary);
+      gap: 0.58rem;
     }
 
     .expandable-arrow {
-      font-size: 0.75rem;
-      color: var(--secondary);
-      transition: transform 0.3s;
+      font-size: 1rem;
+      color: var(--text-secondary);
+      transition: transform 220ms ease;
+      line-height: 1;
     }
 
     .expandable.open .expandable-arrow {
@@ -509,157 +1114,404 @@
     .expandable-content {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.3s ease;
+      transition: max-height 260ms ease;
     }
 
     .expandable.open .expandable-content {
-      max-height: 300px;
+      max-height: 340px;
+    }
+
+    #evExpandable.open .expandable-content {
+      max-height: 760px;
+    }
+
+    #sportsExpandable.open .expandable-content {
+      max-height: 980px;
+    }
+
+    #sportsExpandable.weekday-mode {
+      opacity: 0.97;
+    }
+
+    .sports-content-wrap {
+      border: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-radius: 0;
+      padding-top: 0.1rem;
+      display: grid;
+      gap: 0.65rem;
+    }
+
+    .sports-subtitle {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #2b517b;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+    }
+
+    body[data-night="true"] .sports-subtitle {
+      color: #d2e3f9;
+      text-shadow: none;
+    }
+
+    .sports-list {
+      display: grid;
+      gap: 0.52rem;
+    }
+
+    .sports-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.55rem;
+      align-items: center;
+      border: 1px solid rgba(14, 33, 54, 0.09);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.72);
+      padding: 0.58rem 0.7rem;
+    }
+
+    .sports-main {
+      min-width: 0;
+      display: grid;
+      gap: 0.16rem;
+    }
+
+    .sports-matchup-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      min-width: 0;
+    }
+
+    .sports-team-icons {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      flex-shrink: 0;
+    }
+
+    .sports-team-icon {
+      position: relative;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(16, 32, 50, 0.14);
+      background: rgba(255, 255, 255, 0.78);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      color: #1f446d;
+      font-size: 0.62rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .sports-team-icon img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .sports-matchup {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #173a5b;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .sports-meta {
+      font-size: 0.73rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .sports-location {
+      font-size: 0.71rem;
+      font-weight: 600;
+      color: #2f5b86;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .sports-status {
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border-radius: 999px;
+      padding: 0.22rem 0.48rem;
+      border: 1px solid rgba(16, 32, 50, 0.14);
+      color: var(--text-secondary);
+      background: rgba(16, 32, 50, 0.06);
+      white-space: nowrap;
+    }
+
+    .sports-status.live {
+      color: #9b1c1c;
+      border-color: rgba(155, 28, 28, 0.22);
+      background: rgba(155, 28, 28, 0.1);
+    }
+
+    .sports-status.final {
+      color: #225ea6;
+      border-color: rgba(34, 94, 166, 0.2);
+      background: rgba(34, 94, 166, 0.1);
+    }
+
+    .activity-list {
+      display: grid;
+      gap: 0.5rem;
+    }
+
+    .activity-grid {
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .activity-column {
+      display: grid;
+      gap: 0.45rem;
+      align-content: start;
+    }
+
+    .activity-column-title {
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #2b517b;
+    }
+
+    body[data-night="true"] .activity-column-title {
+      color: #d2e3f9;
+    }
+
+    .activity-link {
+      display: grid;
+      gap: 0.08rem;
+      text-decoration: none;
+      border: 1px solid rgba(14, 33, 54, 0.09);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.72);
+      padding: 0.56rem 0.66rem;
+      color: inherit;
+      transition: transform 160ms ease, box-shadow 160ms ease;
+    }
+
+    .activity-link:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 16px rgba(18, 43, 74, 0.08);
+    }
+
+    body.weekend-layout .activity-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .activity-name {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #173a5b;
+    }
+
+    .activity-meta {
+      font-size: 0.71rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .ev-content-wrap {
+      border: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-radius: 0;
+      padding-top: 0.1rem;
+    }
+
+    .ev-toggle-row {
+      margin: 0 0 0.6rem auto;
+      width: max-content;
     }
 
     .stations-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.75rem;
-      padding: 0 1.25rem 1.25rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.7rem;
+      padding: 0 1.15rem 1.15rem;
     }
 
     .station {
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 0.75rem;
-      padding: 1rem;
+      border: 1px solid rgba(14, 33, 54, 0.09);
+      border-radius: 13px;
+      background: rgba(255, 255, 255, 0.72);
+      padding: 0.84rem;
     }
 
     .station-name {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--secondary);
-      margin-bottom: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      font-weight: 700;
+      margin-bottom: 0.45rem;
+      text-transform: uppercase;
+      letter-spacing: 0.045em;
     }
 
     .station-stats {
       display: flex;
-      gap: 1.5rem;
+      gap: 1.15rem;
     }
 
     .stat {
-      display: flex;
-      flex-direction: column;
+      display: grid;
+      gap: 0.08rem;
+      min-width: 48px;
     }
 
     .stat-value {
-      font-size: 1.5rem;
-      font-weight: 700;
-      line-height: 1.1;
+      font-size: 1.48rem;
+      line-height: 1;
+      font-weight: 800;
+      color: #133352;
+      letter-spacing: -0.015em;
     }
 
     .stat-label {
-      font-size: 0.6875rem;
-      color: var(--secondary);
-      font-weight: 500;
-      margin-top: 0.125rem;
+      font-size: 0.68rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
     }
 
     .loading {
-      color: var(--secondary);
-    }
-
-    .card-wide {
-      grid-column: span 2;
-    }
-
-    .transit-list {
-      display: grid;
-      gap: 0.75rem;
-    }
-
-    .transit-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.65rem 0.85rem;
-      border-radius: 0.75rem;
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    .transit-label {
-      display: flex;
-      flex-direction: column;
-      gap: 0.15rem;
-    }
-
-    .transit-title {
-      font-size: 0.875rem;
+      color: var(--text-muted);
       font-weight: 600;
     }
 
-    .transit-subtitle {
-      font-size: 0.6875rem;
-      color: var(--secondary);
-      text-transform: uppercase;
-      letter-spacing: 0.4px;
-    }
-
-    .transit-time {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--accent);
-    }
-
-    .transit-note {
-      font-size: 0.75rem;
-      color: var(--secondary);
-      margin-top: 0.25rem;
-    }
-
-    @media (max-width: 600px) {
-      body {
-        padding: 1rem;
+    @keyframes riseIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
       }
 
-      .card {
-        padding: 1rem;
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
+    }
 
-      #menuContent {
+    @media (max-width: 980px) {
+      .main-grid {
         grid-template-columns: 1fr;
       }
 
-      .weather-card {
-        flex-direction: column;
-        align-items: flex-start;
+      body.weekend-layout .activity-grid {
+        grid-template-columns: 1fr;
       }
 
-      .weather-stats {
+      .hero-right {
+        margin-left: 0;
         width: 100%;
         justify-content: space-between;
       }
 
-      .weather-stat {
-        text-align: left;
+      .hero-weather {
+        min-width: 0;
+        width: 100%;
       }
 
-      .dashboard-grid {
-        grid-template-columns: 1fr;
+      .quick-nav {
+        margin-top: 0.45rem;
       }
 
-      .card-wide {
-        grid-column: span 1;
+      .weather-stats {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      body {
+        padding: 1rem;
       }
 
+      .hero,
+      .card,
+      .expandable {
+        border-radius: 16px;
+        backdrop-filter: blur(18px) saturate(135%);
+        -webkit-backdrop-filter: blur(18px) saturate(135%);
+        box-shadow:
+          0 18px 36px rgba(8, 24, 46, 0.18),
+          inset 0 1px 0 rgba(255, 255, 255, 0.72),
+          inset 0 -12px 24px rgba(255, 255, 255, 0.07),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.28);
+      }
+
+      .hero {
+        padding: 1rem;
+      }
+
+      .card {
+        padding: 0.95rem;
+      }
+
+      #menuContent,
       .stations-grid {
         grid-template-columns: 1fr;
       }
 
+      .weather-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .weather-stat {
+        min-height: 58px;
+      }
+
+      .departure-row {
+        grid-template-columns: 1fr;
+        gap: 0.3rem;
+      }
+
+      .sports-row {
+        grid-template-columns: 1fr;
+        gap: 0.32rem;
+      }
+
+      .sports-status {
+        justify-self: start;
+      }
+
+      .departure-time {
+        font-size: 0.76rem;
+      }
+
+      .plug-list {
+        grid-template-columns: 1fr;
+      }
+
       .sun {
-        width: 70px;
-        height: 70px;
-        top: 4%;
-        right: 6%;
+        width: 80px;
+        height: 80px;
       }
 
       .moon {
-        width: 50px;
-        height: 50px;
+        width: 58px;
+        height: 58px;
       }
     }
   </style>
@@ -667,6 +1519,7 @@
 
 <body>
   <div class="weather-bg">
+    <div class="ai-bg" id="aiBackground"></div>
     <div class="sun"></div>
     <div class="moon"></div>
     <div class="stars">
@@ -692,92 +1545,159 @@
   </div>
 
   <div class="dashboard">
-    <div class="header">
-      <div class="header-left">
+    <header class="hero">
+      <div class="hero-left">
         <div class="greeting" id="greeting">Good evening, Charles</div>
         <div id="clock">--:--</div>
+        <div class="quick-nav">
+          <a class="quick-link" href="#commuteSection">Commute</a>
+          <a class="quick-link" href="#sportsExpandable">Sports</a>
+          <a class="quick-link" href="#menuSection">Lifestyle</a>
+          <a class="quick-link" href="about.html">About</a>
+        </div>
       </div>
       <div id="date">--</div>
-    </div>
-
-    <div class="dashboard-grid">
-      <div class="card weather-card" id="weather">
-        <div class="weather-main">
-          <div class="weather-icon">--</div>
-          <div>
-            <div class="weather-temp loading">--°</div>
-            <div class="weather-condition">Loading...</div>
-          </div>
-        </div>
-        <div class="weather-stats">
-          <div class="weather-stat">
-            <div class="weather-stat-value">--</div>
-            <div class="weather-stat-label">Feels like</div>
-          </div>
-          <div class="weather-stat">
-            <div class="weather-stat-value">--</div>
-            <div class="weather-stat-label">Humidity</div>
-          </div>
-          <div class="weather-stat">
-            <div class="weather-stat-value">--</div>
-            <div class="weather-stat-label">Wind</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <div class="card-icon icon-train">🚇</div>
-          <span class="card-title">MBTA Red Line</span>
-        </div>
-        <div class="transit-list" id="mbtaDepartures">
-          <div class="transit-item">
-            <div class="transit-label">
-              <span class="transit-title loading">Loading...</span>
-              <span class="transit-subtitle">Alewife → Southbound</span>
+      <div class="hero-right">
+        <div class="hero-weather" id="heroWeather">
+          <div class="weather-main">
+            <div class="weather-icon">WX</div>
+            <div>
+              <div class="weather-temp loading">--&deg;C</div>
+              <div class="weather-condition">Loading...</div>
             </div>
-            <span class="transit-time">--</span>
+          </div>
+          <div class="weather-stats">
+            <div class="weather-stat">
+              <div class="weather-stat-value">--</div>
+              <div class="weather-stat-label">Feels like</div>
+            </div>
+            <div class="weather-stat">
+              <div class="weather-stat-value">--</div>
+              <div class="weather-stat-label">Humidity</div>
+            </div>
+            <div class="weather-stat">
+              <div class="weather-stat-value">--</div>
+              <div class="weather-stat-label">Wind</div>
+            </div>
           </div>
         </div>
-        <div class="transit-note" id="mbtaUpdated">Last updated --</div>
+        <div class="brand-pill">Cambridge HQ</div>
       </div>
+    </header>
 
-      <div class="card card-wide">
-        <div class="card-header">
-          <div class="card-icon icon-menu">🍽</div>
-          <span class="card-title">Today's Menu</span>
-          <span style="margin-left:auto;font-size:0.75rem;color:var(--secondary);font-weight:500;" id="menuDay"></span>
-        </div>
-        <div id="menuContent"><span class="loading">Loading...</span></div>
-      </div>
-
-      <div class="expandable card-wide" id="bikeExpandable">
-        <div class="expandable-header" onclick="toggleBikes()">
-          <div class="expandable-left">
-            <div class="card-icon icon-bike">🚲</div>
-            <span class="expandable-title">Bluebikes Stations</span>
+    <div class="main-grid">
+      <section class="stack" id="commuteSection">
+        <div class="stack-label">Commute</div>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-icon icon-transit">RL</div>
+            <span class="card-title">Alewife Red Line Departures</span>
           </div>
-          <span class="expandable-arrow">▼</span>
+          <div class="departures-list" id="redlineDepartures">
+            <div class="departure-empty loading">Loading departures...</div>
+          </div>
+          <div class="card-note" id="redlineUpdated">Updated --</div>
         </div>
-        <div class="expandable-content">
-          <div class="stations-grid">
-            <div class="station">
-              <div class="station-name">Home Station</div>
-              <div class="station-stats" id="homeStatus">
-                <div class="stat"><span class="stat-value loading">--</span><span class="stat-label">Bikes</span></div>
-                <div class="stat"><span class="stat-value loading">--</span><span class="stat-label">Docks</span></div>
+
+        <div class="expandable" id="evExpandable">
+          <div class="expandable-header" onclick="toggleEvPanel()" tabindex="0" role="button" aria-expanded="false">
+            <div class="expandable-left">
+              <div class="card-icon icon-charge">CP</div>
+              <span class="expandable-title">Garage B EV Charger Status</span>
+            </div>
+            <span class="expandable-arrow">v</span>
+          </div>
+          <div class="expandable-content">
+            <div class="card ev-content-wrap">
+              <div class="toggle-row ev-toggle-row">
+                <span class="toggle-label">Notify until 5 PM</span>
+                <label class="toggle">
+                  <input type="checkbox" id="chargepointNotifyToggle" />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="charger-summary" id="chargepointSummary">Available --</div>
+              <div class="charger-grid" id="chargepointList">
+                <div class="departure-empty loading">Loading chargers...</div>
+              </div>
+              <div class="card-note" id="chargepointUpdated">Updated --</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="expandable" id="bikeExpandable">
+          <div class="expandable-header" onclick="toggleBikes()" tabindex="0" role="button" aria-expanded="false">
+            <div class="expandable-left">
+              <div class="card-icon icon-bike">BK</div>
+              <span class="expandable-title">Bluebikes Stations</span>
+            </div>
+            <span class="expandable-arrow">v</span>
+          </div>
+          <div class="expandable-content">
+            <div class="stations-grid">
+              <div class="station">
+                <div class="station-name">Home Station</div>
+                <div class="station-stats" id="homeStatus">
+                  <div class="stat"><span class="stat-value loading">--</span><span class="stat-label">Bikes</span></div>
+                  <div class="stat"><span class="stat-value loading">--</span><span class="stat-label">Docks</span></div>
+                </div>
+              </div>
+              <div class="station">
+                <div class="station-name">Work Station</div>
+                <div class="station-stats" id="workStatus">
+                  <div class="stat"><span class="stat-value loading">--</span><span class="stat-label">Bikes</span></div>
+                  <div class="stat"><span class="stat-value loading">--</span><span class="stat-label">Docks</span></div>
+                </div>
               </div>
             </div>
-            <div class="station">
-              <div class="station-name">Work Station</div>
-              <div class="station-stats" id="workStatus">
-                <div class="stat"><span class="stat-value loading">--</span><span class="stat-label">Bikes</span></div>
-                <div class="stat"><span class="stat-value loading">--</span><span class="stat-label">Docks</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="stack" id="menuSection">
+        <div class="stack-label">Lifestyle</div>
+        <div class="expandable" id="sportsExpandable">
+          <div class="expandable-header" onclick="toggleSportsPanel()" tabindex="0" role="button" aria-expanded="false">
+            <div class="expandable-left">
+              <div class="card-icon icon-sports">SP</div>
+              <span class="expandable-title">Boston Sports</span>
+            </div>
+            <span class="expandable-arrow">v</span>
+          </div>
+          <div class="expandable-content">
+            <div class="card sports-content-wrap">
+              <div class="sports-subtitle" id="sportsWindowLabel">This week</div>
+              <div class="sports-list" id="sportsList">
+                <div class="departure-empty loading">Loading Boston games...</div>
               </div>
+              <div class="sports-subtitle">Local activities this week</div>
+              <div class="activity-list" id="activityList">
+                <div class="departure-empty loading">Loading activity links...</div>
+              </div>
+              <div class="card-note" id="sportsUpdated">Updated --</div>
             </div>
           </div>
         </div>
-      </div>
+
+        <div class="card" id="menuCard">
+          <div class="card-header">
+            <div class="card-icon icon-menu">MN</div>
+            <span class="card-title">Today's Menu</span>
+            <span id="menuDay"></span>
+          </div>
+          <div class="menu-image-panel">
+            <div class="menu-image-header">
+              <div>
+                <div class="menu-image-title">Action Item Visual</div>
+                <div class="menu-action-name" id="menuActionName">Loading...</div>
+              </div>
+            </div>
+            <div class="menu-image-status" id="menuImageStatus">No image configured.</div>
+            <div class="menu-image-frame" id="menuImageFrame">No image yet</div>
+          </div>
+          <div id="menuContent"><span class="loading">Loading...</span></div>
+        </div>
+      </section>
     </div>
   </div>
 
@@ -789,10 +1709,634 @@
     const WEATHER_KEY = "bd5e378503939ddaee76f12ad7a97608";
     const MBTA_STOP_ID = "place-alfcl";
     const MBTA_ROUTE_ID = "Red";
-    const MBTA_DIRECTION_ID = 1;
+    const MBTA_DEPARTURE_DIRECTION = "0";
+    const MBTA_DEPARTURE_LIMIT = 6;
+    const CHARGEPOINT_ENDPOINT = "https://mc.chargepoint.com/map-prod/v3/station";
+    const CHARGEPOINT_LOCATIONS = [
+      { deviceId: "1850061", name: "BULFINCH GARAGE B EV6" },
+      { deviceId: "1850031", name: "BULFINCH GARAGE B EV1" },
+      { deviceId: "1850041", name: "BULFINCH GARAGE B EV4" },
+      { deviceId: "1850011", name: "BULFINCH GARAGE B EV5" },
+      { deviceId: "1850021", name: "BULFINCH GARAGE B EV2" },
+      { deviceId: "1850001", name: "BULFINCH GARAGE B EV3" }
+    ];
+    const CHARGEPOINT_PORTS_PER_STATION = 2;
+    const CHARGEPOINT_POLL_MS = 30000;
+    const CHARGEPOINT_NOTIFY_AFTER_MS = 60000;
+    const CHARGEPOINT_NOTIFY_CUTOFF_HOUR = 17;
+    const CHARGEPOINT_NOTIFY_STORAGE_KEY = "chargepointNotifyUntil";
+    const CHARGEPOINT_NOTIFY_ENABLED_KEY = "chargepointNotifyEnabled";
+    const EV_PANEL_OPEN_KEY = "evPanelOpen";
+    const WEATHER_CACHE_KEY = "cachedWeatherMain";
+    const WEATHER_CACHE_TS_KEY = "cachedWeatherMainTs";
+    const WEATHER_CACHE_MAX_AGE_MS = 45 * 60 * 1000;
+    const SPORTS_LOOKAHEAD_DAYS = 7;
+    const SPORTS_REFRESH_MS = 30 * 60 * 1000;
+    const EVENTS_PER_CITY = 6;
+    const EVENTS_FETCH_LIMIT = 40;
+    const MENU_ACTION_IMAGE_URL = "assets/menu-action-placeholder.png";
+    const WEEKEND_NO_MENU_IMAGE_URL = "assets/menu-weekend-no-items-boston-vibe.png";
+    const BOSTON_TEAM_NAMES = new Set([
+      "Boston Celtics",
+      "Boston Bruins",
+      "Boston Red Sox",
+      "New England Patriots"
+    ]);
+    const BOSTON_SPORTS_LEAGUES = [
+      { sport: "basketball", league: "nba", label: "NBA" },
+      { sport: "hockey", league: "nhl", label: "NHL" },
+      { sport: "baseball", league: "mlb", label: "MLB" },
+      { sport: "football", league: "nfl", label: "NFL" }
+    ];
+    const CITY_EVENT_FEEDS = [
+      {
+        source: "Boston.gov",
+        rssUrl: "https://www.boston.gov/rss/events"
+      },
+      {
+        source: "CambridgeUSA",
+        rssUrl: "https://www.cambridgeusa.org/events/rss"
+      }
+    ];
+    const RECURRING_EVENT_PATTERNS = [
+      /\bweekly\b/i,
+      /\bmonthly\b/i,
+      /\bevery (monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b/i,
+      /\bopen hours?\b/i,
+      /\bdrop-?in\b/i,
+      /\bstory ?time\b/i,
+      /\bongoing\b/i,
+      /\brecurring\b/i,
+      /^hike boston:/i
+    ];
+    const LOCAL_ACTIVITY_LINKS = [
+      {
+        name: "The Boston Calendar",
+        meta: "Curated city events, concerts, classes, and festivals",
+        url: "https://www.thebostoncalendar.com/"
+      },
+      {
+        name: "Cambridge Office for Tourism",
+        meta: "This week around Harvard Square, Kendall, and beyond",
+        url: "https://www.cambridgeusa.org/events/"
+      },
+      {
+        name: "Cambridge Arts Calendar",
+        meta: "Talks, exhibits, performances, and neighborhood arts",
+        url: "https://www.cambridgema.gov/arts/Calendar"
+      },
+      {
+        name: "Boston.gov Events",
+        meta: "Official city events and community programming",
+        url: "https://www.boston.gov/events"
+      }
+    ];
+    const BACKGROUND_IMAGES = {
+      "normal-day": "assets/backgrounds/app-bg-normal-day.jpg",
+      "normal-sunset": "assets/backgrounds/app-bg-normal-sunset.png",
+      "normal-night": "assets/backgrounds/app-bg-normal-night.png",
+      "cloudy-day": "assets/backgrounds/app-bg-cloudy-day.png",
+      "cloudy-sunset": "assets/backgrounds/app-bg-cloudy-sunset.png",
+      "cloudy-night": "assets/backgrounds/app-bg-cloudy-night.png",
+      "rain-day": "assets/backgrounds/app-bg-rain-day.png",
+      "rain-sunset": "assets/backgrounds/app-bg-rain-sunset.png",
+      "rain-night": "assets/backgrounds/app-bg-rain-night.png",
+      "snow-day": "assets/backgrounds/app-bg-snow-day.png",
+      "snow-sunset": "assets/backgrounds/app-bg-snow-sunset.png",
+      "snow-night": "assets/backgrounds/app-bg-snow-night.png"
+    };
+    function loadFreshCachedWeatherMain() {
+      const cached = localStorage.getItem(WEATHER_CACHE_KEY) || "";
+      const ts = Number(localStorage.getItem(WEATHER_CACHE_TS_KEY) || 0);
+      if (!cached || !ts) return "";
+      if (Date.now() - ts > WEATHER_CACHE_MAX_AGE_MS) return "";
+      return cached;
+    }
+
+    let currentWeatherMain = loadFreshCachedWeatherMain();
+    let weatherSceneSyncKey = "";
+    let currentBackgroundKey = "";
+    let weatherSceneReady = !!currentWeatherMain;
+    let latestRealEventsByCity = { cambridge: [], boston: [] };
+    const celestialPlacementCache = new Map();
+    let celestialPlacementRequestId = 0;
 
     function toggleBikes() {
-      document.getElementById('bikeExpandable').classList.toggle('open');
+      const expandable = document.getElementById('bikeExpandable');
+      expandable.classList.toggle('open');
+      const header = expandable.querySelector('.expandable-header');
+      if (header) {
+        header.setAttribute('aria-expanded', expandable.classList.contains('open') ? 'true' : 'false');
+      }
+    }
+
+    function setEvPanelOpenState(isOpen) {
+      const expandable = document.getElementById("evExpandable");
+      if (!expandable) return;
+      expandable.classList.toggle("open", isOpen);
+      const header = expandable.querySelector(".expandable-header");
+      if (header) {
+        header.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      }
+      localStorage.setItem(EV_PANEL_OPEN_KEY, isOpen ? "true" : "false");
+    }
+
+    function toggleEvPanel() {
+      const expandable = document.getElementById("evExpandable");
+      if (!expandable) return;
+      setEvPanelOpenState(!expandable.classList.contains("open"));
+    }
+
+    function isWeekendDay(date = new Date()) {
+      const day = date.getDay();
+      return day === 0 || day === 6;
+    }
+
+    function applyWeekendLayoutState(date = new Date()) {
+      document.body.classList.toggle("weekend-layout", isWeekendDay(date));
+    }
+
+    function setSportsPanelExpanded(isOpen) {
+      const expandable = document.getElementById("sportsExpandable");
+      if (!expandable) return;
+      expandable.classList.toggle("open", isOpen);
+      const header = expandable.querySelector(".expandable-header");
+      if (header) {
+        header.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      }
+    }
+
+    function toggleSportsPanel() {
+      const expandable = document.getElementById("sportsExpandable");
+      if (!expandable) return;
+      setSportsPanelExpanded(!expandable.classList.contains("open"));
+    }
+
+    function placeSportsPanelByDay(date = new Date()) {
+      const isWeekend = isWeekendDay(date);
+      const section = document.getElementById("menuSection");
+      const sports = document.getElementById("sportsExpandable");
+      const menuCard = document.getElementById("menuCard");
+      if (!section || !sports || !menuCard) return;
+
+      if (isWeekend) {
+        section.insertBefore(sports, menuCard);
+        sports.classList.remove("weekday-mode");
+        setSportsPanelExpanded(true);
+      } else {
+        section.appendChild(sports);
+        sports.classList.add("weekday-mode");
+        setSportsPanelExpanded(false);
+      }
+    }
+
+    function formatDateAsRangeLabel(start, end) {
+      const options = { month: "short", day: "numeric" };
+      const startLabel = start.toLocaleDateString([], options);
+      const endLabel = end.toLocaleDateString([], options);
+      return `${startLabel} - ${endLabel}`;
+    }
+
+    function isCambridgeActivity(item) {
+      const sourceText = String(item.source || item.name || "").toLowerCase();
+      return sourceText.includes("cambridge");
+    }
+
+    function isBostonActivity(item) {
+      const sourceText = String(item.source || item.name || "").toLowerCase();
+      return sourceText.includes("boston");
+    }
+
+    function normalizeEventTitle(title) {
+      return String(title || "")
+        .toLowerCase()
+        .replace(/[^a-z0-9\s]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function isLikelyRecurringEvent(item, titleCounts) {
+      const title = String(item.title || item.name || "");
+      const desc = String(item.description || item.meta || "");
+      const normalized = normalizeEventTitle(title);
+      const repeatedTitle = (titleCounts.get(normalized) || 0) > 1;
+      const text = `${title} ${desc}`;
+      const patternHit = RECURRING_EVENT_PATTERNS.some(pattern => pattern.test(text));
+      return repeatedTitle || patternHit;
+    }
+
+    function isHardExcludedEvent(item) {
+      const title = String(item.title || item.name || "");
+      return /^hike boston:/i.test(title) || /\bhike boston\b/i.test(title);
+    }
+
+    function dedupeEvents(events) {
+      const seen = new Set();
+      const output = [];
+      for (const item of events) {
+        const titleKey = normalizeEventTitle(item.title || item.name || "");
+        const dateKey = String(item.publishedAt || "").slice(0, 16);
+        const linkKey = String(item.link || item.url || "")
+          .toLowerCase()
+          .replace(/^https?:\/\//, "")
+          .replace(/\/+$/, "");
+        const compound = `${titleKey}|${dateKey}`;
+        const key = linkKey || compound;
+        if (!key) continue;
+        if (seen.has(key)) continue;
+        seen.add(key);
+        output.push(item);
+      }
+      return output;
+    }
+
+    function renderActivityColumns(cambridgeItems, bostonItems) {
+      const list = document.getElementById("activityList");
+      if (!list) return;
+      const makeCard = (item, sourceFallback = "") => `
+        <a class="activity-link" href="${escapeHtml(item.link || item.url || "#")}" target="_blank" rel="noreferrer noopener">
+          <div class="activity-name">${escapeHtml(item.title || item.name || "Local event")}</div>
+          <div class="activity-meta">${escapeHtml(item.meta || item.source || sourceFallback)}</div>
+        </a>
+      `;
+      const cambridgeMarkup = cambridgeItems.length
+        ? cambridgeItems.map(item => makeCard(item, "Cambridge")).join("")
+        : `<div class="departure-empty">No Cambridge events found right now.</div>`;
+      const bostonMarkup = bostonItems.length
+        ? bostonItems.map(item => makeCard(item, "Boston")).join("")
+        : `<div class="departure-empty">No Boston events found right now.</div>`;
+      list.innerHTML = `
+        <div class="activity-grid">
+          <div class="activity-column">
+            <div class="activity-column-title">Cambridge</div>
+            ${cambridgeMarkup}
+          </div>
+          <div class="activity-column">
+            <div class="activity-column-title">Boston</div>
+            ${bostonMarkup}
+          </div>
+        </div>
+      `;
+    }
+
+    function formatEspnDate(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}${month}${day}`;
+    }
+
+    function formatSportsSchedule(isoDate) {
+      const gameDate = new Date(isoDate);
+      return gameDate.toLocaleString([], {
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit"
+      });
+    }
+
+    function resolveEspnTeamLogo(league, sport, team) {
+      const fromPayload = team?.logos?.[0]?.href || "";
+      if (fromPayload && /^https:\/\//i.test(fromPayload)) return fromPayload;
+      const leagueKey = String(league || "").toLowerCase().trim();
+      const abbr = String(team?.abbreviation || "")
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, "");
+      if (abbr && leagueKey) {
+        return `https://a.espncdn.com/i/teamlogos/${leagueKey}/500/${abbr}.png`;
+      }
+      const teamId = String(team?.id || "").trim();
+      if (teamId && leagueKey) {
+        return `https://a.espncdn.com/i/teamlogos/${leagueKey}/500/${teamId}.png`;
+      }
+      const sportKey = String(sport || "").toLowerCase().trim();
+      if (teamId && sportKey) {
+        return `https://a.espncdn.com/i/teamlogos/${sportKey}/500/${teamId}.png`;
+      }
+      return "";
+    }
+
+    function buildSportsStatus(statusType, statusDetail) {
+      const state = String(statusType?.state || "").toLowerCase();
+      if (state === "in") {
+        return { text: statusDetail || "Live", className: "live" };
+      }
+      if (state === "post") {
+        return { text: "Final", className: "final" };
+      }
+      return { text: "Upcoming", className: "" };
+    }
+
+    function formatVenueLocation(competition) {
+      const venue = competition?.venue || {};
+      const venueName = venue.fullName || venue.name || "";
+      const city = venue.address?.city || "";
+      const state = venue.address?.state || venue.address?.country || "";
+      const cityState = [city, state].filter(Boolean).join(", ");
+      if (venueName && cityState) return `${venueName} (${cityState})`;
+      if (venueName) return venueName;
+      if (cityState) return cityState;
+      return "Venue TBD";
+    }
+
+    async function fetchLeagueBostonGames(config, startDate, endDate) {
+      const dates = `${formatEspnDate(startDate)}-${formatEspnDate(endDate)}`;
+      const url = `https://site.api.espn.com/apis/site/v2/sports/${config.sport}/${config.league}/scoreboard?dates=${dates}`;
+      const response = await fetch(url);
+      const payload = await response.json();
+      const events = Array.isArray(payload.events) ? payload.events : [];
+      return events
+        .map(event => {
+          const competition = event.competitions?.[0];
+          const competitors = competition?.competitors || [];
+          const bostonCompetitor = competitors.find(entry => BOSTON_TEAM_NAMES.has(entry.team?.displayName));
+          if (!bostonCompetitor) return null;
+          const opponent = competitors.find(entry => entry !== bostonCompetitor);
+          const statusType = competition?.status?.type || event.status?.type || {};
+          const statusDetail = competition?.status?.type?.shortDetail || event.status?.type?.shortDetail || "";
+          const status = buildSportsStatus(statusType, statusDetail);
+          const scheduled = formatSportsSchedule(event.date);
+          const location = formatVenueLocation(competition);
+          const isFinal = status.className === "final";
+          const bostonName = bostonCompetitor.team?.shortDisplayName || "Boston";
+          const opponentName = opponent?.team?.shortDisplayName || "Opponent";
+          const bostonLogo = resolveEspnTeamLogo(config.league, config.sport, bostonCompetitor.team);
+          const opponentLogo = resolveEspnTeamLogo(config.league, config.sport, opponent?.team);
+          const bostonAbbrev = bostonCompetitor.team?.abbreviation || "BOS";
+          const opponentAbbrev = opponent?.team?.abbreviation || "OPP";
+          const matchup = `${bostonName} vs ${opponentName}`;
+          const meta = isFinal
+            ? `${config.label} | ${bostonCompetitor.score || 0}-${opponent?.score || 0}`
+            : `${config.label} | ${scheduled}`;
+          return {
+            id: event.id,
+            date: event.date,
+            matchup,
+            bostonLogo,
+            opponentLogo,
+            bostonAbbrev,
+            opponentAbbrev,
+            meta,
+            location,
+            statusText: status.text,
+            statusClass: status.className
+          };
+        })
+        .filter(Boolean);
+    }
+
+    function renderSportsGames(games, startDate, endDate) {
+      const list = document.getElementById("sportsList");
+      const windowLabel = document.getElementById("sportsWindowLabel");
+      if (!list || !windowLabel) return;
+      windowLabel.textContent = `Boston games (${formatDateAsRangeLabel(startDate, endDate)})`;
+      if (!games.length) {
+        list.innerHTML = `<div class="departure-empty">No Boston major-league games scheduled in this window.</div>`;
+        return;
+      }
+      list.innerHTML = games
+        .slice(0, 12)
+        .map(game => `
+          <div class="sports-row">
+            <div class="sports-main">
+              <div class="sports-matchup-row">
+                <span class="sports-team-icons">
+                  <span class="sports-team-icon">${escapeHtml(game.bostonAbbrev)}${game.bostonLogo ? `<img src="${escapeHtml(game.bostonLogo)}" alt="${escapeHtml(game.bostonAbbrev)} logo" loading="lazy" onerror="this.style.display='none'">` : ""}</span>
+                  <span class="sports-team-icon">${escapeHtml(game.opponentAbbrev)}${game.opponentLogo ? `<img src="${escapeHtml(game.opponentLogo)}" alt="${escapeHtml(game.opponentAbbrev)} logo" loading="lazy" onerror="this.style.display='none'">` : ""}</span>
+                </span>
+                <div class="sports-matchup">${escapeHtml(game.matchup)}</div>
+              </div>
+              <div class="sports-meta">${escapeHtml(game.meta)}</div>
+              <div class="sports-location">${escapeHtml(game.location || "Venue TBD")}</div>
+            </div>
+            <div class="sports-status ${game.statusClass}">${escapeHtml(game.statusText)}</div>
+          </div>
+        `)
+        .join("");
+    }
+
+    function stripHtml(value) {
+      return String(value || "").replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+    }
+
+    function formatEventDateLabel(dateValue) {
+      const date = new Date(dateValue);
+      if (Number.isNaN(date.getTime())) return "Date TBD";
+      return date.toLocaleString([], {
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "2-digit"
+      });
+    }
+
+    function decodePossibleDataUri(value) {
+      const raw = String(value || "");
+      if (!raw.startsWith("data:")) return raw;
+      const commaIndex = raw.indexOf(",");
+      if (commaIndex < 0) return raw;
+      const meta = raw.slice(0, commaIndex);
+      const body = raw.slice(commaIndex + 1);
+      if (/;base64/i.test(meta)) {
+        try {
+          return atob(body);
+        } catch (err) {
+          return "";
+        }
+      }
+      try {
+        return decodeURIComponent(body);
+      } catch (err) {
+        return body;
+      }
+    }
+
+    function parseFeedXmlItems(xmlText, feed) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(xmlText, "text/xml");
+      const nodes = Array.from(doc.querySelectorAll("item")).slice(0, EVENTS_FETCH_LIMIT);
+      return nodes
+        .map(node => {
+          const title = node.querySelector("title")?.textContent?.trim() || "";
+          const link = node.querySelector("link")?.textContent?.trim() || feed.rssUrl;
+          const publishedAt = node.querySelector("pubDate")?.textContent?.trim() || "";
+          const description = stripHtml(node.querySelector("description")?.textContent || "");
+          if (!title) return null;
+          return {
+            source: feed.source,
+            title,
+            link,
+            publishedAt,
+            description
+          };
+        })
+        .filter(Boolean);
+    }
+
+    async function fetchRssFeedItemsViaAllOrigins(feed) {
+      const endpoint = `https://api.allorigins.win/get?url=${encodeURIComponent(feed.rssUrl)}`;
+      const response = await fetch(endpoint);
+      const payload = await response.json();
+      const xmlRaw = decodePossibleDataUri(payload.contents || "");
+      if (!xmlRaw) return [];
+      return parseFeedXmlItems(xmlRaw, feed);
+    }
+
+    async function fetchRssFeedItems(feed) {
+      try {
+        const endpoint = `https://api.rss2json.com/v1/api.json?count=${EVENTS_FETCH_LIMIT}&rss_url=${encodeURIComponent(feed.rssUrl)}`;
+        const response = await fetch(endpoint);
+        const payload = await response.json();
+        if (payload.status === "ok" && Array.isArray(payload.items) && payload.items.length) {
+          return payload.items.map(item => {
+            const title = item.title || "Local event";
+            const link = item.link || feed.rssUrl;
+            const publishedAt = item.pubDate || item.guid || "";
+            const description = stripHtml(item.description || item.content || "");
+            return {
+              source: feed.source,
+              title,
+              link,
+              publishedAt,
+              description
+            };
+          });
+        }
+      } catch (err) {
+      }
+      try {
+        return await fetchRssFeedItemsViaAllOrigins(feed);
+      } catch (err) {
+        return [];
+      }
+    }
+
+    function renderNoEventsState() {
+      const list = document.getElementById("activityList");
+      if (!list) return;
+      list.innerHTML = `
+        <div class="activity-grid">
+          <div class="activity-column">
+            <div class="activity-column-title">Cambridge</div>
+            <div class="departure-empty">No Cambridge events available right now.</div>
+          </div>
+          <div class="activity-column">
+            <div class="activity-column-title">Boston</div>
+            <div class="departure-empty">No Boston events available right now.</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderCachedEventsIfAvailable() {
+      const cambridgeItems = (latestRealEventsByCity.cambridge || []).slice(0, EVENTS_PER_CITY);
+      const bostonItems = (latestRealEventsByCity.boston || []).slice(0, EVENTS_PER_CITY);
+      if (!cambridgeItems.length && !bostonItems.length) {
+        renderNoEventsState();
+        return;
+      }
+      renderActivityColumns(cambridgeItems, bostonItems);
+    }
+
+    function renderLocalActivities(startDate, endDate) {
+      renderCachedEventsIfAvailable();
+    }
+
+    async function fetchLocalEvents(startDate, endDate) {
+      const list = document.getElementById("activityList");
+      if (!list) return;
+      try {
+        const feedItems = await Promise.all(CITY_EVENT_FEEDS.map(feed => fetchRssFeedItems(feed)));
+        const events = feedItems
+          .flat()
+          .sort((a, b) => {
+            const at = new Date(a.publishedAt).getTime();
+            const bt = new Date(b.publishedAt).getTime();
+            if (Number.isNaN(at) && Number.isNaN(bt)) return 0;
+            if (Number.isNaN(at)) return 1;
+            if (Number.isNaN(bt)) return -1;
+            return at - bt;
+          });
+
+        if (!events.length) {
+          renderCachedEventsIfAvailable();
+          return;
+        }
+        const normalized = dedupeEvents(events
+          .filter(item => !isHardExcludedEvent(item))
+          .map(item => ({
+          ...item,
+          meta: `${item.source} | ${formatEventDateLabel(item.publishedAt)}`
+          })));
+        const titleCounts = new Map();
+        normalized.forEach(item => {
+          const key = normalizeEventTitle(item.title);
+          if (!key) return;
+          titleCounts.set(key, (titleCounts.get(key) || 0) + 1);
+        });
+
+        const uniqueFirst = normalized
+          .filter(item => !isLikelyRecurringEvent(item, titleCounts))
+          .concat(normalized.filter(item => isLikelyRecurringEvent(item, titleCounts)));
+
+        let cambridgeItems = uniqueFirst.filter(isCambridgeActivity).slice(0, EVENTS_PER_CITY);
+        if (!cambridgeItems.length) {
+          cambridgeItems = normalized
+            .filter(item => String(item.source || "").toLowerCase().includes("cambridge") || String(item.link || "").toLowerCase().includes("cambridge"))
+            .slice(0, EVENTS_PER_CITY);
+        }
+        let bostonItems = uniqueFirst.filter(item => isBostonActivity(item) && !isLikelyRecurringEvent(item, titleCounts)).slice(0, EVENTS_PER_CITY);
+        if (!bostonItems.length) {
+          bostonItems = uniqueFirst.filter(isBostonActivity).slice(0, EVENTS_PER_CITY);
+        }
+        if (!bostonItems.length) {
+          bostonItems = normalized
+            .filter(item => String(item.source || "").toLowerCase().includes("boston") || String(item.link || "").toLowerCase().includes("boston"))
+            .slice(0, EVENTS_PER_CITY);
+        }
+        latestRealEventsByCity = {
+          cambridge: cambridgeItems,
+          boston: bostonItems
+        };
+        renderActivityColumns(cambridgeItems, bostonItems);
+      } catch (err) {
+        renderCachedEventsIfAvailable();
+      }
+    }
+
+    async function fetchBostonSports() {
+      const startDate = new Date();
+      const endDate = new Date();
+      endDate.setDate(startDate.getDate() + SPORTS_LOOKAHEAD_DAYS);
+      renderLocalActivities(startDate, endDate);
+      await fetchLocalEvents(startDate, endDate);
+      try {
+        const gameLists = await Promise.all(
+          BOSTON_SPORTS_LEAGUES.map(config => fetchLeagueBostonGames(config, startDate, endDate))
+        );
+        const games = gameLists.flat().sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+        renderSportsGames(games, startDate, endDate);
+      } catch (err) {
+        const list = document.getElementById("sportsList");
+        if (list) {
+          list.innerHTML = `<div class="departure-empty">Unable to load Boston sports right now.</div>`;
+        }
+      }
+      const updated = document.getElementById("sportsUpdated");
+      if (updated) {
+        updated.textContent = `Updated ${new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" })}`;
+      }
+    }
+
+    async function refreshSportsPanel() {
+      const now = new Date();
+      applyWeekendLayoutState(now);
+      placeSportsPanelByDay(now);
+      await fetchBostonSports();
+      setTimeout(refreshSportsPanel, SPORTS_REFRESH_MS);
     }
 
     function isNight() {
@@ -810,16 +2354,135 @@
 
     function updateClock() {
       const now = new Date();
+      applyWeekendLayoutState(now);
+      updateGreeting();
       document.getElementById("clock").textContent = now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
       document.getElementById("date").textContent = now.toLocaleDateString([], { weekday: "long", month: "short", day: "numeric" });
+      if (weatherSceneReady) {
+        const nextSceneKey = `${now.getHours()}:${now.getMinutes()}|${String(currentWeatherMain).toLowerCase()}`;
+        if (nextSceneKey !== weatherSceneSyncKey) {
+          weatherSceneSyncKey = nextSceneKey;
+          updateWeatherScene(currentWeatherMain);
+        }
+      }
       setTimeout(updateClock, 1000);
     }
 
+    function getTimePhase(now) {
+      const hour = now.getHours();
+      if (hour < 6 || hour >= 19) return "night";
+      if ((hour >= 6 && hour < 8) || (hour >= 17 && hour < 19)) return "sunset";
+      return "day";
+    }
+
+    function getWeatherBucket(main) {
+      if (main.includes("rain") || main.includes("drizzle") || main.includes("thunder")) return "rain";
+      if (main.includes("snow")) return "snow";
+      if (main.includes("cloud")) return "cloudy";
+      return "normal";
+    }
+
+    function selectBackgroundVariant(main, now) {
+      const weatherBucket = getWeatherBucket(main);
+      const phase = getTimePhase(now);
+      return `${weatherBucket}-${phase}`;
+    }
+
+    function applyAiBackground(main) {
+      const variant = selectBackgroundVariant(main, new Date());
+      if (variant === currentBackgroundKey) return;
+      currentBackgroundKey = variant;
+      const target = document.getElementById("aiBackground");
+      const src = BACKGROUND_IMAGES[variant] || BACKGROUND_IMAGES["normal-day"];
+      target.style.backgroundImage = `url("${src}")`;
+      target.style.opacity = variant.endsWith("-night") ? "0.58" : "0.52";
+      updateCelestialPlacementForBackground(variant, src);
+    }
+
+    function applyCelestialPlacement(side) {
+      const sun = document.querySelector(".sun");
+      const moon = document.querySelector(".moon");
+      if (!sun || !moon) return;
+      const useLeft = side === "left";
+      sun.style.left = useLeft ? "8%" : "auto";
+      sun.style.right = useLeft ? "auto" : "8%";
+      moon.style.left = useLeft ? "8%" : "auto";
+      moon.style.right = useLeft ? "auto" : "8%";
+    }
+
+    function chooseSkySideFromCanvas(ctx, width, height) {
+      const patchWidth = Math.max(20, Math.floor(width * 0.2));
+      const patchHeight = Math.max(14, Math.floor(height * 0.22));
+      const candidates = [
+        { side: "left", x: 0, y: 0 },
+        { side: "right", x: Math.max(0, width - patchWidth), y: 0 }
+      ];
+      let best = { side: "right", score: -Infinity };
+      for (const candidate of candidates) {
+        const imageData = ctx.getImageData(candidate.x, candidate.y, patchWidth, patchHeight).data;
+        let score = 0;
+        for (let i = 0; i < imageData.length; i += 4) {
+          const r = imageData[i];
+          const g = imageData[i + 1];
+          const b = imageData[i + 2];
+          const brightness = (r + g + b) / 3;
+          const blueBias = b - Math.max(r, g);
+          // Prefer brighter, bluer top-corner regions (likely unobstructed sky).
+          score += brightness * 0.85 + blueBias * 1.15;
+        }
+        if (score > best.score) best = { side: candidate.side, score };
+      }
+      return best.side;
+    }
+
+    function detectSkySideForImage(src) {
+      return new Promise(resolve => {
+        const img = new Image();
+        img.onload = () => {
+          try {
+            const canvas = document.createElement("canvas");
+            const width = Math.max(80, Math.floor(img.naturalWidth / 8));
+            const height = Math.max(60, Math.floor(img.naturalHeight / 8));
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext("2d", { willReadFrequently: true });
+            if (!ctx) {
+              resolve("right");
+              return;
+            }
+            ctx.drawImage(img, 0, 0, width, height);
+            resolve(chooseSkySideFromCanvas(ctx, width, height));
+          } catch (err) {
+            resolve("right");
+          }
+        };
+        img.onerror = () => resolve("right");
+        img.src = src;
+      });
+    }
+
+    async function updateCelestialPlacementForBackground(variant, src) {
+      const cached = celestialPlacementCache.get(variant);
+      if (cached) {
+        applyCelestialPlacement(cached);
+        return;
+      }
+      const requestId = ++celestialPlacementRequestId;
+      const side = await detectSkySideForImage(src);
+      celestialPlacementCache.set(variant, side);
+      if (requestId === celestialPlacementRequestId) {
+        applyCelestialPlacement(side);
+      }
+    }
+
     function updateWeatherScene(weatherMain) {
-      const main = weatherMain.toLowerCase();
+      const main = String(weatherMain || "clear").toLowerCase();
       const night = isNight();
       const root = document.documentElement;
       const body = document.body;
+      body.dataset.weather = main;
+      body.dataset.night = night ? "true" : "false";
+      applyAiBackground(main);
 
       document.querySelector('.sun').classList.remove('visible');
       document.querySelector('.moon').classList.remove('visible');
@@ -921,79 +2584,445 @@
       setTimeout(refreshBikes, 60000);
     }
 
-    function formatMinutesUntil(time) {
-      const diffMs = time - new Date();
-      const diffMin = Math.round(diffMs / 60000);
-      if (diffMin <= 0) return "Now";
-      return `${diffMin} min`;
+    function getEasternDateTimeParts(date = new Date()) {
+      const formatter = new Intl.DateTimeFormat("en-US", {
+        timeZone: "America/New_York",
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        hourCycle: "h23"
+      });
+      const parts = formatter.formatToParts(date);
+      const values = {};
+      for (const part of parts) {
+        if (part.type !== "literal") values[part.type] = part.value;
+      }
+      return {
+        date: `${values.year}-${values.month}-${values.day}`,
+        time: `${values.hour}:${values.minute}`
+      };
     }
 
-    async function fetchMbtaDepartures() {
-      const listEl = document.getElementById("mbtaDepartures");
-      const updatedEl = document.getElementById("mbtaUpdated");
-      try {
-        const url = `https://api-v3.mbta.com/predictions?filter[stop]=${MBTA_STOP_ID}&filter[route]=${MBTA_ROUTE_ID}&filter[direction_id]=${MBTA_DIRECTION_ID}&sort=departure_time`;
-        const res = await fetch(url);
-        const data = await res.json();
-        const upcoming = data.data
-          .map(item => item.attributes.departure_time || item.attributes.arrival_time)
-          .filter(Boolean)
-          .map(time => new Date(time))
-          .filter(time => time > new Date(Date.now() - 60000))
-          .sort((a, b) => a - b)
-          .slice(0, 3);
+    function escapeHtml(value) {
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
 
-        if (!upcoming.length) {
-          listEl.innerHTML = `
-            <div class="transit-item">
-              <div class="transit-label">
-                <span class="transit-title">No imminent departures</span>
-                <span class="transit-subtitle">Alewife → Southbound</span>
-              </div>
-              <span class="transit-time">--</span>
-            </div>
-          `;
-        } else {
-          listEl.innerHTML = upcoming.map(time => `
-            <div class="transit-item">
-              <div class="transit-label">
-                <span class="transit-title">${formatMinutesUntil(time)}</span>
-                <span class="transit-subtitle">Departs ${time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
-              </div>
-              <span class="transit-time">${formatMinutesUntil(time)}</span>
-            </div>
-          `).join("");
+    function setMenuImageStatus(message, isError) {
+      const status = document.getElementById("menuImageStatus");
+      if (!status) return;
+      status.textContent = message;
+      status.style.color = isError ? "#9b1c1c" : "var(--text-secondary)";
+    }
+
+    function setMenuImageFrame(imageUrl, altText = "Menu action item image") {
+      const frame = document.getElementById("menuImageFrame");
+      if (!frame) return;
+      if (!imageUrl) {
+        frame.innerHTML = "";
+        frame.textContent = "No image yet";
+        return;
+      }
+      frame.innerHTML = "";
+      const img = document.createElement("img");
+      img.src = imageUrl;
+      img.alt = altText;
+      img.loading = "lazy";
+      img.addEventListener("error", () => {
+        frame.innerHTML = "";
+        frame.textContent = "Placeholder image missing";
+      });
+      frame.appendChild(img);
+    }
+
+    function resolveMenuActionImage(item) {
+      if (item?.image) return item.image;
+      if (window.MENU_ACTION_IMAGE_URL) return window.MENU_ACTION_IMAGE_URL;
+      if (MENU_ACTION_IMAGE_URL) return MENU_ACTION_IMAGE_URL;
+      return "";
+    }
+
+    function pickActionMenuItem(entries) {
+      const actionEntry = entries.find(([category]) => String(category).toLowerCase() === "action");
+      if (actionEntry) {
+        return { category: actionEntry[0], item: actionEntry[1] };
+      }
+      const first = entries[0] || [];
+      return {
+        category: first[0] || "",
+        item: first[1] || null
+      };
+    }
+
+    let menuActionItem = null;
+
+    function updateMenuActionItem(item) {
+      menuActionItem = item;
+      const label = document.getElementById("menuActionName");
+      if (label) {
+        label.textContent = item ? item.name : "No menu item";
+      }
+      const imageUrl = resolveMenuActionImage(item);
+      setMenuImageFrame(imageUrl);
+      if (item && imageUrl) {
+        setMenuImageStatus("Server-managed image loaded.", false);
+      } else if (item) {
+        setMenuImageStatus("No server image configured for this item.", true);
+      } else {
+        setMenuImageStatus("No menu item available.", true);
+      }
+    }
+
+    function getTodayNotifyCutoff() {
+      const now = new Date();
+      return new Date(now.getFullYear(), now.getMonth(), now.getDate(), CHARGEPOINT_NOTIFY_CUTOFF_HOUR, 0, 0, 0);
+    }
+
+    function isAfterNotifyCutoff() {
+      return Date.now() >= getTodayNotifyCutoff().getTime();
+    }
+
+    function loadChargepointNotifyState() {
+      const enabled = localStorage.getItem(CHARGEPOINT_NOTIFY_ENABLED_KEY) === "true";
+      const until = Number(localStorage.getItem(CHARGEPOINT_NOTIFY_STORAGE_KEY) || 0);
+      return { enabled, until };
+    }
+
+    function saveChargepointNotifyState(enabled, until) {
+      localStorage.setItem(CHARGEPOINT_NOTIFY_ENABLED_KEY, String(enabled));
+      localStorage.setItem(CHARGEPOINT_NOTIFY_STORAGE_KEY, String(until));
+    }
+
+    function setChargepointNotifyToggle(enabled) {
+      const toggle = document.getElementById("chargepointNotifyToggle");
+      toggle.checked = enabled;
+    }
+
+    async function requestNotificationPermission() {
+      if (!("Notification" in window)) return false;
+      if (Notification.permission === "granted") return true;
+      if (Notification.permission === "denied") return false;
+      const result = await Notification.requestPermission();
+      return result === "granted";
+    }
+
+    function sendChargepointNotification(message) {
+      if ("Notification" in window && Notification.permission === "granted") {
+        new Notification("ChargePoint Update", { body: message });
+        return;
+      }
+      alert(message);
+    }
+
+    function normalizeChargepointPorts(payload) {
+      const station = payload?.station || payload?.data || payload;
+      const stationName = station?.name || station?.name1 || station?.stationName || "";
+      const portsInfo = station?.portsInfo?.ports || station?.ports || station?.port_status || station?.portStatus || [];
+      const ports = [];
+      if (Array.isArray(portsInfo)) {
+        for (const port of portsInfo) {
+          const statusValue =
+            port?.status ||
+            port?.port_status ||
+            port?.portStatus ||
+            port?.state ||
+            (port?.available === true ? "AVAILABLE" : port?.available === false ? "IN_USE" : "");
+          ports.push({
+            status: typeof statusValue === "string" ? statusValue : String(statusValue || "")
+          });
         }
-        updatedEl.textContent = `Last updated ${new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`;
-      } catch (err) {
-        listEl.innerHTML = `
-          <div class="transit-item">
-            <div class="transit-label">
-              <span class="transit-title">Unable to load</span>
-              <span class="transit-subtitle">Alewife → Southbound</span>
-            </div>
-            <span class="transit-time">--</span>
+      }
+      return { stationName, ports };
+    }
+
+    function classifyPortStatus(rawStatus) {
+      const status = String(rawStatus || "").toLowerCase();
+      if (status.includes("available") || status.includes("green")) return "available";
+      if (status.includes("in_use") || status.includes("in use") || status.includes("charging") || status.includes("busy") || status.includes("red")) {
+        return "in-use";
+      }
+      return "unavailable";
+    }
+
+    function renderChargepointStations(stations) {
+      const list = document.getElementById("chargepointList");
+      if (!stations.length) {
+        list.innerHTML = `<div class="departure-empty">Configure device IDs to load chargers.</div>`;
+        return;
+      }
+      list.innerHTML = stations.map(station => {
+        const ports = station.ports.length ? station.ports : new Array(CHARGEPOINT_PORTS_PER_STATION).fill({ status: "" });
+        const displayedPorts = ports.slice(0, CHARGEPOINT_PORTS_PER_STATION);
+        while (displayedPorts.length < CHARGEPOINT_PORTS_PER_STATION) {
+          displayedPorts.push({ status: "" });
+        }
+        const portHtml = displayedPorts.map((port, index) => {
+          const state = classifyPortStatus(port.status);
+          const label = state === "available" ? "Available" : state === "in-use" ? "In Use" : "Unavailable";
+          const className = state === "available" ? "plug available" : state === "in-use" ? "plug in-use" : "plug unavailable";
+          return `<div class="${className}"><span>Plug ${index + 1}</span><span>${label}</span></div>`;
+        }).join("");
+        return `
+          <div class="charger-station">
+            <div class="charger-name">${escapeHtml(station.name || station.stationName || "ChargePoint")}</div>
+            <div class="charger-meta">2 plugs</div>
+            <div class="plug-list">${portHtml}</div>
           </div>
         `;
-        updatedEl.textContent = "Last updated --";
+      }).join("");
+    }
+
+    function updateChargepointSummary(stations) {
+      let available = 0;
+      let total = stations.length * CHARGEPOINT_PORTS_PER_STATION;
+      for (const station of stations) {
+        const ports = station.ports.slice(0, CHARGEPOINT_PORTS_PER_STATION);
+        for (const port of ports) {
+          if (classifyPortStatus(port.status) === "available") available += 1;
+        }
       }
-      setTimeout(fetchMbtaDepartures, 60000);
+      if (total === 0) total = CHARGEPOINT_LOCATIONS.length * CHARGEPOINT_PORTS_PER_STATION;
+      document.getElementById("chargepointSummary").textContent = `Available ${available}/${total}`;
+    }
+
+    function updateChargepointUpdated() {
+      const updated = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+      document.getElementById("chargepointUpdated").textContent = `Updated ${updated}`;
+    }
+
+    const chargepointNotifyState = {
+      enabled: false,
+      until: 0,
+      plugAvailability: new Map()
+    };
+
+    function updateChargepointNotifyToggleState() {
+      const toggle = document.getElementById("chargepointNotifyToggle");
+      const stored = loadChargepointNotifyState();
+      const now = Date.now();
+      if (stored.enabled && stored.until > now && !isAfterNotifyCutoff()) {
+        chargepointNotifyState.enabled = true;
+        chargepointNotifyState.until = stored.until;
+      } else {
+        chargepointNotifyState.enabled = false;
+        chargepointNotifyState.until = 0;
+      }
+      toggle.disabled = isAfterNotifyCutoff();
+      setChargepointNotifyToggle(chargepointNotifyState.enabled);
+    }
+
+    async function handleChargepointNotifyToggle(event) {
+      if (isAfterNotifyCutoff()) {
+        updateChargepointNotifyToggleState();
+        return;
+      }
+      if (!event.target.checked) {
+        chargepointNotifyState.enabled = false;
+        chargepointNotifyState.until = 0;
+        saveChargepointNotifyState(false, 0);
+        return;
+      }
+      const granted = await requestNotificationPermission();
+      if (!granted) {
+        event.target.checked = false;
+        chargepointNotifyState.enabled = false;
+        chargepointNotifyState.until = 0;
+        saveChargepointNotifyState(false, 0);
+        return;
+      }
+      const cutoff = getTodayNotifyCutoff().getTime();
+      chargepointNotifyState.enabled = true;
+      chargepointNotifyState.until = cutoff;
+      saveChargepointNotifyState(true, cutoff);
+    }
+
+    function checkChargepointNotifications(stations) {
+      if (!chargepointNotifyState.enabled) return;
+      if (Date.now() > chargepointNotifyState.until || isAfterNotifyCutoff()) {
+        chargepointNotifyState.enabled = false;
+        chargepointNotifyState.until = 0;
+        saveChargepointNotifyState(false, 0);
+        updateChargepointNotifyToggleState();
+        return;
+      }
+      const now = Date.now();
+      for (const station of stations) {
+        const ports = station.ports.slice(0, CHARGEPOINT_PORTS_PER_STATION);
+        ports.forEach((port, index) => {
+          const plugId = `${station.deviceId || station.name || "station"}-${index}`;
+          const state = classifyPortStatus(port.status);
+          const entry = chargepointNotifyState.plugAvailability.get(plugId) || { availableSince: 0, notified: false };
+          if (state === "available") {
+            if (!entry.availableSince) entry.availableSince = now;
+            const elapsed = now - entry.availableSince;
+            if (elapsed >= CHARGEPOINT_NOTIFY_AFTER_MS && !entry.notified) {
+              const stationName = station.name || station.stationName || "ChargePoint";
+              sendChargepointNotification(`${stationName} plug ${index + 1} available for 1+ min.`);
+              entry.notified = true;
+            }
+          } else {
+            entry.availableSince = 0;
+            entry.notified = false;
+          }
+          chargepointNotifyState.plugAvailability.set(plugId, entry);
+        });
+      }
+    }
+
+    async function fetchChargepointStations() {
+      const stations = [];
+      for (const location of CHARGEPOINT_LOCATIONS) {
+        if (!location.deviceId) {
+          stations.push({ deviceId: "", name: location.name, ports: [] });
+          continue;
+        }
+        try {
+          const url = new URL(CHARGEPOINT_ENDPOINT);
+          url.searchParams.set("deviceId", location.deviceId);
+          const res = await fetch(url.toString());
+          const data = await res.json();
+          const normalized = normalizeChargepointPorts(data);
+          stations.push({
+            deviceId: location.deviceId,
+            name: location.name || normalized.stationName,
+            stationName: normalized.stationName,
+            ports: normalized.ports
+          });
+        } catch (err) {
+          stations.push({ deviceId: location.deviceId, name: location.name, ports: [] });
+        }
+      }
+      renderChargepointStations(stations);
+      updateChargepointSummary(stations);
+      updateChargepointUpdated();
+      checkChargepointNotifications(stations);
+    }
+
+    async function refreshChargepointStations() {
+      updateChargepointNotifyToggleState();
+      await fetchChargepointStations();
+      setTimeout(refreshChargepointStations, CHARGEPOINT_POLL_MS);
+    }
+
+    function formatDepartureClock(isoDate) {
+      return new Date(isoDate).toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+    }
+
+    function getDepartureEta(isoDate) {
+      const minutes = Math.round((new Date(isoDate).getTime() - Date.now()) / 60000);
+      if (minutes <= 0) return "Due";
+      if (minutes === 1) return "1 min";
+      return `${minutes} min`;
+    }
+
+    function getNextEasternDate(dateString) {
+      const [year, month, day] = dateString.split("-").map(Number);
+      const utcDate = new Date(Date.UTC(year, month - 1, day));
+      utcDate.setUTCDate(utcDate.getUTCDate() + 1);
+      const y = utcDate.getUTCFullYear();
+      const m = String(utcDate.getUTCMonth() + 1).padStart(2, "0");
+      const d = String(utcDate.getUTCDate()).padStart(2, "0");
+      return `${y}-${m}-${d}`;
+    }
+
+    async function loadAlewifeDepartures(date, minTime) {
+      const url = new URL("https://api-v3.mbta.com/schedules");
+      url.searchParams.set("filter[stop]", MBTA_STOP_ID);
+      url.searchParams.set("filter[route]", MBTA_ROUTE_ID);
+      url.searchParams.set("filter[direction_id]", MBTA_DEPARTURE_DIRECTION);
+      url.searchParams.set("filter[date]", date);
+      url.searchParams.set("filter[min_time]", minTime);
+      url.searchParams.set("sort", "departure_time");
+      url.searchParams.set("page[limit]", String(MBTA_DEPARTURE_LIMIT));
+      url.searchParams.set("include", "trip");
+      const res = await fetch(url.toString());
+      const payload = await res.json();
+      return payload;
+    }
+
+    function renderAlewifeDepartures(payload, isTomorrow = false) {
+      const rows = Array.isArray(payload.data) ? payload.data : [];
+      const trips = new Map(
+        (payload.included || [])
+          .filter(item => item.type === "trip")
+          .map(item => [item.id, item.attributes?.headsign || "Southbound"])
+      );
+      const updated = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+      const updatedLabel = isTomorrow
+        ? `Updated ${updated} - showing first trips tomorrow`
+        : `Updated ${updated}`;
+
+      if (rows.length === 0) {
+        document.getElementById("redlineDepartures").innerHTML = `
+          <div class="departure-empty">No departures available right now.</div>
+        `;
+        document.getElementById("redlineUpdated").textContent = updatedLabel;
+        return;
+      }
+
+      document.getElementById("redlineDepartures").innerHTML = rows
+        .slice(0, MBTA_DEPARTURE_LIMIT)
+        .filter(row => row.attributes?.departure_time || row.attributes?.arrival_time)
+        .map(row => {
+          const departureIso = row.attributes?.departure_time || row.attributes?.arrival_time;
+          const tripId = row.relationships?.trip?.data?.id;
+          const destination = escapeHtml(trips.get(tripId) || "Southbound");
+          return `
+            <div class="departure-row">
+              <div class="departure-destination">${destination}</div>
+              <div class="departure-time">${formatDepartureClock(departureIso)}</div>
+              <div class="departure-eta">${getDepartureEta(departureIso)}</div>
+            </div>
+          `;
+        })
+        .join("");
+
+      document.getElementById("redlineUpdated").textContent = updatedLabel;
+    }
+
+    async function fetchRedLineDepartures() {
+      try {
+        const nowEastern = getEasternDateTimeParts();
+        let payload = await loadAlewifeDepartures(nowEastern.date, nowEastern.time);
+        let isTomorrow = false;
+
+        if (!payload.data || payload.data.length === 0) {
+          const tomorrow = getNextEasternDate(nowEastern.date);
+          payload = await loadAlewifeDepartures(tomorrow, "00:00");
+          isTomorrow = true;
+        }
+
+        renderAlewifeDepartures(payload, isTomorrow);
+      } catch (err) {
+        document.getElementById("redlineDepartures").innerHTML = `
+          <div class="departure-empty">Unable to load MBTA departure times.</div>
+        `;
+        document.getElementById("redlineUpdated").textContent = "Updated --";
+      }
+      setTimeout(fetchRedLineDepartures, 30000);
     }
 
     function getWeatherIcon(main) {
       main = main.toLowerCase();
-      if (main.includes("clear")) return isNight() ? "🌙" : "☀️";
-      if (main.includes("cloud")) return "☁️";
-      if (main.includes("rain") || main.includes("drizzle")) return "🌧️";
-      if (main.includes("snow")) return "❄️";
-      if (main.includes("thunder")) return "⛈️";
-      return "🌤️";
+      if (main.includes("clear")) return isNight() ? "NIGHT" : "CLEAR";
+      if (main.includes("cloud")) return "CLOUD";
+      if (main.includes("rain") || main.includes("drizzle")) return "RAIN";
+      if (main.includes("snow")) return "SNOW";
+      if (main.includes("thunder")) return "STORM";
+      return "WEATHER";
     }
 
     async function fetchMenu() {
       const menuUrl = "https://raw.githubusercontent.com/Char1esQian/cambridgedashboard/refs/heads/main/menu.json";
       const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
       const today = weekdays[new Date().getDay()];
+      const isWeekend = today === "Saturday" || today === "Sunday";
       document.getElementById("menuDay").textContent = today;
       try {
         const res = await fetch(menuUrl);
@@ -1001,9 +3030,21 @@
         const todayMenu = data[today];
         if (!todayMenu) {
           document.getElementById("menuContent").innerHTML = `<span class="loading">No menu for ${today}</span>`;
+          updateMenuActionItem(null);
+          if (isWeekend) {
+            const label = document.getElementById("menuActionName");
+            if (label) label.textContent = "Weekend";
+            setMenuImageFrame(WEEKEND_NO_MENU_IMAGE_URL, "Weekend no-menu illustration");
+            setMenuImageStatus(`Weekend: no menu items available for ${today}.`, false);
+          } else {
+            setMenuImageStatus(`No menu items available for ${today}.`, true);
+          }
           return;
         }
-        document.getElementById("menuContent").innerHTML = Object.entries(todayMenu).map(([category, item]) => `
+        const entries = Object.entries(todayMenu);
+        const actionSelection = pickActionMenuItem(entries);
+        updateMenuActionItem(actionSelection.item ? { ...actionSelection.item, category: actionSelection.category } : null);
+        document.getElementById("menuContent").innerHTML = entries.map(([category, item]) => `
           <div class="menu-item">
             <div class="menu-category">${category}</div>
             <div class="menu-name">${item.name}</div>
@@ -1013,6 +3054,8 @@
         `).join("");
       } catch (err) {
         document.getElementById("menuContent").innerHTML = `<span class="loading">Unable to load menu</span>`;
+        updateMenuActionItem(null);
+        setMenuImageStatus("Unable to load menu items.", true);
       }
     }
 
@@ -1022,37 +3065,83 @@
         const w = await res.json();
         if (w.cod !== 200) throw new Error(w.message);
 
-        updateWeatherScene(w.weather[0].main);
+        currentWeatherMain = w.weather[0].main || currentWeatherMain || "Clouds";
+        localStorage.setItem(WEATHER_CACHE_KEY, currentWeatherMain);
+        localStorage.setItem(WEATHER_CACHE_TS_KEY, String(Date.now()));
+        weatherSceneReady = true;
+        weatherSceneSyncKey = "";
+        updateWeatherScene(currentWeatherMain);
 
-        document.getElementById("weather").innerHTML = `
+        document.getElementById("heroWeather").innerHTML = `
           <div class="weather-main">
             <div class="weather-icon">${getWeatherIcon(w.weather[0].main)}</div>
             <div>
-              <div class="weather-temp">${Math.round(w.main.temp)}°C</div>
+              <div class="weather-temp">${Math.round(w.main.temp)}&deg;C</div>
               <div class="weather-condition">${w.weather[0].main}</div>
             </div>
           </div>
           <div class="weather-stats">
-            <div class="weather-stat"><div class="weather-stat-value">${Math.round(w.main.feels_like)}°</div><div class="weather-stat-label">Feels like</div></div>
+            <div class="weather-stat"><div class="weather-stat-value">${Math.round(w.main.feels_like)}&deg;</div><div class="weather-stat-label">Feels like</div></div>
             <div class="weather-stat"><div class="weather-stat-value">${w.main.humidity}%</div><div class="weather-stat-label">Humidity</div></div>
             <div class="weather-stat"><div class="weather-stat-value">${w.wind.speed} m/s</div><div class="weather-stat-label">Wind</div></div>
           </div>
         `;
       } catch (err) {
-        document.getElementById("weather").innerHTML = `
-          <div class="weather-main"><div class="weather-icon">⚠️</div><div><div class="weather-temp">--</div><div class="weather-condition">Unavailable</div></div></div>
+        currentWeatherMain = currentWeatherMain || "Clouds";
+        weatherSceneReady = true;
+        weatherSceneSyncKey = "";
+        updateWeatherScene(currentWeatherMain);
+        document.getElementById("heroWeather").innerHTML = `
+          <div class="weather-main"><div class="weather-icon">OFFLINE</div><div><div class="weather-temp">--</div><div class="weather-condition">Unavailable</div></div></div>
         `;
       }
       setTimeout(fetchWeather, 600000);
     }
 
     updateGreeting();
+    applyWeekendLayoutState();
+    if (currentWeatherMain) {
+      weatherSceneReady = true;
+      updateWeatherScene(currentWeatherMain);
+    }
     updateClock();
     refreshBikes();
     fetchWeather();
     fetchMenu();
-    fetchMbtaDepartures();
+    fetchRedLineDepartures();
+    refreshSportsPanel();
+    setEvPanelOpenState(localStorage.getItem(EV_PANEL_OPEN_KEY) === "true");
+    const bikeHeader = document.querySelector("#bikeExpandable .expandable-header");
+    if (bikeHeader) {
+      bikeHeader.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          toggleBikes();
+        }
+      });
+    }
+    const evHeader = document.querySelector("#evExpandable .expandable-header");
+    if (evHeader) {
+      evHeader.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          toggleEvPanel();
+        }
+      });
+    }
+    const sportsHeader = document.querySelector("#sportsExpandable .expandable-header");
+    if (sportsHeader) {
+      sportsHeader.addEventListener("keydown", event => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          toggleSportsPanel();
+        }
+      });
+    }
+    document.getElementById("chargepointNotifyToggle").addEventListener("change", handleChargepointNotifyToggle);
+    refreshChargepointStations();
   </script>
 </body>
 
 </html>
+
