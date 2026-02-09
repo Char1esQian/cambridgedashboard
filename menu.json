@@ -21,7 +21,7 @@
       "price": "$8.95"
     },
     "Action": {
-      "name": "Lo Mein Noodles, Sauces, Chicken, Shrimp, Vegetables",
+      "name": "Green Coconut Chicken Curry, Rice Noodles",
       "description": "",
       "price": "$11.95"
     }
@@ -38,17 +38,17 @@
       "price": "$2.90-$3.85"
     },
     "Deli": {
-      "name": "Ham and Brie, Bulkie Roll",
+      "name": "Buffalo Chicken Wrap, Romaine, Blue Cheese",
       "description": "",
       "price": "$8.25"
     },
     "Carving": {
-      "name": "Baked Penne Pasta, Three Cheeses, Spinach, Marinara, Sweet Italian Sausage",
+      "name": "Rosemary- Crusted Pork Loin Roast, Sweet Potatoes, Green Beans",
       "description": "",
       "price": "$10.95"
     },
     "Charred": {
-      "name": "Chicken, Broccoli, Mozzarella Flatbread/Cauliflower Crust",
+      "name": "Pepperoni and Mushroom Flatbread/Cauliflower Crust",
       "description": "",
       "price": "$8.95"
     },
@@ -80,7 +80,7 @@
       "price": "$8.95"
     },
     "Action": {
-      "name": "Wing Bar: Chicken Wings, Roasted Potatoes, Sauces, Carrots and Celery, Blue Cheese Dressing",
+      "name": "Fried Rice, Chicken, Shrimp, Mixed Vegetables",
       "description": "",
       "price": "$11.95"
     }
@@ -97,7 +97,7 @@
       "price": "$2.90-$3.85"
     },
     "Deli": {
-      "name": "Chicken Parmesan Sub",
+      "name": "Meatball Parmesan: Provolone Cheese, Marinara, Sub Roll",
       "description": "",
       "price": "$8.25"
     },
@@ -106,8 +106,13 @@
       "description": "",
       "price": "$8.95"
     },
+    "Carving": {
+      "name": "Beef and Vegetable Skewers, Chimichurri, Rice, Cucumber-Tomato Salad",
+      "description": "",
+      "price": "$12.95"
+    },
     "Action": {
-      "name": "Risotto Bar:Spinach, Tomatoes, Peas and Mushrooms, Chicken, Shrimp",
+      "name": "Jerk Chicken, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers, Onions",
       "description": "",
       "price": "$11.95"
     }
@@ -134,7 +139,7 @@
       "price": "$8.95"
     },
     "Action": {
-      "name": "Miso-Glazed Cod Loin, Jasmine Rice, Baby Bok Choy",
+      "name": "Honey-Glazed Grilled Salmon, Jasmine Rice, Steamed Broccoli",
       "description": "",
       "price": "$12.95"
     }
