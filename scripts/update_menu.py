@@ -10,6 +10,7 @@ Workflow:
 """
 
 import argparse
+import ast
 import base64
 import json
 import os
@@ -29,6 +30,7 @@ REQUIRED_DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
 CATEGORY_PRIORITY = ["Carving", "Plant Power", "Action"]
 DEFAULT_CANVAS = (1280, 720)
 IMAGE_MODEL = "nano-banana-pro"
+IMAGE_MODEL_FALLBACK = "gemini-2.0-flash-preview-image-generation"
 IMAGE_GEN_MAX_RETRIES = 4
 MENU_TIMEZONE = "America/New_York"
 
@@ -117,20 +119,46 @@ def extract_menu_with_gemini(image_bytes: bytes) -> str:
 
 
 def validate_menu_json(menu_json: dict) -> dict:
+    def parse_stringified_item(value):
+        text = str(value or "").strip()
+        if not text.startswith("{"):
+            return None
+        try:
+            parsed = ast.literal_eval(text)
+            if isinstance(parsed, dict):
+                return parsed
+        except Exception:
+            return None
+        return None
+
     def coerce_menu_item(item):
         if isinstance(item, dict):
-            name = item.get("name") or item.get("title") or item.get("item") or item.get("dish")
+            nested = None
+            if isinstance(item.get("name"), dict):
+                nested = item.get("name")
+            elif isinstance(item.get("name"), str):
+                nested = parse_stringified_item(item.get("name"))
+            source = nested if isinstance(nested, dict) else item
+
+            name = source.get("name") or source.get("title") or source.get("item") or source.get("dish")
             if not name:
                 return None
-            return {
+            normalized = {
                 "name": str(name).strip(),
-                "description": str(item.get("description") or item.get("details") or "").strip(),
-                "price": normalize_price(item.get("price") or item.get("cost") or "Market Price"),
+                "description": str(source.get("description") or source.get("details") or "").strip(),
+                "price": normalize_price(source.get("price") or source.get("cost") or "Market Price"),
             }
+            image_url = source.get("imageUrl") or item.get("imageUrl") or item.get("image")
+            if image_url:
+                normalized["imageUrl"] = str(image_url)
+            return normalized
         if isinstance(item, str):
             text = item.strip()
             if not text:
                 return None
+            parsed = parse_stringified_item(text)
+            if isinstance(parsed, dict):
+                return coerce_menu_item(parsed)
             return {"name": text, "description": "", "price": "Market Price"}
         if isinstance(item, list):
             parts = [str(part).strip() for part in item if str(part).strip()]
@@ -264,18 +292,29 @@ def generate_food_photo_image(item: dict, output_path: Path, image_api_key: str)
     prompt = build_food_photo_prompt(item)
     client = genai.Client(api_key=image_api_key)
 
-    delay = 8
-    last_error = None
-    for attempt in range(1, IMAGE_GEN_MAX_RETRIES + 1):
-        try:
-            response = client.models.generate_images(
-                model=IMAGE_MODEL,
+    def generate_with_model(model_name: str):
+        if model_name == IMAGE_MODEL:
+            return client.models.generate_images(
+                model=model_name,
                 prompt=prompt,
                 config=types.GenerateImagesConfig(
                     number_of_images=1,
                     aspect_ratio="4:3",
                 ),
             )
+        return client.models.generate_content(
+            model=model_name,
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                response_modalities=["TEXT", "IMAGE"],
+            ),
+        )
+
+    delay = 8
+    last_error = None
+    for attempt in range(1, IMAGE_GEN_MAX_RETRIES + 1):
+        try:
+            response = generate_with_model(IMAGE_MODEL)
             image_bytes = extract_generated_image_bytes(response)
             if not image_bytes:
                 raise RuntimeError("Image model returned no image bytes")
@@ -286,6 +325,22 @@ def generate_food_photo_image(item: dict, output_path: Path, image_api_key: str)
         except Exception as err:
             last_error = err
             err_text = str(err)
+            if "404" in err_text and "NOT_FOUND" in err_text and IMAGE_MODEL_FALLBACK:
+                print(
+                    f"Primary image model unavailable ({IMAGE_MODEL}); trying fallback {IMAGE_MODEL_FALLBACK}.",
+                    file=sys.stderr,
+                )
+                try:
+                    response = generate_with_model(IMAGE_MODEL_FALLBACK)
+                    image_bytes = extract_generated_image_bytes(response)
+                    if image_bytes:
+                        output_path.parent.mkdir(parents=True, exist_ok=True)
+                        with output_path.open("wb") as fh:
+                            fh.write(image_bytes)
+                        return
+                except Exception as fallback_err:
+                    last_error = fallback_err
+                    err_text = str(fallback_err)
             retryable = "429" in err_text or "RESOURCE_EXHAUSTED" in err_text or "rate" in err_text.lower()
             if attempt >= IMAGE_GEN_MAX_RETRIES or not retryable:
                 break
@@ -383,12 +438,20 @@ def parse_args():
     return parser.parse_args()
 
 
+def get_current_day_name():
+    try:
+        return datetime.now(ZoneInfo(MENU_TIMEZONE)).strftime("%A")
+    except Exception:
+        # Fallback for environments without tzdata.
+        return datetime.now().strftime("%A")
+
+
 def main():
     args = parse_args()
     menu_path = Path(args.menu_path).resolve()
     assets_dir = Path(args.assets_dir).resolve()
     week_key = datetime.now().strftime("%Yw%W")
-    current_day_name = datetime.now(ZoneInfo(MENU_TIMEZONE)).strftime("%A")
+    current_day_name = get_current_day_name()
     target_days = {current_day_name} if args.today_only else set(REQUIRED_DAYS)
 
     try:

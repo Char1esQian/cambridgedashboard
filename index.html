@@ -3036,9 +3036,9 @@
       // Handle stringified dict payloads like "{'name': '...', 'description': '', 'price': '$8.95'}".
       const nameString = String(normalized.name || "").trim();
       if (nameString.startsWith("{") && nameString.includes("'name'")) {
-        const nameMatch = nameString.match(/'name'\\s*:\\s*'([^']*)'/);
-        const descMatch = nameString.match(/'description'\\s*:\\s*'([^']*)'/);
-        const priceMatch = nameString.match(/'price'\\s*:\\s*'([^']*)'/);
+        const nameMatch = nameString.match(/'name'\s*:\s*'([^']*)'/);
+        const descMatch = nameString.match(/'description'\s*:\s*'([^']*)'/);
+        const priceMatch = nameString.match(/'price'\s*:\s*'([^']*)'/);
         normalized = {
           name: (nameMatch && nameMatch[1]) || fallback.name,
           description: (descMatch && descMatch[1]) || "",
@@ -3177,7 +3177,16 @@
       const ev5 = byEvSuffix("5");
       const topStations = [ev3, ev5].filter(Boolean);
       const topIds = new Set(topStations.map(station => station.deviceId || station.name));
-      const remainingStations = stations.filter(station => !topIds.has(station.deviceId || station.name));
+      const remainingOrder = ["1", "2", "6", "4"];
+      const remainingStations = remainingOrder
+        .map(suffix => byEvSuffix(suffix))
+        .filter(station => station && !topIds.has(station.deviceId || station.name));
+      const remainingIds = new Set(remainingStations.map(station => station.deviceId || station.name));
+      stations.forEach(station => {
+        const id = station.deviceId || station.name;
+        if (topIds.has(id) || remainingIds.has(id)) return;
+        remainingStations.push(station);
+      });
 
       const topHtml = topStations.length
         ? `<div class="charger-top-row">${topStations.map(renderStationCard).join("")}</div>`
