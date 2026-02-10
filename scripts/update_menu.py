@@ -19,6 +19,7 @@ import time
 from datetime import datetime, timezone
 from io import BytesIO
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import requests
 from PIL import Image, ImageDraw
@@ -29,6 +30,7 @@ CATEGORY_PRIORITY = ["Carving", "Plant Power", "Action"]
 DEFAULT_CANVAS = (1280, 720)
 IMAGE_MODEL = "nano-banana-pro"
 IMAGE_GEN_MAX_RETRIES = 4
+MENU_TIMEZONE = "America/New_York"
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = SCRIPT_DIR.parent
@@ -254,6 +256,7 @@ def extract_generated_image_bytes(response) -> bytes:
 
 def generate_food_photo_image(item: dict, output_path: Path, image_api_key: str):
     from google import genai
+    from google.genai import types
 
     if not image_api_key:
         raise ValueError("GEMINI_IMAGE_API_KEY (or GEMINI_API_KEY) environment variable not set")
@@ -265,9 +268,13 @@ def generate_food_photo_image(item: dict, output_path: Path, image_api_key: str)
     last_error = None
     for attempt in range(1, IMAGE_GEN_MAX_RETRIES + 1):
         try:
-            response = client.models.generate_content(
+            response = client.models.generate_images(
                 model=IMAGE_MODEL,
-                contents=prompt,
+                prompt=prompt,
+                config=types.GenerateImagesConfig(
+                    number_of_images=1,
+                    aspect_ratio="4:3",
+                ),
             )
             image_bytes = extract_generated_image_bytes(response)
             if not image_bytes:
@@ -293,9 +300,10 @@ def to_repo_relative_url(path: Path) -> str:
     return path.relative_to(PROJECT_ROOT).as_posix()
 
 
-def generate_daily_highlights(menu_data: dict, assets_dir: Path, week_key: str, image_api_key: str):
+def generate_daily_highlights(menu_data: dict, assets_dir: Path, week_key: str, image_api_key: str, target_days=None):
     generated = {}
-    for day in REQUIRED_DAYS:
+    days_to_generate = [day for day in REQUIRED_DAYS if not target_days or day in target_days]
+    for day in days_to_generate:
         day_menu = menu_data.get(day)
         if not isinstance(day_menu, dict) or not day_menu:
             continue
@@ -370,6 +378,7 @@ def parse_args():
     parser.add_argument("--assets-dir", default=str(DEFAULT_ASSETS_DIR), help="Directory for generated images")
     parser.add_argument("--no-fetch", action="store_true", help="Skip remote extraction and reuse existing menu JSON as input")
     parser.add_argument("--skip-images", action="store_true", help="Run extraction/update without generating images")
+    parser.add_argument("--today-only", action="store_true", help="Generate image(s) only for today's weekday special item")
     parser.add_argument("--stdout", action="store_true", help="Print final menu JSON to stdout after writing to file")
     return parser.parse_args()
 
@@ -379,6 +388,8 @@ def main():
     menu_path = Path(args.menu_path).resolve()
     assets_dir = Path(args.assets_dir).resolve()
     week_key = datetime.now().strftime("%Yw%W")
+    current_day_name = datetime.now(ZoneInfo(MENU_TIMEZONE)).strftime("%A")
+    target_days = {current_day_name} if args.today_only else set(REQUIRED_DAYS)
 
     try:
         image_api_key = get_image_generation_api_key()
@@ -399,8 +410,8 @@ def main():
             weekly = menu_data.get("_generated", {}).get("weeklyHighlights", {})
             print("Skipping image generation by request (--skip-images).", file=sys.stderr)
         else:
-            daily = generate_daily_highlights(menu_data, assets_dir, week_key, image_api_key)
-            weekly = generate_weekly_highlights(menu_data, assets_dir, week_key, image_api_key)
+            daily = generate_daily_highlights(menu_data, assets_dir, week_key, image_api_key, target_days=target_days)
+            weekly = {} if args.today_only else generate_weekly_highlights(menu_data, assets_dir, week_key, image_api_key)
 
         metadata = menu_data.setdefault("_generated", {})
         metadata["updatedAt"] = datetime.now(timezone.utc).isoformat(timespec="seconds")

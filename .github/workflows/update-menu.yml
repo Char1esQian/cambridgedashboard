@@ -3,10 +3,8 @@ name: Update Cafe Menu
 on:
   workflow_dispatch:
   schedule:
-    # Weekdays extraction at 12:00 UTC
-    - cron: "0 12 * * 1-5"
-    # Weekdays image generation at 12:35 UTC (separated to reduce rate-limit pressure on one key)
-    - cron: "35 12 * * 1-5"
+    # Weekdays morning run (08:00 US Eastern when EST; 09:00 when EDT)
+    - cron: "0 13 * * 1-5"
 
 permissions:
   contents: write
@@ -27,23 +25,12 @@ jobs:
       - name: Install dependencies
         run: pip install -r scripts/requirements.txt
 
-      - name: Determine run mode
-        id: mode
-        run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "command=python scripts/update_menu.py" >> "$GITHUB_OUTPUT"
-          elif [ "${{ github.event.schedule }}" = "0 12 * * 1-5" ]; then
-            echo "command=python scripts/update_menu.py --skip-images" >> "$GITHUB_OUTPUT"
-          else
-            echo "command=python scripts/update_menu.py --no-fetch" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Run menu updater
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_EXTRACTION_API_KEY: ${{ secrets.GEMINI_EXTRACTION_API_KEY }}
           GEMINI_IMAGE_API_KEY: ${{ secrets.GEMINI_IMAGE_API_KEY }}
-        run: ${{ steps.mode.outputs.command }}
+        run: python scripts/update_menu.py --today-only
 
       - name: Detect changes
         id: detect_changes
