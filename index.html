@@ -3020,6 +3020,41 @@
       };
     }
 
+    function normalizeMenuItemForDisplay(item) {
+      const fallback = { name: "Unknown Item", description: "", price: "Market Price", imageUrl: "" };
+      if (!item || typeof item !== "object") return fallback;
+
+      // Handle nested object payloads from extraction drift.
+      const candidate = (item.name && typeof item.name === "object") ? item.name : item;
+      let normalized = {
+        name: candidate.name ?? item.name ?? fallback.name,
+        description: candidate.description ?? item.description ?? "",
+        price: candidate.price ?? item.price ?? fallback.price,
+        imageUrl: candidate.imageUrl ?? item.imageUrl ?? item.image ?? ""
+      };
+
+      // Handle stringified dict payloads like "{'name': '...', 'description': '', 'price': '$8.95'}".
+      const nameString = String(normalized.name || "").trim();
+      if (nameString.startsWith("{") && nameString.includes("'name'")) {
+        const nameMatch = nameString.match(/'name'\\s*:\\s*'([^']*)'/);
+        const descMatch = nameString.match(/'description'\\s*:\\s*'([^']*)'/);
+        const priceMatch = nameString.match(/'price'\\s*:\\s*'([^']*)'/);
+        normalized = {
+          name: (nameMatch && nameMatch[1]) || fallback.name,
+          description: (descMatch && descMatch[1]) || "",
+          price: (priceMatch && priceMatch[1]) || fallback.price,
+          imageUrl: normalized.imageUrl || ""
+        };
+      }
+
+      return {
+        name: String(normalized.name || fallback.name),
+        description: String(normalized.description || ""),
+        price: String(normalized.price || fallback.price),
+        imageUrl: String(normalized.imageUrl || "")
+      };
+    }
+
     let menuActionItem = null;
 
     function updateMenuActionItem(item) {
@@ -3470,7 +3505,7 @@
           }
           return;
         }
-        const entries = Object.entries(todayMenu);
+        const entries = Object.entries(todayMenu).map(([category, item]) => [category, normalizeMenuItemForDisplay(item)]);
         const actionSelection = pickActionMenuItem(entries);
         updateMenuActionItem(actionSelection.item ? { ...actionSelection.item, category: actionSelection.category } : null);
         document.getElementById("menuContent").innerHTML = entries.map(([category, item]) => `
@@ -3478,7 +3513,7 @@
             <div class="menu-category">${category}</div>
             <div class="menu-name">${item.name}</div>
             ${item.description ? `<div class="menu-desc">${item.description}</div>` : ''}
-            <div class="menu-price">${item.price}</div>
+            <div class="menu-price">${item.price || "Market Price"}</div>
           </div>
         `).join("");
       } catch (err) {
