@@ -87,13 +87,21 @@ def fetch_menu_image():
     return image, response.content
 
 
+def get_extraction_api_key() -> str:
+    return os.environ.get("GEMINI_EXTRACTION_API_KEY") or os.environ.get("GEMINI_API_KEY") or ""
+
+
+def get_image_generation_api_key() -> str:
+    return os.environ.get("GEMINI_IMAGE_API_KEY") or ""
+
+
 def extract_menu_with_gemini(image_bytes: bytes) -> str:
     from google import genai
     from google.genai import types
 
-    api_key = os.environ.get("GEMINI_API_KEY")
+    api_key = get_extraction_api_key()
     if not api_key:
-        raise ValueError("GEMINI_API_KEY environment variable not set")
+        raise ValueError("GEMINI_EXTRACTION_API_KEY (or GEMINI_API_KEY) environment variable not set")
 
     print("Sending image to Gemini API...", file=sys.stderr)
     client = genai.Client(api_key=api_key)
@@ -313,6 +321,10 @@ def main():
     week_key = datetime.now().strftime("%Yw%W")
 
     try:
+        image_api_key = get_image_generation_api_key()
+        if image_api_key:
+            print("Detected GEMINI_IMAGE_API_KEY (reserved for future image API generation).", file=sys.stderr)
+
         if args.no_fetch:
             print("Loading existing menu JSON...", file=sys.stderr)
             menu_data = load_existing_menu(menu_path)

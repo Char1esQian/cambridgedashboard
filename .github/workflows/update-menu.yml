@@ -27,7 +27,8 @@ jobs:
 
       - name: Generate menu JSON and highlight images
         env:
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_EXTRACTION_API_KEY: ${{ secrets.GEMINI_EXTRACTION_API_KEY }}
+          GEMINI_IMAGE_API_KEY: ${{ secrets.GEMINI_IMAGE_API_KEY }}
         run: python scripts/update_menu.py
 
       - name: Detect changes
