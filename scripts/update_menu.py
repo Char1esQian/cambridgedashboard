@@ -312,8 +312,9 @@ def download_stock_food_photo(item: dict, output_path: Path):
     response = requests.get(url, timeout=30)
     response.raise_for_status()
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    with output_path.open("wb") as fh:
-        fh.write(response.content)
+    # Normalize to PNG so extension/content match for static hosting.
+    image = Image.open(BytesIO(response.content)).convert("RGB")
+    image.save(output_path, format="PNG", optimize=True)
 
 
 def generate_food_photo_image(item: dict, output_path: Path, image_api_key: str):
