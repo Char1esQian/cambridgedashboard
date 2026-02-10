@@ -89,7 +89,12 @@ def get_extraction_api_key() -> str:
 
 
 def get_image_generation_api_key() -> str:
-    return os.environ.get("GEMINI_IMAGE_API_KEY") or os.environ.get("GEMINI_API_KEY") or ""
+    return (
+        os.environ.get("GEMINI_API_KEY_NANO")
+        or os.environ.get("GEMINI_IMAGE_API_KEY")
+        or os.environ.get("GEMINI_API_KEY")
+        or ""
+    )
 
 
 def fetch_menu_image() -> tuple[Image.Image, bytes]:

@@ -28,6 +28,7 @@ jobs:
       - name: Run menu updater
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_NANO: ${{ secrets.GEMINI_API_KEY_NANO }}
           GEMINI_EXTRACTION_API_KEY: ${{ secrets.GEMINI_EXTRACTION_API_KEY }}
           GEMINI_IMAGE_API_KEY: ${{ secrets.GEMINI_IMAGE_API_KEY }}
         run: python scripts/update_menu.py --today-only
