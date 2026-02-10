@@ -11,7 +11,7 @@
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': 'Tofu Bahn Mi', 'description': 'Pickled Vegetables, Spicy Aioli', 'price': '$8.25'}",
+      "name": "{'name': 'Tofu Bahn Mi, Pickled Vegetables, Spicy Aioli', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
@@ -21,7 +21,7 @@
       "price": "Market Price"
     },
     "Action": {
-      "name": "{'name': 'Green Coconut Chicken Curry', 'description': 'Rice Noodles', 'price': '$11.95'}",
+      "name": "{'name': 'Green Coconut Chicken Curry, Rice Noodles', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     }
@@ -38,12 +38,12 @@
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': 'Buffalo Chicken Wrap', 'description': 'Romaine, Blue Cheese', 'price': '$8.25'}",
+      "name": "{'name': 'Buffalo Chicken Wrap, Romaine, Blue Cheese', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
     "Carving": {
-      "name": "{'name': 'Rosemary- Crusted Pork Loin Roast', 'description': 'Sweet Potatoes, Green Beans', 'price': '$10.95'}",
+      "name": "{'name': 'Rosemary- Crusted Pork Loin Roast, Sweet Potatoes, Green Beans', 'description': '', 'price': '$10.95'}",
       "description": "",
       "price": "Market Price",
       "imageUrl": "assets/menu-generated/daily-2026w06-tuesday-carving.png"
@@ -54,7 +54,7 @@
       "price": "Market Price"
     },
     "Action": {
-      "name": "{'name': 'Taco Tuesday', 'description': 'Chicken, Beef, Assorted Toppings, Tortillas', 'price': '$11.95'}",
+      "name": "{'name': 'Taco Tuesday, Chicken, Beef, Assorted Toppings, Tortillas', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     }
@@ -71,7 +71,7 @@
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': 'Portabello Mushroom', 'description': 'Balsamic Glaze, Mozzarella, Tomato', 'price': '$8.25'}",
+      "name": "{'name': 'Portabello Mushroom, Balsamic Glaze, Mozzarella, Tomato', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
@@ -81,7 +81,7 @@
       "price": "Market Price"
     },
     "Action": {
-      "name": "{'name': 'Fried Rice', 'description': 'Chicken, Shrimp, Mixed Vegetables', 'price': '$11.95'}",
+      "name": "{'name': 'Fried Rice, Chicken, Shrimp, Mixed Vegetables', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     }
@@ -98,7 +98,7 @@
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': 'Meatball Parmesan', 'description': 'Provolone Cheese, Marinara, Sub Roll', 'price': '$8.25'}",
+      "name": "{'name': 'Meatball Parmesan: Provolone Cheese, Marinara, Sub Roll', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
@@ -108,12 +108,12 @@
       "price": "Market Price"
     },
     "Carving": {
-      "name": "{'name': 'Beef and Vegetable Skewers', 'description': 'Chimichurri, Rice, Cucumber-Tomato Salad', 'price': '$12.95'}",
+      "name": "{'name': 'Beef and Vegetable Skewers, Chimichurri, Rice, Cucumber-Tomato Salad', 'description': '', 'price': '$12.95'}",
       "description": "",
       "price": "Market Price"
     },
     "Action": {
-      "name": "{'name': 'Jerk Chicken', 'description': 'Rasta Pasta, Spiced Cream Sauce, Sweet Peppers, Onions', 'price': '$11.95'}",
+      "name": "{'name': 'Jerk Chicken, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers, Onions', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     }
@@ -125,12 +125,12 @@
       "price": "Market Price"
     },
     "Soup": {
-      "name": "{'name': 'New England Clam Chowder', 'description': '', 'price': '$3.65-4-35'}",
+      "name": "{'name': 'New England Clam Chowder', 'description': '', 'price': '$3.65-4.35'}",
       "description": "",
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': 'Tuna Melt', 'description': 'Tomato, American, Multi Grain', 'price': '$8.25'}",
+      "name": "{'name': 'Tuna Melt: Tomato, American, Multi Grain', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
@@ -140,13 +140,13 @@
       "price": "Market Price"
     },
     "Action": {
-      "name": "{'name': 'Honey-Glazed Grilled Salmon', 'description': 'Jasmine Rice, Steamed Broccoli', 'price': '$12.95'}",
+      "name": "{'name': 'Honey-Glazed Grilled Salmon, Jasmine Rice, Steamed Broccoli', 'description': '', 'price': '$12.95'}",
       "description": "",
       "price": "Market Price"
     }
   },
   "_generated": {
-    "updatedAt": "2026-02-10T14:23:05+00:00",
+    "updatedAt": "2026-02-10T22:09:15+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
