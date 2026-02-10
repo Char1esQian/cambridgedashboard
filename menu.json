@@ -18,7 +18,8 @@
     "Plant Power": {
       "name": "Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust",
       "description": "",
-      "price": "$8.95"
+      "price": "$8.95",
+      "imageUrl": "assets/menu-generated/daily-2026w06-monday-plant-power.png"
     },
     "Action": {
       "name": "Green Coconut Chicken Curry, Rice Noodles",
@@ -45,7 +46,8 @@
     "Carving": {
       "name": "Rosemary- Crusted Pork Loin Roast, Sweet Potatoes, Green Beans",
       "description": "",
-      "price": "$10.95"
+      "price": "$10.95",
+      "imageUrl": "assets/menu-generated/daily-2026w06-tuesday-carving.png"
     },
     "Charred": {
       "name": "Pepperoni and Mushroom Flatbread/Cauliflower Crust",
@@ -82,7 +84,8 @@
     "Action": {
       "name": "Fried Rice, Chicken, Shrimp, Mixed Vegetables",
       "description": "",
-      "price": "$11.95"
+      "price": "$11.95",
+      "imageUrl": "assets/menu-generated/daily-2026w06-wednesday-action.png"
     }
   },
   "Thursday": {
@@ -109,7 +112,8 @@
     "Carving": {
       "name": "Beef and Vegetable Skewers, Chimichurri, Rice, Cucumber-Tomato Salad",
       "description": "",
-      "price": "$12.95"
+      "price": "$12.95",
+      "imageUrl": "assets/menu-generated/daily-2026w06-thursday-carving.png"
     },
     "Action": {
       "name": "Jerk Chicken, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers, Onions",
@@ -141,7 +145,43 @@
     "Action": {
       "name": "Honey-Glazed Grilled Salmon, Jasmine Rice, Steamed Broccoli",
       "description": "",
-      "price": "$12.95"
+      "price": "$12.95",
+      "imageUrl": "assets/menu-generated/daily-2026w06-friday-action.png"
+    }
+  },
+  "_generated": {
+    "updatedAt": "2026-02-10T00:27:03+00:00",
+    "priorityOrder": [
+      "Carving",
+      "Plant Power",
+      "Action"
+    ],
+    "dailyHighlights": {
+      "Monday": {
+        "category": "Plant Power",
+        "imageUrl": "assets/menu-generated/daily-2026w06-monday-plant-power.png"
+      },
+      "Tuesday": {
+        "category": "Carving",
+        "imageUrl": "assets/menu-generated/daily-2026w06-tuesday-carving.png"
+      },
+      "Wednesday": {
+        "category": "Action",
+        "imageUrl": "assets/menu-generated/daily-2026w06-wednesday-action.png"
+      },
+      "Thursday": {
+        "category": "Carving",
+        "imageUrl": "assets/menu-generated/daily-2026w06-thursday-carving.png"
+      },
+      "Friday": {
+        "category": "Action",
+        "imageUrl": "assets/menu-generated/daily-2026w06-friday-action.png"
+      }
+    },
+    "weeklyHighlights": {
+      "Carving": "assets/menu-generated/weekly-2026w06-carving.png",
+      "Plant Power": "assets/menu-generated/weekly-2026w06-plant-power.png",
+      "Action": "assets/menu-generated/weekly-2026w06-action.png"
     }
   }
 }

@@ -1,17 +1,17 @@
 name: Update Cafe Menu
 
 on:
-  schedule:
-    # Run every Monday at 8:00 AM EST (13:00 UTC)
-    - cron: '0 13 * * 1'
   workflow_dispatch:
-    # Allow manual trigger from GitHub UI
+  schedule:
+    # Weekdays at 13:00 UTC (~8:00 AM US Eastern, DST-dependent)
+    - cron: "0 13 * * 1-5"
+
+permissions:
+  contents: write
 
 jobs:
   update-menu:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write  # Required to push commits
 
     steps:
       - name: Checkout repository
@@ -20,79 +20,41 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: "3.11"
 
       - name: Install dependencies
-        run: |
-          pip install -r scripts/requirements.txt
+        run: pip install -r scripts/requirements.txt
 
-      - name: Fetch and extract menu
-        id: extract
+      - name: Generate menu JSON and highlight images
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/update_menu.py
+
+      - name: Detect changes
+        id: detect_changes
         run: |
-          # Run the extraction script and capture output
-          # Use || true to prevent immediate exit on failure
-          python scripts/update_menu.py > menu_new.json 2> extraction.log || EXTRACT_FAILED=true
-
-          # Always show extraction log
-          echo "=== Extraction Log ==="
-          cat extraction.log || echo "(no log)"
-
-          # Show extracted menu if it exists
-          echo ""
-          echo "=== Extracted Menu ==="
-          cat menu_new.json || echo "(no output)"
-
-          # Exit with error if extraction failed
-          if [ "$EXTRACT_FAILED" = "true" ]; then
-            echo ""
-            echo "ERROR: Menu extraction failed. See log above."
-            exit 1
-          fi
-
-          # Store menu content for summary
-          echo "MENU_JSON<<EOF" >> $GITHUB_OUTPUT
-          cat menu_new.json >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-
-      - name: Update menu.json
-        run: |
-          # Replace the old menu with the new one
-          mv menu_new.json menu.json
-
-          # Check if there are changes
-          if git diff --quiet menu.json; then
-            echo "No changes detected in menu"
-            echo "MENU_CHANGED=false" >> $GITHUB_ENV
+          if git diff --quiet -- menu.json assets/menu-generated; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No menu or image changes detected."
           else
-            echo "Menu has been updated"
-            echo "MENU_CHANGED=true" >> $GITHUB_ENV
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "Detected menu/image updates."
           fi
 
-      - name: Commit and push changes
-        if: env.MENU_CHANGED == 'true'
+      - name: Commit and push updates
+        if: steps.detect_changes.outputs.changed == 'true'
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add menu.json
-          git commit -m "🍽️ Update cafe menu for week of $(date +'%B %d, %Y')"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add menu.json assets/menu-generated
+          git commit -m "chore: update cafe menu and generated highlights ($(date -u +'%Y-%m-%d'))"
           git push
 
-      - name: Write job summary
+      - name: Workflow summary
         run: |
-          echo "## 🍽️ Cafe Menu Update" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-
-          if [ "$MENU_CHANGED" == "true" ]; then
-            echo "✅ **Menu updated successfully!**" >> $GITHUB_STEP_SUMMARY
+          echo "## Cafe Menu Update" >> "$GITHUB_STEP_SUMMARY"
+          if [ "${{ steps.detect_changes.outputs.changed }}" = "true" ]; then
+            echo "- Updated \`menu.json\` and/or generated highlight images." >> "$GITHUB_STEP_SUMMARY"
           else
-            echo "ℹ️ **No changes detected** - menu.json is already up to date." >> $GITHUB_STEP_SUMMARY
+            echo "- No content changes detected." >> "$GITHUB_STEP_SUMMARY"
           fi
-
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Extracted Menu Content" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo '```json' >> $GITHUB_STEP_SUMMARY
-          cat menu.json >> $GITHUB_STEP_SUMMARY
-          echo '```' >> $GITHUB_STEP_SUMMARY

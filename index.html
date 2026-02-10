@@ -728,6 +728,40 @@
       text-transform: uppercase;
     }
 
+    .menu-collapse-btn {
+      border: 1px solid rgba(16, 32, 50, 0.2);
+      background: rgba(255, 255, 255, 0.72);
+      color: #1b446f;
+      border-radius: 999px;
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+    }
+
+    .menu-collapse-btn:hover {
+      background: rgba(31, 111, 235, 0.12);
+      border-color: rgba(31, 111, 235, 0.35);
+    }
+
+    #menuCard.menu-collapsed .menu-collapse-btn {
+      transform: rotate(-90deg);
+    }
+
+    .menu-panel-body {
+      display: grid;
+      gap: 0.72rem;
+    }
+
+    #menuCard.menu-collapsed .menu-panel-body {
+      display: none;
+    }
+
     .weather-card {
       display: grid;
       gap: 0.95rem;
@@ -800,6 +834,27 @@
       text-transform: uppercase;
       letter-spacing: 0.04em;
       font-weight: 700;
+    }
+
+    .weather-meta {
+      font-size: 0.66rem;
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+      line-height: 1.35;
+    }
+
+    .weather-meta a {
+      color: #1f6feb;
+      text-decoration: underline;
+      text-underline-offset: 0.12em;
+    }
+
+    body[data-night="true"] .weather-meta {
+      color: rgba(225, 238, 255, 0.78);
+    }
+
+    body[data-night="true"] .weather-meta a {
+      color: #8fc4ff;
     }
 
     #menuContent {
@@ -988,6 +1043,17 @@
     }
 
     .charger-grid {
+      display: grid;
+      gap: 0.65rem;
+    }
+
+    .charger-top-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.65rem;
+    }
+
+    .charger-single-row {
       display: grid;
       gap: 0.65rem;
     }
@@ -1243,56 +1309,55 @@
     .sports-main {
       min-width: 0;
       display: grid;
-      gap: 0.16rem;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 0.72rem;
     }
 
     .sports-matchup-row {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      min-width: 0;
-    }
-
-    .sports-team-icons {
       display: inline-flex;
       align-items: center;
-      gap: 0.2rem;
-      flex-shrink: 0;
+      gap: 0.62rem;
+      min-width: 0;
+      max-width: 100%;
     }
 
     .sports-team-icon {
-      position: relative;
-      width: 22px;
-      height: 22px;
-      border-radius: 999px;
-      border: 1px solid rgba(16, 32, 50, 0.14);
-      background: rgba(255, 255, 255, 0.78);
+      width: 48px;
+      height: 48px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      overflow: visible;
       color: #1f446d;
-      font-size: 0.62rem;
+      font-size: 0.8rem;
       font-weight: 800;
       text-transform: uppercase;
+      flex-shrink: 0;
     }
 
     .sports-team-icon img {
-      position: absolute;
-      inset: 0;
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       display: block;
     }
 
     .sports-matchup {
-      font-size: 0.82rem;
+      font-size: 0.86rem;
       font-weight: 700;
       color: #173a5b;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      text-align: left;
+    }
+
+    .sports-context {
+      display: grid;
+      gap: 0.08rem;
+      min-width: 0;
+      text-align: right;
     }
 
     .sports-meta {
@@ -1558,6 +1623,15 @@
         gap: 0.32rem;
       }
 
+      .sports-main {
+        grid-template-columns: 1fr;
+        gap: 0.26rem;
+      }
+
+      .sports-context {
+        text-align: left;
+      }
+
       .sports-status {
         justify-self: start;
       }
@@ -1655,6 +1729,7 @@
               <div class="weather-stat-label">Wind</div>
             </div>
           </div>
+          <div class="weather-meta">Last updated -- - <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Weather data by Open-Meteo.com</a></div>
         </div>
         <div class="brand-pill">Cambridge HQ</div>
       </div>
@@ -1759,18 +1834,21 @@
             <div class="card-icon icon-menu">MN</div>
             <span class="card-title">Today's Menu</span>
             <span id="menuDay"></span>
+            <button class="menu-collapse-btn" id="menuCollapseBtn" type="button" aria-label="Toggle menu panel" aria-controls="menuPanelBody" aria-expanded="true" onclick="toggleMenuPanel()">v</button>
           </div>
-          <div class="menu-image-panel">
-            <div class="menu-image-header">
-              <div>
-                <div class="menu-image-title">Action Item Visual</div>
-                <div class="menu-action-name" id="menuActionName">Loading...</div>
+          <div class="menu-panel-body" id="menuPanelBody">
+            <div class="menu-image-panel">
+              <div class="menu-image-header">
+                <div>
+                  <div class="menu-image-title">Action Item Visual</div>
+                  <div class="menu-action-name" id="menuActionName">Loading...</div>
+                </div>
               </div>
+              <div class="menu-image-status" id="menuImageStatus">No image configured.</div>
+              <div class="menu-image-frame" id="menuImageFrame">No image yet</div>
             </div>
-            <div class="menu-image-status" id="menuImageStatus">No image configured.</div>
-            <div class="menu-image-frame" id="menuImageFrame">No image yet</div>
+            <div id="menuContent"><span class="loading">Loading...</span></div>
           </div>
-          <div id="menuContent"><span class="loading">Loading...</span></div>
         </div>
       </section>
     </div>
@@ -1781,7 +1859,6 @@
     const WORK_STATION_ID = "8347c34d-68df-404b-ac58-7a387cc3ce4b";
     const LAT = 42.39;
     const LON = -71.14;
-    const WEATHER_KEY = "bd5e378503939ddaee76f12ad7a97608";
     const MBTA_STOP_ID = "place-alfcl";
     const MBTA_ROUTE_ID = "Red";
     const MBTA_DEPARTURE_DIRECTION = "0";
@@ -1804,12 +1881,17 @@
     const EV_PANEL_OPEN_KEY = "evPanelOpen";
     const WEATHER_CACHE_KEY = "cachedWeatherMain";
     const WEATHER_CACHE_TS_KEY = "cachedWeatherMainTs";
-    const WEATHER_CACHE_MAX_AGE_MS = 45 * 60 * 1000;
+    const WEATHER_CACHE_PAYLOAD_KEY = "cachedWeatherPayloadV2";
+    const WEATHER_CACHE_UPDATED_KEY = "cachedWeatherLastUpdatedV2";
+    const WEATHER_REFRESH_MIN_MS = 15 * 60 * 1000;
+    const WEATHER_REFRESH_MAX_MS = 30 * 60 * 1000;
     const TEMP_UNIT_STORAGE_KEY = "temperatureUnit";
     const SPORTS_LOOKAHEAD_DAYS = 7;
     const SPORTS_REFRESH_MS = 30 * 60 * 1000;
     const EVENTS_PER_CITY = 6;
     const EVENTS_FETCH_LIMIT = 40;
+    const LOCAL_EVENTS_MAX_LOOKAHEAD_DAYS = 30;
+    const MENU_PANEL_COLLAPSED_KEY = "menuPanelCollapsed";
     const MENU_ACTION_IMAGE_URL = "assets/menu-action-placeholder.png";
     const WEEKEND_NO_MENU_IMAGE_URL = "assets/menu-weekend-no-items-boston-vibe.png";
     const BOSTON_TEAM_NAMES = new Set([
@@ -1885,15 +1967,72 @@
       const cached = localStorage.getItem(WEATHER_CACHE_KEY) || "";
       const ts = Number(localStorage.getItem(WEATHER_CACHE_TS_KEY) || 0);
       if (!cached || !ts) return "";
-      if (Date.now() - ts > WEATHER_CACHE_MAX_AGE_MS) return "";
       return cached;
     }
 
-    let currentWeatherMain = loadFreshCachedWeatherMain();
+    function loadCachedWeatherPayload() {
+      const raw = localStorage.getItem(WEATHER_CACHE_PAYLOAD_KEY);
+      if (!raw) return null;
+      try {
+        const parsed = JSON.parse(raw);
+        if (!parsed || !parsed.weather || !parsed.main) return null;
+        return parsed;
+      } catch (err) {
+        return null;
+      }
+    }
+
+    function normalizeWeatherCodeLabel(code) {
+      const codeNum = Number(code);
+      if (codeNum === 0) return { main: "Clear", label: "Clear sky" };
+      if (codeNum === 1) return { main: "Clouds", label: "Mainly clear" };
+      if (codeNum === 2) return { main: "Clouds", label: "Partly cloudy" };
+      if (codeNum === 3) return { main: "Clouds", label: "Overcast" };
+      if (codeNum === 45 || codeNum === 48) return { main: "Fog", label: "Fog" };
+      if (codeNum >= 51 && codeNum <= 57) return { main: "Drizzle", label: "Drizzle" };
+      if ((codeNum >= 61 && codeNum <= 67) || (codeNum >= 80 && codeNum <= 82)) return { main: "Rain", label: "Rain" };
+      if ((codeNum >= 71 && codeNum <= 77) || (codeNum >= 85 && codeNum <= 86)) return { main: "Snow", label: "Snow" };
+      if (codeNum >= 95 && codeNum <= 99) return { main: "Thunderstorm", label: "Thunderstorm" };
+      return { main: "Clouds", label: "Cloudy" };
+    }
+
+    function normalizeOpenMeteoCurrent(data) {
+      const current = data && data.current ? data.current : null;
+      if (!current) return null;
+      const weather = normalizeWeatherCodeLabel(current.weather_code);
+      return {
+        source: "open-meteo",
+        weather: [{ main: weather.main, description: weather.label, code: Number(current.weather_code) }],
+        main: {
+          temp: Number(current.temperature_2m),
+          feels_like: Number(current.apparent_temperature),
+          humidity: Number(current.relative_humidity_2m),
+          pressure: Number(current.pressure_msl)
+        },
+        wind: {
+          speed: Number(current.wind_speed_10m),
+          gust: Number(current.wind_gusts_10m)
+        },
+        clouds: {
+          all: Number(current.cloud_cover)
+        },
+        precipitation: Number(current.precipitation),
+        uv_index: Number(current.uv_index),
+        is_day: Number(current.is_day) === 1,
+        observedAtMs: Number(current.time) * 1000,
+        timezone: data.timezone || "local",
+        daily: data.daily || null,
+        lastUpdatedMs: Date.now()
+      };
+    }
+
+    const cachedWeatherPayload = loadCachedWeatherPayload();
+    let currentWeatherMain = (cachedWeatherPayload && cachedWeatherPayload.weather && cachedWeatherPayload.weather[0] && cachedWeatherPayload.weather[0].main)
+      || loadFreshCachedWeatherMain();
     let weatherSceneSyncKey = "";
     let currentBackgroundKey = "";
     let weatherSceneReady = !!currentWeatherMain;
-    let latestWeatherPayload = null;
+    let latestWeatherPayload = cachedWeatherPayload;
     let temperatureUnit = localStorage.getItem(TEMP_UNIT_STORAGE_KEY) === "F" ? "F" : "C";
     let latestRealEventsByCity = { cambridge: [], boston: [] };
     const celestialPlacementCache = new Map();
@@ -1948,6 +2087,21 @@
       const expandable = document.getElementById("sportsExpandable");
       if (!expandable) return;
       setSportsPanelExpanded(!expandable.classList.contains("open"));
+    }
+
+    function setMenuPanelCollapsedState(isCollapsed) {
+      const card = document.getElementById("menuCard");
+      const btn = document.getElementById("menuCollapseBtn");
+      if (!card || !btn) return;
+      card.classList.toggle("menu-collapsed", isCollapsed);
+      btn.setAttribute("aria-expanded", isCollapsed ? "false" : "true");
+      localStorage.setItem(MENU_PANEL_COLLAPSED_KEY, isCollapsed ? "true" : "false");
+    }
+
+    function toggleMenuPanel() {
+      const card = document.getElementById("menuCard");
+      if (!card) return;
+      setMenuPanelCollapsedState(!card.classList.contains("menu-collapsed"));
     }
 
     function placeSportsPanelByDay(date = new Date()) {
@@ -2006,6 +2160,118 @@
     function isHardExcludedEvent(item) {
       const title = String(item.title || item.name || "");
       return /^hike boston:/i.test(title) || /\bhike boston\b/i.test(title);
+    }
+
+    function parseActivityTimestamp(value) {
+      if (!value) return NaN;
+      const ts = new Date(value).getTime();
+      return Number.isNaN(ts) ? NaN : ts;
+    }
+
+    function inferEventDateFromText(item) {
+      const text = `${item?.title || ""} ${item?.description || ""}`;
+      const patterns = [
+        /\b(?:mon|tue|wed|thu|fri|sat|sun)\w*,\s*(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\w*\s+(\d{1,2})(?:,\s*(\d{4}))?,\s*(\d{1,2}):(\d{2})\s*(am|pm)\b/i,
+        /\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)\w*\s+(\d{1,2})(?:,\s*(\d{4}))?(?:,\s*(\d{1,2}):(\d{2})\s*(am|pm))?\b/i,
+        /\b(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?(?:\s+(\d{1,2}):(\d{2})\s*(am|pm)?)?\b/i
+      ];
+
+      let match = null;
+      let matchedPattern = -1;
+      for (let i = 0; i < patterns.length; i += 1) {
+        match = text.match(patterns[i]);
+        if (match) {
+          matchedPattern = i;
+          break;
+        }
+      }
+      if (!match) return NaN;
+
+      const monthMap = {
+        jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5,
+        jul: 6, aug: 7, sep: 8, oct: 9, nov: 10, dec: 11
+      };
+      let month = NaN;
+      let day = NaN;
+      let year = new Date().getFullYear();
+      let hour = 12;
+      let minute = 0;
+      let ampm = "";
+
+      if (matchedPattern === 0 || matchedPattern === 1) {
+        month = monthMap[String(match[1]).slice(0, 3).toLowerCase()];
+        day = Number(match[2]);
+        year = Number(match[3] || year);
+        if (match[4] && match[5] && match[6]) {
+          hour = Number(match[4]);
+          minute = Number(match[5]);
+          ampm = String(match[6]).toLowerCase();
+        }
+      } else {
+        month = Number(match[1]) - 1;
+        day = Number(match[2]);
+        if (match[3]) {
+          const rawYear = Number(match[3]);
+          year = rawYear < 100 ? 2000 + rawYear : rawYear;
+        }
+        if (match[4] && match[5]) {
+          hour = Number(match[4]);
+          minute = Number(match[5]);
+          ampm = String(match[6] || "").toLowerCase();
+        }
+      }
+
+      if (!Number.isFinite(month) || month < 0 || month > 11 || !Number.isFinite(day) || day < 1 || day > 31) {
+        return NaN;
+      }
+
+      if (ampm === "pm" && hour !== 12) hour += 12;
+      if (ampm === "am" && hour === 12) hour = 0;
+
+      let candidate = new Date(year, month, day, hour, minute, 0, 0);
+      if (!match[3] && candidate.getTime() < Date.now()) {
+        // If year is absent and this date already passed, interpret as next year.
+        candidate = new Date(year + 1, month, day, hour, minute, 0, 0);
+      }
+      const ts = candidate.getTime();
+      return Number.isNaN(ts) ? NaN : ts;
+    }
+
+    function getActivityDateInfo(item) {
+      const strongCandidates = [
+        item?.eventDate,
+        item?.startDate
+      ];
+      for (const value of strongCandidates) {
+        const ts = parseActivityTimestamp(value);
+        if (!Number.isNaN(ts)) return { timestamp: ts, confidence: "high" };
+      }
+      const inferredTs = inferEventDateFromText(item);
+      if (!Number.isNaN(inferredTs)) return { timestamp: inferredTs, confidence: "medium" };
+      const publishedTs = parseActivityTimestamp(item?.publishedAt);
+      if (!Number.isNaN(publishedTs)) return { timestamp: publishedTs, confidence: "low" };
+      return { timestamp: NaN, confidence: "none" };
+    }
+
+    function getActivityTimestamp(item) {
+      return getActivityDateInfo(item).timestamp;
+    }
+
+    function filterEventsInTimeWindow(events, startDate, endDate) {
+      const nowMs = Date.now();
+      const cappedEnd = new Date(startDate.getTime());
+      cappedEnd.setDate(cappedEnd.getDate() + LOCAL_EVENTS_MAX_LOOKAHEAD_DAYS);
+      const upperMs = cappedEnd.getTime();
+      return events.filter(item => {
+        const dateInfo = getActivityDateInfo(item);
+        const ts = dateInfo.timestamp;
+        if (Number.isNaN(ts)) return false;
+        if (dateInfo.confidence === "high" || dateInfo.confidence === "medium") {
+          return ts >= nowMs && ts <= upperMs;
+        }
+        // For low-confidence dates (usually publish timestamp), keep only if still upcoming.
+        return ts >= nowMs && ts <= upperMs;
+      });
     }
 
     function dedupeEvents(events) {
@@ -2180,14 +2446,14 @@
           <div class="sports-row">
             <div class="sports-main">
               <div class="sports-matchup-row">
-                <span class="sports-team-icons">
-                  <span class="sports-team-icon">${escapeHtml(game.bostonAbbrev)}${game.bostonLogo ? `<img src="${escapeHtml(game.bostonLogo)}" alt="${escapeHtml(game.bostonAbbrev)} logo" loading="lazy" onerror="this.style.display='none'">` : ""}</span>
-                  <span class="sports-team-icon">${escapeHtml(game.opponentAbbrev)}${game.opponentLogo ? `<img src="${escapeHtml(game.opponentLogo)}" alt="${escapeHtml(game.opponentAbbrev)} logo" loading="lazy" onerror="this.style.display='none'">` : ""}</span>
-                </span>
+                <span class="sports-team-icon">${game.bostonLogo ? `<img src="${escapeHtml(game.bostonLogo)}" alt="${escapeHtml(game.bostonAbbrev)} logo" loading="lazy" data-fallback="${escapeHtml(game.bostonAbbrev)}" onerror="this.replaceWith(document.createTextNode(this.dataset.fallback || 'TEAM'))">` : escapeHtml(game.bostonAbbrev)}</span>
                 <div class="sports-matchup">${escapeHtml(game.matchup)}</div>
+                <span class="sports-team-icon">${game.opponentLogo ? `<img src="${escapeHtml(game.opponentLogo)}" alt="${escapeHtml(game.opponentAbbrev)} logo" loading="lazy" data-fallback="${escapeHtml(game.opponentAbbrev)}" onerror="this.replaceWith(document.createTextNode(this.dataset.fallback || 'TEAM'))">` : escapeHtml(game.opponentAbbrev)}</span>
               </div>
-              <div class="sports-meta">${escapeHtml(game.meta)}</div>
-              <div class="sports-location">${escapeHtml(game.location || "Venue TBD")}</div>
+              <div class="sports-context">
+                <div class="sports-meta">${escapeHtml(game.meta)}</div>
+                <div class="sports-location">${escapeHtml(game.location || "Venue TBD")}</div>
+              </div>
             </div>
             <div class="sports-status ${game.statusClass}">${escapeHtml(game.statusText)}</div>
           </div>
@@ -2202,13 +2468,18 @@
     function formatEventDateLabel(dateValue) {
       const date = new Date(dateValue);
       if (Number.isNaN(date.getTime())) return "Date TBD";
-      return date.toLocaleString([], {
+      const nowYear = new Date().getFullYear();
+      const options = {
         weekday: "short",
         month: "short",
         day: "numeric",
         hour: "numeric",
         minute: "2-digit"
-      });
+      };
+      if (date.getFullYear() !== nowYear) {
+        options.year = "numeric";
+      }
+      return date.toLocaleString([], options);
     }
 
     function decodePossibleDataUri(value) {
@@ -2248,6 +2519,8 @@
             title,
             link,
             publishedAt,
+            eventDate: "",
+            startDate: "",
             description
           };
         })
@@ -2273,12 +2546,16 @@
             const title = item.title || "Local event";
             const link = item.link || feed.rssUrl;
             const publishedAt = item.pubDate || item.guid || "";
+            const eventDate = item.eventDate || item.event_date || item.date || "";
+            const startDate = item.startDate || item.start_date || item.start || "";
             const description = stripHtml(item.description || item.content || "");
             return {
               source: feed.source,
               title,
               link,
               publishedAt,
+              eventDate,
+              startDate,
               description
             };
           });
@@ -2328,16 +2605,17 @@
       if (!list) return;
       try {
         const feedItems = await Promise.all(CITY_EVENT_FEEDS.map(feed => fetchRssFeedItems(feed)));
-        const events = feedItems
+        const allEvents = feedItems
           .flat()
           .sort((a, b) => {
-            const at = new Date(a.publishedAt).getTime();
-            const bt = new Date(b.publishedAt).getTime();
+            const at = getActivityTimestamp(a);
+            const bt = getActivityTimestamp(b);
             if (Number.isNaN(at) && Number.isNaN(bt)) return 0;
             if (Number.isNaN(at)) return 1;
             if (Number.isNaN(bt)) return -1;
             return at - bt;
           });
+        const events = filterEventsInTimeWindow(allEvents, startDate, endDate);
 
         if (!events.length) {
           renderCachedEventsIfAvailable();
@@ -2347,7 +2625,7 @@
           .filter(item => !isHardExcludedEvent(item))
           .map(item => ({
           ...item,
-          meta: `${item.source} | ${formatEventDateLabel(item.publishedAt)}`
+          meta: `${item.source} | ${formatEventDateLabel(getActivityTimestamp(item))}`
           })));
         const titleCounts = new Map();
         normalized.forEach(item => {
@@ -2456,7 +2734,7 @@
     function getWeatherBucket(main) {
       if (main.includes("rain") || main.includes("drizzle") || main.includes("thunder")) return "rain";
       if (main.includes("snow")) return "snow";
-      if (main.includes("cloud")) return "cloudy";
+      if (main.includes("cloud") || main.includes("fog")) return "cloudy";
       return "normal";
     }
 
@@ -2720,6 +2998,7 @@
     }
 
     function resolveMenuActionImage(item) {
+      if (item?.imageUrl) return item.imageUrl;
       if (item?.image) return item.image;
       if (window.MENU_ACTION_IMAGE_URL) return window.MENU_ACTION_IMAGE_URL;
       if (MENU_ACTION_IMAGE_URL) return MENU_ACTION_IMAGE_URL;
@@ -2727,9 +3006,12 @@
     }
 
     function pickActionMenuItem(entries) {
-      const actionEntry = entries.find(([category]) => String(category).toLowerCase() === "action");
-      if (actionEntry) {
-        return { category: actionEntry[0], item: actionEntry[1] };
+      const priorities = ["carving", "plant power", "action"];
+      for (const priority of priorities) {
+        const matched = entries.find(([category]) => String(category).toLowerCase() === priority);
+        if (matched) {
+          return { category: matched[0], item: matched[1] };
+        }
       }
       const first = entries[0] || [];
       return {
@@ -2834,7 +3116,7 @@
         list.innerHTML = `<div class="departure-empty">Configure device IDs to load chargers.</div>`;
         return;
       }
-      list.innerHTML = stations.map(station => {
+      const renderStationCard = station => {
         const ports = station.ports.length ? station.ports : new Array(CHARGEPOINT_PORTS_PER_STATION).fill({ status: "" });
         const displayedPorts = ports.slice(0, CHARGEPOINT_PORTS_PER_STATION);
         while (displayedPorts.length < CHARGEPOINT_PORTS_PER_STATION) {
@@ -2853,7 +3135,23 @@
             <div class="plug-list">${portHtml}</div>
           </div>
         `;
-      }).join("");
+      };
+
+      const byEvSuffix = suffix => stations.find(station => String(station.name || "").toUpperCase().includes(`EV${suffix}`));
+      const ev3 = byEvSuffix("3");
+      const ev5 = byEvSuffix("5");
+      const topStations = [ev3, ev5].filter(Boolean);
+      const topIds = new Set(topStations.map(station => station.deviceId || station.name));
+      const remainingStations = stations.filter(station => !topIds.has(station.deviceId || station.name));
+
+      const topHtml = topStations.length
+        ? `<div class="charger-top-row">${topStations.map(renderStationCard).join("")}</div>`
+        : "";
+      const remainingHtml = remainingStations.length
+        ? `<div class="charger-single-row">${remainingStations.map(renderStationCard).join("")}</div>`
+        : "";
+
+      list.innerHTML = `${topHtml}${remainingHtml}`;
     }
 
     function updateChargepointSummary(stations) {
@@ -3090,6 +3388,7 @@
       main = main.toLowerCase();
       if (main.includes("clear")) return isNight() ? "NIGHT" : "CLEAR";
       if (main.includes("cloud")) return "CLOUD";
+      if (main.includes("fog")) return "FOG";
       if (main.includes("rain") || main.includes("drizzle")) return "RAIN";
       if (main.includes("snow")) return "SNOW";
       if (main.includes("thunder")) return "STORM";
@@ -3119,20 +3418,33 @@
 
     function renderWeatherCard(weatherPayload) {
       if (!weatherPayload) return;
+      const updatedTs = Number(weatherPayload.lastUpdatedMs || localStorage.getItem(WEATHER_CACHE_UPDATED_KEY) || 0);
+      const updatedText = updatedTs ? new Date(updatedTs).toLocaleString([], { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) : "--";
+      const windSpeed = Number(weatherPayload.wind && weatherPayload.wind.speed);
+      const humidity = Number(weatherPayload.main && weatherPayload.main.humidity);
+      const precipitation = Number(weatherPayload.precipitation);
       document.getElementById("heroWeather").innerHTML = `
         <div class="weather-main">
-          <div class="weather-icon">${getWeatherIcon(weatherPayload.weather[0].main)}</div>
+          <div class="weather-icon">${getWeatherIcon(weatherPayload.weather[0].main || "")}</div>
           <div>
             <div class="weather-temp">${formatWeatherTemp(weatherPayload.main.temp, true)}</div>
-            <div class="weather-condition">${weatherPayload.weather[0].main}</div>
+            <div class="weather-condition">${weatherPayload.weather[0].description || weatherPayload.weather[0].main}</div>
           </div>
         </div>
         <div class="weather-stats">
           <div class="weather-stat"><div class="weather-stat-value">${formatWeatherTemp(weatherPayload.main.feels_like, false)}</div><div class="weather-stat-label">Feels like</div></div>
-          <div class="weather-stat"><div class="weather-stat-value">${weatherPayload.main.humidity}%</div><div class="weather-stat-label">Humidity</div></div>
-          <div class="weather-stat"><div class="weather-stat-value">${weatherPayload.wind.speed} m/s</div><div class="weather-stat-label">Wind</div></div>
+          <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(humidity) ? `${Math.round(humidity)}%` : "--"}</div><div class="weather-stat-label">Humidity</div></div>
+          <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(windSpeed) ? `${Math.round(windSpeed)} km/h` : "--"}</div><div class="weather-stat-label">Wind</div></div>
+          <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(precipitation) ? `${precipitation.toFixed(1)} mm` : "--"}</div><div class="weather-stat-label">Precipitation</div></div>
+          <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(weatherPayload.uv_index) ? weatherPayload.uv_index.toFixed(1) : "--"}</div><div class="weather-stat-label">UV index</div></div>
         </div>
+        <div class="weather-meta">Last updated ${updatedText} - <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Weather data by Open-Meteo.com</a></div>
       `;
+    }
+
+    function getNextWeatherRefreshDelayMs() {
+      const span = WEATHER_REFRESH_MAX_MS - WEATHER_REFRESH_MIN_MS;
+      return WEATHER_REFRESH_MIN_MS + Math.floor(Math.random() * (span + 1));
     }
 
     async function fetchMenu() {
@@ -3178,13 +3490,18 @@
 
     async function fetchWeather() {
       try {
-        const res = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${LAT}&lon=${LON}&units=metric&appid=${WEATHER_KEY}`);
-        const w = await res.json();
-        if (w.cod !== 200) throw new Error(w.message);
+        const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_gusts_10m,cloud_cover,pressure_msl,uv_index,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&forecast_days=5&timezone=America%2FNew_York&timeformat=unixtime`;
+        const res = await fetch(weatherUrl);
+        if (!res.ok) throw new Error(`Weather request failed: ${res.status}`);
+        const raw = await res.json();
+        const w = normalizeOpenMeteoCurrent(raw);
+        if (!w) throw new Error("Missing current weather payload");
 
         currentWeatherMain = w.weather[0].main || currentWeatherMain || "Clouds";
         localStorage.setItem(WEATHER_CACHE_KEY, currentWeatherMain);
         localStorage.setItem(WEATHER_CACHE_TS_KEY, String(Date.now()));
+        localStorage.setItem(WEATHER_CACHE_PAYLOAD_KEY, JSON.stringify(w));
+        localStorage.setItem(WEATHER_CACHE_UPDATED_KEY, String(w.lastUpdatedMs));
         latestWeatherPayload = w;
         weatherSceneReady = true;
         weatherSceneSyncKey = "";
@@ -3192,20 +3509,27 @@
         renderWeatherCard(w);
       } catch (err) {
         currentWeatherMain = currentWeatherMain || "Clouds";
-        latestWeatherPayload = null;
         weatherSceneReady = true;
         weatherSceneSyncKey = "";
         updateWeatherScene(currentWeatherMain);
-        document.getElementById("heroWeather").innerHTML = `
-          <div class="weather-main"><div class="weather-icon">OFFLINE</div><div><div class="weather-temp">--</div><div class="weather-condition">Unavailable</div></div></div>
-        `;
+        if (latestWeatherPayload) {
+          renderWeatherCard(latestWeatherPayload);
+        } else {
+          document.getElementById("heroWeather").innerHTML = `
+            <div class="weather-main"><div class="weather-icon">OFFLINE</div><div><div class="weather-temp">--</div><div class="weather-condition">Unavailable</div></div></div>
+            <div class="weather-meta"><a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Weather data by Open-Meteo.com</a></div>
+          `;
+        }
       }
-      setTimeout(fetchWeather, 600000);
+      setTimeout(fetchWeather, getNextWeatherRefreshDelayMs());
     }
 
     updateGreeting();
     applyWeekendLayoutState();
     updateTempToggleUI();
+    if (latestWeatherPayload) {
+      renderWeatherCard(latestWeatherPayload);
+    }
     if (currentWeatherMain) {
       weatherSceneReady = true;
       updateWeatherScene(currentWeatherMain);
@@ -3216,6 +3540,7 @@
     fetchMenu();
     fetchRedLineDepartures();
     refreshSportsPanel();
+    setMenuPanelCollapsedState(localStorage.getItem(MENU_PANEL_COLLAPSED_KEY) === "true");
     setEvPanelOpenState(localStorage.getItem(EV_PANEL_OPEN_KEY) === "true");
     const bikeHeader = document.querySelector("#bikeExpandable .expandable-header");
     if (bikeHeader) {
