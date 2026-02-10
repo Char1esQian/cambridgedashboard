@@ -33,6 +33,12 @@ IMAGE_MODEL = "nano-banana-pro"
 IMAGE_MODEL_FALLBACK = "gemini-2.0-flash-preview-image-generation"
 IMAGE_GEN_MAX_RETRIES = 4
 MENU_TIMEZONE = "America/New_York"
+IMAGE_MODEL_CANDIDATES = [
+    "nano-banana-pro",
+    "imagen-3.0-generate-002",
+    "imagen-3.0-fast-generate-001",
+    "gemini-2.0-flash-preview-image-generation",
+]
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = SCRIPT_DIR.parent
@@ -282,6 +288,34 @@ def extract_generated_image_bytes(response) -> bytes:
     return b""
 
 
+def is_model_not_found_error(err_text: str) -> bool:
+    text = (err_text or "").lower()
+    return "404" in text and "not_found" in text
+
+
+def is_retryable_error(err_text: str) -> bool:
+    text = (err_text or "").lower()
+    retry_markers = [
+        "429",
+        "resource_exhausted",
+        "quota",
+        "too many requests",
+        "rate limit",
+        "temporarily unavailable",
+    ]
+    return any(marker in text for marker in retry_markers)
+
+
+def download_stock_food_photo(item: dict, output_path: Path):
+    seed = abs(hash(str(item.get("name", "special-meal")))) % 100000
+    url = f"https://loremflickr.com/1280/960/food,meal?lock={seed}"
+    response = requests.get(url, timeout=30)
+    response.raise_for_status()
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    with output_path.open("wb") as fh:
+        fh.write(response.content)
+
+
 def generate_food_photo_image(item: dict, output_path: Path, image_api_key: str):
     from google import genai
     from google.genai import types
@@ -293,7 +327,8 @@ def generate_food_photo_image(item: dict, output_path: Path, image_api_key: str)
     client = genai.Client(api_key=image_api_key)
 
     def generate_with_model(model_name: str):
-        if model_name == IMAGE_MODEL:
+        lower = model_name.lower()
+        if "imagen" in lower or "banana" in lower:
             return client.models.generate_images(
                 model=model_name,
                 prompt=prompt,
@@ -313,40 +348,41 @@ def generate_food_photo_image(item: dict, output_path: Path, image_api_key: str)
     delay = 8
     last_error = None
     for attempt in range(1, IMAGE_GEN_MAX_RETRIES + 1):
-        try:
-            response = generate_with_model(IMAGE_MODEL)
-            image_bytes = extract_generated_image_bytes(response)
-            if not image_bytes:
-                raise RuntimeError("Image model returned no image bytes")
-            output_path.parent.mkdir(parents=True, exist_ok=True)
-            with output_path.open("wb") as fh:
-                fh.write(image_bytes)
-            return
-        except Exception as err:
-            last_error = err
-            err_text = str(err)
-            if "404" in err_text and "NOT_FOUND" in err_text and IMAGE_MODEL_FALLBACK:
-                print(
-                    f"Primary image model unavailable ({IMAGE_MODEL}); trying fallback {IMAGE_MODEL_FALLBACK}.",
-                    file=sys.stderr,
-                )
-                try:
-                    response = generate_with_model(IMAGE_MODEL_FALLBACK)
-                    image_bytes = extract_generated_image_bytes(response)
-                    if image_bytes:
-                        output_path.parent.mkdir(parents=True, exist_ok=True)
-                        with output_path.open("wb") as fh:
-                            fh.write(image_bytes)
-                        return
-                except Exception as fallback_err:
-                    last_error = fallback_err
-                    err_text = str(fallback_err)
-            retryable = "429" in err_text or "RESOURCE_EXHAUSTED" in err_text or "rate" in err_text.lower()
-            if attempt >= IMAGE_GEN_MAX_RETRIES or not retryable:
-                break
-            print(f"Image generation retry {attempt}/{IMAGE_GEN_MAX_RETRIES} after error: {err}", file=sys.stderr)
-            time.sleep(delay)
-            delay *= 2
+        should_retry = False
+        for model_name in IMAGE_MODEL_CANDIDATES:
+            try:
+                response = generate_with_model(model_name)
+                image_bytes = extract_generated_image_bytes(response)
+                if not image_bytes:
+                    raise RuntimeError(f"Model {model_name} returned no image bytes")
+                output_path.parent.mkdir(parents=True, exist_ok=True)
+                with output_path.open("wb") as fh:
+                    fh.write(image_bytes)
+                return
+            except Exception as err:
+                last_error = err
+                err_text = str(err)
+                if is_model_not_found_error(err_text):
+                    print(f"Image model unavailable: {model_name}", file=sys.stderr)
+                    continue
+                if is_retryable_error(err_text):
+                    should_retry = True
+                    break
+        if attempt >= IMAGE_GEN_MAX_RETRIES or not should_retry:
+            break
+        print(
+            f"Image generation retry {attempt}/{IMAGE_GEN_MAX_RETRIES} after retryable error: {last_error}",
+            file=sys.stderr,
+        )
+        time.sleep(delay)
+        delay *= 2
+
+    try:
+        print("All image models failed; using stock food photo fallback.", file=sys.stderr)
+        download_stock_food_photo(item, output_path)
+        return
+    except Exception:
+        pass
 
     raise RuntimeError(f"Image generation failed: {last_error}")
 
