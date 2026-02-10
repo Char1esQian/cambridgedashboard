@@ -85,13 +85,12 @@ def normalize_price(value: str) -> str:
 
 
 def get_extraction_api_key() -> str:
-    return os.environ.get("GEMINI_EXTRACTION_API_KEY") or os.environ.get("GEMINI_API_KEY") or ""
+    return os.environ.get("GEMINI_API_KEY") or ""
 
 
 def get_image_generation_api_key() -> str:
     return (
         os.environ.get("GEMINI_API_KEY_NANO")
-        or os.environ.get("GEMINI_IMAGE_API_KEY")
         or os.environ.get("GEMINI_API_KEY")
         or ""
     )
@@ -112,7 +111,7 @@ def extract_menu_with_gemini(image_bytes: bytes) -> str:
 
     api_key = get_extraction_api_key()
     if not api_key:
-        raise ValueError("GEMINI_EXTRACTION_API_KEY (or GEMINI_API_KEY) environment variable not set")
+        raise ValueError("GEMINI_API_KEY environment variable not set")
 
     print("Sending menu image to Gemini extraction API...", file=sys.stderr)
     client = genai.Client(api_key=api_key)
@@ -327,7 +326,7 @@ def generate_food_photo_image(item: dict, output_path: Path, image_api_key: str)
     from google.genai import types
 
     if not image_api_key:
-        raise ValueError("GEMINI_IMAGE_API_KEY (or GEMINI_API_KEY) environment variable not set")
+        raise ValueError("GEMINI_API_KEY_NANO (or GEMINI_API_KEY) environment variable not set")
 
     prompt = build_food_photo_prompt(item)
     client = genai.Client(api_key=image_api_key)
@@ -499,7 +498,7 @@ def main():
     try:
         image_api_key = get_image_generation_api_key()
         if not image_api_key:
-            print("Warning: GEMINI_IMAGE_API_KEY not set; using fallback local tray images.", file=sys.stderr)
+            print("Warning: GEMINI_API_KEY_NANO not set; using fallback local tray images.", file=sys.stderr)
 
         if args.no_fetch:
             print("Loading existing menu JSON...", file=sys.stderr)
