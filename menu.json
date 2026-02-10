@@ -1,156 +1,156 @@
 {
   "Monday": {
     "Breakfast": {
-      "name": "Croissant, Egg, Cheese",
+      "name": "{'name': 'Croissant, Egg, Cheese', 'description': '', 'price': '$2.90-$4.95'}",
       "description": "",
-      "price": "$2.90-$4.95"
+      "price": "Market Price"
     },
     "Soup": {
-      "name": "Turkey and Andouille Gumbo",
+      "name": "{'name': 'Turkey and Andouille Gumbo', 'description': '', 'price': '$2.90-$3.85'}",
       "description": "",
-      "price": "$2.90-$3.85"
+      "price": "Market Price"
     },
     "Deli": {
-      "name": "Tofu Bahn Mi, Pickled Vegetables, Spicy Aioli",
+      "name": "{'name': 'Tofu Bahn Mi', 'description': 'Pickled Vegetables, Spicy Aioli', 'price': '$8.25'}",
       "description": "",
-      "price": "$8.25"
+      "price": "Market Price"
     },
     "Plant Power": {
-      "name": "Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust",
+      "name": "{'name': 'Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
       "description": "",
-      "price": "$8.95",
+      "price": "Market Price",
       "imageUrl": "assets/menu-generated/daily-2026w06-monday-plant-power.png"
     },
     "Action": {
-      "name": "Green Coconut Chicken Curry, Rice Noodles",
+      "name": "{'name': 'Green Coconut Chicken Curry', 'description': 'Rice Noodles', 'price': '$11.95'}",
       "description": "",
-      "price": "$11.95"
+      "price": "Market Price"
     }
   },
   "Tuesday": {
     "Breakfast": {
-      "name": "Ham, Egg, Tomato, English Muffin",
+      "name": "{'name': 'Ham, Egg, Tomato, English Muffin', 'description': '', 'price': '$2.90-$4.95'}",
       "description": "",
-      "price": "$2.90-$4.95"
+      "price": "Market Price"
     },
     "Soup": {
-      "name": "Lentil and Spinach",
+      "name": "{'name': 'Lentil and Spinach', 'description': '', 'price': '$2.90-$3.85'}",
       "description": "",
-      "price": "$2.90-$3.85"
+      "price": "Market Price"
     },
     "Deli": {
-      "name": "Buffalo Chicken Wrap, Romaine, Blue Cheese",
+      "name": "{'name': 'Buffalo Chicken Wrap', 'description': 'Romaine, Blue Cheese', 'price': '$8.25'}",
       "description": "",
-      "price": "$8.25"
+      "price": "Market Price"
     },
     "Carving": {
-      "name": "Rosemary- Crusted Pork Loin Roast, Sweet Potatoes, Green Beans",
+      "name": "{'name': 'Rosemary- Crusted Pork Loin Roast', 'description': 'Sweet Potatoes, Green Beans', 'price': '$10.95'}",
       "description": "",
-      "price": "$10.95",
+      "price": "Market Price",
       "imageUrl": "assets/menu-generated/daily-2026w06-tuesday-carving.png"
     },
     "Charred": {
-      "name": "Pepperoni and Mushroom Flatbread/Cauliflower Crust",
+      "name": "{'name': 'Pepperoni and Mushroom Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
       "description": "",
-      "price": "$8.95"
+      "price": "Market Price"
     },
     "Action": {
-      "name": "Taco Tuesday, Chicken, Beef, Assorted Toppings, Tortillas",
+      "name": "{'name': 'Taco Tuesday', 'description': 'Chicken, Beef, Assorted Toppings, Tortillas', 'price': '$11.95'}",
       "description": "",
-      "price": "$11.95"
+      "price": "Market Price"
     }
   },
   "Wednesday": {
     "Breakfast": {
-      "name": "Egg, Sausage, Cheddar, Croissant",
+      "name": "{'name': 'Egg, Sausage, Cheddar, Croissant', 'description': '', 'price': '$2.90-$4.95'}",
       "description": "",
-      "price": "$2.90-$4.95"
+      "price": "Market Price"
     },
     "Soup": {
-      "name": "Vegan Minestrone",
+      "name": "{'name': 'Vegan Minestrone', 'description': '', 'price': '$2.90-$3.85'}",
       "description": "",
-      "price": "$2.90-$3.85"
+      "price": "Market Price"
     },
     "Deli": {
-      "name": "Portabello Mushroom, Balsamic Glaze, Mozzarella, Tomato",
+      "name": "{'name': 'Portabello Mushroom', 'description': 'Balsamic Glaze, Mozzarella, Tomato', 'price': '$8.25'}",
       "description": "",
-      "price": "$8.25"
+      "price": "Market Price"
     },
     "Charred": {
-      "name": "Hawaiian: Ham, Pineapple Flatbread/Cauliflower Crust",
+      "name": "{'name': 'Hawaiian', 'description': 'Ham, Pineapple Flatbread/Cauliflower Crust', 'price': '$8.95'}",
       "description": "",
-      "price": "$8.95"
+      "price": "Market Price"
     },
     "Action": {
-      "name": "Fried Rice, Chicken, Shrimp, Mixed Vegetables",
+      "name": "{'name': 'Fried Rice', 'description': 'Chicken, Shrimp, Mixed Vegetables', 'price': '$11.95'}",
       "description": "",
-      "price": "$11.95",
+      "price": "Market Price",
       "imageUrl": "assets/menu-generated/daily-2026w06-wednesday-action.png"
     }
   },
   "Thursday": {
     "Breakfast": {
-      "name": "Egg, American, Bulkie Roll",
+      "name": "{'name': 'Egg, American, Bulkie Roll', 'description': '', 'price': '$2.90-$4.95'}",
       "description": "",
-      "price": "$2.90-$4.95"
+      "price": "Market Price"
     },
     "Soup": {
-      "name": "Spicy Bean and Corn",
+      "name": "{'name': 'Spicy Bean and Corn', 'description': '', 'price': '$2.90-$3.85'}",
       "description": "",
-      "price": "$2.90-$3.85"
+      "price": "Market Price"
     },
     "Deli": {
-      "name": "Meatball Parmesan: Provolone Cheese, Marinara, Sub Roll",
+      "name": "{'name': 'Meatball Parmesan', 'description': 'Provolone Cheese, Marinara, Sub Roll', 'price': '$8.25'}",
       "description": "",
-      "price": "$8.25"
+      "price": "Market Price"
     },
     "Charred": {
-      "name": "Chicken Ranch Flatbread/Cauliflower Crust",
+      "name": "{'name': 'Chicken Ranch Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
       "description": "",
-      "price": "$8.95"
+      "price": "Market Price"
     },
     "Carving": {
-      "name": "Beef and Vegetable Skewers, Chimichurri, Rice, Cucumber-Tomato Salad",
+      "name": "{'name': 'Beef and Vegetable Skewers', 'description': 'Chimichurri, Rice, Cucumber-Tomato Salad', 'price': '$12.95'}",
       "description": "",
-      "price": "$12.95",
+      "price": "Market Price",
       "imageUrl": "assets/menu-generated/daily-2026w06-thursday-carving.png"
     },
     "Action": {
-      "name": "Jerk Chicken, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers, Onions",
+      "name": "{'name': 'Jerk Chicken', 'description': 'Rasta Pasta, Spiced Cream Sauce, Sweet Peppers, Onions', 'price': '$11.95'}",
       "description": "",
-      "price": "$11.95"
+      "price": "Market Price"
     }
   },
   "Friday": {
     "Breakfast": {
-      "name": "Ham, Egg, Swiss, Croissant",
+      "name": "{'name': 'Ham, Egg, Swiss, Croissant', 'description': '', 'price': '$2.90-$4.95'}",
       "description": "",
-      "price": "$2.90-$4.95"
+      "price": "Market Price"
     },
     "Soup": {
-      "name": "New England Clam Chowder",
+      "name": "{'name': 'New England Clam Chowder', 'description': '', 'price': '$3.65-4.35'}",
       "description": "",
-      "price": "$3.65-4.35"
+      "price": "Market Price"
     },
     "Deli": {
-      "name": "Tuna Melt: Tomato, American, Multi Grain",
+      "name": "{'name': 'Tuna Melt', 'description': 'Tomato, American, Multi Grain', 'price': '$8.25'}",
       "description": "",
-      "price": "$8.25"
+      "price": "Market Price"
     },
     "Charred": {
-      "name": "Create Your Own Flatbread/Cauliflower Crust",
+      "name": "{'name': 'Create Your Own Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
       "description": "",
-      "price": "$8.95"
+      "price": "Market Price"
     },
     "Action": {
-      "name": "Honey-Glazed Grilled Salmon, Jasmine Rice, Steamed Broccoli",
+      "name": "{'name': 'Honey-Glazed Grilled Salmon', 'description': 'Jasmine Rice, Steamed Broccoli', 'price': '$12.95'}",
       "description": "",
-      "price": "$12.95",
+      "price": "Market Price",
       "imageUrl": "assets/menu-generated/daily-2026w06-friday-action.png"
     }
   },
   "_generated": {
-    "updatedAt": "2026-02-10T00:27:03+00:00",
+    "updatedAt": "2026-02-10T03:00:43+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
