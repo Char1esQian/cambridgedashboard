@@ -946,26 +946,71 @@
       font-weight: 600;
     }
 
-    .menu-image-frame {
+    .menu-highlight-grid {
       width: 100%;
-      aspect-ratio: 4 / 3;
-      border-radius: 12px;
-      border: 1px solid rgba(15, 31, 51, 0.12);
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.75), rgba(240, 245, 252, 0.9));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      color: var(--text-muted);
-      font-size: 0.8rem;
-      font-weight: 600;
+      display: grid;
+      gap: 0.65rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     }
 
-    .menu-image-frame img {
+    .menu-highlight-card {
+      border: 1px solid rgba(15, 31, 51, 0.12);
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.75), rgba(240, 245, 252, 0.9));
+      overflow: hidden;
+      display: grid;
+      gap: 0.45rem;
+      padding: 0.48rem;
+    }
+
+    .menu-highlight-meta {
+      display: grid;
+      gap: 0.12rem;
+      padding: 0 0.2rem;
+    }
+
+    .menu-highlight-category {
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .menu-highlight-name {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #173a5b;
+      line-height: 1.25;
+    }
+
+    .menu-highlight-image {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(15, 31, 51, 0.1);
+      background: rgba(245, 249, 255, 0.85);
+    }
+
+    .menu-highlight-image img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
+    }
+
+    .menu-highlight-empty {
+      width: 100%;
+      min-height: 110px;
+      border-radius: 10px;
+      border: 1px dashed rgba(23, 58, 91, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-weight: 600;
     }
 
     .toggle-row {
@@ -1840,12 +1885,12 @@
             <div class="menu-image-panel">
               <div class="menu-image-header">
                 <div>
-                  <div class="menu-image-title">Action Item Visual</div>
+                  <div class="menu-image-title">Daily Highlights</div>
                   <div class="menu-action-name" id="menuActionName">Loading...</div>
                 </div>
               </div>
               <div class="menu-image-status" id="menuImageStatus">No image configured.</div>
-              <div class="menu-image-frame" id="menuImageFrame">No image yet</div>
+              <div class="menu-highlight-grid" id="menuHighlightsGrid"></div>
             </div>
             <div id="menuContent"><span class="loading">Loading...</span></div>
           </div>
@@ -2977,47 +3022,55 @@
       status.style.color = isError ? "#9b1c1c" : "var(--text-secondary)";
     }
 
-    function setMenuImageFrame(imageUrl, altText = "Menu action item image") {
-      const frame = document.getElementById("menuImageFrame");
-      if (!frame) return;
-      if (!imageUrl) {
-        frame.innerHTML = "";
-        frame.textContent = "No image yet";
-        return;
-      }
-      frame.innerHTML = "";
-      const img = document.createElement("img");
-      img.src = imageUrl;
-      img.alt = altText;
-      img.loading = "lazy";
-      img.addEventListener("error", () => {
-        frame.innerHTML = "";
-        frame.textContent = "Placeholder image missing";
-      });
-      frame.appendChild(img);
-    }
-
-    function resolveMenuActionImage(item) {
-      if (item?.imageUrl) return item.imageUrl;
-      if (item?.image) return item.image;
+    function getMenuFallbackImageUrl() {
       if (window.MENU_ACTION_IMAGE_URL) return window.MENU_ACTION_IMAGE_URL;
       if (MENU_ACTION_IMAGE_URL) return MENU_ACTION_IMAGE_URL;
       return "";
     }
 
-    function pickActionMenuItem(entries) {
+    function pickActionMenuItems(entries) {
       const priorities = ["carving", "plant power", "action"];
+      const picked = [];
       for (const priority of priorities) {
         const matched = entries.find(([category]) => String(category).toLowerCase() === priority);
         if (matched) {
-          return { category: matched[0], item: matched[1] };
+          picked.push({ category: matched[0], item: matched[1] });
         }
       }
+      if (picked.length) return picked;
       const first = entries[0] || [];
-      return {
-        category: first[0] || "",
-        item: first[1] || null
-      };
+      return first[0] && first[1] ? [{ category: first[0], item: first[1] }] : [];
+    }
+
+    function normalizeDailyHighlightMeta(dayMeta) {
+      if (Array.isArray(dayMeta)) return dayMeta;
+      if (dayMeta && typeof dayMeta === "object") return Object.values(dayMeta);
+      return [];
+    }
+
+    function setMenuHighlightGrid(items) {
+      const grid = document.getElementById("menuHighlightsGrid");
+      if (!grid) return;
+      if (!items.length) {
+        grid.innerHTML = `<div class="menu-highlight-empty">No image yet</div>`;
+        return;
+      }
+      grid.innerHTML = items.map(item => {
+        const category = escapeHtml(item.category || "Highlight");
+        const name = escapeHtml(item.name || "Menu item");
+        const imageUrl = escapeHtml(item.imageUrl || getMenuFallbackImageUrl());
+        return `
+          <div class="menu-highlight-card">
+            <div class="menu-highlight-meta">
+              <div class="menu-highlight-category">${category}</div>
+              <div class="menu-highlight-name">${name}</div>
+            </div>
+            <div class="menu-highlight-image">
+              <img src="${imageUrl}" alt="${category} item photo" loading="lazy" onerror="this.onerror=null; this.src='${escapeHtml(getMenuFallbackImageUrl())}';" />
+            </div>
+          </div>
+        `;
+      }).join("");
     }
 
     function normalizeMenuItemForDisplay(item) {
@@ -3055,20 +3108,21 @@
       };
     }
 
-    let menuActionItem = null;
-
-    function updateMenuActionItem(item) {
-      menuActionItem = item;
+    function updateMenuActionItem(items) {
+      const safeItems = Array.isArray(items) ? items.filter(Boolean) : [];
       const label = document.getElementById("menuActionName");
       if (label) {
-        label.textContent = item ? item.name : "No menu item";
+        if (!safeItems.length) {
+          label.textContent = "No menu item";
+        } else if (safeItems.length === 1) {
+          label.textContent = safeItems[0].name || "Menu highlight";
+        } else {
+          label.textContent = safeItems.map(it => it.category).filter(Boolean).join(" | ");
+        }
       }
-      const imageUrl = resolveMenuActionImage(item);
-      setMenuImageFrame(imageUrl);
-      if (item && imageUrl) {
-        setMenuImageStatus("Server-managed image loaded.", false);
-      } else if (item) {
-        setMenuImageStatus("No server image configured for this item.", true);
+      setMenuHighlightGrid(safeItems);
+      if (safeItems.length) {
+        setMenuImageStatus(`Showing ${safeItems.length} highlight image${safeItems.length > 1 ? "s" : ""}.`, false);
       } else {
         setMenuImageStatus("No menu item available.", true);
       }
@@ -3503,11 +3557,11 @@
         const todayMenu = data[today];
         if (!todayMenu) {
           document.getElementById("menuContent").innerHTML = `<span class="loading">No menu for ${today}</span>`;
-          updateMenuActionItem(null);
+          updateMenuActionItem([]);
           if (isWeekend) {
             const label = document.getElementById("menuActionName");
             if (label) label.textContent = "Weekend";
-            setMenuImageFrame(WEEKEND_NO_MENU_IMAGE_URL, "Weekend no-menu illustration");
+            setMenuHighlightGrid([{ category: "Weekend", name: "No menu items", imageUrl: WEEKEND_NO_MENU_IMAGE_URL }]);
             setMenuImageStatus(`Weekend: no menu items available for ${today}.`, false);
           } else {
             setMenuImageStatus(`No menu items available for ${today}.`, true);
@@ -3515,8 +3569,31 @@
           return;
         }
         const entries = Object.entries(todayMenu).map(([category, item]) => [category, normalizeMenuItemForDisplay(item)]);
-        const actionSelection = pickActionMenuItem(entries);
-        updateMenuActionItem(actionSelection.item ? { ...actionSelection.item, category: actionSelection.category } : null);
+        const byCategory = new Map(entries.map(([category, item]) => [String(category).toLowerCase(), { category, item }]));
+        const dailyMetaRaw = data && data._generated && data._generated.dailyHighlights ? data._generated.dailyHighlights[today] : null;
+        const dailyMeta = normalizeDailyHighlightMeta(dailyMetaRaw);
+        let highlightItems = [];
+        if (dailyMeta.length) {
+          highlightItems = dailyMeta.map(meta => {
+            const category = String((meta && meta.category) || "").trim();
+            const matched = byCategory.get(category.toLowerCase());
+            const item = matched ? matched.item : null;
+            const fallbackItem = item || normalizeMenuItemForDisplay(meta || {});
+            return {
+              category: category || (matched ? matched.category : "Highlight"),
+              name: fallbackItem.name || String((meta && meta.name) || "Menu highlight"),
+              imageUrl: String((meta && meta.imageUrl) || fallbackItem.imageUrl || "")
+            };
+          }).filter(it => it.name || it.imageUrl);
+        }
+        if (!highlightItems.length) {
+          highlightItems = pickActionMenuItems(entries).map(entry => ({
+            category: entry.category,
+            name: entry.item.name,
+            imageUrl: entry.item.imageUrl || ""
+          }));
+        }
+        updateMenuActionItem(highlightItems);
         document.getElementById("menuContent").innerHTML = entries.map(([category, item]) => `
           <div class="menu-item">
             <div class="menu-category">${category}</div>
@@ -3527,7 +3604,7 @@
         `).join("");
       } catch (err) {
         document.getElementById("menuContent").innerHTML = `<span class="loading">Unable to load menu</span>`;
-        updateMenuActionItem(null);
+        updateMenuActionItem([]);
         setMenuImageStatus("Unable to load menu items.", true);
       }
     }

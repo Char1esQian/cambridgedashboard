@@ -29,18 +29,14 @@ MENU_IMAGE_URL = "https://cafe.sebastians.com/sebclients/3130alewife.jpg"
 REQUIRED_DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
 CATEGORY_PRIORITY = ["Carving", "Plant Power", "Action"]
 DEFAULT_CANVAS = (1280, 720)
-IMAGE_MODEL = "nano-banana-pro"
-IMAGE_MODEL_FALLBACK = "gemini-2.0-flash-preview-image-generation"
+IMAGE_MODEL = "gemini-3-pro-image-preview"
+IMAGE_MODEL_FALLBACK = "gemini-2.5-flash-image"
 IMAGE_GEN_MAX_RETRIES = 4
 MENU_TIMEZONE = "America/New_York"
 IMAGE_MODEL_CANDIDATES = [
-    "nano-banana-pro",
-    "imagen-3.0-generate-002",
-    "imagen-3.0-fast-generate-001",
-    "gemini-2.0-flash-preview-image-generation",
+    "gemini-3-pro-image-preview",
+    "gemini-2.5-flash-image",
 ]
-OPENVERSE_SEARCH_URL = "https://api.openverse.org/v1/images/"
-HTTP_USER_AGENT = "cambridgedashboard-menu-updater/1.0"
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = SCRIPT_DIR.parent
@@ -205,12 +201,16 @@ def find_category_entry(day_menu: dict, target_category: str):
     return None, None
 
 
-def select_daily_highlight(day_menu: dict):
+def select_daily_highlights(day_menu: dict):
+    highlights = []
     for category in CATEGORY_PRIORITY:
         matched_category, item = find_category_entry(day_menu, category)
         if matched_category and item:
-            return matched_category, item
-    return next(((c, i) for c, i in day_menu.items() if isinstance(i, dict)), (None, None))
+            highlights.append((matched_category, item))
+    if highlights:
+        return highlights
+    first = next(((c, i) for c, i in day_menu.items() if isinstance(i, dict)), (None, None))
+    return [first] if first[0] and first[1] else []
 
 
 def render_fallback_tray_image(output_path: Path):
@@ -312,63 +312,6 @@ def is_retryable_error(err_text: str) -> bool:
     return any(marker in text for marker in retry_markers)
 
 
-def build_image_search_queries(item: dict):
-    name = str(item.get("name") or "").strip()
-    description = str(item.get("description") or "").strip()
-
-    base_queries = []
-    if name:
-        base_queries.append(name)
-        base_queries.append(f"{name} food")
-    if description:
-        base_queries.append(f"{name} {description} food".strip())
-
-    generic = ["cafeteria meal", "meal prep food", "healthy lunch food"]
-    queries = []
-    seen = set()
-    for query in base_queries + generic:
-        normalized = " ".join(query.split()).strip()
-        if not normalized:
-            continue
-        key = normalized.lower()
-        if key in seen:
-            continue
-        seen.add(key)
-        queries.append(normalized)
-    return queries
-
-
-def search_openverse_image_url(query: str) -> str:
-    params = {
-        "q": query,
-        "mature": "false",
-        "page_size": "20",
-    }
-    headers = {"User-Agent": HTTP_USER_AGENT}
-    response = requests.get(OPENVERSE_SEARCH_URL, params=params, headers=headers, timeout=30)
-    response.raise_for_status()
-    payload = response.json()
-    results = payload.get("results", [])
-    for result in results:
-        candidate_url = str(result.get("url") or result.get("thumbnail") or "").strip()
-        if not candidate_url:
-            continue
-        lowered = candidate_url.lower()
-        if lowered.endswith(".svg"):
-            continue
-        return candidate_url
-    return ""
-
-
-def download_image_as_png(image_url: str, output_path: Path):
-    headers = {"User-Agent": HTTP_USER_AGENT}
-    response = requests.get(image_url, headers=headers, timeout=30)
-    response.raise_for_status()
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    image = Image.open(BytesIO(response.content)).convert("RGB")
-    image.save(output_path, format="PNG", optimize=True)
-
-
 def download_stock_food_photo(item: dict, output_path: Path):
     seed = abs(hash(str(item.get("name", "special-meal")))) % 100000
     url = f"https://loremflickr.com/1280/960/food,meal?lock={seed}"
@@ -381,29 +324,65 @@ def download_stock_food_photo(item: dict, output_path: Path):
 
 
 def generate_food_photo_image(item: dict, output_path: Path, image_api_key: str):
-    _ = image_api_key  # No model generation in current mode; kept for call compatibility.
-    queries = build_image_search_queries(item)
+    from google import genai
+    from google.genai import types
+
+    if not image_api_key:
+        raise ValueError("GEMINI_API_KEY_NANO (or GEMINI_API_KEY) environment variable not set")
+
+    prompt = build_food_photo_prompt(item)
+    client = genai.Client(api_key=image_api_key)
+
+    def generate_with_model(model_name: str):
+        return client.models.generate_content(
+            model=model_name,
+            contents=prompt,
+            config=types.GenerateContentConfig(
+                response_modalities=["TEXT", "IMAGE"],
+            ),
+        )
+
+    delay = 8
     last_error = None
-    for query in queries:
-        try:
-            image_url = search_openverse_image_url(query)
-            if not image_url:
-                continue
-            download_image_as_png(image_url, output_path)
-            print(f"Selected online image via query: {query}", file=sys.stderr)
-            return
-        except Exception as err:
-            last_error = err
-            continue
+    for attempt in range(1, IMAGE_GEN_MAX_RETRIES + 1):
+        should_retry = False
+        for model_name in IMAGE_MODEL_CANDIDATES:
+            try:
+                response = generate_with_model(model_name)
+                image_bytes = extract_generated_image_bytes(response)
+                if not image_bytes:
+                    raise RuntimeError(f"Model {model_name} returned no image bytes")
+                output_path.parent.mkdir(parents=True, exist_ok=True)
+                with output_path.open("wb") as fh:
+                    fh.write(image_bytes)
+                print(f"Generated AI image with model: {model_name}", file=sys.stderr)
+                return
+            except Exception as err:
+                last_error = err
+                err_text = str(err)
+                if is_model_not_found_error(err_text):
+                    print(f"Image model unavailable: {model_name}", file=sys.stderr)
+                    continue
+                if is_retryable_error(err_text):
+                    should_retry = True
+                    break
+        if attempt >= IMAGE_GEN_MAX_RETRIES or not should_retry:
+            break
+        print(
+            f"Image generation retry {attempt}/{IMAGE_GEN_MAX_RETRIES} after retryable error: {last_error}",
+            file=sys.stderr,
+        )
+        time.sleep(delay)
+        delay *= 2
 
     try:
-        print("No suitable online search result found; using stock food photo fallback.", file=sys.stderr)
+        print("All configured image models failed; using stock food photo fallback.", file=sys.stderr)
         download_stock_food_photo(item, output_path)
         return
-    except Exception as err:
-        if last_error is None:
-            last_error = err
-        raise RuntimeError(f"Online image search failed: {last_error}")
+    except Exception:
+        pass
+
+    raise RuntimeError(f"Image generation failed: {last_error}")
 
 
 def to_repo_relative_url(path: Path) -> str:
@@ -417,23 +396,31 @@ def generate_daily_highlights(menu_data: dict, assets_dir: Path, week_key: str, 
         day_menu = menu_data.get(day)
         if not isinstance(day_menu, dict) or not day_menu:
             continue
-        category, item = select_daily_highlight(day_menu)
-        if not category or not isinstance(item, dict):
+        highlights = select_daily_highlights(day_menu)
+        if not highlights:
             continue
 
-        filename = f"daily-{week_key}-{slugify(day)}-{slugify(category)}.png"
-        output_path = assets_dir / filename
+        generated[day] = []
+        for category, item in highlights:
+            if not category or not isinstance(item, dict):
+                continue
+            filename = f"daily-{week_key}-{slugify(day)}-{slugify(category)}.png"
+            output_path = assets_dir / filename
 
-        try:
-            generate_food_photo_image(item, output_path, image_api_key)
-        except Exception as err:
-            print(f"Daily image generation failed for {day}/{category}: {err}; using fallback image.", file=sys.stderr)
-            render_fallback_tray_image(output_path)
+            try:
+                generate_food_photo_image(item, output_path, image_api_key)
+            except Exception as err:
+                print(f"Daily image generation failed for {day}/{category}: {err}; using fallback image.", file=sys.stderr)
+                render_fallback_tray_image(output_path)
 
-        image_url = to_repo_relative_url(output_path)
-        item["imageUrl"] = image_url
-        generated[day] = {"category": category, "imageUrl": image_url}
-        print(f"Generated daily highlight: {day} / {category} -> {image_url}", file=sys.stderr)
+            image_url = to_repo_relative_url(output_path)
+            item["imageUrl"] = image_url
+            generated[day].append({
+                "category": category,
+                "name": str(item.get("name") or ""),
+                "imageUrl": image_url,
+            })
+            print(f"Generated daily highlight: {day} / {category} -> {image_url}", file=sys.stderr)
 
     return generated
 
@@ -510,8 +497,9 @@ def main():
     target_days = {current_day_name} if args.today_only else set(REQUIRED_DAYS)
 
     try:
-        image_api_key = ""
-        print("Using safe online image search for menu photo selection.", file=sys.stderr)
+        image_api_key = get_image_generation_api_key()
+        if not image_api_key and not args.skip_images:
+            print("Warning: GEMINI_API_KEY_NANO not set; image generation may fall back.", file=sys.stderr)
 
         if args.no_fetch:
             print("Loading existing menu JSON...", file=sys.stderr)
