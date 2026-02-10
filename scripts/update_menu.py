@@ -15,6 +15,7 @@ import base64
 import json
 import os
 import re
+import shutil
 import sys
 import time
 from datetime import datetime, timezone
@@ -42,6 +43,7 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = SCRIPT_DIR.parent
 DEFAULT_MENU_PATH = PROJECT_ROOT / "menu.json"
 DEFAULT_ASSETS_DIR = PROJECT_ROOT / "assets" / "menu-generated"
+TUESDAY_REFERENCE_IMAGE = PROJECT_ROOT / "assets" / "menu-generated" / "taco-tuesday-reference.png"
 
 EXTRACTION_PROMPT = """Analyze this cafe menu image and extract ALL menu items into a structured JSON format.
 
@@ -65,12 +67,21 @@ For each menu item, provide:
 Return ONLY valid JSON in this exact format, no markdown code blocks.
 """
 
-FOOD_PHOTO_PROMPT_TEMPLATE = """Photoreal food product photo: a single black rectangular meal-prep container with a clear lid slightly open, on a clean off-white table. Modern cafeteria background, heavily blurred chairs, soft daylight from left, shallow depth of field, minimal/neutral colors, lots of negative space, 3/4 table-height angle, crisp focus on food.
+FOOD_PHOTO_PROMPT_TEMPLATE = """Photoreal food product photo: a single black rectangular meal-prep container with a clear lid slightly open, on a clean off-white table. Modern cafeteria background, heavily blurred chairs, soft daylight from left, shallow depth of field, minimal/neutral colors, lots of negative space, slightly top-down view (around 35 to 45 degrees), crisp focus on food so ingredients are clearly visible.
 
 Meal based on: {item_name}. Ingredients: {ingredients_list}. Base/crust: {base_or_crust}. Sauce: {sauce_or_none}. Make it realistic, neatly arranged inside the tray, appetizing, no props.
 
 Negative: text, logos, labels, watermarks, hands/people, utensils, clutter, cartoon/anime, oversaturated, distorted container/lid.
 """
+
+TUESDAY_TACO_SPECIAL = {
+    "category": "Taco Tuesday",
+    "item": {
+        "name": "Taco Tuesday Bowl",
+        "description": "Seasoned chicken and beef, shredded lettuce, diced tomato, red onion, cheddar, salsa, sour cream, soft tortillas",
+        "price": "Market Price",
+    },
+}
 
 
 def slugify(value: str) -> str:
@@ -396,6 +407,32 @@ def generate_daily_highlights(menu_data: dict, assets_dir: Path, week_key: str, 
         day_menu = menu_data.get(day)
         if not isinstance(day_menu, dict) or not day_menu:
             continue
+        if day == "Tuesday":
+            category = TUESDAY_TACO_SPECIAL["category"]
+            item = dict(TUESDAY_TACO_SPECIAL["item"])
+            filename = f"daily-{week_key}-{slugify(day)}-{slugify(category)}.png"
+            output_path = assets_dir / filename
+
+            try:
+                if TUESDAY_REFERENCE_IMAGE.exists():
+                    output_path.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copyfile(TUESDAY_REFERENCE_IMAGE, output_path)
+                    print(f"Using fixed Tuesday reference image: {to_repo_relative_url(TUESDAY_REFERENCE_IMAGE)}", file=sys.stderr)
+                else:
+                    generate_food_photo_image(item, output_path, image_api_key)
+            except Exception as err:
+                print(f"Daily image generation failed for {day}/{category}: {err}; using fallback image.", file=sys.stderr)
+                render_fallback_tray_image(output_path)
+
+            image_url = to_repo_relative_url(output_path)
+            generated[day] = [{
+                "category": category,
+                "name": str(item.get("name") or ""),
+                "imageUrl": image_url,
+            }]
+            print(f"Generated daily highlight: {day} / {category} -> {image_url}", file=sys.stderr)
+            continue
+
         highlights = select_daily_highlights(day_menu)
         if not highlights:
             continue

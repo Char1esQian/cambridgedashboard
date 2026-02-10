@@ -803,10 +803,52 @@
       font-weight: 600;
     }
 
+    .weather-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 0.6rem;
+      align-items: center;
+    }
+
+    .weather-primary {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      min-width: 0;
+    }
+
+    .weather-title {
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: #335a80;
+      margin-bottom: 0.08rem;
+    }
+
+    .weather-aux {
+      text-align: right;
+    }
+
+    .weather-aux-label {
+      font-size: 0.64rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #335a80;
+    }
+
+    .weather-aux-value {
+      margin-top: 0.1rem;
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: #102a46;
+    }
+
     .weather-stats {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.6rem;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.5rem;
     }
 
     .weather-stat {
@@ -841,6 +883,94 @@
       color: var(--text-muted);
       letter-spacing: 0.02em;
       line-height: 1.35;
+    }
+
+    .weather-forecast-shell {
+      border: 1px solid rgba(15, 31, 51, 0.12);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.58);
+      overflow: hidden;
+    }
+
+    .weather-forecast-toggle {
+      width: 100%;
+      border: none;
+      background: transparent;
+      padding: 0.5rem 0.62rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.45rem;
+      cursor: pointer;
+      color: #193f68;
+      font-weight: 800;
+      font-size: 0.68rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .weather-forecast-toggle:hover {
+      background: rgba(255, 255, 255, 0.42);
+    }
+
+    .weather-forecast-arrow {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(15, 31, 51, 0.22);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.82rem;
+      transition: transform 170ms ease;
+      background: rgba(255, 255, 255, 0.78);
+    }
+
+    .weather-forecast-shell.open .weather-forecast-arrow {
+      transform: rotate(180deg);
+    }
+
+    .weather-forecast-list {
+      display: none;
+      gap: 0.45rem;
+      padding: 0.12rem 0.52rem 0.6rem;
+      grid-template-columns: repeat(auto-fit, minmax(92px, 1fr));
+    }
+
+    .weather-forecast-shell.open .weather-forecast-list {
+      display: grid;
+    }
+
+    .weather-forecast-item {
+      border-radius: 10px;
+      border: 1px solid rgba(15, 31, 51, 0.11);
+      background: rgba(255, 255, 255, 0.74);
+      padding: 0.45rem 0.42rem;
+      display: grid;
+      gap: 0.14rem;
+      text-align: center;
+    }
+
+    .weather-forecast-day {
+      font-size: 0.64rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      color: #335a80;
+      text-transform: uppercase;
+    }
+
+    .weather-forecast-condition {
+      font-size: 0.62rem;
+      color: var(--text-secondary);
+      min-height: 1.8em;
+      line-height: 1.2;
+      font-weight: 600;
+    }
+
+    .weather-forecast-temp {
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #102a46;
     }
 
     .weather-meta a {
@@ -1321,6 +1451,13 @@
       gap: 0.65rem;
     }
 
+    .sports-content-wrap::before,
+    .sports-content-wrap::after,
+    .ev-content-wrap::before,
+    .ev-content-wrap::after {
+      display: none;
+    }
+
     .sports-subtitle {
       font-size: 0.72rem;
       font-weight: 800;
@@ -1615,7 +1752,7 @@
       }
 
       .weather-stats {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
@@ -1651,11 +1788,15 @@
       }
 
       .weather-stats {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .weather-stat {
         min-height: 58px;
+      }
+
+      .weather-forecast-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .departure-row {
@@ -1928,6 +2069,7 @@
     const WEATHER_CACHE_TS_KEY = "cachedWeatherMainTs";
     const WEATHER_CACHE_PAYLOAD_KEY = "cachedWeatherPayloadV2";
     const WEATHER_CACHE_UPDATED_KEY = "cachedWeatherLastUpdatedV2";
+    const WEATHER_FORECAST_COLLAPSED_KEY = "weatherForecastCollapsed";
     const WEATHER_REFRESH_MIN_MS = 15 * 60 * 1000;
     const WEATHER_REFRESH_MAX_MS = 30 * 60 * 1000;
     const TEMP_UNIT_STORAGE_KEY = "temperatureUnit";
@@ -2079,6 +2221,7 @@
     let weatherSceneReady = !!currentWeatherMain;
     let latestWeatherPayload = cachedWeatherPayload;
     let temperatureUnit = localStorage.getItem(TEMP_UNIT_STORAGE_KEY) === "F" ? "F" : "C";
+    let weatherForecastCollapsed = localStorage.getItem(WEATHER_FORECAST_COLLAPSED_KEY) !== "false";
     let latestRealEventsByCity = { cambridge: [], boston: [] };
     const celestialPlacementCache = new Map();
     let celestialPlacementRequestId = 0;
@@ -3514,27 +3657,95 @@
       if (fLabel) fLabel.classList.toggle("active", temperatureUnit === "F");
     }
 
+    function buildFiveDayForecast(dailyPayload) {
+      if (!dailyPayload) return [];
+      const times = Array.isArray(dailyPayload.time) ? dailyPayload.time : [];
+      const maxTemps = Array.isArray(dailyPayload.temperature_2m_max) ? dailyPayload.temperature_2m_max : [];
+      const minTemps = Array.isArray(dailyPayload.temperature_2m_min) ? dailyPayload.temperature_2m_min : [];
+      const codes = Array.isArray(dailyPayload.weather_code) ? dailyPayload.weather_code : [];
+      const precip = Array.isArray(dailyPayload.precipitation_probability_max) ? dailyPayload.precipitation_probability_max : [];
+      const length = Math.min(5, times.length, maxTemps.length, minTemps.length);
+      const dayFmt = new Intl.DateTimeFormat("en-US", { weekday: "short", timeZone: "America/New_York" });
+      const items = [];
+      for (let i = 0; i < length; i += 1) {
+        const ts = Number(times[i]) * 1000;
+        const codeLabel = normalizeWeatherCodeLabel(codes[i]);
+        const dayLabel = Number.isFinite(ts) ? dayFmt.format(new Date(ts)) : `Day ${i + 1}`;
+        const maxValue = Number(maxTemps[i]);
+        const minValue = Number(minTemps[i]);
+        const precipValue = Number(precip[i]);
+        items.push({
+          day: dayLabel,
+          code: codeLabel,
+          max: Number.isFinite(maxValue) ? maxValue : null,
+          min: Number.isFinite(minValue) ? minValue : null,
+          precip: Number.isFinite(precipValue) ? precipValue : null
+        });
+      }
+      return items;
+    }
+
+    function formatTempCompact(valueC) {
+      const normalized = Number(valueC);
+      if (!Number.isFinite(normalized)) return "--";
+      const shown = temperatureUnit === "F" ? celsiusToFahrenheit(normalized) : normalized;
+      return `${Math.round(shown)}&deg;`;
+    }
+
+    function toggleWeatherForecast() {
+      weatherForecastCollapsed = !weatherForecastCollapsed;
+      localStorage.setItem(WEATHER_FORECAST_COLLAPSED_KEY, weatherForecastCollapsed ? "true" : "false");
+      if (latestWeatherPayload) renderWeatherCard(latestWeatherPayload);
+    }
+
     function renderWeatherCard(weatherPayload) {
       if (!weatherPayload) return;
       const updatedTs = Number(weatherPayload.lastUpdatedMs || localStorage.getItem(WEATHER_CACHE_UPDATED_KEY) || 0);
       const updatedText = updatedTs ? new Date(updatedTs).toLocaleString([], { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }) : "--";
       const windSpeed = Number(weatherPayload.wind && weatherPayload.wind.speed);
+      const windGust = Number(weatherPayload.wind && weatherPayload.wind.gust);
       const humidity = Number(weatherPayload.main && weatherPayload.main.humidity);
       const precipitation = Number(weatherPayload.precipitation);
+      const forecastItems = buildFiveDayForecast(weatherPayload.daily);
+      const forecastHtml = forecastItems.map(item => `
+        <div class="weather-forecast-item">
+          <div class="weather-forecast-day">${item.day}</div>
+          <div class="weather-forecast-condition">${item.code.label}</div>
+          <div class="weather-forecast-temp">${formatTempCompact(item.max)} / ${formatTempCompact(item.min)}</div>
+          <div class="weather-stat-label">${Number.isFinite(item.precip) ? `${Math.round(item.precip)}% rain` : "--"}</div>
+        </div>
+      `).join("");
       document.getElementById("heroWeather").innerHTML = `
-        <div class="weather-main">
-          <div class="weather-icon">${getWeatherIcon(weatherPayload.weather[0].main || "")}</div>
-          <div>
-            <div class="weather-temp">${formatWeatherTemp(weatherPayload.main.temp, true)}</div>
-            <div class="weather-condition">${weatherPayload.weather[0].description || weatherPayload.weather[0].main}</div>
+        <div class="weather-top">
+          <div class="weather-primary">
+            <div class="weather-icon">${getWeatherIcon(weatherPayload.weather[0].main || "")}</div>
+            <div>
+              <div class="weather-title">Current Conditions</div>
+              <div class="weather-temp">${formatWeatherTemp(weatherPayload.main.temp, true)}</div>
+              <div class="weather-condition">${weatherPayload.weather[0].description || weatherPayload.weather[0].main}</div>
+            </div>
+          </div>
+          <div class="weather-aux">
+            <div class="weather-aux-label">Feels like</div>
+            <div class="weather-aux-value">${formatWeatherTemp(weatherPayload.main.feels_like, false)}</div>
           </div>
         </div>
         <div class="weather-stats">
-          <div class="weather-stat"><div class="weather-stat-value">${formatWeatherTemp(weatherPayload.main.feels_like, false)}</div><div class="weather-stat-label">Feels like</div></div>
           <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(humidity) ? `${Math.round(humidity)}%` : "--"}</div><div class="weather-stat-label">Humidity</div></div>
           <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(windSpeed) ? `${Math.round(windSpeed)} km/h` : "--"}</div><div class="weather-stat-label">Wind</div></div>
           <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(precipitation) ? `${precipitation.toFixed(1)} mm` : "--"}</div><div class="weather-stat-label">Precipitation</div></div>
-          <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(weatherPayload.uv_index) ? weatherPayload.uv_index.toFixed(1) : "--"}</div><div class="weather-stat-label">UV index</div></div>
+          <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(weatherPayload.uv_index) ? weatherPayload.uv_index.toFixed(1) : "--"}</div><div class="weather-stat-label">UV Index</div></div>
+          <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(windGust) ? `${Math.round(windGust)} km/h` : "--"}</div><div class="weather-stat-label">Wind Gust</div></div>
+          <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(weatherPayload.main.pressure) ? `${Math.round(weatherPayload.main.pressure)} hPa` : "--"}</div><div class="weather-stat-label">Pressure</div></div>
+        </div>
+        <div class="weather-forecast-shell ${weatherForecastCollapsed ? "" : "open"}">
+          <button class="weather-forecast-toggle" type="button" aria-expanded="${weatherForecastCollapsed ? "false" : "true"}" onclick="toggleWeatherForecast()">
+            <span>5-Day Forecast</span>
+            <span class="weather-forecast-arrow">v</span>
+          </button>
+          <div class="weather-forecast-list">
+            ${forecastHtml || `<div class="weather-forecast-item"><div class="weather-forecast-day">No data</div><div class="weather-forecast-condition">Forecast unavailable</div><div class="weather-forecast-temp">--</div></div>`}
+          </div>
         </div>
         <div class="weather-meta">Last updated ${updatedText} - <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Weather data by Open-Meteo.com</a></div>
       `;
