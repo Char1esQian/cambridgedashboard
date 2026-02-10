@@ -115,6 +115,28 @@ def extract_menu_with_gemini(image_bytes: bytes) -> str:
 
 
 def validate_menu_json(menu_json: dict) -> dict:
+    def coerce_menu_item(item):
+        if isinstance(item, dict):
+            name = item.get("name") or item.get("title") or item.get("item") or item.get("dish")
+            if not name:
+                return None
+            return {
+                "name": str(name).strip(),
+                "description": str(item.get("description") or item.get("details") or "").strip(),
+                "price": normalize_price(item.get("price") or item.get("cost") or "Market Price"),
+            }
+        if isinstance(item, str):
+            text = item.strip()
+            if not text:
+                return None
+            return {"name": text, "description": "", "price": "Market Price"}
+        if isinstance(item, list):
+            parts = [str(part).strip() for part in item if str(part).strip()]
+            if not parts:
+                return None
+            return {"name": ", ".join(parts), "description": "", "price": "Market Price"}
+        return None
+
     for day in REQUIRED_DAYS:
         if day not in menu_json:
             print(f"Warning: Missing day '{day}' in menu", file=sys.stderr)
@@ -122,14 +144,14 @@ def validate_menu_json(menu_json: dict) -> dict:
         day_menu = menu_json[day]
         if not isinstance(day_menu, dict):
             raise ValueError(f"Invalid menu structure for {day}")
+        normalized_day_menu = {}
         for category, item in day_menu.items():
-            if not isinstance(item, dict):
-                raise ValueError(f"Invalid item structure for {day}/{category}")
-            if "name" not in item:
-                raise ValueError(f"Missing 'name' for {day}/{category}")
-            item.setdefault("description", "")
-            item.setdefault("price", "")
-            item["price"] = normalize_price(item["price"])
+            normalized_item = coerce_menu_item(item)
+            if not normalized_item:
+                print(f"Warning: Skipping invalid item structure for {day}/{category}", file=sys.stderr)
+                continue
+            normalized_day_menu[category] = normalized_item
+        menu_json[day] = normalized_day_menu
     return menu_json
 
 
@@ -347,6 +369,7 @@ def parse_args():
     parser.add_argument("--menu-path", default=str(DEFAULT_MENU_PATH), help="Path to menu.json")
     parser.add_argument("--assets-dir", default=str(DEFAULT_ASSETS_DIR), help="Directory for generated images")
     parser.add_argument("--no-fetch", action="store_true", help="Skip remote extraction and reuse existing menu JSON as input")
+    parser.add_argument("--skip-images", action="store_true", help="Run extraction/update without generating images")
     parser.add_argument("--stdout", action="store_true", help="Print final menu JSON to stdout after writing to file")
     return parser.parse_args()
 
@@ -371,8 +394,13 @@ def main():
             menu_data = json.loads(raw_json)
 
         menu_data = validate_menu_json(menu_data)
-        daily = generate_daily_highlights(menu_data, assets_dir, week_key, image_api_key)
-        weekly = generate_weekly_highlights(menu_data, assets_dir, week_key, image_api_key)
+        if args.skip_images:
+            daily = menu_data.get("_generated", {}).get("dailyHighlights", {})
+            weekly = menu_data.get("_generated", {}).get("weeklyHighlights", {})
+            print("Skipping image generation by request (--skip-images).", file=sys.stderr)
+        else:
+            daily = generate_daily_highlights(menu_data, assets_dir, week_key, image_api_key)
+            weekly = generate_weekly_highlights(menu_data, assets_dir, week_key, image_api_key)
 
         metadata = menu_data.setdefault("_generated", {})
         metadata["updatedAt"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
