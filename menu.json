@@ -56,7 +56,8 @@
     "Action": {
       "name": "{'name': 'Taco Tuesday, Chicken, Beef, Assorted Toppings, Tortillas', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w06-tuesday-action.png"
     }
   },
   "Wednesday": {
@@ -146,17 +147,25 @@
     }
   },
   "_generated": {
-    "updatedAt": "2026-02-10T22:09:15+00:00",
+    "updatedAt": "2026-02-10T22:28:21+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Tuesday": {
-        "category": "Carving",
-        "imageUrl": "assets/menu-generated/daily-2026w06-tuesday-carving.png"
-      }
+      "Tuesday": [
+        {
+          "category": "Carving",
+          "name": "{'name': 'Rosemary- Crusted Pork Loin Roast, Sweet Potatoes, Green Beans', 'description': '', 'price': '$10.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w06-tuesday-carving.png"
+        },
+        {
+          "category": "Action",
+          "name": "{'name': 'Taco Tuesday, Chicken, Beef, Assorted Toppings, Tortillas', 'description': '', 'price': '$11.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w06-tuesday-action.png"
+        }
+      ]
     },
     "weeklyHighlights": {}
   }
