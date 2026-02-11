@@ -3885,13 +3885,14 @@
     }
 
     async function fetchMenu() {
-      const menuUrl = "https://raw.githubusercontent.com/Char1esQian/cambridgedashboard/refs/heads/main/menu.json";
+      const menuUrl = `menu.json?ts=${Date.now()}`;
       const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
       const today = weekdays[new Date().getDay()];
       const isWeekend = today === "Saturday" || today === "Sunday";
       document.getElementById("menuDay").textContent = today;
       try {
-        const res = await fetch(menuUrl);
+        const res = await fetch(menuUrl, { cache: "no-store" });
+        if (!res.ok) throw new Error(`Menu request failed: ${res.status}`);
         const data = await res.json();
         const todayMenu = data[today];
         if (!todayMenu) {
