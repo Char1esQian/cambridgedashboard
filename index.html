@@ -786,6 +786,13 @@
       font-size: 0.8rem;
       letter-spacing: 0.04em;
       padding: 0 0.45rem;
+      overflow: hidden;
+    }
+
+    .weather-icon img {
+      width: 46px;
+      height: 46px;
+      display: block;
     }
 
     .weather-temp {
@@ -885,14 +892,14 @@
       line-height: 1.35;
     }
 
-    .weather-forecast-shell {
+    .weather-details-shell {
       border: 1px solid rgba(15, 31, 51, 0.12);
       border-radius: 12px;
       background: rgba(255, 255, 255, 0.58);
       overflow: hidden;
     }
 
-    .weather-forecast-toggle {
+    .weather-details-toggle {
       width: 100%;
       border: none;
       background: transparent;
@@ -909,11 +916,11 @@
       text-transform: uppercase;
     }
 
-    .weather-forecast-toggle:hover {
+    .weather-details-toggle:hover {
       background: rgba(255, 255, 255, 0.42);
     }
 
-    .weather-forecast-arrow {
+    .weather-details-indicator {
       width: 22px;
       height: 22px;
       border-radius: 999px;
@@ -921,24 +928,33 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.82rem;
-      transition: transform 170ms ease;
+      font-size: 0.9rem;
       background: rgba(255, 255, 255, 0.78);
     }
 
-    .weather-forecast-shell.open .weather-forecast-arrow {
-      transform: rotate(180deg);
+    .weather-details-body {
+      display: none;
+      padding: 0.12rem 0.52rem 0.6rem;
+      gap: 0.6rem;
+    }
+
+    .weather-details-shell.open .weather-details-body {
+      display: grid;
+    }
+
+    .weather-forecast-title {
+      font-size: 0.66rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #335a80;
+      margin-top: 0.1rem;
     }
 
     .weather-forecast-list {
-      display: none;
-      gap: 0.45rem;
-      padding: 0.12rem 0.52rem 0.6rem;
-      grid-template-columns: repeat(auto-fit, minmax(92px, 1fr));
-    }
-
-    .weather-forecast-shell.open .weather-forecast-list {
       display: grid;
+      gap: 0.45rem;
+      grid-template-columns: repeat(auto-fit, minmax(92px, 1fr));
     }
 
     .weather-forecast-item {
@@ -1894,28 +1910,35 @@
       <div id="date">--</div>
       <div class="hero-right">
         <div class="hero-weather" id="heroWeather">
-          <div class="weather-main">
-            <div class="weather-icon">WX</div>
-            <div>
-              <div class="weather-temp loading">--&deg;C</div>
-              <div class="weather-condition">Loading...</div>
+          <div class="weather-top">
+            <div class="weather-primary">
+              <div class="weather-icon">WX</div>
+              <div>
+                <div class="weather-title">Current Conditions</div>
+                <div class="weather-temp loading">--&deg;C</div>
+                <div class="weather-condition">Loading...</div>
+              </div>
+            </div>
+            <div class="weather-aux">
+              <div class="weather-aux-label">Feels like</div>
+              <div class="weather-aux-value">--</div>
             </div>
           </div>
-          <div class="weather-stats">
-            <div class="weather-stat">
-              <div class="weather-stat-value">--</div>
-              <div class="weather-stat-label">Feels like</div>
-            </div>
-            <div class="weather-stat">
-              <div class="weather-stat-value">--</div>
-              <div class="weather-stat-label">Humidity</div>
-            </div>
-            <div class="weather-stat">
-              <div class="weather-stat-value">--</div>
-              <div class="weather-stat-label">Wind</div>
+          <div class="weather-details-shell">
+            <button class="weather-details-toggle" type="button" aria-expanded="false">
+              <span>More Details</span>
+              <span class="weather-details-indicator">+</span>
+            </button>
+            <div class="weather-details-body">
+              <div class="weather-stats">
+                <div class="weather-stat"><div class="weather-stat-value">--</div><div class="weather-stat-label">Humidity</div></div>
+                <div class="weather-stat"><div class="weather-stat-value">--</div><div class="weather-stat-label">Wind</div></div>
+              </div>
+              <div class="weather-forecast-title">5-Day Forecast</div>
+              <div class="weather-forecast-list"></div>
+              <div class="weather-meta">Last updated -- - <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Weather data by Open-Meteo.com</a></div>
             </div>
           </div>
-          <div class="weather-meta">Last updated -- - <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Weather data by Open-Meteo.com</a></div>
         </div>
         <div class="brand-pill">Cambridge HQ</div>
       </div>
@@ -2069,7 +2092,7 @@
     const WEATHER_CACHE_TS_KEY = "cachedWeatherMainTs";
     const WEATHER_CACHE_PAYLOAD_KEY = "cachedWeatherPayloadV2";
     const WEATHER_CACHE_UPDATED_KEY = "cachedWeatherLastUpdatedV2";
-    const WEATHER_FORECAST_COLLAPSED_KEY = "weatherForecastCollapsed";
+    const WEATHER_DETAILS_COLLAPSED_KEY = "weatherDetailsCollapsed";
     const WEATHER_REFRESH_MIN_MS = 15 * 60 * 1000;
     const WEATHER_REFRESH_MAX_MS = 30 * 60 * 1000;
     const TEMP_UNIT_STORAGE_KEY = "temperatureUnit";
@@ -2221,7 +2244,7 @@
     let weatherSceneReady = !!currentWeatherMain;
     let latestWeatherPayload = cachedWeatherPayload;
     let temperatureUnit = localStorage.getItem(TEMP_UNIT_STORAGE_KEY) === "F" ? "F" : "C";
-    let weatherForecastCollapsed = localStorage.getItem(WEATHER_FORECAST_COLLAPSED_KEY) !== "false";
+    let weatherDetailsCollapsed = localStorage.getItem(WEATHER_DETAILS_COLLAPSED_KEY) !== "false";
     let latestRealEventsByCity = { cambridge: [], boston: [] };
     const celestialPlacementCache = new Map();
     let celestialPlacementRequestId = 0;
@@ -3625,15 +3648,21 @@
       setTimeout(fetchRedLineDepartures, 30000);
     }
 
-    function getWeatherIcon(main) {
-      main = main.toLowerCase();
-      if (main.includes("clear")) return isNight() ? "NIGHT" : "CLEAR";
-      if (main.includes("cloud")) return "CLOUD";
-      if (main.includes("fog")) return "FOG";
-      if (main.includes("rain") || main.includes("drizzle")) return "RAIN";
-      if (main.includes("snow")) return "SNOW";
-      if (main.includes("thunder")) return "STORM";
-      return "WEATHER";
+    function getWeatherAnimationUrl(weatherPayload) {
+      const code = Number(weatherPayload?.weather?.[0]?.code);
+      const isDay = !!weatherPayload?.is_day;
+      const base = "https://cdn.jsdelivr.net/gh/basmilius/weather-icons/production/fill/all/";
+      const pick = name => `${base}${name}.svg`;
+
+      if (code === 0) return pick(isDay ? "clear-day" : "clear-night");
+      if (code === 1 || code === 2) return pick(isDay ? "partly-cloudy-day" : "partly-cloudy-night");
+      if (code === 3) return pick("overcast");
+      if (code === 45 || code === 48) return pick(isDay ? "fog-day" : "fog-night");
+      if (code >= 51 && code <= 57) return pick(isDay ? "drizzle-day" : "drizzle-night");
+      if ((code >= 61 && code <= 67) || (code >= 80 && code <= 82)) return pick(isDay ? "rain-day" : "rain-night");
+      if ((code >= 71 && code <= 77) || (code >= 85 && code <= 86)) return pick(isDay ? "snow-day" : "snow-night");
+      if (code >= 95 && code <= 99) return pick(isDay ? "thunderstorms-day" : "thunderstorms-night");
+      return pick("overcast");
     }
 
     function celsiusToFahrenheit(valueC) {
@@ -3692,9 +3721,9 @@
       return `${Math.round(shown)}&deg;`;
     }
 
-    function toggleWeatherForecast() {
-      weatherForecastCollapsed = !weatherForecastCollapsed;
-      localStorage.setItem(WEATHER_FORECAST_COLLAPSED_KEY, weatherForecastCollapsed ? "true" : "false");
+    function toggleWeatherDetails() {
+      weatherDetailsCollapsed = !weatherDetailsCollapsed;
+      localStorage.setItem(WEATHER_DETAILS_COLLAPSED_KEY, weatherDetailsCollapsed ? "true" : "false");
       if (latestWeatherPayload) renderWeatherCard(latestWeatherPayload);
     }
 
@@ -3707,6 +3736,7 @@
       const humidity = Number(weatherPayload.main && weatherPayload.main.humidity);
       const precipitation = Number(weatherPayload.precipitation);
       const forecastItems = buildFiveDayForecast(weatherPayload.daily);
+      const weatherAnimUrl = getWeatherAnimationUrl(weatherPayload);
       const forecastHtml = forecastItems.map(item => `
         <div class="weather-forecast-item">
           <div class="weather-forecast-day">${item.day}</div>
@@ -3718,7 +3748,7 @@
       document.getElementById("heroWeather").innerHTML = `
         <div class="weather-top">
           <div class="weather-primary">
-            <div class="weather-icon">${getWeatherIcon(weatherPayload.weather[0].main || "")}</div>
+            <div class="weather-icon"><img src="${weatherAnimUrl}" alt="${weatherPayload.weather[0].description || weatherPayload.weather[0].main}" loading="lazy" /></div>
             <div>
               <div class="weather-title">Current Conditions</div>
               <div class="weather-temp">${formatWeatherTemp(weatherPayload.main.temp, true)}</div>
@@ -3730,24 +3760,27 @@
             <div class="weather-aux-value">${formatWeatherTemp(weatherPayload.main.feels_like, false)}</div>
           </div>
         </div>
-        <div class="weather-stats">
-          <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(humidity) ? `${Math.round(humidity)}%` : "--"}</div><div class="weather-stat-label">Humidity</div></div>
-          <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(windSpeed) ? `${Math.round(windSpeed)} km/h` : "--"}</div><div class="weather-stat-label">Wind</div></div>
-          <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(precipitation) ? `${precipitation.toFixed(1)} mm` : "--"}</div><div class="weather-stat-label">Precipitation</div></div>
-          <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(weatherPayload.uv_index) ? weatherPayload.uv_index.toFixed(1) : "--"}</div><div class="weather-stat-label">UV Index</div></div>
-          <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(windGust) ? `${Math.round(windGust)} km/h` : "--"}</div><div class="weather-stat-label">Wind Gust</div></div>
-          <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(weatherPayload.main.pressure) ? `${Math.round(weatherPayload.main.pressure)} hPa` : "--"}</div><div class="weather-stat-label">Pressure</div></div>
-        </div>
-        <div class="weather-forecast-shell ${weatherForecastCollapsed ? "" : "open"}">
-          <button class="weather-forecast-toggle" type="button" aria-expanded="${weatherForecastCollapsed ? "false" : "true"}" onclick="toggleWeatherForecast()">
-            <span>5-Day Forecast</span>
-            <span class="weather-forecast-arrow">v</span>
+        <div class="weather-details-shell ${weatherDetailsCollapsed ? "" : "open"}">
+          <button class="weather-details-toggle" type="button" aria-expanded="${weatherDetailsCollapsed ? "false" : "true"}" onclick="toggleWeatherDetails()">
+            <span>More Details</span>
+            <span class="weather-details-indicator">${weatherDetailsCollapsed ? "+" : "-"}</span>
           </button>
-          <div class="weather-forecast-list">
-            ${forecastHtml || `<div class="weather-forecast-item"><div class="weather-forecast-day">No data</div><div class="weather-forecast-condition">Forecast unavailable</div><div class="weather-forecast-temp">--</div></div>`}
+          <div class="weather-details-body">
+            <div class="weather-stats">
+              <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(humidity) ? `${Math.round(humidity)}%` : "--"}</div><div class="weather-stat-label">Humidity</div></div>
+              <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(windSpeed) ? `${Math.round(windSpeed)} km/h` : "--"}</div><div class="weather-stat-label">Wind</div></div>
+              <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(precipitation) ? `${precipitation.toFixed(1)} mm` : "--"}</div><div class="weather-stat-label">Precipitation</div></div>
+              <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(weatherPayload.uv_index) ? weatherPayload.uv_index.toFixed(1) : "--"}</div><div class="weather-stat-label">UV Index</div></div>
+              <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(windGust) ? `${Math.round(windGust)} km/h` : "--"}</div><div class="weather-stat-label">Wind Gust</div></div>
+              <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(weatherPayload.main.pressure) ? `${Math.round(weatherPayload.main.pressure)} hPa` : "--"}</div><div class="weather-stat-label">Pressure</div></div>
+            </div>
+            <div class="weather-forecast-title">5-Day Forecast</div>
+            <div class="weather-forecast-list">
+              ${forecastHtml || `<div class="weather-forecast-item"><div class="weather-forecast-day">No data</div><div class="weather-forecast-condition">Forecast unavailable</div><div class="weather-forecast-temp">--</div></div>`}
+            </div>
+            <div class="weather-meta">Last updated ${updatedText} - <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Weather data by Open-Meteo.com</a></div>
           </div>
         </div>
-        <div class="weather-meta">Last updated ${updatedText} - <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Weather data by Open-Meteo.com</a></div>
       `;
     }
 
@@ -3848,8 +3881,20 @@
           renderWeatherCard(latestWeatherPayload);
         } else {
           document.getElementById("heroWeather").innerHTML = `
-            <div class="weather-main"><div class="weather-icon">OFFLINE</div><div><div class="weather-temp">--</div><div class="weather-condition">Unavailable</div></div></div>
-            <div class="weather-meta"><a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Weather data by Open-Meteo.com</a></div>
+            <div class="weather-top">
+              <div class="weather-primary">
+                <div class="weather-icon">OFF</div>
+                <div>
+                  <div class="weather-title">Current Conditions</div>
+                  <div class="weather-temp">--</div>
+                  <div class="weather-condition">Unavailable</div>
+                </div>
+              </div>
+              <div class="weather-aux">
+                <div class="weather-aux-label">Feels like</div>
+                <div class="weather-aux-value">--</div>
+              </div>
+            </div>
           `;
         }
       }
