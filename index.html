@@ -434,6 +434,43 @@
       transform: translateX(16px);
     }
 
+    .weather-temp-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .weather-temp-row .temp-toggle-inline {
+      margin-top: 0;
+      padding: 0.16rem 0.3rem;
+      gap: 0.3rem;
+    }
+
+    .weather-temp-row .temp-toggle-label {
+      display: none;
+    }
+
+    .weather-temp-row .temp-unit {
+      font-size: 0.64rem;
+    }
+
+    .weather-temp-row .temp-toggle-inline .toggle {
+      width: 32px;
+      height: 18px;
+    }
+
+    .weather-temp-row .temp-toggle-inline .toggle-slider::after {
+      width: 10px;
+      height: 10px;
+      top: 3px;
+      left: 3px;
+    }
+
+    .weather-temp-row .temp-toggle-inline .toggle input:checked + .toggle-slider::after {
+      transform: translateX(14px);
+    }
+
     body[data-night="true"] .temp-toggle-inline {
       border-color: rgba(210, 228, 248, 0.26);
       background: rgba(18, 36, 56, 0.52);
@@ -1984,15 +2021,6 @@
         <div class="greeting" id="greeting">Good evening, Charles</div>
         <div id="date">--</div>
         <div id="clock">--:--</div>
-        <div class="temp-toggle-inline" id="tempToggleControl">
-          <span class="temp-toggle-label">Temp</span>
-          <span class="temp-unit" id="tempUnitCLabel">&deg;C</span>
-          <label class="toggle">
-            <input type="checkbox" id="tempUnitToggle" aria-label="Toggle Fahrenheit temperature" />
-            <span class="toggle-slider"></span>
-          </label>
-          <span class="temp-unit" id="tempUnitFLabel">&deg;F</span>
-        </div>
         <a class="about-inline-link" href="about.html">About</a>
       </div>
       <div class="hero-right">
@@ -2002,7 +2030,18 @@
               <div class="weather-icon">WX</div>
               <div>
                 <div class="weather-title">Current Conditions</div>
-                <div class="weather-temp loading">--&deg;C</div>
+                <div class="weather-temp-row">
+                  <div class="weather-temp loading">--&deg;C</div>
+                  <div class="temp-toggle-inline" id="tempToggleControl">
+                    <span class="temp-toggle-label">Temp</span>
+                    <span class="temp-unit" id="tempUnitCLabel">&deg;C</span>
+                    <label class="toggle">
+                      <input type="checkbox" id="tempUnitToggle" aria-label="Toggle Fahrenheit temperature" />
+                      <span class="toggle-slider"></span>
+                    </label>
+                    <span class="temp-unit" id="tempUnitFLabel">&deg;F</span>
+                  </div>
+                </div>
                 <div class="weather-condition">Loading...</div>
               </div>
             </div>
@@ -3845,7 +3884,18 @@
             <div class="weather-icon" aria-hidden="true">${weatherAnimMarkup}</div>
             <div>
               <div class="weather-title">Current Conditions</div>
-              <div class="weather-temp">${formatWeatherTemp(weatherPayload.main.temp, true)}</div>
+              <div class="weather-temp-row">
+                <div class="weather-temp">${formatWeatherTemp(weatherPayload.main.temp, true)}</div>
+                <div class="temp-toggle-inline" id="tempToggleControl">
+                  <span class="temp-toggle-label">Temp</span>
+                  <span class="temp-unit" id="tempUnitCLabel">&deg;C</span>
+                  <label class="toggle">
+                    <input type="checkbox" id="tempUnitToggle" aria-label="Toggle Fahrenheit temperature" />
+                    <span class="toggle-slider"></span>
+                  </label>
+                  <span class="temp-unit" id="tempUnitFLabel">&deg;F</span>
+                </div>
+              </div>
               <div class="weather-condition">${weatherPayload.weather[0].description || weatherPayload.weather[0].main}</div>
             </div>
           </div>
@@ -3876,6 +3926,7 @@
           </div>
         </div>
       `;
+      updateTempToggleUI();
       syncWeatherPanelExpansion();
     }
 
@@ -3982,7 +4033,18 @@
                 <div class="weather-icon">OFF</div>
                 <div>
                   <div class="weather-title">Current Conditions</div>
-                  <div class="weather-temp">--</div>
+                  <div class="weather-temp-row">
+                    <div class="weather-temp">--</div>
+                    <div class="temp-toggle-inline" id="tempToggleControl">
+                      <span class="temp-toggle-label">Temp</span>
+                      <span class="temp-unit" id="tempUnitCLabel">&deg;C</span>
+                      <label class="toggle">
+                        <input type="checkbox" id="tempUnitToggle" aria-label="Toggle Fahrenheit temperature" />
+                        <span class="toggle-slider"></span>
+                      </label>
+                      <span class="temp-unit" id="tempUnitFLabel">&deg;F</span>
+                    </div>
+                  </div>
                   <div class="weather-condition">Unavailable</div>
                 </div>
               </div>
@@ -3992,6 +4054,7 @@
               </div>
             </div>
           `;
+          updateTempToggleUI();
           syncWeatherPanelExpansion();
         }
       }
@@ -4043,17 +4106,17 @@
         }
       });
     }
-    const tempUnitToggle = document.getElementById("tempUnitToggle");
-    if (tempUnitToggle) {
-      tempUnitToggle.addEventListener("change", event => {
-        temperatureUnit = event.target.checked ? "F" : "C";
-        localStorage.setItem(TEMP_UNIT_STORAGE_KEY, temperatureUnit);
-        updateTempToggleUI();
-        if (latestWeatherPayload) {
-          renderWeatherCard(latestWeatherPayload);
-        }
-      });
-    }
+    document.addEventListener("change", event => {
+      const target = event.target;
+      if (!(target instanceof HTMLInputElement)) return;
+      if (target.id !== "tempUnitToggle") return;
+      temperatureUnit = target.checked ? "F" : "C";
+      localStorage.setItem(TEMP_UNIT_STORAGE_KEY, temperatureUnit);
+      updateTempToggleUI();
+      if (latestWeatherPayload) {
+        renderWeatherCard(latestWeatherPayload);
+      }
+    });
     document.getElementById("chargepointNotifyToggle").addEventListener("change", handleChargepointNotifyToggle);
     refreshChargepointStations();
   </script>
