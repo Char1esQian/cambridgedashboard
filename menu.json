@@ -82,8 +82,7 @@
     "Action": {
       "name": "{'name': 'Fried Rice, Chicken, Shrimp, Mixed Vegetables', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w06-wednesday-action.png"
+      "price": "Market Price"
     }
   },
   "Thursday": {
@@ -110,12 +109,14 @@
     "Carving": {
       "name": "{'name': 'Beef and Vegetable Skewers, Chimichurri, Rice, Cucumber-Tomato Salad', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w06-thursday-carving.png"
     },
     "Action": {
       "name": "{'name': 'Jerk Chicken, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers, Onions', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w06-thursday-action.png"
     }
   },
   "Friday": {
@@ -125,7 +126,7 @@
       "price": "Market Price"
     },
     "Soup": {
-      "name": "{'name': 'New England Clam Chowder', 'description': '', 'price': '$3.65-4-35'}",
+      "name": "{'name': 'New England Clam Chowder', 'description': '', 'price': '$3.65-4.35'}",
       "description": "",
       "price": "Market Price"
     },
@@ -146,18 +147,23 @@
     }
   },
   "_generated": {
-    "updatedAt": "2026-02-11T14:17:54+00:00",
+    "updatedAt": "2026-02-12T14:13:34+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Wednesday": [
+      "Thursday": [
+        {
+          "category": "Carving",
+          "name": "{'name': 'Beef and Vegetable Skewers, Chimichurri, Rice, Cucumber-Tomato Salad', 'description': '', 'price': '$12.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w06-thursday-carving.png"
+        },
         {
           "category": "Action",
-          "name": "{'name': 'Fried Rice, Chicken, Shrimp, Mixed Vegetables', 'description': '', 'price': '$11.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w06-wednesday-action.png"
+          "name": "{'name': 'Jerk Chicken, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers, Onions', 'description': '', 'price': '$11.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w06-thursday-action.png"
         }
       ]
     },
