@@ -1,26 +1,29 @@
 {
   "Monday": {
     "Breakfast": {
-      "name": "{'name': 'Grab n Go Open', 'description': 'Cafe closed for Presidents Day', 'price': '$2.90-$4.95'}",
+      "name": "{'name': 'Grab n Go Open. Cafe closed for Presidents Day', 'description': '', 'price': '$2.90-$4.95'}",
+      "description": "",
+      "price": "Market Price"
+    },
+    "Soup": {
+      "name": "{'name': '', 'description': '', 'price': '$2.90-$3.85'}",
       "description": "",
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': 'Deli', 'description': '', 'price': '$2.90-$3.85'}",
+      "name": "{'name': '', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
     "Plant Power": {
-      "name": "{'name': 'Plant Power', 'description': '', 'price': '$8.25'}",
+      "name": "{'name': '', 'description': '', 'price': '$8.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w07-monday-plant-power.png"
+      "price": "Market Price"
     },
     "Action": {
-      "name": "{'name': 'Action', 'description': '', 'price': '$11.95'}",
+      "name": "{'name': '', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w07-monday-action.png"
+      "price": "Market Price"
     }
   },
   "Tuesday": {
@@ -142,23 +145,18 @@
     }
   },
   "_generated": {
-    "updatedAt": "2026-02-16T14:07:29+00:00",
+    "updatedAt": "2026-02-17T14:09:01+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Monday": [
+      "Tuesday": [
         {
-          "category": "Plant Power",
-          "name": "{'name': 'Plant Power', 'description': '', 'price': '$8.25'}",
-          "imageUrl": "assets/menu-generated/daily-2026w07-monday-plant-power.png"
-        },
-        {
-          "category": "Action",
-          "name": "{'name': 'Action', 'description': '', 'price': '$11.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w07-monday-action.png"
+          "category": "Taco Tuesday",
+          "name": "Taco Tuesday Bowl",
+          "imageUrl": "assets/menu-generated/daily-2026w07-tuesday-taco-tuesday.png"
         }
       ]
     },
