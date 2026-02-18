@@ -6,22 +6,22 @@
       "price": "Market Price"
     },
     "Soup": {
-      "name": "{'name': '', 'description': '', 'price': '$2.90-$3.85'}",
+      "name": "{'name': 'Soup', 'description': '', 'price': '$2.90-$3.85'}",
       "description": "",
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': '', 'description': '', 'price': '$8.25'}",
+      "name": "{'name': 'Deli', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
     "Plant Power": {
-      "name": "{'name': '', 'description': '', 'price': '$8.95'}",
+      "name": "{'name': 'Plant Power', 'description': '', 'price': '$8.95'}",
       "description": "",
       "price": "Market Price"
     },
     "Action": {
-      "name": "{'name': '', 'description': '', 'price': '$11.95'}",
+      "name": "{'name': 'Action', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     }
@@ -82,7 +82,8 @@
     "Action": {
       "name": "{'name': 'Chicken Vindaloo: Roast Chicken Breast, Sweet and Spicy Curry, Cauliflower and Peas, Basmati Rice, Raita', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w07-wednesday-action.png"
     }
   },
   "Thursday": {
@@ -145,18 +146,18 @@
     }
   },
   "_generated": {
-    "updatedAt": "2026-02-17T14:09:01+00:00",
+    "updatedAt": "2026-02-18T14:09:06+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Tuesday": [
+      "Wednesday": [
         {
-          "category": "Taco Tuesday",
-          "name": "Taco Tuesday Bowl",
-          "imageUrl": "assets/menu-generated/daily-2026w07-tuesday-taco-tuesday.png"
+          "category": "Action",
+          "name": "{'name': 'Chicken Vindaloo: Roast Chicken Breast, Sweet and Spicy Curry, Cauliflower and Peas, Basmati Rice, Raita', 'description': '', 'price': '$11.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w07-wednesday-action.png"
         }
       ]
     },
