@@ -82,8 +82,7 @@
     "Action": {
       "name": "{'name': 'Chicken Vindaloo: Roast Chicken Breast, Sweet and Spicy Curry, Cauliflower and Peas, Basmati Rice, Raita', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w07-wednesday-action.png"
+      "price": "Market Price"
     }
   },
   "Thursday": {
@@ -110,12 +109,14 @@
     "Carving": {
       "name": "{'name': 'Spinach and Mushroom Lasagna, Three Cheeses, Marinara', 'description': '', 'price': '$10.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w07-thursday-carving.png"
     },
     "Action": {
       "name": "{'name': 'Beef Stroganoff, Braised Beef, Sour Cream, Dijon, Mushrooms, Peas, Buttered Egg Noodles', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w07-thursday-action.png"
     }
   },
   "Friday": {
@@ -146,18 +147,23 @@
     }
   },
   "_generated": {
-    "updatedAt": "2026-02-18T14:09:06+00:00",
+    "updatedAt": "2026-02-19T14:11:07+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Wednesday": [
+      "Thursday": [
+        {
+          "category": "Carving",
+          "name": "{'name': 'Spinach and Mushroom Lasagna, Three Cheeses, Marinara', 'description': '', 'price': '$10.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w07-thursday-carving.png"
+        },
         {
           "category": "Action",
-          "name": "{'name': 'Chicken Vindaloo: Roast Chicken Breast, Sweet and Spicy Curry, Cauliflower and Peas, Basmati Rice, Raita', 'description': '', 'price': '$11.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w07-wednesday-action.png"
+          "name": "{'name': 'Beef Stroganoff, Braised Beef, Sour Cream, Dijon, Mushrooms, Peas, Buttered Egg Noodles', 'description': '', 'price': '$12.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w07-thursday-action.png"
         }
       ]
     },
