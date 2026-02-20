@@ -6,22 +6,22 @@
       "price": "Market Price"
     },
     "Soup": {
-      "name": "{'name': 'Soup', 'description': '', 'price': '$2.90-$3.85'}",
+      "name": "{'name': None, 'description': None, 'price': '$2.90-$3.85'}",
       "description": "",
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': 'Deli', 'description': '', 'price': '$8.25'}",
+      "name": "{'name': None, 'description': None, 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
     "Plant Power": {
-      "name": "{'name': 'Plant Power', 'description': '', 'price': '$8.95'}",
+      "name": "{'name': None, 'description': None, 'price': '$8.95'}",
       "description": "",
       "price": "Market Price"
     },
     "Action": {
-      "name": "{'name': 'Action', 'description': '', 'price': '$11.95'}",
+      "name": "{'name': None, 'description': None, 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     }
@@ -109,14 +109,12 @@
     "Carving": {
       "name": "{'name': 'Spinach and Mushroom Lasagna, Three Cheeses, Marinara', 'description': '', 'price': '$10.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w07-thursday-carving.png"
+      "price": "Market Price"
     },
     "Action": {
       "name": "{'name': 'Beef Stroganoff, Braised Beef, Sour Cream, Dijon, Mushrooms, Peas, Buttered Egg Noodles', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w07-thursday-action.png"
+      "price": "Market Price"
     }
   },
   "Friday": {
@@ -143,27 +141,23 @@
     "Action": {
       "name": "{'name': 'Baked Haddock, Ritz Cracker Crumbs, Herb Butter, Roasted Potatoes, Broccoli', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w07-friday-action.png"
     }
   },
   "_generated": {
-    "updatedAt": "2026-02-19T14:11:07+00:00",
+    "updatedAt": "2026-02-20T14:02:31+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Thursday": [
-        {
-          "category": "Carving",
-          "name": "{'name': 'Spinach and Mushroom Lasagna, Three Cheeses, Marinara', 'description': '', 'price': '$10.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w07-thursday-carving.png"
-        },
+      "Friday": [
         {
           "category": "Action",
-          "name": "{'name': 'Beef Stroganoff, Braised Beef, Sour Cream, Dijon, Mushrooms, Peas, Buttered Egg Noodles', 'description': '', 'price': '$12.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w07-thursday-action.png"
+          "name": "{'name': 'Baked Haddock, Ritz Cracker Crumbs, Herb Butter, Roasted Potatoes, Broccoli', 'description': '', 'price': '$12.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w07-friday-action.png"
         }
       ]
     },
