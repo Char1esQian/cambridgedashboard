@@ -6,24 +6,26 @@
       "price": "Market Price"
     },
     "Soup": {
-      "name": "{'name': None, 'description': None, 'price': '$2.90-$3.85'}",
+      "name": "{'name': '', 'description': '', 'price': '$2.90-$3.85'}",
       "description": "",
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': None, 'description': None, 'price': '$8.25'}",
+      "name": "{'name': '', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
     "Plant Power": {
-      "name": "{'name': None, 'description': None, 'price': '$8.95'}",
+      "name": "{'name': '', 'description': '', 'price': '$8.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w08-monday-plant-power.png"
     },
     "Action": {
-      "name": "{'name': None, 'description': None, 'price': '$11.95'}",
+      "name": "{'name': '', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w08-monday-action.png"
     }
   },
   "Tuesday": {
@@ -141,23 +143,27 @@
     "Action": {
       "name": "{'name': 'Baked Haddock, Ritz Cracker Crumbs, Herb Butter, Roasted Potatoes, Broccoli', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w07-friday-action.png"
+      "price": "Market Price"
     }
   },
   "_generated": {
-    "updatedAt": "2026-02-20T14:02:31+00:00",
+    "updatedAt": "2026-02-23T14:10:05+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Friday": [
+      "Monday": [
+        {
+          "category": "Plant Power",
+          "name": "{'name': '', 'description': '', 'price': '$8.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w08-monday-plant-power.png"
+        },
         {
           "category": "Action",
-          "name": "{'name': 'Baked Haddock, Ritz Cracker Crumbs, Herb Butter, Roasted Potatoes, Broccoli', 'description': '', 'price': '$12.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w07-friday-action.png"
+          "name": "{'name': '', 'description': '', 'price': '$11.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w08-monday-action.png"
         }
       ]
     },
