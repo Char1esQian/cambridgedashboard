@@ -30,12 +30,13 @@ MENU_IMAGE_URL = "https://cafe.sebastians.com/sebclients/3130alewife.jpg"
 REQUIRED_DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
 CATEGORY_PRIORITY = ["Carving", "Plant Power", "Action"]
 DEFAULT_CANVAS = (1280, 720)
-IMAGE_MODEL = "gemini-3-pro-image-preview"
-IMAGE_MODEL_FALLBACK = "gemini-2.5-flash-image"
+IMAGE_MODEL = "gemini-3.1-flash-image-preview"
+IMAGE_MODEL_FALLBACK = "gemini-3-pro-image-preview"
 IMAGE_GEN_MAX_RETRIES = 4
 MENU_TIMEZONE = "America/New_York"
 IMAGE_MODEL_CANDIDATES = [
-    "gemini-3-pro-image-preview",
+    IMAGE_MODEL,
+    IMAGE_MODEL_FALLBACK,
     "gemini-2.5-flash-image",
 ]
 
@@ -69,7 +70,7 @@ Return ONLY valid JSON in this exact format, no markdown code blocks.
 
 FOOD_PHOTO_PROMPT_TEMPLATE = """Photoreal food product photo: a single black rectangular meal-prep container with a clear lid slightly open, on a clean off-white table. Modern cafeteria background, heavily blurred chairs, soft daylight from left, shallow depth of field, minimal/neutral colors, lots of negative space, slightly top-down view (around 35 to 45 degrees), crisp focus on food so ingredients are clearly visible.
 
-Meal based on: {item_name}. Ingredients: {ingredients_list}. Base/crust: {base_or_crust}. Sauce: {sauce_or_none}. Make it realistic, neatly arranged inside the tray, appetizing, no props.
+Meal based on: {item_name}. Proteins: {proteins_list}. Ingredients: {ingredients_list}. Base/crust: {base_or_crust}. Sauce: {sauce_or_none}. {protein_layout_instruction} Make it realistic, neatly arranged inside the tray, appetizing, no props.
 
 Negative: text, logos, labels, watermarks, hands/people, utensils, clutter, cartoon/anime, oversaturated, distorted container/lid.
 """
@@ -246,10 +247,31 @@ def split_meal_components(item: dict) -> dict:
 
     base_keywords = ("rice", "noodle", "pasta", "crust", "flatbread", "quinoa", "potato")
     sauce_keywords = ("sauce", "aioli", "pesto", "gravy", "chimichurri", "marinara", "curry", "dressing")
+    protein_keywords = (
+        "chicken",
+        "beef",
+        "pork",
+        "salmon",
+        "tuna",
+        "shrimp",
+        "turkey",
+        "tofu",
+        "lamb",
+        "sausage",
+        "meatball",
+        "ham",
+        "cod",
+        "tilapia",
+        "fish",
+        "steak",
+        "chorizo",
+        "egg",
+    )
 
     base = "none"
     sauce = "none"
     ingredients = []
+    proteins = []
 
     for token in tokens:
         lower = token.lower()
@@ -259,16 +281,35 @@ def split_meal_components(item: dict) -> dict:
         if sauce == "none" and any(k in lower for k in sauce_keywords):
             sauce = token
             continue
+        if any(k in lower for k in protein_keywords):
+            if token not in proteins:
+                proteins.append(token)
+            continue
         ingredients.append(token)
 
     if not ingredients and name:
         ingredients = [name]
 
+    proteins_list = ", ".join(proteins) if proteins else "unspecified"
+    if len(proteins) >= 2:
+        protein_layout_instruction = (
+            "If multiple proteins are listed, place each protein in a separate smaller side container "
+            "positioned next to the main dish container, and do not mix the proteins together."
+        )
+    elif len(proteins) == 1:
+        protein_layout_instruction = "Use the listed protein as the primary protein in the main dish."
+    else:
+        protein_layout_instruction = (
+            "No explicit protein is listed; keep plating realistic to the named dish without adding extra props."
+        )
+
     return {
         "item_name": name or "Chef special",
         "ingredients_list": ", ".join(ingredients) if ingredients else "Chef selected seasonal ingredients",
+        "proteins_list": proteins_list,
         "base_or_crust": base,
         "sauce_or_none": sauce,
+        "protein_layout_instruction": protein_layout_instruction,
     }
 
 
