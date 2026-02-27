@@ -968,6 +968,56 @@
       gap: 0.5rem;
     }
 
+    .weather-metrics-cluster {
+      border: 1px solid rgba(15, 31, 51, 0.14);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.52);
+      padding: 0.45rem;
+    }
+
+    .weather-hourly-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
+      gap: 0.4rem;
+    }
+
+    .weather-hourly-item {
+      border: 1px solid rgba(15, 31, 51, 0.11);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.72);
+      padding: 0.36rem 0.28rem;
+      display: grid;
+      gap: 0.08rem;
+      text-align: center;
+    }
+
+    .weather-hourly-time {
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: #335a80;
+      text-transform: uppercase;
+    }
+
+    .weather-hourly-icon {
+      font-size: 0.9rem;
+      line-height: 1;
+    }
+
+    .weather-hourly-temp {
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: #15324f;
+    }
+
+    .weather-hourly-rain {
+      font-size: 0.58rem;
+      color: var(--text-secondary);
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
     .weather-stat {
       background: rgba(255, 255, 255, 0.66);
       border: 1px solid rgba(15, 31, 51, 0.08);
@@ -1944,6 +1994,10 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
+      .weather-hourly-strip {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
       .departure-row {
         grid-template-columns: 1fr;
         gap: 0.3rem;
@@ -2056,9 +2110,18 @@
               <span class="weather-details-indicator">+</span>
             </button>
             <div class="weather-details-body">
-              <div class="weather-stats">
-                <div class="weather-stat"><div class="weather-stat-value">--</div><div class="weather-stat-label">Humidity</div></div>
-                <div class="weather-stat"><div class="weather-stat-value">--</div><div class="weather-stat-label">Wind</div></div>
+              <div class="weather-forecast-title">Today by hour</div>
+              <div class="weather-hourly-strip">
+                <div class="weather-hourly-item"><div class="weather-hourly-time">--</div><div class="weather-hourly-icon">☁️</div><div class="weather-hourly-temp">--</div><div class="weather-hourly-rain">--</div></div>
+                <div class="weather-hourly-item"><div class="weather-hourly-time">--</div><div class="weather-hourly-icon">☁️</div><div class="weather-hourly-temp">--</div><div class="weather-hourly-rain">--</div></div>
+                <div class="weather-hourly-item"><div class="weather-hourly-time">--</div><div class="weather-hourly-icon">☁️</div><div class="weather-hourly-temp">--</div><div class="weather-hourly-rain">--</div></div>
+                <div class="weather-hourly-item"><div class="weather-hourly-time">--</div><div class="weather-hourly-icon">☁️</div><div class="weather-hourly-temp">--</div><div class="weather-hourly-rain">--</div></div>
+              </div>
+              <div class="weather-metrics-cluster">
+                <div class="weather-stats">
+                  <div class="weather-stat"><div class="weather-stat-value">--</div><div class="weather-stat-label">Humidity</div></div>
+                  <div class="weather-stat"><div class="weather-stat-value">--</div><div class="weather-stat-label">Wind</div></div>
+                </div>
               </div>
               <div class="weather-forecast-title">5-Day Forecast</div>
               <div class="weather-forecast-list"></div>
@@ -2217,6 +2280,8 @@
     const WEATHER_CACHE_TS_KEY = "cachedWeatherMainTs";
     const WEATHER_CACHE_PAYLOAD_KEY = "cachedWeatherPayloadV2";
     const WEATHER_CACHE_UPDATED_KEY = "cachedWeatherLastUpdatedV2";
+    const WEATHER_SNOW_THEME_UNTIL_KEY = "weatherSnowThemeUntilMs";
+    const WEATHER_SNOW_THEME_MS = 3 * 24 * 60 * 60 * 1000;
     const WEATHER_DETAILS_COLLAPSED_KEY = "weatherDetailsCollapsed";
     const WEATHER_REFRESH_MIN_MS = 15 * 60 * 1000;
     const WEATHER_REFRESH_MAX_MS = 30 * 60 * 1000;
@@ -2357,6 +2422,7 @@
         observedAtMs: Number(current.time) * 1000,
         timezone: data.timezone || "local",
         daily: data.daily || null,
+        hourly: data.hourly || null,
         lastUpdatedMs: Date.now()
       };
     }
@@ -2368,11 +2434,16 @@
     let currentBackgroundKey = "";
     let weatherSceneReady = !!currentWeatherMain;
     let latestWeatherPayload = cachedWeatherPayload;
+    let snowThemeUntilMs = Number(localStorage.getItem(WEATHER_SNOW_THEME_UNTIL_KEY) || 0);
     let temperatureUnit = localStorage.getItem(TEMP_UNIT_STORAGE_KEY) === "F" ? "F" : "C";
     let weatherDetailsCollapsed = true;
     let latestRealEventsByCity = { cambridge: [], boston: [] };
     const celestialPlacementCache = new Map();
     let celestialPlacementRequestId = 0;
+    if (snowThemeUntilMs && snowThemeUntilMs <= Date.now()) {
+      snowThemeUntilMs = 0;
+      localStorage.removeItem(WEATHER_SNOW_THEME_UNTIL_KEY);
+    }
 
     function toggleBikes() {
       const expandable = document.getElementById('bikeExpandable');
@@ -3074,8 +3145,52 @@
       return "normal";
     }
 
+    function isSnowCode(code) {
+      const codeNum = Number(code);
+      return (codeNum >= 71 && codeNum <= 77) || (codeNum >= 85 && codeNum <= 86);
+    }
+
+    function shouldForceSnowTheme(nowMs = Date.now()) {
+      return Number.isFinite(snowThemeUntilMs) && snowThemeUntilMs > nowMs;
+    }
+
+    function refreshSnowThemeFromWeather(weatherPayload) {
+      if (!weatherPayload) return;
+      const currentCode = Number(weatherPayload.weather && weatherPayload.weather[0] && weatherPayload.weather[0].code);
+      const currentMain = String(weatherPayload.weather && weatherPayload.weather[0] && weatherPayload.weather[0].main || "").toLowerCase();
+      const hasSnowNow = currentMain.includes("snow") || isSnowCode(currentCode);
+
+      let hadSnowEarlierToday = false;
+      const hourly = weatherPayload.hourly || {};
+      const hourlyTimes = Array.isArray(hourly.time) ? hourly.time : [];
+      const hourlyCodes = Array.isArray(hourly.weather_code) ? hourly.weather_code : [];
+      const nowMs = Date.now();
+      const todayStart = new Date(nowMs);
+      todayStart.setHours(0, 0, 0, 0);
+      const len = Math.min(hourlyTimes.length, hourlyCodes.length);
+      for (let i = 0; i < len; i += 1) {
+        const ts = Number(hourlyTimes[i]) * 1000;
+        if (!Number.isFinite(ts)) continue;
+        if (ts < todayStart.getTime() || ts > nowMs) continue;
+        if (isSnowCode(hourlyCodes[i])) {
+          hadSnowEarlierToday = true;
+          break;
+        }
+      }
+
+      if (hasSnowNow || hadSnowEarlierToday) {
+        snowThemeUntilMs = Date.now() + WEATHER_SNOW_THEME_MS;
+        localStorage.setItem(WEATHER_SNOW_THEME_UNTIL_KEY, String(snowThemeUntilMs));
+        return;
+      }
+      if (!shouldForceSnowTheme()) {
+        snowThemeUntilMs = 0;
+        localStorage.removeItem(WEATHER_SNOW_THEME_UNTIL_KEY);
+      }
+    }
+
     function selectBackgroundVariant(main, now) {
-      const weatherBucket = getWeatherBucket(main);
+      const weatherBucket = shouldForceSnowTheme(now.getTime()) ? "snow" : getWeatherBucket(main);
       const phase = getTimePhase(now);
       return `${weatherBucket}-${phase}`;
     }
@@ -3168,7 +3283,8 @@
     }
 
     function updateWeatherScene(weatherMain) {
-      const main = String(weatherMain || "clear").toLowerCase();
+      const mainRaw = String(weatherMain || "clear").toLowerCase();
+      const main = shouldForceSnowTheme() ? "snow" : mainRaw;
       const night = isNight();
       const root = document.documentElement;
       const body = document.body;
@@ -3808,6 +3924,56 @@
       if (fLabel) fLabel.classList.toggle("active", temperatureUnit === "F");
     }
 
+    function getHourlyWeatherGlyph(code) {
+      const codeNum = Number(code);
+      if (codeNum === 0) return "☀️";
+      if (codeNum === 1 || codeNum === 2) return "⛅";
+      if (codeNum === 3) return "☁️";
+      if (codeNum === 45 || codeNum === 48) return "🌫️";
+      if (codeNum >= 51 && codeNum <= 57) return "🌦️";
+      if ((codeNum >= 61 && codeNum <= 67) || (codeNum >= 80 && codeNum <= 82)) return "🌧️";
+      if ((codeNum >= 71 && codeNum <= 77) || (codeNum >= 85 && codeNum <= 86)) return "❄️";
+      if (codeNum >= 95 && codeNum <= 99) return "⛈️";
+      return "☁️";
+    }
+
+    function buildTodayHourlyForecast(hourlyPayload, observedAtMs) {
+      if (!hourlyPayload) return [];
+      const times = Array.isArray(hourlyPayload.time) ? hourlyPayload.time : [];
+      const temps = Array.isArray(hourlyPayload.temperature_2m) ? hourlyPayload.temperature_2m : [];
+      const codes = Array.isArray(hourlyPayload.weather_code) ? hourlyPayload.weather_code : [];
+      const precip = Array.isArray(hourlyPayload.precipitation_probability) ? hourlyPayload.precipitation_probability : [];
+      const length = Math.min(times.length, temps.length, codes.length);
+      if (!length) return [];
+
+      const nowMs = Number(observedAtMs) || Date.now();
+      const startOfDay = new Date(nowMs);
+      startOfDay.setHours(0, 0, 0, 0);
+      const endOfDay = startOfDay.getTime() + 24 * 60 * 60 * 1000;
+      const cutoffMs = nowMs - 30 * 60 * 1000;
+
+      const results = [];
+      for (let i = 0; i < length; i += 1) {
+        const ts = Number(times[i]) * 1000;
+        if (!Number.isFinite(ts)) continue;
+        if (ts < startOfDay.getTime() || ts >= endOfDay) continue;
+        if (ts < cutoffMs) continue;
+        const temp = Number(temps[i]);
+        const code = Number(codes[i]);
+        const rainProb = Number(precip[i]);
+        results.push({
+          ts,
+          timeLabel: new Date(ts).toLocaleTimeString([], { hour: "numeric" }),
+          temp: Number.isFinite(temp) ? temp : null,
+          code,
+          icon: getHourlyWeatherGlyph(code),
+          rainProb: Number.isFinite(rainProb) ? rainProb : null
+        });
+        if (results.length >= 8) break;
+      }
+      return results;
+    }
+
     function buildFiveDayForecast(dailyPayload) {
       if (!dailyPayload) return [];
       const times = Array.isArray(dailyPayload.time) ? dailyPayload.time : [];
@@ -3837,6 +4003,7 @@
     }
 
     function formatTempCompact(valueC) {
+      if (valueC === null || valueC === undefined || valueC === "") return "--";
       const normalized = Number(valueC);
       if (!Number.isFinite(normalized)) return "--";
       const shown = temperatureUnit === "F" ? celsiusToFahrenheit(normalized) : normalized;
@@ -3868,8 +4035,17 @@
       const windGust = Number(weatherPayload.wind && weatherPayload.wind.gust);
       const humidity = Number(weatherPayload.main && weatherPayload.main.humidity);
       const precipitation = Number(weatherPayload.precipitation);
+      const hourlyItems = buildTodayHourlyForecast(weatherPayload.hourly, weatherPayload.observedAtMs);
       const forecastItems = buildFiveDayForecast(weatherPayload.daily);
       const weatherAnimMarkup = getWeatherAnimationMarkup(weatherPayload);
+      const hourlyHtml = hourlyItems.map(item => `
+        <div class="weather-hourly-item">
+          <div class="weather-hourly-time">${item.timeLabel}</div>
+          <div class="weather-hourly-icon">${item.icon}</div>
+          <div class="weather-hourly-temp">${formatTempCompact(item.temp)}</div>
+          <div class="weather-hourly-rain">${Number.isFinite(item.rainProb) ? `${Math.round(item.rainProb)}%` : "--"}</div>
+        </div>
+      `).join("");
       const forecastHtml = forecastItems.map(item => `
         <div class="weather-forecast-item">
           <div class="weather-forecast-day">${item.day}</div>
@@ -3910,13 +4086,19 @@
             <span class="weather-details-indicator">${weatherDetailsCollapsed ? "+" : "-"}</span>
           </button>
           <div class="weather-details-body">
-            <div class="weather-stats">
-              <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(humidity) ? `${Math.round(humidity)}%` : "--"}</div><div class="weather-stat-label">Humidity</div></div>
-              <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(windSpeed) ? `${Math.round(windSpeed)} km/h` : "--"}</div><div class="weather-stat-label">Wind</div></div>
-              <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(precipitation) ? `${precipitation.toFixed(1)} mm` : "--"}</div><div class="weather-stat-label">Precipitation</div></div>
-              <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(weatherPayload.uv_index) ? weatherPayload.uv_index.toFixed(1) : "--"}</div><div class="weather-stat-label">UV Index</div></div>
-              <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(windGust) ? `${Math.round(windGust)} km/h` : "--"}</div><div class="weather-stat-label">Wind Gust</div></div>
-              <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(weatherPayload.main.pressure) ? `${Math.round(weatherPayload.main.pressure)} hPa` : "--"}</div><div class="weather-stat-label">Pressure</div></div>
+            <div class="weather-forecast-title">Today by hour</div>
+            <div class="weather-hourly-strip">
+              ${hourlyHtml || `<div class="weather-hourly-item"><div class="weather-hourly-time">--</div><div class="weather-hourly-icon">☁️</div><div class="weather-hourly-temp">--</div><div class="weather-hourly-rain">--</div></div>`}
+            </div>
+            <div class="weather-metrics-cluster">
+              <div class="weather-stats">
+                <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(humidity) ? `${Math.round(humidity)}%` : "--"}</div><div class="weather-stat-label">Humidity</div></div>
+                <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(windSpeed) ? `${Math.round(windSpeed)} km/h` : "--"}</div><div class="weather-stat-label">Wind</div></div>
+                <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(precipitation) ? `${precipitation.toFixed(1)} mm` : "--"}</div><div class="weather-stat-label">Precipitation</div></div>
+                <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(weatherPayload.uv_index) ? weatherPayload.uv_index.toFixed(1) : "--"}</div><div class="weather-stat-label">UV Index</div></div>
+                <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(windGust) ? `${Math.round(windGust)} km/h` : "--"}</div><div class="weather-stat-label">Wind Gust</div></div>
+                <div class="weather-stat"><div class="weather-stat-value">${Number.isFinite(weatherPayload.main.pressure) ? `${Math.round(weatherPayload.main.pressure)} hPa` : "--"}</div><div class="weather-stat-label">Pressure</div></div>
+              </div>
             </div>
             <div class="weather-forecast-title">5-Day Forecast</div>
             <div class="weather-forecast-list">
@@ -4002,12 +4184,13 @@
 
     async function fetchWeather() {
       try {
-        const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_gusts_10m,cloud_cover,pressure_msl,uv_index,is_day&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&forecast_days=5&timezone=America%2FNew_York&timeformat=unixtime`;
+        const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${LAT}&longitude=${LON}&current=temperature_2m,apparent_temperature,relative_humidity_2m,precipitation,weather_code,wind_speed_10m,wind_gusts_10m,cloud_cover,pressure_msl,uv_index,is_day&hourly=temperature_2m,weather_code,precipitation_probability&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max&forecast_days=5&timezone=America%2FNew_York&timeformat=unixtime`;
         const res = await fetch(weatherUrl);
         if (!res.ok) throw new Error(`Weather request failed: ${res.status}`);
         const raw = await res.json();
         const w = normalizeOpenMeteoCurrent(raw);
         if (!w) throw new Error("Missing current weather payload");
+        refreshSnowThemeFromWeather(w);
 
         currentWeatherMain = w.weather[0].main || currentWeatherMain || "Clouds";
         localStorage.setItem(WEATHER_CACHE_KEY, currentWeatherMain);
