@@ -1,17 +1,17 @@
 {
   "Monday": {
     "Breakfast": {
-      "name": "{'name': 'Egg, Cheese, Ham, Croissant', 'description': '', 'price': '$2.90-$4.95'}",
+      "name": "{'name': 'Croissant, Egg, Cheese', 'description': '', 'price': '$2.90-$4.95'}",
       "description": "",
       "price": "Market Price"
     },
     "Soup": {
-      "name": "{'name': 'Chicken and Andouille Gumbo', 'description': '', 'price': '$2.90-$3.85'}",
+      "name": "{'name': 'Vegetable Beef', 'description': '', 'price': '$2.90-$3.85'}",
       "description": "",
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': 'Tofu Bahn Mi', 'description': 'Pickled Vegetables, Spicy Aioli', 'price': '$8.25'}",
+      "name": "{'name': 'Tofu Bahn Mi, Pickled Vegetables, Spicy Aioli', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
@@ -20,79 +20,74 @@
       "description": "",
       "price": "Market Price"
     },
-    "Charred": {
-      "name": "{'name': 'Pork Tenderloin', 'description': 'Sweet Potato, Balsamic Glaze, Peas', 'price': '$11.95'}",
-      "description": "",
-      "price": "Market Price"
-    },
     "Action": {
-      "name": "{'name': 'Wing Bar', 'description': 'Baked Chicken Wings, Sauces, Potato Salad, Carrots and Celery, Blue Cheese Dressing', 'price': '$11.95'}",
+      "name": "{'name': 'Omelet Bar: Cage-Free Egg Omelet, Cheeses, Vegetables, Meats, Home Fries', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     }
   },
   "Tuesday": {
     "Breakfast": {
-      "name": "{'name': 'Egg, Tomato, Cheddar, English Muffin', 'description': '', 'price': '$2.90-$4.95'}",
+      "name": "{'name': 'Ham, Egg, Tomato, English Muffin', 'description': '', 'price': '$2.90-$4.95'}",
       "description": "",
       "price": "Market Price"
     },
     "Soup": {
-      "name": "{'name': 'Lentil and Spinach', 'description': '', 'price': '$2.90-$3.85'}",
+      "name": "{'name': 'Cream of Broccoli', 'description': '', 'price': '$2.90-$3.85'}",
       "description": "",
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': 'Ham and Brie, Bulkie Roll', 'description': '', 'price': '$8.25'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Carving": {
-      "name": "{'name': 'Baked Penne Pasta', 'description': 'Three Cheeses, Mushrooms, Marinara, Sweet Italian Sausage', 'price': '$10.95'}",
+      "name": "{'name': 'Buffalo Chicken Wrap', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
     "Charred": {
-      "name": "{'name': 'Chicken, Broccoli, Mozzarella Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
+      "name": "{'name': 'Ham, Broccoli, Mozzarella Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
+      "description": "",
+      "price": "Market Price"
+    },
+    "Carving": {
+      "name": "{'name': 'Roasted Turkey, Mushroom Gravy, Mashed Potatoes, Ginger Carrots', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     },
     "Action": {
-      "name": "{'name': 'Taco Tuesday', 'description': 'Chicken, Beef, Assorted Toppings, Tortillas', 'price': '$11.95'}",
+      "name": "{'name': 'Taco Tuesday, Chicken, Beef, Assorted Toppings, Corn Tortillas', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     }
   },
   "Wednesday": {
     "Breakfast": {
-      "name": "{'name': 'Egg, Sausage, Cheddar, Everything Bagel', 'description': '', 'price': '$2.90-$4.95'}",
+      "name": "{'name': 'Egg, Sausage, Cheddar, Croissant', 'description': '', 'price': '$2.90-$4.95'}",
       "description": "",
       "price": "Market Price"
     },
     "Soup": {
-      "name": "{'name': 'Vegan Minestrone', 'description': '', 'price': '$2.90-$3.85'}",
+      "name": "{'name': 'Pasta e Fagioli', 'description': '', 'price': '$2.90-$3.85'}",
       "description": "",
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': 'Portabello Mushroom', 'description': 'Balsamic Glaze, Mozzarella, Tomato', 'price': '$8.25'}",
+      "name": "{'name': 'Portabello Mushroom, Balsamic Glaze, Mozzarella, Tomato', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
     "Charred": {
-      "name": "{'name': 'Hawaiian', 'description': 'Ham, Pineapple Flatbread/Cauliflower Crust', 'price': '$8.95'}",
+      "name": "{'name': 'Hawaiian: Ham, Pineapple Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
       "description": "",
       "price": "Market Price"
     },
     "Action": {
-      "name": "{'name': 'Rice Noddles', 'description': 'Peanut Sauce, Vegetables, Chicken, Shrimp, Tofu', 'price': '$11.95'}",
+      "name": "{'name': 'Jerk Chicken, Rasta Pasta: Spiced Cream Sauce with Sweet Peppers and Onions', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     }
   },
   "Thursday": {
     "Breakfast": {
-      "name": "{'name': 'Egg, American, Bulkie Roll', 'description': '', 'price': '$2.90-$4.95'}",
+      "name": "{'name': 'Egg, American, Bagel', 'description': '', 'price': '$2.90-$4.95'}",
       "description": "",
       "price": "Market Price"
     },
@@ -102,7 +97,7 @@
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': 'Chicken Parmesan Sub', 'description': '', 'price': '$8.25'}",
+      "name": "{'name': 'Cubano: Ham, Pork, Swiss, Pickles, Mustard, Sub Roll', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
@@ -111,8 +106,13 @@
       "description": "",
       "price": "Market Price"
     },
+    "Carving": {
+      "name": "{'name': 'Slow-Roasted (Pulled) Pork Shoulder, Bulkie Roll, Pickles, Coleslaw, Mac and Cheese', 'description': '', 'price': '$11.95'}",
+      "description": "",
+      "price": "Market Price"
+    },
     "Action": {
-      "name": "{'name': 'Risotto Bar', 'description': 'Spinach, Tomatoes, Peas and Mushrooms, Chicken, Shrimp, Parmesan', 'price': '$11.95'}",
+      "name": "{'name': 'Mongolian Beef Stir-Fry, Jasmine Rice, Peas, Broccoli', 'description': '', 'price': '$12.95'}",
       "description": "",
       "price": "Market Price"
     }
@@ -129,7 +129,7 @@
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': 'Tuna Melt', 'description': 'Tomato, American, Multi Grain', 'price': '$8.25'}",
+      "name": "{'name': 'Tuna Melt: Tomato, American, Multi Grain', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
@@ -139,25 +139,24 @@
       "price": "Market Price"
     },
     "Action": {
-      "name": "{'name': 'Roasted Salmon', 'description': 'Couscous Salad, Tomato, Cucumber, Red Onion, Mint', 'price': '$12.95'}",
+      "name": "{'name': 'Grilled Sea Bass Fillet, Hoisin Glaze, Vegetable Fried Rice', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w08-friday-action.png"
+      "price": "Market Price"
     }
   },
   "_generated": {
-    "updatedAt": "2026-02-27T14:01:50+00:00",
+    "updatedAt": "2026-03-03T14:01:41+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Friday": [
+      "Tuesday": [
         {
-          "category": "Action",
-          "name": "{'name': 'Roasted Salmon', 'description': 'Couscous Salad, Tomato, Cucumber, Red Onion, Mint', 'price': '$12.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w08-friday-action.png"
+          "category": "Taco Tuesday",
+          "name": "Taco Tuesday Bowl",
+          "imageUrl": "assets/menu-generated/daily-2026w09-tuesday-taco-tuesday.png"
         }
       ]
     },
