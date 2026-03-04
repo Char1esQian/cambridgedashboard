@@ -82,7 +82,8 @@
     "Action": {
       "name": "{'name': 'Jerk Chicken, Rasta Pasta: Spiced Cream Sauce with Sweet Peppers and Onions', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w09-wednesday-action.png"
     }
   },
   "Thursday": {
@@ -145,18 +146,18 @@
     }
   },
   "_generated": {
-    "updatedAt": "2026-03-03T14:01:41+00:00",
+    "updatedAt": "2026-03-04T14:00:14+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Tuesday": [
+      "Wednesday": [
         {
-          "category": "Taco Tuesday",
-          "name": "Taco Tuesday Bowl",
-          "imageUrl": "assets/menu-generated/daily-2026w09-tuesday-taco-tuesday.png"
+          "category": "Action",
+          "name": "{'name': 'Jerk Chicken, Rasta Pasta: Spiced Cream Sauce with Sweet Peppers and Onions', 'description': '', 'price': '$11.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w09-wednesday-action.png"
         }
       ]
     },
