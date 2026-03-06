@@ -21,7 +21,7 @@
       "price": "Market Price"
     },
     "Action": {
-      "name": "{'name': 'Omelet Bar', 'description': 'Cage-Free Egg Omelet, Cheeses, Vegetables, Meats, Home Fries', 'price': '$11.95'}",
+      "name": "{'name': 'Omelet Bar: Cage-Free Egg Omelet, Cheeses, Vegetables, Meats, Home Fries', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     }
@@ -48,12 +48,12 @@
       "price": "Market Price"
     },
     "Carving": {
-      "name": "{'name': 'Roasted Turkey', 'description': 'Mushroom Gravy, Mashed Potatoes, Ginger Carrots', 'price': '$11.95'}",
+      "name": "{'name': 'Roasted Turkey, Mushroom Gravy, Mashed Potatoes, Ginger Carrots', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     },
     "Action": {
-      "name": "{'name': 'Taco Tuesday', 'description': 'Chicken, Beef, Assorted Toppings, Corn Tortillas', 'price': '$11.95'}",
+      "name": "{'name': 'Taco Tuesday, Chicken, Beef, Assorted Toppings, Corn Tortillas', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     }
@@ -70,17 +70,17 @@
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': 'Portabello Mushroom', 'description': 'Balsamic Glaze, Mozzarella, Tomato', 'price': '$8.25'}",
+      "name": "{'name': 'Portabello Mushroom, Balsamic Glaze, Mozzarella, Tomato', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
     "Charred": {
-      "name": "{'name': 'Hawaiian', 'description': 'Ham, Pineapple Flatbread/Cauliflower Crust', 'price': '$8.95'}",
+      "name": "{'name': 'Hawaiian: Ham, Pineapple Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
       "description": "",
       "price": "Market Price"
     },
     "Action": {
-      "name": "{'name': 'Jerk Chicken, Rasta Pasta', 'description': 'Spiced Cream Sauce with Sweet Peppers and Onions', 'price': '$11.95'}",
+      "name": "{'name': 'Jerk Chicken, Rasta Pasta: Spiced Cream Sauce with Sweet Peppers and Onions', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     }
@@ -97,7 +97,7 @@
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': 'Cubano', 'description': 'Ham, Pork, Swiss, Pickles, Mustard, Sub Roll', 'price': '$8.25'}",
+      "name": "{'name': 'Cubano: Ham, Pork, Swiss, Pickles, Mustard, Sub Roll', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
@@ -107,16 +107,14 @@
       "price": "Market Price"
     },
     "Carving": {
-      "name": "{'name': 'Slow-Roasted (Pulled) Pork Shoulder', 'description': 'Bulkie Roll, Pickles, Coleslaw, Mac and Cheese', 'price': '$11.95'}",
+      "name": "{'name': 'Slow-Roasted (Pulled) Pork Shoulder, Bulkie Roll, Pickles, Coleslaw, Mac and Cheese', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w09-thursday-carving.png"
+      "price": "Market Price"
     },
     "Action": {
-      "name": "{'name': 'Mongolian Beef Stir-Fry', 'description': 'Jasmine Rice, Peas, Broccoli', 'price': '$12.95'}",
+      "name": "{'name': 'Mongolian Beef Stir-Fry, Jasmine Rice, Peas, Broccoli', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w09-thursday-action.png"
+      "price": "Market Price"
     }
   },
   "Friday": {
@@ -131,7 +129,7 @@
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': 'Tuna Melt', 'description': 'Tomato, American, Multi Grain', 'price': '$8.25'}",
+      "name": "{'name': 'Tuna Melt: Tomato, American, Multi Grain', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
@@ -141,29 +139,25 @@
       "price": "Market Price"
     },
     "Action": {
-      "name": "{'name': 'Grilled Sea Bass Fillet', 'description': 'Hoisin Glaze, Vegetable Fried Rice', 'price': '$12.95'}",
+      "name": "{'name': 'Grilled Sea Bass Fillet, Hoisin Glaze, Vegetable Fried Rice', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w09-friday-action.png"
     }
   },
   "_generated": {
-    "updatedAt": "2026-03-05T14:03:39+00:00",
+    "updatedAt": "2026-03-06T13:57:44+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Thursday": [
-        {
-          "category": "Carving",
-          "name": "{'name': 'Slow-Roasted (Pulled) Pork Shoulder', 'description': 'Bulkie Roll, Pickles, Coleslaw, Mac and Cheese', 'price': '$11.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w09-thursday-carving.png"
-        },
+      "Friday": [
         {
           "category": "Action",
-          "name": "{'name': 'Mongolian Beef Stir-Fry', 'description': 'Jasmine Rice, Peas, Broccoli', 'price': '$12.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w09-thursday-action.png"
+          "name": "{'name': 'Grilled Sea Bass Fillet, Hoisin Glaze, Vegetable Fried Rice', 'description': '', 'price': '$12.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w09-friday-action.png"
         }
       ]
     },
