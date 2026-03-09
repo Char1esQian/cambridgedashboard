@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   schedule:
     # Weekdays morning run (08:00 US Eastern when EST; 09:00 when EDT)
-    - cron: "0 13 * * 1-5"
+    - cron: "0 10 * * 1-5"  # 5 AM EST / 6 AM EDT
 
 permissions:
   contents: write
