@@ -65,7 +65,7 @@
       "price": "Market Price"
     },
     "Plant Power": {
-      "name": "{'name': 'Pasta e Fagioli', 'description': '', 'price': '$2.90-$3.85'}",
+      "name": "{'name': 'Spaghetti, Broccoli Rabe, Cherry Tomatoes, Roasted Onions, Chicken, Basil, Red Pepper Flakes, Parmesan', 'description': '', 'price': '$10.95'}",
       "description": "",
       "price": "Market Price"
     },
@@ -76,11 +76,6 @@
     },
     "Charred": {
       "name": "{'name': 'Hawaiian: Ham, Pineapple Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Plant Power 2": {
-      "name": "{'name': 'Spaghetti, Broccoli Rabe, Cherry Tomatoes, Roasted Onions, Chicken, Basil, Red Pepper Flakes, Parmesan', 'description': '', 'price': '$10.95'}",
       "description": "",
       "price": "Market Price"
     }
@@ -145,7 +140,7 @@
     }
   },
   "_generated": {
-    "updatedAt": "2026-03-10T10:30:11+00:00",
+    "updatedAt": "2026-03-10T14:19:45+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
