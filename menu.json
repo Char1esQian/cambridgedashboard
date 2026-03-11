@@ -67,7 +67,8 @@
     "Plant Power": {
       "name": "{'name': 'Pasta e Fagioli', 'description': '', 'price': '$2.90-$3.85'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w10-wednesday-plant-power.png"
     },
     "Deli": {
       "name": "{'name': 'Portabello Mushroom, Balsamic Glaze, Mozzarella, Tomato', 'description': '', 'price': '$8.25'}",
@@ -145,18 +146,18 @@
     }
   },
   "_generated": {
-    "updatedAt": "2026-03-10T18:06:52+00:00",
+    "updatedAt": "2026-03-11T10:29:11+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Tuesday": [
+      "Wednesday": [
         {
-          "category": "Taco Tuesday",
-          "name": "Taco Tuesday Bowl",
-          "imageUrl": "assets/menu-generated/daily-2026w10-tuesday-taco-tuesday.png"
+          "category": "Plant Power",
+          "name": "{'name': 'Pasta e Fagioli', 'description': '', 'price': '$2.90-$3.85'}",
+          "imageUrl": "assets/menu-generated/daily-2026w10-wednesday-plant-power.png"
         }
       ]
     },
