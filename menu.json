@@ -1,166 +1,211 @@
 {
-  "Monday": {
-    "Breakfast": {
-      "name": "{'name': 'Croissant, Egg, Cheese', 'description': '', 'price': '$2.90-$4.95'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Soup": {
-      "name": "{'name': 'Cream of Broccoli', 'description': '', 'price': '$2.90-$3.85'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Deli": {
-      "name": "{'name': 'Meatball Sub, Provolone, Marinara Sauce', 'description': '', 'price': '$8.25'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Plant Power": {
-      "name": "{'name': 'Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Action": {
-      "name": "{'name': 'Scampi, Shrimp, Chicken, Broccoli Rabe, Pasta, Garlic-Wine Sauce', 'description': '', 'price': '$11.95'}",
-      "description": "",
-      "price": "Market Price"
-    }
+  "monday": {
+    "Breakfast": [
+      {
+        "name": "Croissant, Egg, Cheese",
+        "description": "",
+        "price": "$2.90-$4.95"
+      }
+    ],
+    "Soup": [
+      {
+        "name": "Cream of Broccoli",
+        "description": "",
+        "price": "$2.90-$3.85"
+      }
+    ],
+    "Deli": [
+      {
+        "name": "Meatball Sub, Provolone, Marinara Sauce",
+        "description": "",
+        "price": "$8.25"
+      }
+    ],
+    "Plant Power": [
+      {
+        "name": "Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust",
+        "description": "",
+        "price": "$8.95"
+      }
+    ],
+    "Action": [
+      {
+        "name": "Scampi, Shrimp, Chicken, Broccoli Rabe, Pasta, Garlic-Wine Sauce",
+        "description": "",
+        "price": "$11.95"
+      }
+    ]
   },
-  "Tuesday": {
-    "Breakfast": {
-      "name": "{'name': 'Ham, Egg, Tomato, English Muffin', 'description': '', 'price': '$2.90-$4.95'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Plant Power": {
-      "name": "{'name': 'Lentil and Spinach Soup', 'description': '', 'price': '$2.90-$3.85'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Deli": {
-      "name": "{'name': 'Buffalo Chicken Wrap', 'description': '', 'price': '$8.25'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Carving": {
-      "name": "{'name': 'Cheese Manicotti, Italian Sausage', 'description': '', 'price': '$10.95'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Charred": {
-      "name": "{'name': 'Chicken, Broccoli, Mozzarella Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Action": {
-      "name": "{'name': 'Taco Tuesday, Chicken, Beef, Assorted Toppings, Choice of Taco Bowl or Tortillas', 'description': '', 'price': '$11.95'}",
-      "description": "",
-      "price": "Market Price"
-    }
+  "tuesday": {
+    "Breakfast": [
+      {
+        "name": "Ham, Egg, Tomato, English Muffin",
+        "description": "",
+        "price": "$2.90-$4.95"
+      }
+    ],
+    "Plant Power": [
+      {
+        "name": "Lentil and Spinach Soup",
+        "description": "",
+        "price": "$2.90-$3.85"
+      }
+    ],
+    "Deli": [
+      {
+        "name": "Buffalo Chicken Wrap",
+        "description": "",
+        "price": "$8.25"
+      }
+    ],
+    "Carving": [
+      {
+        "name": "Cheese Manicotti, Italian Sausage",
+        "description": "",
+        "price": "$10.95"
+      }
+    ],
+    "Charred": [
+      {
+        "name": "Chicken, Broccoli, Mozzarella Flatbread/Cauliflower Crust",
+        "description": "",
+        "price": "$8.95"
+      }
+    ],
+    "Action": [
+      {
+        "name": "Taco Tuesday, Chicken, Beef, Assorted Toppings, Choice of Taco Bowl or Tortillas",
+        "description": "",
+        "price": "$11.95"
+      }
+    ]
   },
-  "Wednesday": {
-    "Breakfast": {
-      "name": "{'name': 'Egg, Sausage, American, Croissant', 'description': '', 'price': '$2.90-$4.95'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Plant Power": {
-      "name": "{'name': 'Pasta e Fagioli', 'description': '', 'price': '$2.90-$3.85'}",
-      "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w10-wednesday-plant-power.png"
-    },
-    "Deli": {
-      "name": "{'name': 'Portabello Mushroom, Balsamic Glaze, Mozzarella, Tomato', 'description': '', 'price': '$8.25'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Charred": {
-      "name": "{'name': 'Hawaiian: Ham, Pineapple Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Plant Power 2": {
-      "name": "{'name': 'Spaghetti, Broccoli Rabe, Cherry Tomatoes, Roasted Onions, Chicken, Basil, Red Pepper Flakes, Parmesan', 'description': '', 'price': '$10.95'}",
-      "description": "",
-      "price": "Market Price"
-    }
+  "wednesday": {
+    "Breakfast": [
+      {
+        "name": "Egg, Sausage, American, Croissant",
+        "description": "",
+        "price": "$2.90-$4.95"
+      }
+    ],
+    "Plant Power": [
+      {
+        "name": "Pasta e Fagioli",
+        "description": "",
+        "price": "$2.90-$3.85"
+      }
+    ],
+    "Deli": [
+      {
+        "name": "Portabello Mushroom, Balsamic Glaze, Mozzarella, Tomato",
+        "description": "",
+        "price": "$8.25"
+      }
+    ],
+    "Charred": [
+      {
+        "name": "Hawaiian: Ham, Pineapple Flatbread/Cauliflower Crust",
+        "description": "",
+        "price": "$8.95"
+      }
+    ],
+    "Plant Power 2": [
+      {
+        "name": "Spaghetti, Broccoli Rabe, Cherry Tomatoes, Roasted Onions, Chicken, Basil, Red Pepper Flakes, Parmesan",
+        "description": "",
+        "price": "$10.95"
+      }
+    ]
   },
-  "Thursday": {
-    "Breakfast": {
-      "name": "{'name': 'Egg, American, Bagel', 'description': '', 'price': '$2.90-$4.95'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Soup": {
-      "name": "{'name': 'Spicy Black Bean', 'description': '', 'price': '$2.90-$3.85'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Deli": {
-      "name": "{'name': 'Cubano: Ham, Pork, Swiss, Pickles, Mustard, Sub Roll', 'description': '', 'price': '$8.25'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Charred": {
-      "name": "{'name': 'Chicken Ranch Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Carving": {
-      "name": "{'name': 'Beef Pot Roast, Herb Gravy, Mashed Potatoes, Grilled Zucchini', 'description': '', 'price': '$12.95'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Action": {
-      "name": "{'name': 'Green Coconut Curry, Chicken, Shrimp, Tofu, Steamed Rice', 'description': '', 'price': '$10.95-$12.95'}",
-      "description": "",
-      "price": "Market Price"
-    }
+  "thursday": {
+    "Breakfast": [
+      {
+        "name": "Egg, American, Bagel",
+        "description": "",
+        "price": "$2.90-$4.95"
+      }
+    ],
+    "Soup": [
+      {
+        "name": "Spicy Black Bean",
+        "description": "",
+        "price": "$2.90-$3.85"
+      }
+    ],
+    "Deli": [
+      {
+        "name": "Cubano: Ham, Pork, Swiss, Pickles, Mustard, Sub Roll",
+        "description": "",
+        "price": "$8.25"
+      }
+    ],
+    "Charred": [
+      {
+        "name": "Chicken Ranch Flatbread/Cauliflower Crust",
+        "description": "",
+        "price": "$8.95"
+      }
+    ],
+    "Carving": [
+      {
+        "name": "Beef Pot Roast, Herb Gravy, Mashed Potatoes, Grilled Zucchini",
+        "description": "",
+        "price": "$12.95"
+      }
+    ],
+    "Action": [
+      {
+        "name": "Green Coconut Curry, Chicken, Shrimp, Tofu, Steamed Rice",
+        "description": "",
+        "price": "$10.95-$12.95"
+      }
+    ]
   },
-  "Friday": {
-    "Breakfast": {
-      "name": "{'name': 'Bacon, Egg, Cheddar, Croissant', 'description': '', 'price': '$2.90-$4.95'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Soup": {
-      "name": "{'name': 'New England Clam Chowder', 'description': '', 'price': '$3.65-4.35'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Deli": {
-      "name": "{'name': 'Tuna Melt: Tomato, American, Multi Grain', 'description': '', 'price': '$8.25'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Charred": {
-      "name": "{'name': 'Create Your Own Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Action": {
-      "name": "{'name': 'Grilled Salmon, Scallion Vinaigrette, Asparagus Risotto', 'description': '', 'price': '$12.95'}",
-      "description": "",
-      "price": "Market Price"
-    }
+  "friday": {
+    "Breakfast": [
+      {
+        "name": "Bacon, Egg, Cheddar, Croissant",
+        "description": "",
+        "price": "$2.90-$4.95"
+      }
+    ],
+    "Soup": [
+      {
+        "name": "New England Clam Chowder",
+        "description": "",
+        "price": "$3.65-4.35"
+      }
+    ],
+    "Deli": [
+      {
+        "name": "Tuna Melt: Tomato, American, Multi Grain",
+        "description": "",
+        "price": "$8.25"
+      }
+    ],
+    "Charred": [
+      {
+        "name": "Create Your Own Flatbread/Cauliflower Crust",
+        "description": "",
+        "price": "$8.95"
+      }
+    ],
+    "Action": [
+      {
+        "name": "Grilled Salmon, Scallion Vinaigrette, Asparagus Risotto",
+        "description": "",
+        "price": "$12.95"
+      }
+    ]
   },
   "_generated": {
-    "updatedAt": "2026-03-11T10:29:11+00:00",
+    "updatedAt": "2026-03-12T10:29:05+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
-    "dailyHighlights": {
-      "Wednesday": [
-        {
-          "category": "Plant Power",
-          "name": "{'name': 'Pasta e Fagioli', 'description': '', 'price': '$2.90-$3.85'}",
-          "imageUrl": "assets/menu-generated/daily-2026w10-wednesday-plant-power.png"
-        }
-      ]
-    },
+    "dailyHighlights": {},
     "weeklyHighlights": {}
   }
 }
