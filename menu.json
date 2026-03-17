@@ -18,14 +18,12 @@
     "Plant Power": {
       "name": "{'name': 'Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w11-monday-plant-power.png"
+      "price": "Market Price"
     },
     "Action": {
       "name": "{'name': 'Jerk Chicken Wings, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers and Shallots', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w11-monday-action.png"
+      "price": "Market Price"
     }
   },
   "Tuesday": {
@@ -147,23 +145,18 @@
     }
   },
   "_generated": {
-    "updatedAt": "2026-03-16T19:08:05+00:00",
+    "updatedAt": "2026-03-17T10:40:20+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Monday": [
+      "Tuesday": [
         {
-          "category": "Plant Power",
-          "name": "{'name': 'Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w11-monday-plant-power.png"
-        },
-        {
-          "category": "Action",
-          "name": "{'name': 'Jerk Chicken Wings, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers and Shallots', 'description': '', 'price': '$11.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w11-monday-action.png"
+          "category": "Taco Tuesday",
+          "name": "Taco Tuesday Bowl",
+          "imageUrl": "assets/menu-generated/daily-2026w11-tuesday-taco-tuesday.png"
         }
       ]
     },
