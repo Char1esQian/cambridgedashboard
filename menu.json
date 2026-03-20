@@ -104,8 +104,7 @@
     "Carving": {
       "name": "{'name': 'Chicken Ranch Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w11-thursday-carving.png"
+      "price": "Market Price"
     },
     "Charred": {
       "name": "{'name': 'Creamy Parmesan Polenta, Herb-Roasted Vegetables', 'description': '', 'price': '$11.95'}",
@@ -115,8 +114,7 @@
     "Action": {
       "name": "{'name': 'Chicken, Broccoli, Penne, Alfredo Sauce', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w11-thursday-action.png"
+      "price": "Market Price"
     }
   },
   "Friday": {
@@ -143,27 +141,23 @@
     "Action": {
       "name": "{'name': 'Miso-Glazed Cod Loin, Jasmine Rice, Baby Bok Choy', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w11-friday-action.png"
     }
   },
   "_generated": {
-    "updatedAt": "2026-03-19T10:30:37+00:00",
+    "updatedAt": "2026-03-20T10:28:25+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Thursday": [
-        {
-          "category": "Carving",
-          "name": "{'name': 'Chicken Ranch Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w11-thursday-carving.png"
-        },
+      "Friday": [
         {
           "category": "Action",
-          "name": "{'name': 'Chicken, Broccoli, Penne, Alfredo Sauce', 'description': '', 'price': '$11.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w11-thursday-action.png"
+          "name": "{'name': 'Miso-Glazed Cod Loin, Jasmine Rice, Baby Bok Choy', 'description': '', 'price': '$12.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w11-friday-action.png"
         }
       ]
     },
