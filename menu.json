@@ -18,14 +18,12 @@
     "Plant Power": {
       "name": "{'name': 'Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust', 'description': '', 'price': '$7.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w12-monday-plant-power.png"
+      "price": "Market Price"
     },
     "Action": {
       "name": "{'name': 'Rainbow Tortellini, Grilled Chicken, Shrimp, Vegetables, Sauces', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w12-monday-action.png"
+      "price": "Market Price"
     }
   },
   "Tuesday": {
@@ -147,23 +145,18 @@
     }
   },
   "_generated": {
-    "updatedAt": "2026-03-23T10:43:22+00:00",
+    "updatedAt": "2026-03-24T10:40:48+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Monday": [
+      "Tuesday": [
         {
-          "category": "Plant Power",
-          "name": "{'name': 'Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust', 'description': '', 'price': '$7.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w12-monday-plant-power.png"
-        },
-        {
-          "category": "Action",
-          "name": "{'name': 'Rainbow Tortellini, Grilled Chicken, Shrimp, Vegetables, Sauces', 'description': '', 'price': '$11.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w12-monday-action.png"
+          "category": "Taco Tuesday",
+          "name": "Taco Tuesday Bowl",
+          "imageUrl": "assets/menu-generated/daily-2026w12-tuesday-taco-tuesday.png"
         }
       ]
     },
