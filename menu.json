@@ -62,7 +62,8 @@
     "Plant Power": {
       "name": "{'name': 'Pasta e Fagioli', 'description': '', 'price': '$2.90-$3.85'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w12-wednesday-plant-power.png"
     },
     "Deli": {
       "name": "{'name': 'Portabello Mushroom, Balsamic Glaze, Mozzarella, Tomato', 'description': '', 'price': '$8.25'}",
@@ -72,7 +73,8 @@
     "Carving": {
       "name": "{'name': 'Grilled Beef Tri-Tip, Potatoes, Arugula Salad, Chimichurri', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w12-wednesday-carving.png"
     },
     "Charred": {
       "name": "{'name': 'Hawaiian: Ham, Pineapple Flatbread/Cauliflower Crust', 'description': '', 'price': '$7.95'}",
@@ -82,7 +84,8 @@
     "Action": {
       "name": "{'name': 'Roasted Jerk Chicken, Rasta Pasta', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w12-wednesday-action.png"
     }
   },
   "Thursday": {
@@ -145,18 +148,28 @@
     }
   },
   "_generated": {
-    "updatedAt": "2026-03-24T10:40:48+00:00",
+    "updatedAt": "2026-03-25T10:39:19+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Tuesday": [
+      "Wednesday": [
         {
-          "category": "Taco Tuesday",
-          "name": "Taco Tuesday Bowl",
-          "imageUrl": "assets/menu-generated/daily-2026w12-tuesday-taco-tuesday.png"
+          "category": "Carving",
+          "name": "{'name': 'Grilled Beef Tri-Tip, Potatoes, Arugula Salad, Chimichurri', 'description': '', 'price': '$12.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w12-wednesday-carving.png"
+        },
+        {
+          "category": "Plant Power",
+          "name": "{'name': 'Pasta e Fagioli', 'description': '', 'price': '$2.90-$3.85'}",
+          "imageUrl": "assets/menu-generated/daily-2026w12-wednesday-plant-power.png"
+        },
+        {
+          "category": "Action",
+          "name": "{'name': 'Roasted Jerk Chicken, Rasta Pasta', 'description': '', 'price': '$11.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w12-wednesday-action.png"
         }
       ]
     },
