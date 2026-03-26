@@ -62,8 +62,7 @@
     "Plant Power": {
       "name": "{'name': 'Pasta e Fagioli', 'description': '', 'price': '$2.90-$3.85'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w12-wednesday-plant-power.png"
+      "price": "Market Price"
     },
     "Deli": {
       "name": "{'name': 'Portabello Mushroom, Balsamic Glaze, Mozzarella, Tomato', 'description': '', 'price': '$8.25'}",
@@ -73,8 +72,7 @@
     "Carving": {
       "name": "{'name': 'Grilled Beef Tri-Tip, Potatoes, Arugula Salad, Chimichurri', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w12-wednesday-carving.png"
+      "price": "Market Price"
     },
     "Charred": {
       "name": "{'name': 'Hawaiian: Ham, Pineapple Flatbread/Cauliflower Crust', 'description': '', 'price': '$7.95'}",
@@ -84,8 +82,7 @@
     "Action": {
       "name": "{'name': 'Roasted Jerk Chicken, Rasta Pasta', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w12-wednesday-action.png"
+      "price": "Market Price"
     }
   },
   "Thursday": {
@@ -112,12 +109,14 @@
     "Carving": {
       "name": "{'name': 'North Carolina Style Pulled Pork Sandwich, Coleslaw, Green Beans', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w12-thursday-carving.png"
     },
     "Plant Power": {
       "name": "{'name': 'Sweet and Sour Tofu or Chicken, Stir-Fried Vegetables, Jasmine Rice', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w12-thursday-plant-power.png"
     }
   },
   "Friday": {
@@ -148,28 +147,23 @@
     }
   },
   "_generated": {
-    "updatedAt": "2026-03-25T10:39:19+00:00",
+    "updatedAt": "2026-03-26T10:42:55+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Wednesday": [
+      "Thursday": [
         {
           "category": "Carving",
-          "name": "{'name': 'Grilled Beef Tri-Tip, Potatoes, Arugula Salad, Chimichurri', 'description': '', 'price': '$12.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w12-wednesday-carving.png"
+          "name": "{'name': 'North Carolina Style Pulled Pork Sandwich, Coleslaw, Green Beans', 'description': '', 'price': '$12.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w12-thursday-carving.png"
         },
         {
           "category": "Plant Power",
-          "name": "{'name': 'Pasta e Fagioli', 'description': '', 'price': '$2.90-$3.85'}",
-          "imageUrl": "assets/menu-generated/daily-2026w12-wednesday-plant-power.png"
-        },
-        {
-          "category": "Action",
-          "name": "{'name': 'Roasted Jerk Chicken, Rasta Pasta', 'description': '', 'price': '$11.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w12-wednesday-action.png"
+          "name": "{'name': 'Sweet and Sour Tofu or Chicken, Stir-Fried Vegetables, Jasmine Rice', 'description': '', 'price': '$11.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w12-thursday-plant-power.png"
         }
       ]
     },
