@@ -82,8 +82,7 @@
     "Action": {
       "name": "{'name': 'Spaghetti with Red or White Clam Sauce, White Wine, Garlic, Basil', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w13-wednesday-action.png"
+      "price": "Market Price"
     }
   },
   "Thursday": {
@@ -110,12 +109,14 @@
     "Carving": {
       "name": "{'name': 'Spinach and Cheese Lasagne, Marinara', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w13-thursday-carving.png"
     },
     "Action": {
       "name": "{'name': 'Chicken Picatta, Capers, Lemon, Butter, Pasta', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w13-thursday-action.png"
     }
   },
   "Friday": {
@@ -125,7 +126,7 @@
       "price": "Market Price"
     },
     "Soup": {
-      "name": "{'name': 'New England Clam Chowder', 'description': '', 'price': '$3.65-4.35'}",
+      "name": "{'name': 'New England Clam Chowder', 'description': '', 'price': '$3.65-4-35'}",
       "description": "",
       "price": "Market Price"
     },
@@ -146,18 +147,23 @@
     }
   },
   "_generated": {
-    "updatedAt": "2026-04-01T10:45:15+00:00",
+    "updatedAt": "2026-04-02T10:44:33+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Wednesday": [
+      "Thursday": [
+        {
+          "category": "Carving",
+          "name": "{'name': 'Spinach and Cheese Lasagne, Marinara', 'description': '', 'price': '$11.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w13-thursday-carving.png"
+        },
         {
           "category": "Action",
-          "name": "{'name': 'Spaghetti with Red or White Clam Sauce, White Wine, Garlic, Basil', 'description': '', 'price': '$11.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w13-wednesday-action.png"
+          "name": "{'name': 'Chicken Picatta, Capers, Lemon, Butter, Pasta', 'description': '', 'price': '$12.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w13-thursday-action.png"
         }
       ]
     },
