@@ -109,14 +109,12 @@
     "Carving": {
       "name": "{'name': 'Spinach and Cheese Lasagne, Marinara', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w13-thursday-carving.png"
+      "price": "Market Price"
     },
     "Action": {
       "name": "{'name': 'Chicken Picatta, Capers, Lemon, Butter, Pasta', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w13-thursday-action.png"
+      "price": "Market Price"
     }
   },
   "Friday": {
@@ -126,7 +124,7 @@
       "price": "Market Price"
     },
     "Soup": {
-      "name": "{'name': 'New England Clam Chowder', 'description': '', 'price': '$3.65-4-35'}",
+      "name": "{'name': 'New England Clam Chowder', 'description': '', 'price': '$3.65-4.35'}",
       "description": "",
       "price": "Market Price"
     },
@@ -143,27 +141,23 @@
     "Action": {
       "name": "{'name': 'Fish of the Day, Surprise Accompaniments', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w13-friday-action.png"
     }
   },
   "_generated": {
-    "updatedAt": "2026-04-02T10:44:33+00:00",
+    "updatedAt": "2026-04-03T10:34:21+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Thursday": [
-        {
-          "category": "Carving",
-          "name": "{'name': 'Spinach and Cheese Lasagne, Marinara', 'description': '', 'price': '$11.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w13-thursday-carving.png"
-        },
+      "Friday": [
         {
           "category": "Action",
-          "name": "{'name': 'Chicken Picatta, Capers, Lemon, Butter, Pasta', 'description': '', 'price': '$12.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w13-thursday-action.png"
+          "name": "{'name': 'Fish of the Day, Surprise Accompaniments', 'description': '', 'price': '$12.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w13-friday-action.png"
         }
       ]
     },
