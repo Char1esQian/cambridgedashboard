@@ -6,7 +6,7 @@
       "price": "Market Price"
     },
     "Soup": {
-      "name": "{'name': 'Caldo Verde: Portugese Sausage, Potato and Greens Soup', 'description': '', 'price': '$2.90-$3.85'}",
+      "name": "{'name': 'Turkey and Andouille Gumbo', 'description': '', 'price': '$2.90-$3.85'}",
       "description": "",
       "price": "Market Price"
     },
@@ -18,12 +18,14 @@
     "Plant Power": {
       "name": "{'name': 'Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w14-monday-plant-power.png"
     },
     "Action": {
-      "name": "{'name': 'Wing Bar: Chicken Wings, Sauces, Potato Salad, Carrots and Celery, Blue Cheese Dressing', 'description': '', 'price': '$11.95'}",
+      "name": "{'name': 'Buckwheat Soba Noodles, Sauces, Chicken, Shrimp, Vegetables', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w14-monday-action.png"
     }
   },
   "Tuesday": {
@@ -33,17 +35,17 @@
       "price": "Market Price"
     },
     "Soup": {
-      "name": "{'name': 'Cream of Mushroom', 'description': '', 'price': '$2.90-$3.85'}",
+      "name": "{'name': 'Lentil and Spinach', 'description': '', 'price': '$2.90-$3.85'}",
       "description": "",
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': 'Buffalo Chicken Wrap', 'description': '', 'price': '$8.25'}",
+      "name": "{'name': 'Ham and Brie, Bulkie Roll', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
     "Carving": {
-      "name": "{'name': 'Roast Pork Loin, Sweet Potatoes, Apple Gravy, Brussels Sprouts', 'description': '', 'price': '$11.95'}",
+      "name": "{'name': 'Baked Penne Primavera, Mozzarella, Grilled and Roasted Vegetables, Pesto', 'description': '', 'price': '$10.95'}",
       "description": "",
       "price": "Market Price"
     },
@@ -53,7 +55,7 @@
       "price": "Market Price"
     },
     "Action": {
-      "name": "{'name': 'Taco Tuesday, Chicken, Beef, Assorted Toppings, Choice of Taco Bowl or Tortillas', 'description': '', 'price': '$11.95'}",
+      "name": "{'name': 'Taco Tuesday, Chicken, Beef, Assorted Toppings, Tortillas', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     }
@@ -65,7 +67,7 @@
       "price": "Market Price"
     },
     "Soup": {
-      "name": "{'name': 'Minestrone', 'description': '', 'price': '$2.90-$3.85'}",
+      "name": "{'name': 'Vegan Minestrone', 'description': '', 'price': '$2.90-$3.85'}",
       "description": "",
       "price": "Market Price"
     },
@@ -80,14 +82,14 @@
       "price": "Market Price"
     },
     "Action": {
-      "name": "{'name': 'Spaghetti with Red or White Clam Sauce, White Wine, Garlic, Basil', 'description': '', 'price': '$11.95'}",
+      "name": "{'name': 'Risotto Bar: Asparagus, Tomatoes, Peas and Mushrooms, Chicken, Shrimp', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     }
   },
   "Thursday": {
     "Breakfast": {
-      "name": "{'name': 'Egg, American, Bagel', 'description': '', 'price': '$2.90-$4.95'}",
+      "name": "{'name': 'Egg, American, Bulkie Roll', 'description': '', 'price': '$2.90-$4.95'}",
       "description": "",
       "price": "Market Price"
     },
@@ -97,7 +99,7 @@
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': 'Cubano: Ham, Pork, Swiss, Pickles, Mustard, Sub Roll', 'description': '', 'price': '$8.25'}",
+      "name": "{'name': 'Chicken Parmesan Sub', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
@@ -107,19 +109,19 @@
       "price": "Market Price"
     },
     "Carving": {
-      "name": "{'name': 'Spinach and Cheese Lasagne, Marinara', 'description': '', 'price': '$11.95'}",
+      "name": "{'name': 'Pulled Pork Sandwich, Coleslaw, Green Beans', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     },
     "Action": {
-      "name": "{'name': 'Chicken Picatta, Capers, Lemon, Butter, Pasta', 'description': '', 'price': '$12.95'}",
+      "name": "{'name': 'Jerk Chicken, Rasta Pasta, Spiced Cream and Sweet Pepper Sauce', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     }
   },
   "Friday": {
     "Breakfast": {
-      "name": "{'name': 'Ham, Egg, Cheddar, Bulkie Roll', 'description': '', 'price': '$2.90-$4.95'}",
+      "name": "{'name': 'Ham, Egg, Swiss, Croissant', 'description': '', 'price': '$2.90-$4.95'}",
       "description": "",
       "price": "Market Price"
     },
@@ -139,25 +141,29 @@
       "price": "Market Price"
     },
     "Action": {
-      "name": "{'name': 'Fish of the Day, Surprise Accompaniments', 'description': '', 'price': '$12.95'}",
+      "name": "{'name': 'Grilled Salmon, Shrimp and Cucumber Salad, Brown Rice, Honey-Lime Vinaigrette,', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w13-friday-action.png"
+      "price": "Market Price"
     }
   },
   "_generated": {
-    "updatedAt": "2026-04-03T10:34:21+00:00",
+    "updatedAt": "2026-04-06T10:47:17+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Friday": [
+      "Monday": [
+        {
+          "category": "Plant Power",
+          "name": "{'name': 'Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w14-monday-plant-power.png"
+        },
         {
           "category": "Action",
-          "name": "{'name': 'Fish of the Day, Surprise Accompaniments', 'description': '', 'price': '$12.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w13-friday-action.png"
+          "name": "{'name': 'Buckwheat Soba Noodles, Sauces, Chicken, Shrimp, Vegetables', 'description': '', 'price': '$11.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w14-monday-action.png"
         }
       ]
     },
