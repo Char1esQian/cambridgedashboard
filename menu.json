@@ -82,7 +82,8 @@
     "Action": {
       "name": "{'name': 'Risotto Bar: Asparagus, Tomatoes, Peas and Mushrooms, Chicken, Shrimp', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w14-wednesday-action.png"
     }
   },
   "Thursday": {
@@ -145,18 +146,18 @@
     }
   },
   "_generated": {
-    "updatedAt": "2026-04-07T10:46:23+00:00",
+    "updatedAt": "2026-04-08T10:48:53+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Tuesday": [
+      "Wednesday": [
         {
-          "category": "Taco Tuesday",
-          "name": "Taco Tuesday Bowl",
-          "imageUrl": "assets/menu-generated/daily-2026w14-tuesday-taco-tuesday.png"
+          "category": "Action",
+          "name": "{'name': 'Risotto Bar: Asparagus, Tomatoes, Peas and Mushrooms, Chicken, Shrimp', 'description': '', 'price': '$11.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w14-wednesday-action.png"
         }
       ]
     },
