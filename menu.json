@@ -82,8 +82,7 @@
     "Action": {
       "name": "{'name': 'Risotto Bar: Asparagus, Tomatoes, Peas and Mushrooms, Chicken, Shrimp', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w14-wednesday-action.png"
+      "price": "Market Price"
     }
   },
   "Thursday": {
@@ -110,12 +109,14 @@
     "Carving": {
       "name": "{'name': 'Pulled Pork Sandwich, Coleslaw, Green Beans', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w14-thursday-carving.png"
     },
     "Action": {
       "name": "{'name': 'Jerk Chicken, Rasta Pasta, Spiced Cream and Sweet Pepper Sauce', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w14-thursday-action.png"
     }
   },
   "Friday": {
@@ -146,18 +147,23 @@
     }
   },
   "_generated": {
-    "updatedAt": "2026-04-08T10:48:53+00:00",
+    "updatedAt": "2026-04-09T10:52:47+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Wednesday": [
+      "Thursday": [
+        {
+          "category": "Carving",
+          "name": "{'name': 'Pulled Pork Sandwich, Coleslaw, Green Beans', 'description': '', 'price': '$11.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w14-thursday-carving.png"
+        },
         {
           "category": "Action",
-          "name": "{'name': 'Risotto Bar: Asparagus, Tomatoes, Peas and Mushrooms, Chicken, Shrimp', 'description': '', 'price': '$11.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w14-wednesday-action.png"
+          "name": "{'name': 'Jerk Chicken, Rasta Pasta, Spiced Cream and Sweet Pepper Sauce', 'description': '', 'price': '$11.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w14-thursday-action.png"
         }
       ]
     },
