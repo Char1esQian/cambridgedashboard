@@ -109,14 +109,12 @@
     "Carving": {
       "name": "{'name': 'Pulled Pork Sandwich, Coleslaw, Green Beans', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w14-thursday-carving.png"
+      "price": "Market Price"
     },
     "Action": {
       "name": "{'name': 'Jerk Chicken, Rasta Pasta, Spiced Cream and Sweet Pepper Sauce', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w14-thursday-action.png"
+      "price": "Market Price"
     }
   },
   "Friday": {
@@ -143,27 +141,23 @@
     "Action": {
       "name": "{'name': 'Grilled Salmon, Shrimp and Cucumber Salad, Brown Rice, Honey-Lime Vinaigrette,', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w14-friday-action.png"
     }
   },
   "_generated": {
-    "updatedAt": "2026-04-09T10:52:47+00:00",
+    "updatedAt": "2026-04-10T10:43:37+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Thursday": [
-        {
-          "category": "Carving",
-          "name": "{'name': 'Pulled Pork Sandwich, Coleslaw, Green Beans', 'description': '', 'price': '$11.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w14-thursday-carving.png"
-        },
+      "Friday": [
         {
           "category": "Action",
-          "name": "{'name': 'Jerk Chicken, Rasta Pasta, Spiced Cream and Sweet Pepper Sauce', 'description': '', 'price': '$11.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w14-thursday-action.png"
+          "name": "{'name': 'Grilled Salmon, Shrimp and Cucumber Salad, Brown Rice, Honey-Lime Vinaigrette,', 'description': '', 'price': '$12.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w14-friday-action.png"
         }
       ]
     },
