@@ -18,17 +18,19 @@
     "Plant Power": {
       "name": "{'name': 'Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w15-monday-plant-power.png"
     },
     "Action": {
-      "name": "{'name': 'Buckwheat Soba Noodles, Sauces, Chicken, Shrimp, Vegetables', 'description': '', 'price': '$11.95'}",
+      "name": "{'name': 'Coq au Vin: Chicken in Red Wine, Bacon, Mushrooms, Onions, Mashed Potatoes', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w15-monday-action.png"
     }
   },
   "Tuesday": {
     "Breakfast": {
-      "name": "{'name': 'Ham, Egg, Tomato, English Muffin', 'description': '', 'price': '$2.90-$4.95'}",
+      "name": "{'name': 'Ham, Egg, Bacon, English Muffin', 'description': '', 'price': '$2.90-$4.95'}",
       "description": "",
       "price": "Market Price"
     },
@@ -38,12 +40,12 @@
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': 'Ham and Brie, Bulkie Roll', 'description': '', 'price': '$8.25'}",
+      "name": "{'name': 'Buffalo Chicken Wrap, Romaine, Blue Cheese', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
     "Carving": {
-      "name": "{'name': 'Baked Penne Primavera, Mozzarella, Grilled and Roasted Vegetables, Pesto', 'description': '', 'price': '$10.95'}",
+      "name": "{'name': 'Roast Turkey Breast, Gravy, Stuffing, Carrots', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     },
@@ -80,7 +82,7 @@
       "price": "Market Price"
     },
     "Action": {
-      "name": "{'name': 'Risotto Bar: Asparagus, Tomatoes, Peas and Mushrooms, Chicken, Shrimp', 'description': '', 'price': '$11.95'}",
+      "name": "{'name': 'Pasta Bar: Cheese Tortellini or Roasted Vegetable Ravioli, Sauces, Chicken, Shrimp, Vegetables', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     }
@@ -97,7 +99,7 @@
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': 'Chicken Parmesan Sub', 'description': '', 'price': '$8.25'}",
+      "name": "{'name': 'Cubano: Ham, Pork, Swiss, Pickles, Mustard, Sub Roll', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
@@ -107,12 +109,12 @@
       "price": "Market Price"
     },
     "Carving": {
-      "name": "{'name': 'Pulled Pork Sandwich, Coleslaw, Green Beans', 'description': '', 'price': '$11.95'}",
+      "name": "{'name': 'Baked Stuffed Shells, Sweet Italian Sausage, Marinara', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     },
     "Action": {
-      "name": "{'name': 'Jerk Chicken, Rasta Pasta, Spiced Cream and Sweet Pepper Sauce', 'description': '', 'price': '$11.95'}",
+      "name": "{'name': 'Chicken and/or Vegetable Vindaloo, Basmati Rice, Naan Bread', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     }
@@ -139,25 +141,29 @@
       "price": "Market Price"
     },
     "Action": {
-      "name": "{'name': 'Grilled Salmon, Shrimp and Cucumber Salad, Brown Rice, Honey-Lime Vinaigrette,', 'description': '', 'price': '$12.95'}",
+      "name": "{'name': 'Grilled Swordfish Kabob, Mango Salsa, Coconut Rice', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w14-friday-action.png"
+      "price": "Market Price"
     }
   },
   "_generated": {
-    "updatedAt": "2026-04-10T10:43:37+00:00",
+    "updatedAt": "2026-04-13T11:09:08+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Friday": [
+      "Monday": [
+        {
+          "category": "Plant Power",
+          "name": "{'name': 'Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w15-monday-plant-power.png"
+        },
         {
           "category": "Action",
-          "name": "{'name': 'Grilled Salmon, Shrimp and Cucumber Salad, Brown Rice, Honey-Lime Vinaigrette,', 'description': '', 'price': '$12.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w14-friday-action.png"
+          "name": "{'name': 'Coq au Vin: Chicken in Red Wine, Bacon, Mushrooms, Onions, Mashed Potatoes', 'description': '', 'price': '$11.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w15-monday-action.png"
         }
       ]
     },
