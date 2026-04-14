@@ -18,14 +18,12 @@
     "Plant Power": {
       "name": "{'name': 'Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w15-monday-plant-power.png"
+      "price": "Market Price"
     },
     "Action": {
       "name": "{'name': 'Coq au Vin: Chicken in Red Wine, Bacon, Mushrooms, Onions, Mashed Potatoes', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w15-monday-action.png"
+      "price": "Market Price"
     }
   },
   "Tuesday": {
@@ -147,23 +145,18 @@
     }
   },
   "_generated": {
-    "updatedAt": "2026-04-13T11:09:08+00:00",
+    "updatedAt": "2026-04-14T10:55:45+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Monday": [
+      "Tuesday": [
         {
-          "category": "Plant Power",
-          "name": "{'name': 'Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w15-monday-plant-power.png"
-        },
-        {
-          "category": "Action",
-          "name": "{'name': 'Coq au Vin: Chicken in Red Wine, Bacon, Mushrooms, Onions, Mashed Potatoes', 'description': '', 'price': '$11.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w15-monday-action.png"
+          "category": "Taco Tuesday",
+          "name": "Taco Tuesday Bowl",
+          "imageUrl": "assets/menu-generated/daily-2026w15-tuesday-taco-tuesday.png"
         }
       ]
     },
