@@ -82,7 +82,8 @@
     "Action": {
       "name": "{'name': 'Pasta Bar: Cheese Tortellini or Roasted Vegetable Ravioli, Sauces, Chicken, Shrimp, Vegetables', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w15-wednesday-action.png"
     }
   },
   "Thursday": {
@@ -145,18 +146,18 @@
     }
   },
   "_generated": {
-    "updatedAt": "2026-04-14T10:55:45+00:00",
+    "updatedAt": "2026-04-15T10:51:58+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Tuesday": [
+      "Wednesday": [
         {
-          "category": "Taco Tuesday",
-          "name": "Taco Tuesday Bowl",
-          "imageUrl": "assets/menu-generated/daily-2026w15-tuesday-taco-tuesday.png"
+          "category": "Action",
+          "name": "{'name': 'Pasta Bar: Cheese Tortellini or Roasted Vegetable Ravioli, Sauces, Chicken, Shrimp, Vegetables', 'description': '', 'price': '$11.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w15-wednesday-action.png"
         }
       ]
     },
