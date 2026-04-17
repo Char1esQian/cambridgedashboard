@@ -109,14 +109,12 @@
     "Carving": {
       "name": "{'name': 'Baked Stuffed Shells, Sweet Italian Sausage, Marinara', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w15-thursday-carving.png"
+      "price": "Market Price"
     },
     "Action": {
       "name": "{'name': 'Chicken and/or Vegetable Vindaloo, Basmati Rice, Naan Bread', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w15-thursday-action.png"
+      "price": "Market Price"
     }
   },
   "Friday": {
@@ -143,27 +141,23 @@
     "Action": {
       "name": "{'name': 'Grilled Swordfish Kabob, Mango Salsa, Coconut Rice', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w15-friday-action.png"
     }
   },
   "_generated": {
-    "updatedAt": "2026-04-16T10:55:06+00:00",
+    "updatedAt": "2026-04-17T10:46:06+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Thursday": [
-        {
-          "category": "Carving",
-          "name": "{'name': 'Baked Stuffed Shells, Sweet Italian Sausage, Marinara', 'description': '', 'price': '$11.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w15-thursday-carving.png"
-        },
+      "Friday": [
         {
           "category": "Action",
-          "name": "{'name': 'Chicken and/or Vegetable Vindaloo, Basmati Rice, Naan Bread', 'description': '', 'price': '$11.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w15-thursday-action.png"
+          "name": "{'name': 'Grilled Swordfish Kabob, Mango Salsa, Coconut Rice', 'description': '', 'price': '$12.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w15-friday-action.png"
         }
       ]
     },
