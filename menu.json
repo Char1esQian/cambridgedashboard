@@ -82,8 +82,7 @@
     "Action": {
       "name": "{'name': 'Risotto Bar: Asparagus, Tomatoes, Peas and Mushrooms, Chicken, Shrimp', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w18-wednesday-action.png"
+      "price": "Market Price"
     }
   },
   "Thursday": {
@@ -110,12 +109,14 @@
     "Carving": {
       "name": "{'name': 'Poached Fluke Fillet, Potatoes, Peas, Asparagus, Tomatoes', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w18-thursday-carving.png"
     },
     "Action": {
       "name": "{'name': 'Mac and Cheese Bar', 'description': '', 'price': '$10.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w18-thursday-action.png"
     }
   },
   "Friday": {
@@ -146,18 +147,23 @@
     }
   },
   "_generated": {
-    "updatedAt": "2026-05-06T11:43:12+00:00",
+    "updatedAt": "2026-05-07T11:42:35+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Wednesday": [
+      "Thursday": [
+        {
+          "category": "Carving",
+          "name": "{'name': 'Poached Fluke Fillet, Potatoes, Peas, Asparagus, Tomatoes', 'description': '', 'price': '$12.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w18-thursday-carving.png"
+        },
         {
           "category": "Action",
-          "name": "{'name': 'Risotto Bar: Asparagus, Tomatoes, Peas and Mushrooms, Chicken, Shrimp', 'description': '', 'price': '$11.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w18-wednesday-action.png"
+          "name": "{'name': 'Mac and Cheese Bar', 'description': '', 'price': '$10.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w18-thursday-action.png"
         }
       ]
     },
