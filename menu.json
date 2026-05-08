@@ -109,14 +109,12 @@
     "Carving": {
       "name": "{'name': 'Poached Fluke Fillet, Potatoes, Peas, Asparagus, Tomatoes', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w18-thursday-carving.png"
+      "price": "Market Price"
     },
     "Action": {
       "name": "{'name': 'Mac and Cheese Bar', 'description': '', 'price': '$10.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w18-thursday-action.png"
+      "price": "Market Price"
     }
   },
   "Friday": {
@@ -143,27 +141,23 @@
     "Action": {
       "name": "{'name': 'Grilled Swordfish, Shrimp, Fried Brown Rice, Spring Onion Vinaigrette', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w18-friday-action.png"
     }
   },
   "_generated": {
-    "updatedAt": "2026-05-07T11:42:35+00:00",
+    "updatedAt": "2026-05-08T11:01:43+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Thursday": [
-        {
-          "category": "Carving",
-          "name": "{'name': 'Poached Fluke Fillet, Potatoes, Peas, Asparagus, Tomatoes', 'description': '', 'price': '$12.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w18-thursday-carving.png"
-        },
+      "Friday": [
         {
           "category": "Action",
-          "name": "{'name': 'Mac and Cheese Bar', 'description': '', 'price': '$10.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w18-thursday-action.png"
+          "name": "{'name': 'Grilled Swordfish, Shrimp, Fried Brown Rice, Spring Onion Vinaigrette', 'description': '', 'price': '$12.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w18-friday-action.png"
         }
       ]
     },
