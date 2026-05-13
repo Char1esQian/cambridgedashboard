@@ -82,7 +82,8 @@
     "Action": {
       "name": "{'name': 'Omelets: Cage-Free Eggs, Fillings, Home Fried Potatoes', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w19-wednesday-action.png"
     }
   },
   "Thursday": {
@@ -124,7 +125,7 @@
       "price": "Market Price"
     },
     "Soup": {
-      "name": "{'name': 'New England Clam Chowder', 'description': '', 'price': '$3.65-4.35'}",
+      "name": "{'name': 'New England Clam Chowder', 'description': '', 'price': '$3.65-4-35'}",
       "description": "",
       "price": "Market Price"
     },
@@ -145,18 +146,18 @@
     }
   },
   "_generated": {
-    "updatedAt": "2026-05-12T11:46:52+00:00",
+    "updatedAt": "2026-05-13T11:54:21+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Tuesday": [
+      "Wednesday": [
         {
-          "category": "Taco Tuesday",
-          "name": "Taco Tuesday Bowl",
-          "imageUrl": "assets/menu-generated/daily-2026w19-tuesday-taco-tuesday.png"
+          "category": "Action",
+          "name": "{'name': 'Omelets: Cage-Free Eggs, Fillings, Home Fried Potatoes', 'description': '', 'price': '$11.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w19-wednesday-action.png"
         }
       ]
     },
