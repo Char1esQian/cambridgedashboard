@@ -65,9 +65,10 @@
       "price": "Market Price"
     },
     "Plant Power": {
-      "name": "{'name': 'Chicken Piccata, Capers, Lemon, Spinach and Mushroom Risotto', 'description': '', 'price': '$11.95'}",
+      "name": "{'name': 'Pork and White Bean', 'description': '', 'price': '$2.90-$3.85'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w20-wednesday-plant-power.png"
     },
     "Deli": {
       "name": "{'name': 'Portabello Mushroom, Balsamic Glaze, Mozzarella, Tomato', 'description': '', 'price': '$8.25'}",
@@ -76,6 +77,11 @@
     },
     "Charred": {
       "name": "{'name': 'Hawaiian: Ham, Pineapple Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
+      "description": "",
+      "price": "Market Price"
+    },
+    "Plant Power 2": {
+      "name": "{'name': 'Chicken Piccata, Capers, Lemon, Spinach and Mushroom Risotto', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     }
@@ -140,18 +146,18 @@
     }
   },
   "_generated": {
-    "updatedAt": "2026-05-19T12:33:51+00:00",
+    "updatedAt": "2026-05-20T12:14:25+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Tuesday": [
+      "Wednesday": [
         {
-          "category": "Taco Tuesday",
-          "name": "Taco Tuesday Bowl",
-          "imageUrl": "assets/menu-generated/daily-2026w20-tuesday-taco-tuesday.png"
+          "category": "Plant Power",
+          "name": "{'name': 'Pork and White Bean', 'description': '', 'price': '$2.90-$3.85'}",
+          "imageUrl": "assets/menu-generated/daily-2026w20-wednesday-plant-power.png"
         }
       ]
     },
