@@ -65,7 +65,7 @@
       "price": "Market Price"
     },
     "Plant Power": {
-      "name": "{'name': 'Pork and White Bean', 'description': '', 'price': '$2.90-$3.85'}",
+      "name": "{'name': 'Chicken Piccata, Capers, Lemon, Spinach and Mushroom Risotto', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     },
@@ -76,11 +76,6 @@
     },
     "Charred": {
       "name": "{'name': 'Hawaiian: Ham, Pineapple Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Plant Power 2": {
-      "name": "{'name': 'Chicken Piccata, Capers, Lemon, Spinach and Mushroom Risotto', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     }
@@ -109,14 +104,12 @@
     "Carving": {
       "name": "{'name': 'Grilled Tri-Tip Steak, Roasted Potatoes, Asparagus and Tomato Salad', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w20-thursday-carving.png"
+      "price": "Market Price"
     },
     "Action": {
       "name": "{'name': \"General Tso's Chicken, Shrimp or Tofu, Spicy Broccoli, Steamed Rice\", 'description': '', 'price': '$10.95-$11.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w20-thursday-action.png"
+      "price": "Market Price"
     }
   },
   "Friday": {
@@ -143,27 +136,23 @@
     "Action": {
       "name": "{'name': 'Grilled Salmon, Wild Rice Pilaf, Peas, Shallots, Herb Vinaigrette', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w20-friday-action.png"
     }
   },
   "_generated": {
-    "updatedAt": "2026-05-21T12:38:27+00:00",
+    "updatedAt": "2026-05-22T12:12:20+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Thursday": [
-        {
-          "category": "Carving",
-          "name": "{'name': 'Grilled Tri-Tip Steak, Roasted Potatoes, Asparagus and Tomato Salad', 'description': '', 'price': '$12.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w20-thursday-carving.png"
-        },
+      "Friday": [
         {
           "category": "Action",
-          "name": "{'name': \"General Tso's Chicken, Shrimp or Tofu, Spicy Broccoli, Steamed Rice\", 'description': '', 'price': '$10.95-$11.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w20-thursday-action.png"
+          "name": "{'name': 'Grilled Salmon, Wild Rice Pilaf, Peas, Shallots, Herb Vinaigrette', 'description': '', 'price': '$12.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w20-friday-action.png"
         }
       ]
     },
