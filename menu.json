@@ -18,12 +18,14 @@
     "Plant Power": {
       "name": "{'name': 'Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w21-monday-plant-power.png"
     },
     "Action": {
       "name": "{'name': 'Scampi, Shrimp, Chicken, Zucchini, Pasta, Garlic-Wine Sauce', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w21-monday-action.png"
     }
   },
   "Tuesday": {
@@ -136,23 +138,27 @@
     "Action": {
       "name": "{'name': 'Grilled Salmon, Wild Rice Pilaf, Peas, Shallots, Herb Vinaigrette', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w20-friday-action.png"
+      "price": "Market Price"
     }
   },
   "_generated": {
-    "updatedAt": "2026-05-22T12:12:20+00:00",
+    "updatedAt": "2026-05-25T12:55:46+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Friday": [
+      "Monday": [
+        {
+          "category": "Plant Power",
+          "name": "{'name': 'Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w21-monday-plant-power.png"
+        },
         {
           "category": "Action",
-          "name": "{'name': 'Grilled Salmon, Wild Rice Pilaf, Peas, Shallots, Herb Vinaigrette', 'description': '', 'price': '$12.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w20-friday-action.png"
+          "name": "{'name': 'Scampi, Shrimp, Chicken, Zucchini, Pasta, Garlic-Wine Sauce', 'description': '', 'price': '$11.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w21-monday-action.png"
         }
       ]
     },
