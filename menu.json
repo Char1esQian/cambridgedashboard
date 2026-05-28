@@ -1,31 +1,9 @@
 {
   "Monday": {
-    "Breakfast": {
-      "name": "{'name': 'Egg, Cheddar, Bacon, Bulkie', 'description': '', 'price': '$2.90-$4.95'}",
+    "Closed": {
+      "name": "Cafe will be closed for Memorial Day Holiday",
       "description": "",
       "price": "Market Price"
-    },
-    "Soup": {
-      "name": "{'name': 'Cream of Broccoli', 'description': '', 'price': '$2.90-$3.85'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Deli": {
-      "name": "{'name': 'Meatball Sub, Provolone, Marinara Sauce', 'description': '', 'price': '$8.25'}",
-      "description": "",
-      "price": "Market Price"
-    },
-    "Plant Power": {
-      "name": "{'name': 'Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
-      "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w21-monday-plant-power.png"
-    },
-    "Action": {
-      "name": "{'name': 'Scampi, Shrimp, Chicken, Zucchini, Pasta, Garlic-Wine Sauce', 'description': '', 'price': '$11.95'}",
-      "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w21-monday-action.png"
     }
   },
   "Tuesday": {
@@ -34,8 +12,8 @@
       "description": "",
       "price": "Market Price"
     },
-    "Plant Power": {
-      "name": "{'name': 'Lentil and Spinach', 'description': '', 'price': '$2.90-$3.85'}",
+    "Soup": {
+      "name": "{'name': 'Seafood Stew', 'description': '', 'price': '$2.90-$3.85'}",
       "description": "",
       "price": "Market Price"
     },
@@ -44,30 +22,30 @@
       "description": "",
       "price": "Market Price"
     },
-    "Carving": {
-      "name": "{'name': 'Roast Turkey Breast, Mashed Potatoes, Gravy, Butternut Squash, Cranberry Sauce', 'description': '', 'price': '$12.95'}",
+    "Charred": {
+      "name": "{'name': 'Ham, Broccoli, Mozzarella Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
       "description": "",
       "price": "Market Price"
     },
-    "Charred": {
-      "name": "{'name': 'Chicken, Broccoli, Mozzarella Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
+    "Carving": {
+      "name": "{'name': 'Roasted Pork Loin, Fig Chutney, Sweet Potatoes, Swiss Chard', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     },
     "Action": {
-      "name": "{'name': 'Taco Tuesday, Chicken, Beef, Assorted Toppings, Choice of Taco Bowl or Tortillas', 'description': '', 'price': '$11.95'}",
+      "name": "{'name': 'Taco Tuesday, Chicken, Beef, Assorted Toppings, Flour Tortillas', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price"
     }
   },
   "Wednesday": {
     "Breakfast": {
-      "name": "{'name': 'Egg, Sausage, American, Croissant', 'description': '', 'price': '$2.90-$4.95'}",
+      "name": "{'name': 'Egg, Sausage, Cheddar, Croissant', 'description': '', 'price': '$2.90-$4.95'}",
       "description": "",
       "price": "Market Price"
     },
-    "Plant Power": {
-      "name": "{'name': 'Chicken Piccata, Capers, Lemon, Spinach and Mushroom Risotto', 'description': '', 'price': '$11.95'}",
+    "Soup": {
+      "name": "{'name': 'Pasta e Fagioli', 'description': '', 'price': '$2.90-$3.85'}",
       "description": "",
       "price": "Market Price"
     },
@@ -80,21 +58,26 @@
       "name": "{'name': 'Hawaiian: Ham, Pineapple Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
       "description": "",
       "price": "Market Price"
+    },
+    "Action": {
+      "name": "{'name': 'Omelet Bar: Cage-Free Egg Omelet, Cheeses, Vegetables, Meats, Home Fries', 'description': '', 'price': '10.95'}",
+      "description": "",
+      "price": "Market Price"
     }
   },
   "Thursday": {
     "Breakfast": {
-      "name": "{'name': 'Mexican Breakfast Wrap, Egg, Beans, Salsa', 'description': '', 'price': '$2.90-$4.95'}",
+      "name": "{'name': 'Egg, American, Spinach, Bulkie', 'description': '', 'price': '$2.90-$4.95'}",
       "description": "",
       "price": "Market Price"
     },
     "Soup": {
-      "name": "{'name': 'Chicken Creole', 'description': '', 'price': '$2.90-$3.85'}",
+      "name": "{'name': 'Chicken and Andouille Gumbo', 'description': '', 'price': '$2.90-$3.85'}",
       "description": "",
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': 'Cubano: Ham, Pork, Swiss, Pickles, Mustard, Sub Roll', 'description': '', 'price': '$8.25'}",
+      "name": "{'name': 'Ham and Brie, Ciabatta, Tomato, Mustard', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
@@ -104,19 +87,21 @@
       "price": "Market Price"
     },
     "Carving": {
-      "name": "{'name': 'Grilled Tri-Tip Steak, Roasted Potatoes, Asparagus and Tomato Salad', 'description': '', 'price': '$12.95'}",
+      "name": "{'name': 'Vegan Chili, Beans, Squashes, Chipotle Chiles, Onions, Garlic, Spices, Tomato, Sour Cream, Cheese, Scallions', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w21-thursday-carving.png"
     },
     "Action": {
-      "name": "{'name': \"General Tso's Chicken, Shrimp or Tofu, Spicy Broccoli, Steamed Rice\", 'description': '', 'price': '$10.95-$11.95'}",
+      "name": "{'name': 'Chicken Cacciatore: Braised with Olives, Tomato, Red Wine, Peppers, Onion, Garlic, Herbs, Pasta', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w21-thursday-action.png"
     }
   },
   "Friday": {
     "Breakfast": {
-      "name": "{'name': 'Bacon, Egg, Cheddar, Croissant', 'description': '', 'price': '$2.90-$4.95'}",
+      "name": "{'name': 'Ham, Egg, Swiss, Croissant', 'description': '', 'price': '$2.90-$4.95'}",
       "description": "",
       "price": "Market Price"
     },
@@ -136,29 +121,29 @@
       "price": "Market Price"
     },
     "Action": {
-      "name": "{'name': 'Grilled Salmon, Wild Rice Pilaf, Peas, Shallots, Herb Vinaigrette', 'description': '', 'price': '$12.95'}",
+      "name": "{'name': 'Grilled Sea Bass Fillet, Vegetable Fried Rice', 'description': '', 'price': '$12.95'}",
       "description": "",
       "price": "Market Price"
     }
   },
   "_generated": {
-    "updatedAt": "2026-05-25T12:55:46+00:00",
+    "updatedAt": "2026-05-28T13:01:36+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Monday": [
+      "Thursday": [
         {
-          "category": "Plant Power",
-          "name": "{'name': 'Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w21-monday-plant-power.png"
+          "category": "Carving",
+          "name": "{'name': 'Vegan Chili, Beans, Squashes, Chipotle Chiles, Onions, Garlic, Spices, Tomato, Sour Cream, Cheese, Scallions', 'description': '', 'price': '$11.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w21-thursday-carving.png"
         },
         {
           "category": "Action",
-          "name": "{'name': 'Scampi, Shrimp, Chicken, Zucchini, Pasta, Garlic-Wine Sauce', 'description': '', 'price': '$11.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w21-monday-action.png"
+          "name": "{'name': 'Chicken Cacciatore: Braised with Olives, Tomato, Red Wine, Peppers, Onion, Garlic, Herbs, Pasta', 'description': '', 'price': '$11.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w21-thursday-action.png"
         }
       ]
     },
