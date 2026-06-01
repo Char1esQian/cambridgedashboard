@@ -34,7 +34,7 @@ jobs:
       - name: Detect changes
         id: detect_changes
         run: |
-          if git diff --quiet -- menu.json assets/menu-generated; then
+          if git diff --quiet -- menu.json assets/menu-generated assets/menu-archive; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No menu or image changes detected."
           else
@@ -47,7 +47,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add menu.json assets/menu-generated
+          git add menu.json assets/menu-generated assets/menu-archive
           git commit -m "chore: update cafe menu and generated highlights ($(date -u +'%Y-%m-%d'))"
           git push
 

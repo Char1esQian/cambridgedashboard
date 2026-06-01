@@ -4,8 +4,8 @@ Automated cafe menu updater.
 
 Workflow:
 1) Fetch menu image and extract structured JSON with Gemini Vision (default), or reuse existing menu.json.
-2) Generate daily and weekly food photos for priority stations.
-3) Save generated images under assets/menu-generated/.
+2) Reuse archived food photos when possible, then generate daily and weekly food photos for priority stations.
+3) Save generated images under assets/menu-generated/ and reusable archives under assets/menu-archive/.
 4) Write image URLs back into menu.json so the dashboard can render them.
 """
 
@@ -44,7 +44,9 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = SCRIPT_DIR.parent
 DEFAULT_MENU_PATH = PROJECT_ROOT / "menu.json"
 DEFAULT_ASSETS_DIR = PROJECT_ROOT / "assets" / "menu-generated"
+DEFAULT_ARCHIVE_DIR = PROJECT_ROOT / "assets" / "menu-archive"
 TUESDAY_REFERENCE_IMAGE = PROJECT_ROOT / "assets" / "menu-generated" / "taco-tuesday-reference.png"
+CAULIFLOWER_FLATBREAD_ARCHIVE_NAME = "charred-cauliflower-flatbread.png"
 
 EXTRACTION_PROMPT = """Analyze this cafe menu image and extract ALL menu items into a structured JSON format.
 
@@ -237,6 +239,91 @@ def render_fallback_tray_image(output_path: Path):
     draw.rounded_rectangle((390, 310, 890, 500), radius=18, outline=(220, 220, 220), width=6)
     output_path.parent.mkdir(parents=True, exist_ok=True)
     base.save(output_path, format="PNG", optimize=True)
+
+
+def render_cauliflower_flatbread_stock_image(output_path: Path):
+    width, height = DEFAULT_CANVAS
+    base = Image.new("RGB", (width, height), (238, 235, 226))
+    draw = ImageDraw.Draw(base)
+
+    for y in range(height):
+        shade = int(248 - ((y / max(height - 1, 1)) * 28))
+        draw.line([(0, y), (width, y)], fill=(shade, shade - 2, shade - 7))
+
+    # Soft cafeteria shapes in the background, intentionally abstract and token-free.
+    for x, y, w, h, fill in [
+        (70, 70, 210, 80, (214, 205, 190)),
+        (350, 48, 260, 92, (225, 217, 204)),
+        (780, 62, 280, 88, (208, 202, 190)),
+        (145, 170, 1020, 18, (198, 188, 174)),
+    ]:
+        draw.rounded_rectangle((x, y, x + w, y + h), radius=18, fill=fill)
+
+    tray = (250, 240, 1030, 610)
+    draw.rounded_rectangle(tray, radius=46, fill=(23, 23, 22))
+    draw.rounded_rectangle((288, 276, 992, 574), radius=34, fill=(244, 244, 238))
+
+    crust = (345, 315, 935, 540)
+    draw.rounded_rectangle(crust, radius=58, fill=(225, 198, 143), outline=(194, 151, 88), width=5)
+    draw.rounded_rectangle((365, 334, 915, 522), radius=48, fill=(236, 218, 169))
+
+    # Pesto, char, cauliflower, mushroom, and onion details.
+    for x, y in [(418, 370), (500, 424), (585, 360), (710, 425), (810, 372), (872, 470)]:
+        draw.ellipse((x, y, x + 45, y + 28), fill=(74, 128, 67))
+    for x, y in [(454, 460), (635, 476), (760, 338), (866, 418)]:
+        draw.ellipse((x, y, x + 38, y + 18), fill=(83, 55, 34))
+    for x, y in [(430, 410), (545, 382), (660, 414), (745, 472), (835, 444)]:
+        draw.ellipse((x, y, x + 62, y + 52), fill=(235, 232, 211), outline=(181, 174, 142), width=3)
+        draw.arc((x + 10, y + 8, x + 48, y + 42), start=210, end=35, fill=(166, 158, 127), width=2)
+    for x, y in [(520, 472), (604, 350), (706, 392), (815, 494)]:
+        draw.arc((x, y, x + 70, y + 34), start=180, end=350, fill=(124, 67, 112), width=5)
+
+    lid = (318, 245, 966, 420)
+    draw.rounded_rectangle(lid, radius=32, outline=(222, 225, 224), width=8)
+    draw.line((342, 258, 942, 407), fill=(255, 255, 255), width=3)
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    base.save(output_path, format="PNG", optimize=True)
+
+
+def get_archive_dir_for_assets(assets_dir: Path) -> Path:
+    return assets_dir.parent / DEFAULT_ARCHIVE_DIR.name
+
+
+def get_menu_image_archive_key(item: dict) -> str:
+    name = str(item.get("name") or "").strip()
+    return slugify(name)[:96]
+
+
+def is_cauliflower_flatbread_item(category: str, item: dict) -> bool:
+    text = " ".join([
+        str(category or ""),
+        str(item.get("name") or ""),
+        str(item.get("description") or ""),
+    ]).lower()
+    if "cauliflower" not in text:
+        return False
+    return any(marker in text for marker in ("flatbread", "crust", "pizza", "charred", "plant power"))
+
+
+def get_reusable_image_path(category: str, item: dict, assets_dir: Path) -> Path:
+    archive_dir = get_archive_dir_for_assets(assets_dir)
+    if is_cauliflower_flatbread_item(category, item):
+        path = archive_dir / CAULIFLOWER_FLATBREAD_ARCHIVE_NAME
+        if not path.exists():
+            render_cauliflower_flatbread_stock_image(path)
+            print(f"Created reusable cauliflower flatbread stock image: {to_repo_relative_url(path)}", file=sys.stderr)
+        return path
+    return archive_dir / f"{get_menu_image_archive_key(item)}.png"
+
+
+def copy_reusable_image(source_path: Path, output_path: Path) -> bool:
+    if not source_path.exists():
+        return False
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(source_path, output_path)
+    print(f"Reused archived menu image: {to_repo_relative_url(source_path)}", file=sys.stderr)
+    return True
 
 
 def split_meal_components(item: dict) -> dict:
@@ -437,8 +524,24 @@ def generate_food_photo_image(item: dict, output_path: Path, image_api_key: str)
     raise RuntimeError(f"Image generation failed: {last_error}")
 
 
+def generate_or_reuse_food_photo_image(category: str, item: dict, output_path: Path, image_api_key: str, assets_dir: Path):
+    reusable_path = get_reusable_image_path(category, item, assets_dir)
+    if copy_reusable_image(reusable_path, output_path):
+        return
+
+    generate_food_photo_image(item, output_path, image_api_key)
+
+    if output_path.exists():
+        reusable_path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(output_path, reusable_path)
+        print(f"Archived menu image for future reuse: {to_repo_relative_url(reusable_path)}", file=sys.stderr)
+
+
 def to_repo_relative_url(path: Path) -> str:
-    return path.relative_to(PROJECT_ROOT).as_posix()
+    try:
+        return path.relative_to(PROJECT_ROOT).as_posix()
+    except ValueError:
+        return path.as_posix()
 
 
 def generate_daily_highlights(menu_data: dict, assets_dir: Path, week_key: str, image_api_key: str, target_days=None):
@@ -460,7 +563,7 @@ def generate_daily_highlights(menu_data: dict, assets_dir: Path, week_key: str, 
                     shutil.copyfile(TUESDAY_REFERENCE_IMAGE, output_path)
                     print(f"Using fixed Tuesday reference image: {to_repo_relative_url(TUESDAY_REFERENCE_IMAGE)}", file=sys.stderr)
                 else:
-                    generate_food_photo_image(item, output_path, image_api_key)
+                    generate_or_reuse_food_photo_image(category, item, output_path, image_api_key, assets_dir)
             except Exception as err:
                 print(f"Daily image generation failed for {day}/{category}: {err}; using fallback image.", file=sys.stderr)
                 render_fallback_tray_image(output_path)
@@ -486,7 +589,7 @@ def generate_daily_highlights(menu_data: dict, assets_dir: Path, week_key: str, 
             output_path = assets_dir / filename
 
             try:
-                generate_food_photo_image(item, output_path, image_api_key)
+                generate_or_reuse_food_photo_image(category, item, output_path, image_api_key, assets_dir)
             except Exception as err:
                 print(f"Daily image generation failed for {day}/{category}: {err}; using fallback image.", file=sys.stderr)
                 render_fallback_tray_image(output_path)
@@ -523,7 +626,7 @@ def generate_weekly_highlights(menu_data: dict, assets_dir: Path, week_key: str,
         output_path = assets_dir / filename
 
         try:
-            generate_food_photo_image(representative_item, output_path, image_api_key)
+            generate_or_reuse_food_photo_image(category, representative_item, output_path, image_api_key, assets_dir)
         except Exception as err:
             print(f"Weekly image generation failed for {category}: {err}; using fallback image.", file=sys.stderr)
             render_fallback_tray_image(output_path)
