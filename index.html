@@ -21,6 +21,9 @@
       --panel-shadow: 0 28px 72px rgba(8, 24, 46, 0.16);
       --panel-inner-glow: inset 0 1px 0 rgba(255, 255, 255, 0.82), inset 0 -24px 42px rgba(255, 255, 255, 0.1);
       --panel-edge-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.34);
+      --tile-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.76), rgba(246, 250, 255, 0.58));
+      --tile-border: rgba(14, 33, 54, 0.1);
+      --tile-shadow: 0 10px 26px rgba(15, 35, 62, 0.08);
       --text-primary: #0d2238;
       --text-secondary: #485d77;
       --text-muted: #6e839b;
@@ -86,6 +89,9 @@
       --glass-hero-bg: linear-gradient(122deg, rgba(28, 48, 72, 0.34) 0%, rgba(24, 44, 68, 0.2) 45%, rgba(18, 38, 62, 0.14) 100%);
       --glass-card-bg: linear-gradient(122deg, rgba(28, 48, 72, 0.3) 0%, rgba(24, 44, 68, 0.18) 46%, rgba(18, 38, 62, 0.12) 100%);
       --glass-border: rgba(203, 223, 248, 0.26);
+      --tile-bg: linear-gradient(135deg, rgba(28, 48, 72, 0.58), rgba(21, 39, 62, 0.42));
+      --tile-border: rgba(203, 223, 248, 0.18);
+      --tile-shadow: 0 12px 28px rgba(0, 8, 20, 0.2);
       --glass-saturation: 145%;
       --glass-contrast: 104%;
       --glass-specular: linear-gradient(116deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0.06) 34%, transparent 64%);
@@ -319,7 +325,7 @@
       width: min(1240px, 100%);
       margin: 0 auto;
       display: grid;
-      gap: 1.22rem;
+      gap: 1.28rem;
     }
 
     .hero {
@@ -327,10 +333,13 @@
         var(--glass-hero-bg);
       border: 1px solid var(--glass-border);
       border-radius: 28px;
-      box-shadow: var(--panel-shadow), var(--panel-inner-glow), var(--panel-edge-shadow);
+      box-shadow:
+        0 32px 80px rgba(8, 24, 46, 0.18),
+        var(--panel-inner-glow),
+        var(--panel-edge-shadow);
       backdrop-filter: blur(var(--glass-hero-blur)) saturate(var(--glass-saturation)) contrast(var(--glass-contrast));
       -webkit-backdrop-filter: blur(var(--glass-hero-blur)) saturate(var(--glass-saturation)) contrast(var(--glass-contrast));
-      padding: 1.35rem 1.45rem;
+      padding: 1.38rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -589,7 +598,7 @@
     .main-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.22rem;
+      gap: 1.28rem;
       align-items: start;
     }
 
@@ -599,7 +608,7 @@
 
     .stack {
       display: grid;
-      gap: 1.22rem;
+      gap: 1.28rem;
     }
 
     .stack[id] {
@@ -629,6 +638,42 @@
       text-shadow: none;
     }
 
+    body[data-night="true"] .weather-temp,
+    body[data-night="true"] .weather-aux-value,
+    body[data-night="true"] .weather-stat-value,
+    body[data-night="true"] .weather-forecast-temp,
+    body[data-night="true"] .menu-name,
+    body[data-night="true"] .menu-action-name,
+    body[data-night="true"] .menu-highlight-name,
+    body[data-night="true"] .charger-name,
+    body[data-night="true"] .departure-destination,
+    body[data-night="true"] .sports-matchup,
+    body[data-night="true"] .activity-name,
+    body[data-night="true"] .stat-value {
+      color: #eaf3ff;
+    }
+
+    body[data-night="true"] .weather-title,
+    body[data-night="true"] .weather-aux-label,
+    body[data-night="true"] .weather-stat-label,
+    body[data-night="true"] .weather-forecast-condition,
+    body[data-night="true"] .menu-category,
+    body[data-night="true"] .menu-highlight-category,
+    body[data-night="true"] .charger-meta,
+    body[data-night="true"] .departure-time,
+    body[data-night="true"] .sports-meta,
+    body[data-night="true"] .sports-location,
+    body[data-night="true"] .activity-meta,
+    body[data-night="true"] .stat-label {
+      color: rgba(220, 233, 251, 0.78);
+    }
+
+    body[data-night="true"] .weather-details-shell,
+    body[data-night="true"] .menu-image-panel,
+    body[data-night="true"] .menu-highlight-card {
+      background: linear-gradient(145deg, rgba(28, 48, 72, 0.56), rgba(19, 35, 56, 0.4));
+    }
+
     .full-span {
       grid-column: 1 / -1;
     }
@@ -639,7 +684,10 @@
         var(--glass-card-bg);
       border: 1px solid var(--glass-border);
       border-radius: 26px;
-      box-shadow: var(--panel-shadow), var(--panel-inner-glow), var(--panel-edge-shadow);
+      box-shadow:
+        0 24px 58px rgba(8, 24, 46, 0.14),
+        var(--panel-inner-glow),
+        var(--panel-edge-shadow);
       backdrop-filter: blur(var(--glass-card-blur)) saturate(var(--glass-saturation)) contrast(var(--glass-contrast));
       -webkit-backdrop-filter: blur(var(--glass-card-blur)) saturate(var(--glass-saturation)) contrast(var(--glass-contrast));
       overflow: hidden;
@@ -681,19 +729,21 @@
       z-index: 2;
     }
 
-    .card:hover,
-    .expandable:hover {
-      border-color: rgba(255, 255, 255, 0.78);
-      box-shadow:
-        0 38px 90px rgba(8, 24, 46, 0.22),
-        inset 0 1px 0 rgba(255, 255, 255, 0.76),
-        inset 0 -24px 38px rgba(255, 255, 255, 0.12),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.38);
-      transform: translateY(-2px);
+    @media (hover: hover) and (pointer: fine) {
+      .card:hover,
+      .expandable:hover {
+        border-color: rgba(255, 255, 255, 0.78);
+        box-shadow:
+          0 38px 90px rgba(8, 24, 46, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.76),
+          inset 0 -24px 38px rgba(255, 255, 255, 0.12),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.38);
+        transform: translateY(-2px);
+      }
     }
 
     .card {
-      padding: 1.05rem 1.15rem 1.2rem;
+      padding: 1.08rem 1.18rem 1.22rem;
     }
 
     .card-header {
@@ -704,9 +754,9 @@
     }
 
     .card-icon {
-      width: 30px;
-      height: 30px;
-      border-radius: 9px;
+      width: 32px;
+      height: 32px;
+      border-radius: 11px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -716,6 +766,7 @@
       color: #11406b;
       border: 1px solid rgba(17, 64, 107, 0.16);
       background: rgba(17, 64, 107, 0.08);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
     }
 
     .icon-menu {
@@ -1019,14 +1070,15 @@
     }
 
     .weather-stat {
-      background: rgba(255, 255, 255, 0.66);
-      border: 1px solid rgba(15, 31, 51, 0.08);
-      border-radius: 12px;
+      background: var(--tile-bg);
+      border: 1px solid var(--tile-border);
+      border-radius: 14px;
       padding: 0.58rem 0.6rem;
       min-height: 64px;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.72) inset;
     }
 
     .weather-stat-value {
@@ -1053,9 +1105,9 @@
     }
 
     .weather-details-shell {
-      border: 1px solid rgba(15, 31, 51, 0.12);
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.58);
+      border: 1px solid var(--tile-border);
+      border-radius: 16px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.66), rgba(241, 247, 255, 0.46));
       overflow: hidden;
       display: grid;
       grid-template-rows: auto 0fr;
@@ -1187,16 +1239,18 @@
     }
 
     .menu-item {
-      border: 1px solid rgba(15, 31, 51, 0.09);
-      background: rgba(255, 255, 255, 0.72);
-      border-radius: 12px;
+      border: 1px solid var(--tile-border);
+      background: var(--tile-bg);
+      border-radius: 14px;
       padding: 0.8rem 0.86rem;
-      transition: transform 180ms ease, box-shadow 180ms ease;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.72) inset;
+      transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
     }
 
     .menu-item:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 16px rgba(18, 43, 74, 0.09);
+      border-color: rgba(31, 111, 235, 0.18);
+      box-shadow: var(--tile-shadow);
     }
 
     .menu-category {
@@ -1232,9 +1286,9 @@
     }
 
     .menu-image-panel {
-      border: 1px solid rgba(15, 31, 51, 0.09);
-      background: rgba(255, 255, 255, 0.72);
-      border-radius: 14px;
+      border: 1px solid var(--tile-border);
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.74), rgba(243, 248, 255, 0.6));
+      border-radius: 16px;
       padding: 0.75rem 0.85rem;
       display: grid;
       gap: 0.55rem;
@@ -1277,13 +1331,14 @@
     }
 
     .menu-highlight-card {
-      border: 1px solid rgba(15, 31, 51, 0.12);
-      border-radius: 12px;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.75), rgba(240, 245, 252, 0.9));
+      border: 1px solid var(--tile-border);
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.78), rgba(240, 246, 254, 0.86));
       overflow: hidden;
       display: grid;
       gap: 0.45rem;
       padding: 0.48rem;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
     }
 
     .menu-highlight-meta {
@@ -1357,12 +1412,21 @@
       height: 24px;
       display: inline-flex;
       align-items: center;
+      flex: 0 0 auto;
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .toggle input {
+      position: absolute;
+      inset: -8px;
       opacity: 0;
-      width: 0;
-      height: 0;
+      width: calc(100% + 16px);
+      height: calc(100% + 16px);
+      margin: 0;
+      cursor: pointer;
+      z-index: 2;
     }
 
     .toggle-slider {
@@ -1371,7 +1435,8 @@
       border-radius: 999px;
       background: rgba(16, 32, 50, 0.18);
       border: 1px solid rgba(16, 32, 50, 0.2);
-      transition: background 160ms ease, border 160ms ease;
+      transition: background 160ms ease, border 160ms ease, box-shadow 160ms ease;
+      pointer-events: none;
     }
 
     .toggle-slider::after {
@@ -1390,6 +1455,7 @@
     .toggle input:checked + .toggle-slider {
       background: rgba(14, 159, 110, 0.35);
       border-color: rgba(14, 159, 110, 0.4);
+      box-shadow: 0 0 0 3px rgba(14, 159, 110, 0.08);
     }
 
     .toggle input:checked + .toggle-slider::after {
@@ -1427,12 +1493,13 @@
     }
 
     .charger-station {
-      border: 1px solid rgba(14, 33, 54, 0.09);
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--tile-border);
+      border-radius: 14px;
+      background: var(--tile-bg);
       padding: 0.7rem 0.75rem;
       display: grid;
       gap: 0.45rem;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.72) inset;
     }
 
     .charger-name {
@@ -1498,10 +1565,11 @@
       grid-template-columns: minmax(0, 1fr) auto auto;
       gap: 0.65rem;
       align-items: center;
-      border: 1px solid rgba(14, 33, 54, 0.09);
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--tile-border);
+      border-radius: 14px;
+      background: var(--tile-bg);
       padding: 0.58rem 0.7rem;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.72) inset;
     }
 
     .departure-destination {
@@ -1578,11 +1646,20 @@
       align-items: center;
       cursor: pointer;
       padding: 0.98rem 1.15rem;
-      transition: background 160ms ease;
+      border-radius: inherit;
+      transition: background 160ms ease, box-shadow 160ms ease;
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
 
     .expandable-header:hover {
       background: rgba(10, 30, 55, 0.04);
+    }
+
+    .expandable.open .expandable-header {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      box-shadow: inset 0 -1px 0 rgba(14, 33, 54, 0.08);
     }
 
     a:focus-visible,
@@ -1675,10 +1752,11 @@
       grid-template-columns: minmax(0, 1fr) auto;
       gap: 0.55rem;
       align-items: center;
-      border: 1px solid rgba(14, 33, 54, 0.09);
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--tile-border);
+      border-radius: 14px;
+      background: var(--tile-bg);
       padding: 0.58rem 0.7rem;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.72) inset;
     }
 
     .sports-main {
@@ -1810,17 +1888,19 @@
       display: grid;
       gap: 0.08rem;
       text-decoration: none;
-      border: 1px solid rgba(14, 33, 54, 0.09);
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid var(--tile-border);
+      border-radius: 14px;
+      background: var(--tile-bg);
       padding: 0.56rem 0.66rem;
       color: inherit;
-      transition: transform 160ms ease, box-shadow 160ms ease;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.72) inset;
+      transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
     }
 
     .activity-link:hover {
       transform: translateY(-1px);
-      box-shadow: 0 8px 16px rgba(18, 43, 74, 0.08);
+      border-color: rgba(31, 111, 235, 0.18);
+      box-shadow: var(--tile-shadow);
     }
 
     body.weekend-layout .activity-grid {
@@ -1851,6 +1931,29 @@
     .ev-toggle-row {
       margin: 0 0 0.6rem auto;
       width: max-content;
+      min-height: 44px;
+      padding: 0.35rem 0.42rem 0.35rem 0.68rem;
+      border: 1px solid rgba(14, 33, 54, 0.08);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.4);
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+    }
+
+    .ev-toggle-row .toggle {
+      width: 54px;
+      height: 30px;
+    }
+
+    .ev-toggle-row .toggle-slider::after {
+      width: 20px;
+      height: 20px;
+      top: 4px;
+      left: 4px;
+    }
+
+    .ev-toggle-row .toggle input:checked + .toggle-slider::after {
+      transform: translateX(24px);
     }
 
     .stations-grid {
@@ -1996,6 +2099,12 @@
 
       .weather-hourly-strip {
         grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+
+      .ev-toggle-row {
+        width: 100%;
+        margin-left: 0;
+        justify-content: space-between;
       }
 
       .departure-row {
@@ -2159,7 +2268,7 @@
               <div class="toggle-row ev-toggle-row">
                 <span class="toggle-label">Notify until 5 PM</span>
                 <label class="toggle">
-                  <input type="checkbox" id="chargepointNotifyToggle" />
+                  <input type="checkbox" id="chargepointNotifyToggle" aria-label="Notify when EV charger availability changes until 5 PM" />
                   <span class="toggle-slider"></span>
                 </label>
               </div>
@@ -3557,15 +3666,20 @@
 
     function setChargepointNotifyToggle(enabled) {
       const toggle = document.getElementById("chargepointNotifyToggle");
+      if (!toggle) return;
       toggle.checked = enabled;
     }
 
     async function requestNotificationPermission() {
-      if (!("Notification" in window)) return false;
+      if (!("Notification" in window) || !window.isSecureContext) return true;
       if (Notification.permission === "granted") return true;
       if (Notification.permission === "denied") return false;
-      const result = await Notification.requestPermission();
-      return result === "granted";
+      try {
+        const result = await Notification.requestPermission();
+        return result === "granted";
+      } catch (err) {
+        return true;
+      }
     }
 
     function sendChargepointNotification(message) {
@@ -3685,6 +3799,7 @@
 
     function updateChargepointNotifyToggleState() {
       const toggle = document.getElementById("chargepointNotifyToggle");
+      if (!toggle) return;
       const stored = loadChargepointNotifyState();
       const now = Date.now();
       if (stored.enabled && stored.until > now && !isAfterNotifyCutoff()) {
@@ -4300,7 +4415,17 @@
         renderWeatherCard(latestWeatherPayload);
       }
     });
-    document.getElementById("chargepointNotifyToggle").addEventListener("change", handleChargepointNotifyToggle);
+    const chargepointNotifyToggle = document.getElementById("chargepointNotifyToggle");
+    const chargepointNotifyRow = document.querySelector(".ev-toggle-row");
+    if (chargepointNotifyRow) {
+      ["click", "touchstart", "pointerdown"].forEach(eventName => {
+        chargepointNotifyRow.addEventListener(eventName, event => event.stopPropagation(), { passive: true });
+      });
+    }
+    if (chargepointNotifyToggle) {
+      chargepointNotifyToggle.addEventListener("change", handleChargepointNotifyToggle);
+      chargepointNotifyToggle.addEventListener("click", event => event.stopPropagation());
+    }
     refreshChargepointStations();
   </script>
 </body>
