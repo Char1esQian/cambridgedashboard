@@ -760,6 +760,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      flex: 0 0 auto;
       font-size: 0.69rem;
       font-weight: 800;
       letter-spacing: 0.04em;
@@ -767,6 +768,12 @@
       border: 1px solid rgba(17, 64, 107, 0.16);
       background: rgba(17, 64, 107, 0.08);
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+    }
+
+    .card-icon svg {
+      width: 17px;
+      height: 17px;
+      display: block;
     }
 
     .icon-menu {
@@ -834,15 +841,21 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.9rem;
-      font-weight: 700;
+      color: #1b446f;
       cursor: pointer;
-      transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+      transition: transform 240ms cubic-bezier(0.34, 1.56, 0.64, 1), background 160ms ease, border-color 160ms ease, color 160ms ease;
+    }
+
+    .menu-collapse-btn svg {
+      width: 15px;
+      height: 15px;
+      display: block;
     }
 
     .menu-collapse-btn:hover {
       background: rgba(31, 111, 235, 0.12);
       border-color: rgba(31, 111, 235, 0.35);
+      color: var(--accent);
     }
 
     #menuCard.menu-collapsed .menu-collapse-btn {
@@ -1139,15 +1152,28 @@
       width: 22px;
       height: 22px;
       border-radius: 999px;
-      border: 1px solid rgba(15, 31, 51, 0.22);
+      border: 1px solid rgba(15, 31, 51, 0.18);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-size: 1rem;
-      font-weight: 800;
-      line-height: 1;
       background: rgba(255, 255, 255, 0.78);
-      transform: translateY(-0.5px);
+      transition: transform 240ms cubic-bezier(0.34, 1.56, 0.64, 1), background 160ms ease;
+    }
+
+    .weather-details-indicator svg {
+      width: 14px;
+      height: 14px;
+      display: block;
+    }
+
+    .weather-details-open .weather-details-indicator {
+      transform: rotate(180deg);
+      background: rgba(31, 111, 235, 0.14);
+    }
+
+    body[data-night="true"] .weather-details-indicator {
+      background: rgba(28, 48, 72, 0.5);
+      border-color: rgba(203, 223, 248, 0.18);
     }
 
     .weather-details-body {
@@ -1678,14 +1704,37 @@
     }
 
     .expandable-arrow {
-      font-size: 1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
       color: var(--text-secondary);
-      transition: transform 220ms ease;
-      line-height: 1;
+      background: rgba(255, 255, 255, 0.42);
+      border: 1px solid rgba(15, 31, 51, 0.1);
+      transition: transform 240ms cubic-bezier(0.34, 1.56, 0.64, 1), background 160ms ease, color 160ms ease;
+    }
+
+    .expandable-arrow svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
+    .expandable-header:hover .expandable-arrow {
+      background: rgba(31, 111, 235, 0.12);
+      color: var(--accent);
     }
 
     .expandable.open .expandable-arrow {
       transform: rotate(180deg);
+    }
+
+    body[data-night="true"] .expandable-arrow {
+      background: rgba(28, 48, 72, 0.5);
+      border-color: rgba(203, 223, 248, 0.16);
+      color: #cfe0f6;
     }
 
     .expandable-content {
@@ -2216,7 +2265,7 @@
           <div class="weather-details-shell">
             <button class="weather-details-toggle" type="button" aria-expanded="false">
               <span>More Details</span>
-              <span class="weather-details-indicator">+</span>
+              <span class="weather-details-indicator"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
             </button>
             <div class="weather-details-body">
               <div class="weather-forecast-title">Today by hour</div>
@@ -2246,7 +2295,7 @@
         <div class="stack-label">Commute</div>
         <div class="card">
           <div class="card-header">
-            <div class="card-icon icon-transit">RL</div>
+            <div class="card-icon icon-transit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="13" rx="3.5"/><path d="M5 11h14"/><circle cx="9" cy="13.5" r="0.6" fill="currentColor" stroke="none"/><circle cx="15" cy="13.5" r="0.6" fill="currentColor" stroke="none"/><path d="M8.5 16 6.5 20"/><path d="M15.5 16 17.5 20"/></svg></div>
             <span class="card-title">Alewife Red Line Departures</span>
           </div>
           <div class="departures-list" id="redlineDepartures">
@@ -2258,10 +2307,10 @@
         <div class="expandable" id="evExpandable">
           <div class="expandable-header" onclick="toggleEvPanel()" tabindex="0" role="button" aria-expanded="false">
             <div class="expandable-left">
-              <div class="card-icon icon-charge">CP</div>
+              <div class="card-icon icon-charge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 5 13h6l-1 9 8-11h-6z"/></svg></div>
               <span class="expandable-title">Garage B EV Charger Status</span>
             </div>
-            <span class="expandable-arrow">v</span>
+            <span class="expandable-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
           </div>
           <div class="expandable-content">
             <div class="card ev-content-wrap">
@@ -2284,10 +2333,10 @@
         <div class="expandable" id="bikeExpandable">
           <div class="expandable-header" onclick="toggleBikes()" tabindex="0" role="button" aria-expanded="false">
             <div class="expandable-left">
-              <div class="card-icon icon-bike">BK</div>
+              <div class="card-icon icon-bike"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18.5" cy="17.5" r="3.5"/><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="15" cy="5" r="1"/><path d="M12 17.5V14l-3-3 4-3 2 3h2"/></svg></div>
               <span class="expandable-title">Bluebikes Stations</span>
             </div>
-            <span class="expandable-arrow">v</span>
+            <span class="expandable-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
           </div>
           <div class="expandable-content">
             <div class="stations-grid">
@@ -2315,10 +2364,10 @@
         <div class="expandable" id="sportsExpandable">
           <div class="expandable-header" onclick="toggleSportsPanel()" tabindex="0" role="button" aria-expanded="false">
             <div class="expandable-left">
-              <div class="card-icon icon-sports">SP</div>
+              <div class="card-icon icon-sports"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.7V17c0 .6-.5 1-1 1.2C7.9 18.8 7 20.2 7 22"/><path d="M14 14.7V17c0 .6.5 1 1 1.2 1.1.5 2 1.9 2 3.8"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></div>
               <span class="expandable-title">Boston Sports</span>
             </div>
-            <span class="expandable-arrow">v</span>
+            <span class="expandable-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
           </div>
           <div class="expandable-content">
             <div class="card sports-content-wrap">
@@ -2337,10 +2386,10 @@
 
         <div class="card" id="menuCard">
           <div class="card-header">
-            <div class="card-icon icon-menu">MN</div>
+            <div class="card-icon icon-menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h0a2 2 0 0 0 2-2V2"/><path d="M5 11v11"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg></div>
             <span class="card-title">Today's Menu</span>
             <span id="menuDay"></span>
-            <button class="menu-collapse-btn" id="menuCollapseBtn" type="button" aria-label="Toggle menu panel" aria-controls="menuPanelBody" aria-expanded="true" onclick="toggleMenuPanel()">v</button>
+            <button class="menu-collapse-btn" id="menuCollapseBtn" type="button" aria-label="Toggle menu panel" aria-controls="menuPanelBody" aria-expanded="true" onclick="toggleMenuPanel()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
           </div>
           <div class="menu-panel-body" id="menuPanelBody">
             <div class="menu-image-panel">
@@ -4136,10 +4185,8 @@
       localStorage.setItem(WEATHER_DETAILS_COLLAPSED_KEY, weatherDetailsCollapsed ? "true" : "false");
       const weatherCard = document.getElementById("heroWeather");
       const button = document.querySelector("#heroWeather .weather-details-toggle");
-      const indicator = document.querySelector("#heroWeather .weather-details-indicator");
       if (weatherCard) weatherCard.classList.toggle("weather-details-open", !weatherDetailsCollapsed);
       if (button) button.setAttribute("aria-expanded", weatherDetailsCollapsed ? "false" : "true");
-      if (indicator) indicator.textContent = weatherDetailsCollapsed ? "+" : "-";
     }
 
     function renderWeatherCard(weatherPayload) {
@@ -4198,7 +4245,7 @@
         <div class="weather-details-shell">
           <button class="weather-details-toggle" type="button" aria-expanded="${weatherDetailsCollapsed ? "false" : "true"}" onclick="toggleWeatherDetails()">
             <span>More Details</span>
-            <span class="weather-details-indicator">${weatherDetailsCollapsed ? "+" : "-"}</span>
+            <span class="weather-details-indicator"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></span>
           </button>
           <div class="weather-details-body">
             <div class="weather-forecast-title">Today by hour</div>
