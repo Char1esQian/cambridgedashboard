@@ -19,13 +19,13 @@
       "name": "{'name': 'Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
       "description": "",
       "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w22-monday-plant-power.png"
+      "imageUrl": "assets/menu-generated/daily-2026w25-monday-plant-power.png"
     },
     "Action": {
-      "name": "{'name': 'Jerk Chicken Wings, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers and Shallots', 'description': '', 'price': '$11.95'}",
+      "name": "{'name': 'Spicy Chicken Wings, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers and Shallots', 'description': '', 'price': '$11.95'}",
       "description": "",
       "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w22-monday-action.png"
+      "imageUrl": "assets/menu-generated/daily-2026w25-monday-action.png"
     }
   },
   "Tuesday": {
@@ -45,7 +45,7 @@
       "price": "Market Price"
     },
     "Carving": {
-      "name": "{'name': 'Shrimp Creole, Peppers, Onions, Tomato, Steamed Rice', 'description': '', 'price': '$12.95'}",
+      "name": "{'name': 'Shrimp Crepes, Peppers, Onions, Tomato, Steamed Rice', 'description': '', 'price': '$12.95'}",
       "description": "",
       "price": "Market Price"
     },
@@ -72,7 +72,7 @@
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': 'Portabello Mushroom, Balsamic Glaze, Mozzarella, Tomato', 'description': '', 'price': '$8.25'}",
+      "name": "{'name': 'Portobello Mushroom, Balsamic Glaze, Mozzarella, Tomato', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
@@ -99,7 +99,7 @@
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': 'Meatball Parmesan, Provolone, Marinara, Sub Roll', 'description': '', 'price': '$8.25'}",
+      "name": "{'name': 'Meatball Peppers, Provolone, Marinara, Sub Roll', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
@@ -126,12 +126,12 @@
       "price": "Market Price"
     },
     "Soup": {
-      "name": "{'name': 'New England Clam Chowder', 'description': '', 'price': '$3.65-4-35'}",
+      "name": "{'name': 'New England Clam Chowder', 'description': '', 'price': '$3.65-$4.35'}",
       "description": "",
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': 'Tuna Melt: Tomato, American, Multi Grain', 'description': '', 'price': '$8.25'}",
+      "name": "{'name': 'Tuna Melt, Tomato, American, Multi Grain', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
@@ -147,7 +147,7 @@
     }
   },
   "_generated": {
-    "updatedAt": "2026-06-01T15:46:44+00:00",
+    "updatedAt": "2026-06-22T19:46:11+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
@@ -158,12 +158,12 @@
         {
           "category": "Plant Power",
           "name": "{'name': 'Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w22-monday-plant-power.png"
+          "imageUrl": "assets/menu-generated/daily-2026w25-monday-plant-power.png"
         },
         {
           "category": "Action",
-          "name": "{'name': 'Jerk Chicken Wings, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers and Shallots', 'description': '', 'price': '$11.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w22-monday-action.png"
+          "name": "{'name': 'Spicy Chicken Wings, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers and Shallots', 'description': '', 'price': '$11.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w25-monday-action.png"
         }
       ]
     },
