@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Automated cafe menu updater.
 
@@ -30,15 +30,28 @@ MENU_IMAGE_URL = "https://cafe.sebastians.com/sebclients/3130alewife.jpg"
 REQUIRED_DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
 CATEGORY_PRIORITY = ["Carving", "Plant Power", "Action"]
 DEFAULT_CANVAS = (1280, 720)
-IMAGE_MODEL = "gemini-3.1-flash-image-preview"
-IMAGE_MODEL_FALLBACK = "gemini-3-pro-image-preview"
+
+# Gemini models. Defaults are chosen for lowest practical cost.
+# Override in GitHub Actions if needed, e.g. GEMINI_EXTRACTION_MODEL=gemini-2.5-flash.
+EXTRACTION_MODEL = os.environ.get("GEMINI_EXTRACTION_MODEL", "gemini-2.5-flash-lite")
+EXTRACTION_MODEL_FALLBACK = os.environ.get("GEMINI_EXTRACTION_MODEL_FALLBACK", "gemini-2.5-flash")
+EXTRACTION_MODEL_CANDIDATES = [
+    model for model in [EXTRACTION_MODEL, EXTRACTION_MODEL_FALLBACK] if model
+]
+
+# Cheapest current Google image-generation default.
+# Set GEMINI_IMAGE_MODEL_FALLBACK if you want a more expensive backup model.
+IMAGE_MODEL = os.environ.get("GEMINI_IMAGE_MODEL", "gemini-2.5-flash-image")
+IMAGE_MODEL_FALLBACK = os.environ.get("GEMINI_IMAGE_MODEL_FALLBACK", "")
 IMAGE_GEN_MAX_RETRIES = 4
 MENU_TIMEZONE = "America/New_York"
 IMAGE_MODEL_CANDIDATES = [
-    IMAGE_MODEL,
-    IMAGE_MODEL_FALLBACK,
-    "gemini-2.5-flash-image",
+    model for model in [IMAGE_MODEL, IMAGE_MODEL_FALLBACK] if model
 ]
+
+# Optional: set GEMINI_SERVICE_TIER=flex in GitHub Actions for lower cost with best-effort availability.
+# Leave unset for standard synchronous API behavior.
+GEMINI_SERVICE_TIER = os.environ.get("GEMINI_SERVICE_TIER", "").strip().lower()
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = SCRIPT_DIR.parent
@@ -108,6 +121,14 @@ def get_image_generation_api_key() -> str:
     )
 
 
+def build_generate_config(**kwargs) -> dict:
+    """Build Gemini generate_content config, optionally adding Flex/standard/priority tier."""
+    config = {key: value for key, value in kwargs.items() if value is not None}
+    if GEMINI_SERVICE_TIER in {"flex", "standard", "priority"}:
+        config["service_tier"] = GEMINI_SERVICE_TIER
+    return config
+
+
 def fetch_menu_image() -> tuple[Image.Image, bytes]:
     print(f"Fetching menu image from {MENU_IMAGE_URL}...", file=sys.stderr)
     response = requests.get(MENU_IMAGE_URL, timeout=30)
@@ -128,16 +149,30 @@ def extract_menu_with_gemini(image_bytes: bytes) -> str:
     print("Sending menu image to Gemini extraction API...", file=sys.stderr)
     client = genai.Client(api_key=api_key)
     image_part = types.Part.from_bytes(data=image_bytes, mime_type="image/jpeg")
-    response = client.models.generate_content(
-        model="gemini-2.0-flash",
-        contents=[EXTRACTION_PROMPT, image_part],
-    )
 
-    raw_text = (response.text or "").strip()
-    if raw_text.startswith("```"):
-        lines = [line for line in raw_text.split("\n") if not line.startswith("```")]
-        raw_text = "\n".join(lines)
-    return raw_text
+    last_error = None
+    for model_name in EXTRACTION_MODEL_CANDIDATES:
+        try:
+            response = client.models.generate_content(
+                model=model_name,
+                contents=[EXTRACTION_PROMPT, image_part],
+                config=build_generate_config(response_mime_type="application/json"),
+            )
+            print(f"Extracted menu JSON with model: {model_name}", file=sys.stderr)
+            raw_text = (response.text or "").strip()
+            if raw_text.startswith("```"):
+                lines = [line for line in raw_text.split("\n") if not line.startswith("```")]
+                raw_text = "\n".join(lines)
+            return raw_text
+        except Exception as err:
+            last_error = err
+            err_text = str(err)
+            if is_model_not_found_error(err_text):
+                print(f"Extraction model unavailable: {model_name}", file=sys.stderr)
+                continue
+            raise
+
+    raise RuntimeError(f"Menu extraction failed: {last_error}")
 
 
 def validate_menu_json(menu_json: dict) -> dict:
@@ -476,9 +511,7 @@ def generate_food_photo_image(item: dict, output_path: Path, image_api_key: str)
         return client.models.generate_content(
             model=model_name,
             contents=prompt,
-            config=types.GenerateContentConfig(
-                response_modalities=["TEXT", "IMAGE"],
-            ),
+            config=build_generate_config(response_modalities=["TEXT", "IMAGE"]),
         )
 
     delay = 8
