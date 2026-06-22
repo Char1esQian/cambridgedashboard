@@ -51,7 +51,7 @@ IMAGE_MODEL_CANDIDATES = [
 
 # Optional: set GEMINI_SERVICE_TIER=flex in GitHub Actions for lower cost with best-effort availability.
 # Leave unset for standard synchronous API behavior.
-GEMINI_SERVICE_TIER = standard
+GEMINI_SERVICE_TIER = "standard"
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = SCRIPT_DIR.parent
