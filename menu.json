@@ -5,13 +5,8 @@
       "description": "",
       "price": "Market Price"
     },
-    "Soup": {
-      "name": "{'name': 'Turkey and Andouille Gumbo', 'description': '', 'price': '$2.90-$3.85'}",
-      "description": "",
-      "price": "Market Price"
-    },
     "Deli": {
-      "name": "{'name': 'Tofu Bahn Mi, Pickled Vegetables, Spicy Aioli', 'description': '', 'price': '$8.25'}",
+      "name": "{'name': 'Turkey and Andouille Gumbo', 'description': '', 'price': '$2.90-$3.85'}, {'name': 'Tofu Bahn Mi, Pickled Vegetables, Spicy Aioli', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
@@ -82,8 +77,7 @@
     "Action": {
       "name": "{'name': 'Lo Mein Noodles, Sesame Garlic Sauce, Chicken, Shrimp, Vegetables', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w26-wednesday-action.png"
+      "price": "Market Price"
     }
   },
   "Thursday": {
@@ -105,7 +99,8 @@
     "Carving": {
       "name": "{'name': 'Chicken Ranch Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w26-thursday-carving.png"
     },
     "Charred": {
       "name": "{'name': 'Creamy Parmesan Polenta, Herb-Roasted Spring Vegetables', 'description': '', 'price': '$11.95'}",
@@ -115,7 +110,8 @@
     "Action": {
       "name": "{'name': 'Chicken, Broccoli, Penne, Alfredo Sauce', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w26-thursday-action.png"
     }
   },
   "Friday": {
@@ -130,7 +126,7 @@
       "price": "Market Price"
     },
     "Deli": {
-      "name": "{'name': 'Tuna Melt, Tomato, American, Multi Grain', 'description': '', 'price': '$8.25'}",
+      "name": "{'name': 'Tuna Melt on Tomato, American, Multi Grain', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
@@ -139,25 +135,30 @@
       "description": "",
       "price": "Market Price"
     },
-    "Action": {
+    "Plant Power": {
       "name": "{'name': 'Grilled Swordfish, Mango Salsa, Jasmine Rice, Asparagus', 'description': '', 'price': '$12.95'}",
       "description": "",
       "price": "Market Price"
     }
   },
   "_generated": {
-    "updatedAt": "2026-07-01T12:26:40+00:00",
+    "updatedAt": "2026-07-02T12:01:03+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Wednesday": [
+      "Thursday": [
+        {
+          "category": "Carving",
+          "name": "{'name': 'Chicken Ranch Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w26-thursday-carving.png"
+        },
         {
           "category": "Action",
-          "name": "{'name': 'Lo Mein Noodles, Sesame Garlic Sauce, Chicken, Shrimp, Vegetables', 'description': '', 'price': '$11.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w26-wednesday-action.png"
+          "name": "{'name': 'Chicken, Broccoli, Penne, Alfredo Sauce', 'description': '', 'price': '$11.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w26-thursday-action.png"
         }
       ]
     },
