@@ -5,20 +5,27 @@
       "description": "",
       "price": "Market Price"
     },
+    "Soup": {
+      "name": "{'name': 'Turkey and Andouille Gumbo', 'description': '', 'price': '$2.90-$3.85'}",
+      "description": "",
+      "price": "Market Price"
+    },
     "Deli": {
-      "name": "{'name': 'Turkey and Andouille Gumbo', 'description': '', 'price': '$2.90-$3.85'}, {'name': 'Tofu Bahn Mi, Pickled Vegetables, Spicy Aioli', 'description': '', 'price': '$8.25'}",
+      "name": "{'name': 'Tofu Bahn Mi, Pickled Vegetables, Spicy Aioli', 'description': '', 'price': '$8.25'}",
       "description": "",
       "price": "Market Price"
     },
     "Plant Power": {
       "name": "{'name': 'Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w27-monday-plant-power.png"
     },
     "Action": {
-      "name": "{'name': 'Chicken Wings, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers and Shallots', 'description': '', 'price': '$11.95'}",
+      "name": "{'name': 'Jerk Chicken Wings, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers and Shallots', 'description': '', 'price': '$11.95'}",
       "description": "",
-      "price": "Market Price"
+      "price": "Market Price",
+      "imageUrl": "assets/menu-generated/daily-2026w27-monday-action.png"
     }
   },
   "Tuesday": {
@@ -136,23 +143,27 @@
     "Action": {
       "name": "{'name': 'Grilled Swordfish, Mango Salsa, Jasmine Rice, Asparagus', 'description': '', 'price': '$12.95'}",
       "description": "",
-      "price": "Market Price",
-      "imageUrl": "assets/menu-generated/daily-2026w26-friday-action.png"
+      "price": "Market Price"
     }
   },
   "_generated": {
-    "updatedAt": "2026-07-03T11:59:25+00:00",
+    "updatedAt": "2026-07-06T13:36:47+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
       "Action"
     ],
     "dailyHighlights": {
-      "Friday": [
+      "Monday": [
+        {
+          "category": "Plant Power",
+          "name": "{'name': 'Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w27-monday-plant-power.png"
+        },
         {
           "category": "Action",
-          "name": "{'name': 'Grilled Swordfish, Mango Salsa, Jasmine Rice, Asparagus', 'description': '', 'price': '$12.95'}",
-          "imageUrl": "assets/menu-generated/daily-2026w26-friday-action.png"
+          "name": "{'name': 'Jerk Chicken Wings, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers and Shallots', 'description': '', 'price': '$11.95'}",
+          "imageUrl": "assets/menu-generated/daily-2026w27-monday-action.png"
         }
       ]
     },
