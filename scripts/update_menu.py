@@ -3,16 +3,18 @@
 Automated cafe menu updater.
 
 Workflow:
-1) Fetch menu image and extract structured JSON with Gemini Vision (default), or reuse existing menu.json.
-2) Reuse archived food photos when possible, then generate daily and weekly food photos for priority stations.
+1) Weekly: fetch the source menu once and extract structured JSON with Gemini.
+2) Daily: reuse existing menu.json and only generate/reuse today's needed image.
 3) Save generated images under assets/menu-generated/ and reusable archives under assets/menu-archive/.
-4) Write image URLs back into menu.json so the dashboard can render them.
+4) Write image URLs back into menu.json only when meaningful content changes.
 """
 
 import argparse
 import ast
 import base64
+import hashlib
 import json
+import mimetypes
 import os
 import re
 import shutil
@@ -26,10 +28,11 @@ from zoneinfo import ZoneInfo
 import requests
 from PIL import Image, ImageDraw
 
-MENU_IMAGE_URL = "https://cafe.sebastians.com/sebclients/3130alewife.jpg"
+MENU_SOURCE_URL = os.environ.get("MENU_SOURCE_URL", "https://cafe.sebastians.com/sebclients/3130alewife.jpg")
 REQUIRED_DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
 CATEGORY_PRIORITY = ["Carving", "Plant Power", "Action"]
 DEFAULT_CANVAS = (1280, 720)
+VOLATILE_METADATA_KEYS = {"updatedAt", "sourceFetchedAt"}
 
 # Gemini models. Defaults are chosen for lowest practical cost.
 # Override in GitHub Actions if needed, e.g. GEMINI_EXTRACTION_MODEL=gemini-2.5-flash.
@@ -51,7 +54,7 @@ IMAGE_MODEL_CANDIDATES = [
 
 # Optional: set GEMINI_SERVICE_TIER=flex in GitHub Actions for lower cost with best-effort availability.
 # Leave unset for standard synchronous API behavior.
-GEMINI_SERVICE_TIER = "standard"
+GEMINI_SERVICE_TIER = os.environ.get("GEMINI_SERVICE_TIER", "standard")
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = SCRIPT_DIR.parent
@@ -61,7 +64,7 @@ DEFAULT_ARCHIVE_DIR = PROJECT_ROOT / "assets" / "menu-archive"
 TUESDAY_REFERENCE_IMAGE = PROJECT_ROOT / "assets" / "menu-generated" / "taco-tuesday-reference.png"
 CAULIFLOWER_FLATBREAD_ARCHIVE_NAME = "charred-cauliflower-flatbread.png"
 
-EXTRACTION_PROMPT = """Analyze this cafe menu image and extract ALL menu items into a structured JSON format.
+EXTRACTION_PROMPT = """Analyze this cafe menu source and extract ALL menu items into a structured JSON format.
 
 The menu should be organized by day of the week (Monday through Friday).
 For each day, extract the available menu categories and their items.
@@ -109,6 +112,19 @@ def normalize_price(value: str) -> str:
     return str(value or "").replace("\u2013", "-").replace("â€“", "-").strip()
 
 
+def parse_stringified_dict(value):
+    text = str(value or "").strip()
+    if not text.startswith("{"):
+        return None
+    try:
+        parsed = ast.literal_eval(text)
+        if isinstance(parsed, dict):
+            return parsed
+    except Exception:
+        return None
+    return None
+
+
 def get_extraction_api_key() -> str:
     return os.environ.get("GEMINI_API_KEY") or ""
 
@@ -129,16 +145,30 @@ def build_generate_config(**kwargs) -> dict:
     return config
 
 
-def fetch_menu_image() -> tuple[Image.Image, bytes]:
-    print(f"Fetching menu image from {MENU_IMAGE_URL}...", file=sys.stderr)
-    response = requests.get(MENU_IMAGE_URL, timeout=30)
+def guess_mime_type(url: str, response: requests.Response) -> str:
+    content_type = response.headers.get("content-type", "").split(";")[0].strip().lower()
+    if content_type:
+        return content_type
+    guessed, _ = mimetypes.guess_type(url)
+    return guessed or "application/octet-stream"
+
+
+def fetch_menu_source() -> tuple[bytes, str, str]:
+    print(f"Fetching menu source from {MENU_SOURCE_URL}...", file=sys.stderr)
+    response = requests.get(MENU_SOURCE_URL, timeout=30)
     response.raise_for_status()
-    image = Image.open(BytesIO(response.content))
-    print(f"Image downloaded: {image.size[0]}x{image.size[1]}", file=sys.stderr)
-    return image, response.content
+    source_bytes = response.content
+    mime_type = guess_mime_type(MENU_SOURCE_URL, response)
+    source_hash = hashlib.sha256(source_bytes).hexdigest()
+    if mime_type.startswith("image/"):
+        image = Image.open(BytesIO(source_bytes))
+        print(f"Image downloaded: {image.size[0]}x{image.size[1]}", file=sys.stderr)
+    else:
+        print(f"Source downloaded: {len(source_bytes)} bytes ({mime_type})", file=sys.stderr)
+    return source_bytes, mime_type, source_hash
 
 
-def extract_menu_with_gemini(image_bytes: bytes) -> str:
+def extract_menu_with_gemini(source_bytes: bytes, mime_type: str) -> tuple[str, str]:
     from google import genai
     from google.genai import types
 
@@ -146,16 +176,16 @@ def extract_menu_with_gemini(image_bytes: bytes) -> str:
     if not api_key:
         raise ValueError("GEMINI_API_KEY environment variable not set")
 
-    print("Sending menu image to Gemini extraction API...", file=sys.stderr)
+    print("Sending menu source to Gemini extraction API...", file=sys.stderr)
     client = genai.Client(api_key=api_key)
-    image_part = types.Part.from_bytes(data=image_bytes, mime_type="image/jpeg")
+    source_part = types.Part.from_bytes(data=source_bytes, mime_type=mime_type)
 
     last_error = None
     for model_name in EXTRACTION_MODEL_CANDIDATES:
         try:
             response = client.models.generate_content(
                 model=model_name,
-                contents=[EXTRACTION_PROMPT, image_part],
+                contents=[EXTRACTION_PROMPT, source_part],
                 config=build_generate_config(response_mime_type="application/json"),
             )
             print(f"Extracted menu JSON with model: {model_name}", file=sys.stderr)
@@ -163,7 +193,7 @@ def extract_menu_with_gemini(image_bytes: bytes) -> str:
             if raw_text.startswith("```"):
                 lines = [line for line in raw_text.split("\n") if not line.startswith("```")]
                 raw_text = "\n".join(lines)
-            return raw_text
+            return raw_text, model_name
         except Exception as err:
             last_error = err
             err_text = str(err)
@@ -176,25 +206,13 @@ def extract_menu_with_gemini(image_bytes: bytes) -> str:
 
 
 def validate_menu_json(menu_json: dict) -> dict:
-    def parse_stringified_item(value):
-        text = str(value or "").strip()
-        if not text.startswith("{"):
-            return None
-        try:
-            parsed = ast.literal_eval(text)
-            if isinstance(parsed, dict):
-                return parsed
-        except Exception:
-            return None
-        return None
-
     def coerce_menu_item(item):
         if isinstance(item, dict):
             nested = None
             if isinstance(item.get("name"), dict):
                 nested = item.get("name")
             elif isinstance(item.get("name"), str):
-                nested = parse_stringified_item(item.get("name"))
+                nested = parse_stringified_dict(item.get("name"))
             source = nested if isinstance(nested, dict) else item
 
             name = source.get("name") or source.get("title") or source.get("item") or source.get("dish")
@@ -213,7 +231,7 @@ def validate_menu_json(menu_json: dict) -> dict:
             text = item.strip()
             if not text:
                 return None
-            parsed = parse_stringified_item(text)
+            parsed = parse_stringified_dict(text)
             if isinstance(parsed, dict):
                 return coerce_menu_item(parsed)
             return {"name": text, "description": "", "price": "Market Price"}
@@ -330,6 +348,15 @@ def get_menu_image_archive_key(item: dict) -> str:
     return slugify(name)[:96]
 
 
+def get_legacy_menu_image_archive_key(item: dict) -> str:
+    legacy_name = str({
+        "name": str(item.get("name") or "").strip(),
+        "description": str(item.get("description") or "").strip(),
+        "price": str(item.get("price") or "").strip(),
+    })
+    return slugify(legacy_name)[:96]
+
+
 def is_cauliflower_flatbread_item(category: str, item: dict) -> bool:
     text = " ".join([
         str(category or ""),
@@ -341,15 +368,21 @@ def is_cauliflower_flatbread_item(category: str, item: dict) -> bool:
     return any(marker in text for marker in ("flatbread", "crust", "pizza", "charred", "plant power"))
 
 
-def get_reusable_image_path(category: str, item: dict, assets_dir: Path) -> Path:
+def get_reusable_image_paths(category: str, item: dict, assets_dir: Path) -> list[Path]:
     archive_dir = get_archive_dir_for_assets(assets_dir)
     if is_cauliflower_flatbread_item(category, item):
         path = archive_dir / CAULIFLOWER_FLATBREAD_ARCHIVE_NAME
         if not path.exists():
             render_cauliflower_flatbread_stock_image(path)
             print(f"Created reusable cauliflower flatbread stock image: {to_repo_relative_url(path)}", file=sys.stderr)
-        return path
-    return archive_dir / f"{get_menu_image_archive_key(item)}.png"
+        return [path]
+
+    keys = [get_menu_image_archive_key(item), get_legacy_menu_image_archive_key(item)]
+    unique_keys = []
+    for key in keys:
+        if key and key not in unique_keys:
+            unique_keys.append(key)
+    return [archive_dir / f"{key}.png" for key in unique_keys]
 
 
 def copy_reusable_image(source_path: Path, output_path: Path) -> bool:
@@ -558,13 +591,19 @@ def generate_food_photo_image(item: dict, output_path: Path, image_api_key: str)
 
 
 def generate_or_reuse_food_photo_image(category: str, item: dict, output_path: Path, image_api_key: str, assets_dir: Path):
-    reusable_path = get_reusable_image_path(category, item, assets_dir)
-    if copy_reusable_image(reusable_path, output_path):
+    if output_path.exists():
+        print(f"Using existing generated image: {to_repo_relative_url(output_path)}", file=sys.stderr)
         return
+
+    reusable_paths = get_reusable_image_paths(category, item, assets_dir)
+    for reusable_path in reusable_paths:
+        if copy_reusable_image(reusable_path, output_path):
+            return
 
     generate_food_photo_image(item, output_path, image_api_key)
 
     if output_path.exists():
+        reusable_path = reusable_paths[0]
         reusable_path.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(output_path, reusable_path)
         print(f"Archived menu image for future reuse: {to_repo_relative_url(reusable_path)}", file=sys.stderr)
@@ -670,11 +709,50 @@ def generate_weekly_highlights(menu_data: dict, assets_dir: Path, week_key: str,
     return weekly
 
 
+def normalize_daily_highlights(daily: dict) -> dict:
+    if not isinstance(daily, dict):
+        return {}
+    normalized = {}
+    for day, highlights in daily.items():
+        if not isinstance(highlights, list):
+            continue
+        normalized_items = []
+        for entry in highlights:
+            if not isinstance(entry, dict):
+                continue
+            normalized_entry = dict(entry)
+            parsed_name = parse_stringified_dict(normalized_entry.get("name"))
+            if parsed_name and parsed_name.get("name"):
+                normalized_entry["name"] = str(parsed_name.get("name")).strip()
+            normalized_items.append(normalized_entry)
+        if normalized_items:
+            normalized[day] = normalized_items
+    return normalized
+
+
+def merge_daily_highlights(existing_daily: dict, generated_daily: dict, target_days=None) -> dict:
+    if target_days:
+        merged = dict(existing_daily) if isinstance(existing_daily, dict) else {}
+        for day in target_days:
+            if day in generated_daily:
+                merged[day] = generated_daily[day]
+            else:
+                merged.pop(day, None)
+        return merged
+    return generated_daily
+
+
 def load_existing_menu(menu_path: Path) -> dict:
     if not menu_path.exists():
         raise FileNotFoundError(f"Menu file not found: {menu_path}")
     with menu_path.open("r", encoding="utf-8") as fh:
         return json.load(fh)
+
+
+def load_existing_menu_if_present(menu_path: Path) -> dict:
+    if not menu_path.exists():
+        return {}
+    return load_existing_menu(menu_path)
 
 
 def write_menu(menu_path: Path, menu_data: dict):
@@ -683,15 +761,46 @@ def write_menu(menu_path: Path, menu_data: dict):
         fh.write("\n")
 
 
+def strip_volatile_metadata(value):
+    if isinstance(value, dict):
+        stripped = {}
+        for key, item in value.items():
+            if key in VOLATILE_METADATA_KEYS:
+                continue
+            stripped[key] = strip_volatile_metadata(item)
+        return stripped
+    if isinstance(value, list):
+        return [strip_volatile_metadata(item) for item in value]
+    return value
+
+
+def has_meaningful_changes(original: dict, updated: dict) -> bool:
+    return strip_volatile_metadata(original or {}) != strip_volatile_metadata(updated or {})
+
+
 def parse_args():
     parser = argparse.ArgumentParser(description="Extract cafe menu and generate highlight imagery.")
     parser.add_argument("--menu-path", default=str(DEFAULT_MENU_PATH), help="Path to menu.json")
     parser.add_argument("--assets-dir", default=str(DEFAULT_ASSETS_DIR), help="Directory for generated images")
+    parser.add_argument("--daily", action="store_true", help="Reuse menu.json and update only today's generated image metadata")
+    parser.add_argument("--weekly", action="store_true", help="Refresh the source menu once, then update weekly metadata and today's image")
     parser.add_argument("--no-fetch", action="store_true", help="Skip remote extraction and reuse existing menu JSON as input")
     parser.add_argument("--skip-images", action="store_true", help="Run extraction/update without generating images")
     parser.add_argument("--today-only", action="store_true", help="Generate image(s) only for today's weekday special item")
+    parser.add_argument("--all-daily-images", action="store_true", help="Generate daily images for every weekday instead of only today")
+    parser.add_argument("--skip-weekly-images", action="store_true", help="Preserve existing weekly highlight images instead of regenerating them")
     parser.add_argument("--stdout", action="store_true", help="Print final menu JSON to stdout after writing to file")
-    return parser.parse_args()
+    args = parser.parse_args()
+    if args.daily and args.weekly:
+        parser.error("--daily and --weekly cannot be used together")
+    if args.daily:
+        args.no_fetch = True
+        args.today_only = True
+        args.skip_weekly_images = True
+    if args.weekly:
+        args.no_fetch = False
+        args.today_only = not args.all_daily_images
+    return args
 
 
 def get_current_day_name():
@@ -715,31 +824,64 @@ def main():
         if not image_api_key and not args.skip_images:
             print("Warning: GEMINI_API_KEY_NANO not set; image generation may fall back.", file=sys.stderr)
 
+        existing_menu_data = load_existing_menu_if_present(menu_path)
+        original_menu_data = json.loads(json.dumps(existing_menu_data)) if existing_menu_data else {}
+        existing_metadata = existing_menu_data.get("_generated", {}) if isinstance(existing_menu_data, dict) else {}
+
+        source_hash = None
+        source_mime_type = None
+        extraction_model_used = existing_metadata.get("extractionModel")
+
         if args.no_fetch:
             print("Loading existing menu JSON...", file=sys.stderr)
-            menu_data = load_existing_menu(menu_path)
+            if not existing_menu_data:
+                raise FileNotFoundError(f"Menu file not found: {menu_path}")
+            menu_data = existing_menu_data
         else:
-            _, image_bytes = fetch_menu_image()
-            raw_json = extract_menu_with_gemini(image_bytes)
-            menu_data = json.loads(raw_json)
+            source_bytes, source_mime_type, source_hash = fetch_menu_source()
+            if source_hash and source_hash == existing_metadata.get("sourceHash") and existing_menu_data:
+                print("Menu source unchanged; reusing existing structured menu JSON.", file=sys.stderr)
+                menu_data = existing_menu_data
+            else:
+                raw_json, extraction_model_used = extract_menu_with_gemini(source_bytes, source_mime_type)
+                menu_data = json.loads(raw_json)
 
         menu_data = validate_menu_json(menu_data)
+        metadata = menu_data.setdefault("_generated", {})
+        existing_daily = normalize_daily_highlights(existing_metadata.get("dailyHighlights", {}))
+        existing_weekly = existing_metadata.get("weeklyHighlights", {})
+
         if args.skip_images:
-            daily = menu_data.get("_generated", {}).get("dailyHighlights", {})
-            weekly = menu_data.get("_generated", {}).get("weeklyHighlights", {})
+            daily = existing_daily or metadata.get("dailyHighlights") or {}
+            weekly = metadata.get("weeklyHighlights") or existing_weekly or {}
             print("Skipping image generation by request (--skip-images).", file=sys.stderr)
         else:
-            daily = generate_daily_highlights(menu_data, assets_dir, week_key, image_api_key, target_days=target_days)
-            weekly = {} if args.today_only else generate_weekly_highlights(menu_data, assets_dir, week_key, image_api_key)
+            generated_daily = generate_daily_highlights(menu_data, assets_dir, week_key, image_api_key, target_days=target_days)
+            daily = merge_daily_highlights(existing_daily, generated_daily, target_days if args.today_only else None)
 
-        metadata = menu_data.setdefault("_generated", {})
-        metadata["updatedAt"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+            if args.skip_weekly_images or (args.today_only and not args.weekly):
+                weekly = existing_weekly or metadata.get("weeklyHighlights") or {}
+                print("Preserving existing weekly highlights.", file=sys.stderr)
+            else:
+                weekly = generate_weekly_highlights(menu_data, assets_dir, week_key, image_api_key)
+
         metadata["priorityOrder"] = CATEGORY_PRIORITY
         metadata["dailyHighlights"] = daily
         metadata["weeklyHighlights"] = weekly
+        if source_hash:
+            metadata["sourceUrl"] = MENU_SOURCE_URL
+            metadata["sourceType"] = source_mime_type
+            metadata["sourceHash"] = source_hash
+            metadata["sourceFetchedAt"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+        if extraction_model_used:
+            metadata["extractionModel"] = extraction_model_used
 
-        write_menu(menu_path, menu_data)
-        print(f"Wrote menu JSON with image URLs: {menu_path}", file=sys.stderr)
+        if has_meaningful_changes(original_menu_data, menu_data):
+            metadata["updatedAt"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+            write_menu(menu_path, menu_data)
+            print(f"Wrote menu JSON with image URLs: {menu_path}", file=sys.stderr)
+        else:
+            print("No meaningful menu JSON changes; leaving menu.json unchanged.", file=sys.stderr)
 
         if args.stdout:
             print(json.dumps(menu_data, indent=2, ensure_ascii=False))

@@ -1,153 +1,153 @@
 {
   "Monday": {
     "Breakfast": {
-      "name": "{'name': 'Croissant, Egg, Cheese', 'description': '', 'price': '$2.90-$4.95'}",
+      "name": "Croissant, Egg, Cheese",
       "description": "",
-      "price": "Market Price"
+      "price": "$2.90-$4.95"
     },
     "Soup": {
-      "name": "{'name': 'Turkey and Andouille Gumbo', 'description': '', 'price': '$2.90-$3.85'}",
+      "name": "Turkey and Andouille Gumbo",
       "description": "",
-      "price": "Market Price"
+      "price": "$2.90-$3.85"
     },
     "Deli": {
-      "name": "{'name': 'Tofu Bahn Mi, Pickled Vegetables, Spicy Aioli', 'description': '', 'price': '$8.95'}",
+      "name": "Tofu Bahn Mi, Pickled Vegetables, Spicy Aioli",
       "description": "",
-      "price": "Market Price"
+      "price": "$8.95"
     },
     "Plant Power": {
-      "name": "{'name': 'Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
+      "name": "Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust",
       "description": "",
-      "price": "Market Price"
+      "price": "$8.95"
     },
     "Action": {
-      "name": "{'name': 'Jerk Chicken Wings, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers and Shallots', 'description': '', 'price': '$11.95'}",
+      "name": "Jerk Chicken Wings, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers and Shallots",
       "description": "",
-      "price": "Market Price"
+      "price": "$11.95"
     }
   },
   "Tuesday": {
     "Breakfast": {
-      "name": "{'name': 'Ham, Egg, Tomato, English Muffin', 'description': '', 'price': '$2.90-$4.95'}",
+      "name": "Ham, Egg, Tomato, English Muffin",
       "description": "",
-      "price": "Market Price"
+      "price": "$2.90-$4.95"
     },
     "Soup": {
-      "name": "{'name': 'Lentil and Spinach', 'description': '', 'price': '$2.90-$3.85'}",
+      "name": "Lentil and Spinach",
       "description": "",
-      "price": "Market Price"
+      "price": "$2.90-$3.85"
     },
     "Deli": {
-      "name": "{'name': 'Buffalo Chicken Wrap, Romaine, Blue Cheese', 'description': '', 'price': '$8.25'}",
+      "name": "Buffalo Chicken Wrap, Romaine, Blue Cheese",
       "description": "",
-      "price": "Market Price"
+      "price": "$8.25"
     },
     "Carving": {
-      "name": "{'name': 'Shrimp Crepes, Peppers, Onions, Tomato, Steamed Rice', 'description': '', 'price': '$12.95'}",
+      "name": "Shrimp Crepes, Peppers, Onions, Tomato, Steamed Rice",
       "description": "",
-      "price": "Market Price"
+      "price": "$12.95"
     },
     "Charred": {
-      "name": "{'name': 'Chicken, Broccoli, Mozzarella Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
+      "name": "Chicken, Broccoli, Mozzarella Flatbread/Cauliflower Crust",
       "description": "",
-      "price": "Market Price"
+      "price": "$8.95"
     },
     "Action": {
-      "name": "{'name': 'Taco Tuesday, Chicken, Beef, Rice, Beans, Assorted Toppings, Tortillas', 'description': '', 'price': '$11.95'}",
+      "name": "Taco Tuesday, Chicken, Beef, Rice, Beans, Assorted Toppings, Tortillas",
       "description": "",
-      "price": "Market Price"
+      "price": "$11.95"
     }
   },
   "Wednesday": {
     "Breakfast": {
-      "name": "{'name': 'Egg, Sausage, Cheddar, Croissant', 'description': '', 'price': '$2.90-$4.95'}",
+      "name": "Egg, Sausage, Cheddar, Croissant",
       "description": "",
-      "price": "Market Price"
+      "price": "$2.90-$4.95"
     },
     "Soup": {
-      "name": "{'name': 'Vegan Minestrone', 'description': '', 'price': '$2.90-$3.85'}",
+      "name": "Vegan Minestrone",
       "description": "",
-      "price": "Market Price"
+      "price": "$2.90-$3.85"
     },
     "Deli": {
-      "name": "{'name': 'Portabello Mushroom, Balsamic Glaze, Mozzarella, Tomato', 'description': '', 'price': '$8.25'}",
+      "name": "Portabello Mushroom, Balsamic Glaze, Mozzarella, Tomato",
       "description": "",
-      "price": "Market Price"
+      "price": "$8.25"
     },
     "Charred": {
-      "name": "{'name': 'Hawaiian: Ham, Pineapple Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
+      "name": "Hawaiian: Ham, Pineapple Flatbread/Cauliflower Crust",
       "description": "",
-      "price": "Market Price"
+      "price": "$8.95"
     },
     "Action": {
-      "name": "{'name': 'Lo Mein Noodles, Sesame Garlic Sauce, Chicken, Shrimp, Vegetables', 'description': '', 'price': '$11.95'}",
+      "name": "Lo Mein Noodles, Sesame Garlic Sauce, Chicken, Shrimp, Vegetables",
       "description": "",
-      "price": "Market Price"
+      "price": "$11.95"
     }
   },
   "Thursday": {
     "Breakfast": {
-      "name": "{'name': 'Egg, American, Bulkie Roll', 'description': '', 'price': '$2.90-$4.95'}",
+      "name": "Egg, American, Bulkie Roll",
       "description": "",
-      "price": "Market Price"
+      "price": "$2.90-$4.95"
     },
     "Soup": {
-      "name": "{'name': 'Spicy Bean and Corn', 'description': '', 'price': '$2.90-$3.85'}",
+      "name": "Spicy Bean and Corn",
       "description": "",
-      "price": "Market Price"
+      "price": "$2.90-$3.85"
     },
     "Deli": {
-      "name": "{'name': 'Meatball Peppers, Provolone, Marinara, Sub Roll', 'description': '', 'price': '$8.25'}",
+      "name": "Meatball Peppers, Provolone, Marinara, Sub Roll",
       "description": "",
-      "price": "Market Price"
+      "price": "$8.25"
     },
     "Carving": {
-      "name": "{'name': 'Chicken Ranch Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
+      "name": "Chicken Ranch Flatbread/Cauliflower Crust",
       "description": "",
-      "price": "Market Price",
+      "price": "$8.95",
       "imageUrl": "assets/menu-generated/daily-2026w27-thursday-carving.png"
     },
     "Charred": {
-      "name": "{'name': 'Creamy Parmesan Polenta, Herb-Roasted Spring Vegetables', 'description': '', 'price': '$11.95'}",
+      "name": "Creamy Parmesan Polenta, Herb-Roasted Spring Vegetables",
       "description": "",
-      "price": "Market Price"
+      "price": "$11.95"
     },
     "Action": {
-      "name": "{'name': 'Chicken, Broccoli, Penne, Alfredo Sauce', 'description': '', 'price': '$11.95'}",
+      "name": "Chicken, Broccoli, Penne, Alfredo Sauce",
       "description": "",
-      "price": "Market Price",
+      "price": "$11.95",
       "imageUrl": "assets/menu-generated/daily-2026w27-thursday-action.png"
     }
   },
   "Friday": {
     "Breakfast": {
-      "name": "{'name': 'Ham, Egg, Swiss, Croissant', 'description': '', 'price': '$2.90-$4.95'}",
+      "name": "Ham, Egg, Swiss, Croissant",
       "description": "",
-      "price": "Market Price"
+      "price": "$2.90-$4.95"
     },
     "Soup": {
-      "name": "{'name': 'New England Clam Chowder', 'description': '', 'price': '$3.65-$4.35'}",
+      "name": "New England Clam Chowder",
       "description": "",
-      "price": "Market Price"
+      "price": "$3.65-$4.35"
     },
     "Deli": {
-      "name": "{'name': 'Tuna Melt, Tomato, American, Multi Grain', 'description': '', 'price': '$8.25'}",
+      "name": "Tuna Melt, Tomato, American, Multi Grain",
       "description": "",
-      "price": "Market Price"
+      "price": "$8.25"
     },
     "Charred": {
-      "name": "{'name': 'Create Your Own Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
+      "name": "Create Your Own Flatbread/Cauliflower Crust",
       "description": "",
-      "price": "Market Price"
+      "price": "$8.95"
     },
     "Action": {
-      "name": "{'name': 'Grilled Swordfish, Mango Salsa, Jasmine Rice, Asparagus', 'description': '', 'price': '$12.95'}",
+      "name": "Grilled Swordfish, Mango Salsa, Jasmine Rice, Asparagus",
       "description": "",
-      "price": "Market Price"
+      "price": "$12.95"
     }
   },
   "_generated": {
-    "updatedAt": "2026-07-09T12:24:59+00:00",
+    "updatedAt": "2026-07-09T19:04:45+00:00",
     "priorityOrder": [
       "Carving",
       "Plant Power",
@@ -157,12 +157,12 @@
       "Thursday": [
         {
           "category": "Carving",
-          "name": "{'name': 'Chicken Ranch Flatbread/Cauliflower Crust', 'description': '', 'price': '$8.95'}",
+          "name": "Chicken Ranch Flatbread/Cauliflower Crust",
           "imageUrl": "assets/menu-generated/daily-2026w27-thursday-carving.png"
         },
         {
           "category": "Action",
-          "name": "{'name': 'Chicken, Broccoli, Penne, Alfredo Sauce', 'description': '', 'price': '$11.95'}",
+          "name": "Chicken, Broccoli, Penne, Alfredo Sauce",
           "imageUrl": "assets/menu-generated/daily-2026w27-thursday-action.png"
         }
       ]
