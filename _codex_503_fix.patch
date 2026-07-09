@@ -1,0 +1,228 @@
+--- a/scripts/update_menu.py
++++ b/scripts/update_menu.py
+@@ -46,15 +46,17 @@
+ # Set GEMINI_IMAGE_MODEL_FALLBACK if you want a more expensive backup model.
+ IMAGE_MODEL = os.environ.get("GEMINI_IMAGE_MODEL", "gemini-2.5-flash-image")
+ IMAGE_MODEL_FALLBACK = os.environ.get("GEMINI_IMAGE_MODEL_FALLBACK", "")
++EXTRACTION_MAX_RETRIES = int(os.environ.get("GEMINI_EXTRACTION_MAX_RETRIES", "4"))
+ IMAGE_GEN_MAX_RETRIES = 4
+ MENU_TIMEZONE = "America/New_York"
+ IMAGE_MODEL_CANDIDATES = [
+     model for model in [IMAGE_MODEL, IMAGE_MODEL_FALLBACK] if model
+ ]
+ 
+-# Optional: set GEMINI_SERVICE_TIER=flex in GitHub Actions for lower cost with best-effort availability.
+-# Leave unset for standard synchronous API behavior.
+-GEMINI_SERVICE_TIER = os.environ.get("GEMINI_SERVICE_TIER", "standard")
++# Use Flex first for lower cost, then optionally fall back to Standard for capacity failures.
++VALID_SERVICE_TIERS = {"flex", "standard", "priority"}
++GEMINI_SERVICE_TIER = os.environ.get("GEMINI_SERVICE_TIER", "flex")
++GEMINI_SERVICE_TIER_FALLBACK = os.environ.get("GEMINI_SERVICE_TIER_FALLBACK", "standard")
+ 
+ SCRIPT_DIR = Path(__file__).resolve().parent
+ PROJECT_ROOT = SCRIPT_DIR.parent
+@@ -137,11 +139,26 @@
+     )
+ 
+ 
+-def build_generate_config(**kwargs) -> dict:
++def normalize_service_tier(value: str) -> str:
++    tier = str(value or "").strip().lower()
++    return tier if tier in VALID_SERVICE_TIERS else ""
++
++
++def get_service_tiers() -> list[str]:
++    tiers = []
++    for tier in [GEMINI_SERVICE_TIER, GEMINI_SERVICE_TIER_FALLBACK]:
++        normalized = normalize_service_tier(tier)
++        if normalized and normalized not in tiers:
++            tiers.append(normalized)
++    return tiers or [""]
++
++
++def build_generate_config(service_tier: str = "", **kwargs) -> dict:
+     """Build Gemini generate_content config, optionally adding Flex/standard/priority tier."""
+     config = {key: value for key, value in kwargs.items() if value is not None}
+-    if GEMINI_SERVICE_TIER in {"flex", "standard", "priority"}:
+-        config["service_tier"] = GEMINI_SERVICE_TIER
++    normalized_tier = normalize_service_tier(service_tier or GEMINI_SERVICE_TIER)
++    if normalized_tier:
++        config["service_tier"] = normalized_tier
+     return config
+ 
+ 
+@@ -181,26 +198,55 @@
+     source_part = types.Part.from_bytes(data=source_bytes, mime_type=mime_type)
+ 
+     last_error = None
+-    for model_name in EXTRACTION_MODEL_CANDIDATES:
+-        try:
+-            response = client.models.generate_content(
+-                model=model_name,
+-                contents=[EXTRACTION_PROMPT, source_part],
+-                config=build_generate_config(response_mime_type="application/json"),
++    service_tiers = get_service_tiers()
++    for tier_index, service_tier in enumerate(service_tiers):
++        tier_attempts = EXTRACTION_MAX_RETRIES if tier_index == 0 else 1
++        delay = 8
++        if tier_index > 0:
++            print(f"Falling back to Gemini service tier: {service_tier}", file=sys.stderr)
++        for attempt in range(1, tier_attempts + 1):
++            should_retry = False
++            for model_name in EXTRACTION_MODEL_CANDIDATES:
++                try:
++                    response = client.models.generate_content(
++                        model=model_name,
++                        contents=[EXTRACTION_PROMPT, source_part],
++                        config=build_generate_config(
++                            service_tier=service_tier,
++                            response_mime_type="application/json",
++                        ),
++                    )
++                    print(
++                        f"Extracted menu JSON with model: {model_name} ({service_tier or 'default'} tier)",
++                        file=sys.stderr,
++                    )
++                    raw_text = (response.text or "").strip()
++                    if raw_text.startswith("```"):
++                        lines = [line for line in raw_text.split("\n") if not line.startswith("```")]
++                        raw_text = "\n".join(lines)
++                    return raw_text, model_name
++                except Exception as err:
++                    last_error = err
++                    err_text = str(err)
++                    if is_model_not_found_error(err_text):
++                        print(f"Extraction model unavailable: {model_name}", file=sys.stderr)
++                        continue
++                    if is_retryable_error(err_text):
++                        should_retry = True
++                        print(
++                            f"Extraction model retryable error: {model_name} ({service_tier or 'default'} tier): {err}",
++                            file=sys.stderr,
++                        )
++                        continue
++                    raise
++            if attempt >= tier_attempts or not should_retry:
++                break
++            print(
++                f"Menu extraction retry {attempt}/{tier_attempts} on {service_tier or 'default'} tier after retryable error: {last_error}",
++                file=sys.stderr,
+             )
+-            print(f"Extracted menu JSON with model: {model_name}", file=sys.stderr)
+-            raw_text = (response.text or "").strip()
+-            if raw_text.startswith("```"):
+-                lines = [line for line in raw_text.split("\n") if not line.startswith("```")]
+-                raw_text = "\n".join(lines)
+-            return raw_text, model_name
+-        except Exception as err:
+-            last_error = err
+-            err_text = str(err)
+-            if is_model_not_found_error(err_text):
+-                print(f"Extraction model unavailable: {model_name}", file=sys.stderr)
+-                continue
+-            raise
++            time.sleep(delay)
++            delay *= 2
+ 
+     raise RuntimeError(f"Menu extraction failed: {last_error}")
+ 
+@@ -514,6 +560,9 @@
+         "quota",
+         "too many requests",
+         "rate limit",
++        "503",
++        "unavailable",
++        "high demand",
+         "temporarily unavailable",
+     ]
+     return any(marker in text for marker in retry_markers)
+@@ -540,45 +589,56 @@
+     prompt = build_food_photo_prompt(item)
+     client = genai.Client(api_key=image_api_key)
+ 
+-    def generate_with_model(model_name: str):
++    def generate_with_model(model_name: str, service_tier: str):
+         return client.models.generate_content(
+             model=model_name,
+             contents=prompt,
+-            config=build_generate_config(response_modalities=["TEXT", "IMAGE"]),
++            config=build_generate_config(
++                service_tier=service_tier,
++                response_modalities=["TEXT", "IMAGE"],
++            ),
+         )
+ 
+-    delay = 8
+     last_error = None
+-    for attempt in range(1, IMAGE_GEN_MAX_RETRIES + 1):
+-        should_retry = False
+-        for model_name in IMAGE_MODEL_CANDIDATES:
+-            try:
+-                response = generate_with_model(model_name)
+-                image_bytes = extract_generated_image_bytes(response)
+-                if not image_bytes:
+-                    raise RuntimeError(f"Model {model_name} returned no image bytes")
+-                output_path.parent.mkdir(parents=True, exist_ok=True)
+-                with output_path.open("wb") as fh:
+-                    fh.write(image_bytes)
+-                print(f"Generated AI image with model: {model_name}", file=sys.stderr)
+-                return
+-            except Exception as err:
+-                last_error = err
+-                err_text = str(err)
+-                if is_model_not_found_error(err_text):
+-                    print(f"Image model unavailable: {model_name}", file=sys.stderr)
+-                    continue
+-                if is_retryable_error(err_text):
+-                    should_retry = True
+-                    break
+-        if attempt >= IMAGE_GEN_MAX_RETRIES or not should_retry:
+-            break
+-        print(
+-            f"Image generation retry {attempt}/{IMAGE_GEN_MAX_RETRIES} after retryable error: {last_error}",
+-            file=sys.stderr,
+-        )
+-        time.sleep(delay)
+-        delay *= 2
++    service_tiers = get_service_tiers()
++    for tier_index, service_tier in enumerate(service_tiers):
++        tier_attempts = IMAGE_GEN_MAX_RETRIES if tier_index == 0 else 1
++        delay = 8
++        if tier_index > 0:
++            print(f"Falling back to Gemini service tier: {service_tier}", file=sys.stderr)
++        for attempt in range(1, tier_attempts + 1):
++            should_retry = False
++            for model_name in IMAGE_MODEL_CANDIDATES:
++                try:
++                    response = generate_with_model(model_name, service_tier)
++                    image_bytes = extract_generated_image_bytes(response)
++                    if not image_bytes:
++                        raise RuntimeError(f"Model {model_name} returned no image bytes")
++                    output_path.parent.mkdir(parents=True, exist_ok=True)
++                    with output_path.open("wb") as fh:
++                        fh.write(image_bytes)
++                    print(
++                        f"Generated AI image with model: {model_name} ({service_tier or 'default'} tier)",
++                        file=sys.stderr,
++                    )
++                    return
++                except Exception as err:
++                    last_error = err
++                    err_text = str(err)
++                    if is_model_not_found_error(err_text):
++                        print(f"Image model unavailable: {model_name}", file=sys.stderr)
++                        continue
++                    if is_retryable_error(err_text):
++                        should_retry = True
++                        break
++            if attempt >= tier_attempts or not should_retry:
++                break
++            print(
++                f"Image generation retry {attempt}/{tier_attempts} on {service_tier or 'default'} tier after retryable error: {last_error}",
++                file=sys.stderr,
++            )
++            time.sleep(delay)
++            delay *= 2
+ 
+     try:
+         print("All configured image models failed; using stock food photo fallback.", file=sys.stderr)
