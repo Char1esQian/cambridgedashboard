@@ -34,23 +34,42 @@ jobs:
           python - <<'PY'
           from pathlib import Path
 
-          patch = Path("_codex_push.patch")
-          text = patch.read_text(encoding="utf-8")
+          source = Path("_codex_push.patch")
+          text = source.read_text(encoding="utf-8")
           text = text.replace("\r\n", "\n").replace("\r", "\n")
-          patch.write_text(text, encoding="utf-8", newline="\n")
+
+          sections = []
+          current = []
+          for line in text.splitlines(keepends=True):
+              if line.startswith("--- a/") and current:
+                  sections.append(current)
+                  current = [line]
+              else:
+                  current.append(line)
+          if current:
+              sections.append(current)
+
+          kept = []
+          for section in sections:
+              header = section[0] if section else ""
+              if header.startswith("--- a/.github/workflows/update-menu.yml"):
+                  continue
+              kept.extend(section)
+
+          Path("_codex_runtime.patch").write_text("".join(kept), encoding="utf-8", newline="\n")
           PY
 
-          git apply --index --ignore-whitespace _codex_push.patch
+          git apply --index --ignore-whitespace _codex_runtime.patch
           python -m py_compile scripts/update_menu.py
           python -m json.tool menu.json > /tmp/menu.json
 
-          rm -f _codex_push.patch .github/workflows/codex-apply-patch.yml
-          git add index.html menu.json scripts/update_menu.py .github/workflows/update-menu.yml _codex_push.patch .github/workflows/codex-apply-patch.yml
+          rm -f _codex_push.patch _codex_runtime.patch
+          git add index.html menu.json scripts/update_menu.py _codex_push.patch
 
           if git diff --cached --quiet; then
             echo "No patch changes to commit."
             exit 0
           fi
 
-          git commit -m "chore: update dashboard and menu automation"
+          git commit -m "chore: update dashboard and menu data"
           git push
