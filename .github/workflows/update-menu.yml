@@ -2,9 +2,20 @@ name: Update Cafe Menu
 
 on:
   workflow_dispatch:
+    inputs:
+      mode:
+        description: "Update mode"
+        required: true
+        default: daily
+        type: choice
+        options:
+          - daily
+          - weekly
   schedule:
-    # Weekdays morning run (08:00 US Eastern when EST; 09:00 when EDT)
-    - cron: "0 10 * * 1-5"  # 5 AM EST / 6 AM EDT
+    # Weekly source extraction on Monday morning.
+    - cron: "0 10 * * 1"  # 5 AM EST / 6 AM EDT
+    # Lightweight daily image/metadata refresh, reusing menu.json.
+    - cron: "0 10 * * 2-5"  # 5 AM EST / 6 AM EDT
 
 permissions:
   contents: write
@@ -25,11 +36,31 @@ jobs:
       - name: Install dependencies
         run: pip install -r scripts/requirements.txt
 
+      - name: Select update mode
+        id: mode
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "mode=${{ inputs.mode }}" >> "$GITHUB_OUTPUT"
+          elif [ "${{ github.event.schedule }}" = "0 10 * * 1" ]; then
+            echo "mode=weekly" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=daily" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Run menu updater
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_API_KEY_NANO: ${{ secrets.GEMINI_API_KEY_NANO }}
-        run: python scripts/update_menu.py --today-only
+          GEMINI_EXTRACTION_MODEL: gemini-2.5-flash-lite
+          GEMINI_EXTRACTION_MODEL_FALLBACK: gemini-2.5-flash
+          GEMINI_IMAGE_MODEL: gemini-2.5-flash-image
+          GEMINI_SERVICE_TIER: flex
+        run: |
+          if [ "${{ steps.mode.outputs.mode }}" = "weekly" ]; then
+            python scripts/update_menu.py --weekly
+          else
+            python scripts/update_menu.py --daily
+          fi
 
       - name: Detect changes
         id: detect_changes
@@ -48,12 +79,13 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add menu.json assets/menu-generated assets/menu-archive
-          git commit -m "chore: update cafe menu and generated highlights ($(date -u +'%Y-%m-%d'))"
+          git commit -m "chore: update cafe menu (${{ steps.mode.outputs.mode }}, $(date -u +'%Y-%m-%d'))"
           git push
 
       - name: Workflow summary
         run: |
           echo "## Cafe Menu Update" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Mode: \`${{ steps.mode.outputs.mode }}\`" >> "$GITHUB_STEP_SUMMARY"
           if [ "${{ steps.detect_changes.outputs.changed }}" = "true" ]; then
             echo "- Updated \`menu.json\` and/or generated highlight images." >> "$GITHUB_STEP_SUMMARY"
           else
