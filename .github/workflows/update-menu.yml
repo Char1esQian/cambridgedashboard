@@ -55,6 +55,7 @@ jobs:
           GEMINI_EXTRACTION_MODEL_FALLBACK: gemini-2.5-flash
           GEMINI_IMAGE_MODEL: gemini-2.5-flash-image
           GEMINI_SERVICE_TIER: flex
+          GEMINI_SERVICE_TIER_FALLBACK: standard
         run: |
           if [ "${{ steps.mode.outputs.mode }}" = "weekly" ]; then
             python scripts/update_menu.py --weekly
