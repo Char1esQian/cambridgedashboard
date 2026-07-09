@@ -31,7 +31,16 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git apply --index _codex_push.patch
+          python - <<'PY'
+          from pathlib import Path
+
+          patch = Path("_codex_push.patch")
+          text = patch.read_text(encoding="utf-8")
+          text = text.replace("\r\n", "\n").replace("\r", "\n")
+          patch.write_text(text, encoding="utf-8", newline="\n")
+          PY
+
+          git apply --index --ignore-whitespace _codex_push.patch
           python -m py_compile scripts/update_menu.py
           python -m json.tool menu.json > /tmp/menu.json
 
