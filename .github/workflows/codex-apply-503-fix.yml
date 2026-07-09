@@ -1,0 +1,54 @@
+name: Apply Gemini Retry Patch
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "_codex_503_fix.patch"
+      - ".github/workflows/codex-apply-503-fix.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply retry patch
+        run: |
+          set -euo pipefail
+          if [ ! -f _codex_503_fix.patch ]; then
+            echo "No retry patch found; nothing to do."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          python - <<'PY'
+          from pathlib import Path
+          patch = Path("_codex_503_fix.patch")
+          text = patch.read_text(encoding="utf-8")
+          text = text.replace("\r\n", "\n").replace("\r", "\n")
+          patch.write_text(text, encoding="utf-8", newline="\n")
+          PY
+
+          git apply --index --ignore-whitespace _codex_503_fix.patch
+          python -m py_compile scripts/update_menu.py
+
+          rm -f _codex_503_fix.patch
+          git add scripts/update_menu.py _codex_503_fix.patch
+
+          if git diff --cached --quiet; then
+            echo "No patch changes to commit."
+            exit 0
+          fi
+
+          git commit -m "chore: retry Gemini flex before standard fallback"
+          git push
