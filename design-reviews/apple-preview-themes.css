@@ -1,0 +1,376 @@
+/* Opt-in review themes. The production dashboard is unchanged without ?design=. */
+body[data-design-preview] {
+  --preview-blue: #0071e3;
+  --preview-green: #34c759;
+  --preview-red: #ff3b30;
+  padding: 1.5rem;
+  letter-spacing: 0;
+}
+
+body[data-design-preview] .dashboard {
+  width: min(1280px, 100%);
+  gap: 1rem;
+}
+
+body[data-design-preview] .main-grid,
+body[data-design-preview] .stack {
+  gap: 1rem;
+}
+
+body[data-design-preview] .hero,
+body[data-design-preview] .card,
+body[data-design-preview] .expandable,
+body[data-design-preview] .hero-weather,
+body[data-design-preview] .weather-details-shell,
+body[data-design-preview] .menu-image-panel,
+body[data-design-preview] .menu-highlight-card,
+body[data-design-preview] .station,
+body[data-design-preview] .charger-station,
+body[data-design-preview] .weather-stat,
+body[data-design-preview] .weather-hourly-item,
+body[data-design-preview] .weather-forecast-item {
+  border-radius: 8px;
+}
+
+body[data-design-preview] .hero,
+body[data-design-preview] .card,
+body[data-design-preview] .expandable {
+  animation: none;
+  transform: none;
+}
+
+body[data-design-preview] .stack-label {
+  padding: 0 0.15rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  text-shadow: none;
+  font-size: 0.7rem;
+  letter-spacing: 0;
+}
+
+body[data-design-preview] .card-title,
+body[data-design-preview] .expandable-title,
+body[data-design-preview] .greeting,
+body[data-design-preview] .menu-category,
+body[data-design-preview] .menu-highlight-category,
+body[data-design-preview] .weather-stat-label,
+body[data-design-preview] .stat-label {
+  letter-spacing: 0;
+}
+
+body[data-design-preview] .card-title,
+body[data-design-preview] .expandable-title {
+  text-transform: none;
+  font-size: 0.9rem;
+  font-weight: 650;
+  text-shadow: none;
+}
+
+body[data-design-preview] #clock {
+  letter-spacing: 0;
+  font-weight: 700;
+}
+
+body[data-design-preview] .card-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+body[data-design-preview] .quick-link,
+body[data-design-preview] .temp-toggle-inline,
+body[data-design-preview] .menu-collapse-btn,
+body[data-design-preview] .toggle-slider {
+  border-radius: 8px;
+}
+
+body[data-design-preview] .quick-link {
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 600;
+}
+
+body[data-design-preview] .hero::before,
+body[data-design-preview] .card::before,
+body[data-design-preview] .expandable::before,
+body[data-design-preview] .hero::after,
+body[data-design-preview] .card::after,
+body[data-design-preview] .expandable::after {
+  display: none;
+}
+
+/* Cupertino: calm, bright, and close to Apple's system surfaces. */
+body[data-design-preview="cupertino"] {
+  --text-primary: #1d1d1f;
+  --text-secondary: #515154;
+  --text-muted: #6e6e73;
+  --accent: #0071e3;
+  --accent-soft: rgba(0, 113, 227, 0.1);
+  --success: #248a3d;
+  --success-soft: rgba(52, 199, 89, 0.12);
+  --tile-bg: rgba(255, 255, 255, 0.72);
+  --tile-border: rgba(0, 0, 0, 0.08);
+  --tile-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  background: #f5f5f7;
+}
+
+body[data-design-preview="cupertino"]::before {
+  background: linear-gradient(180deg, rgba(245, 245, 247, 0.62), rgba(245, 245, 247, 0.92));
+}
+
+body[data-design-preview="cupertino"]::after { display: none; }
+
+body[data-design-preview="cupertino"] .weather-bg {
+  opacity: 0.32;
+  filter: saturate(76%);
+}
+
+body[data-design-preview="cupertino"] .hero,
+body[data-design-preview="cupertino"] .card,
+body[data-design-preview="cupertino"] .expandable {
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.07);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+}
+
+body[data-design-preview="cupertino"] .hero-weather,
+body[data-design-preview="cupertino"] .weather-details-shell,
+body[data-design-preview="cupertino"] .menu-image-panel,
+body[data-design-preview="cupertino"] .menu-highlight-card,
+body[data-design-preview="cupertino"] .station,
+body[data-design-preview="cupertino"] .charger-station,
+body[data-design-preview="cupertino"] .weather-stat,
+body[data-design-preview="cupertino"] .weather-hourly-item,
+body[data-design-preview="cupertino"] .weather-forecast-item {
+  background: rgba(255, 255, 255, 0.68);
+  border-color: rgba(0, 0, 0, 0.07);
+  box-shadow: none;
+}
+
+body[data-design-preview="cupertino"] .stack-label,
+body[data-design-preview="cupertino"] .card-title,
+body[data-design-preview="cupertino"] .expandable-title,
+body[data-design-preview="cupertino"] #clock,
+body[data-design-preview="cupertino"] .weather-temp,
+body[data-design-preview="cupertino"] .menu-name,
+body[data-design-preview="cupertino"] .charger-name,
+body[data-design-preview="cupertino"] .departure-destination {
+  color: #1d1d1f;
+}
+
+body[data-design-preview="cupertino"] .quick-link,
+body[data-design-preview="cupertino"] .temp-toggle-inline,
+body[data-design-preview="cupertino"] .menu-collapse-btn {
+  background: rgba(255, 255, 255, 0.72);
+  border-color: rgba(0, 0, 0, 0.09);
+  color: #0066cc;
+}
+
+/* Vibrant Glass: more depth and color, with the same dashboard geometry. */
+body[data-design-preview="glass"] {
+  --text-primary: #142238;
+  --text-secondary: #40546c;
+  --text-muted: #61748a;
+  --accent: #0066cc;
+  --accent-soft: rgba(0, 102, 204, 0.12);
+  --success: #18864b;
+  --success-soft: rgba(48, 209, 88, 0.14);
+  --tile-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.72), rgba(240, 247, 255, 0.48));
+  --tile-border: rgba(255, 255, 255, 0.56);
+  --tile-shadow: 0 10px 26px rgba(22, 45, 76, 0.08);
+}
+
+body[data-design-preview="glass"]::before {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(228, 239, 250, 0.22));
+}
+
+body[data-design-preview="glass"]::after {
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.08), rgba(0, 122, 255, 0.08) 52%, rgba(52, 199, 89, 0.06));
+}
+
+body[data-design-preview="glass"] .weather-bg {
+  opacity: 0.92;
+  filter: saturate(112%) contrast(102%);
+}
+
+body[data-design-preview="glass"] .hero,
+body[data-design-preview="glass"] .card,
+body[data-design-preview="glass"] .expandable {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.54), rgba(255, 255, 255, 0.22));
+  border: 1px solid rgba(255, 255, 255, 0.66);
+  box-shadow: 0 22px 58px rgba(16, 38, 66, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(34px) saturate(185%);
+  -webkit-backdrop-filter: blur(34px) saturate(185%);
+}
+
+body[data-design-preview="glass"] .hero-weather,
+body[data-design-preview="glass"] .weather-details-shell,
+body[data-design-preview="glass"] .menu-image-panel,
+body[data-design-preview="glass"] .menu-highlight-card,
+body[data-design-preview="glass"] .station,
+body[data-design-preview="glass"] .charger-station {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.58), rgba(244, 250, 255, 0.34));
+  border-color: rgba(255, 255, 255, 0.62);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.66);
+}
+
+body[data-design-preview="glass"] .stack-label { color: #153a61; }
+
+/* Graphite: dark neutral materials with colorful status accents. */
+body[data-design-preview="graphite"] {
+  --text-primary: #f5f5f7;
+  --text-secondary: #c7c7cc;
+  --text-muted: #98989d;
+  --accent: #0a84ff;
+  --accent-soft: rgba(10, 132, 255, 0.18);
+  --success: #30d158;
+  --success-soft: rgba(48, 209, 88, 0.16);
+  --tile-bg: rgba(44, 44, 46, 0.7);
+  --tile-border: rgba(255, 255, 255, 0.1);
+  --tile-shadow: none;
+  background: #1c1c1e;
+}
+
+body[data-design-preview="graphite"]::before {
+  background: linear-gradient(180deg, rgba(20, 20, 22, 0.54), rgba(20, 20, 22, 0.9));
+}
+
+body[data-design-preview="graphite"]::after {
+  background: linear-gradient(120deg, rgba(10, 132, 255, 0.08), transparent 46%, rgba(48, 209, 88, 0.06));
+}
+
+body[data-design-preview="graphite"] .weather-bg {
+  opacity: 0.42;
+  filter: grayscale(28%) saturate(82%) brightness(62%);
+}
+
+body[data-design-preview="graphite"] .hero,
+body[data-design-preview="graphite"] .card,
+body[data-design-preview="graphite"] .expandable {
+  background: rgba(35, 35, 38, 0.76);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(30px) saturate(130%);
+  -webkit-backdrop-filter: blur(30px) saturate(130%);
+}
+
+body[data-design-preview="graphite"] .hero-weather,
+body[data-design-preview="graphite"] .weather-details-shell,
+body[data-design-preview="graphite"] .menu-image-panel,
+body[data-design-preview="graphite"] .menu-highlight-card,
+body[data-design-preview="graphite"] .station,
+body[data-design-preview="graphite"] .charger-station,
+body[data-design-preview="graphite"] .weather-stat,
+body[data-design-preview="graphite"] .weather-hourly-item,
+body[data-design-preview="graphite"] .weather-forecast-item {
+  background: rgba(58, 58, 60, 0.62);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+}
+
+body[data-design-preview="graphite"] .stack-label,
+body[data-design-preview="graphite"] .card-title,
+body[data-design-preview="graphite"] .expandable-title,
+body[data-design-preview="graphite"] #clock,
+body[data-design-preview="graphite"] #date,
+body[data-design-preview="graphite"] .greeting,
+body[data-design-preview="graphite"] .weather-temp,
+body[data-design-preview="graphite"] .weather-title,
+body[data-design-preview="graphite"] .weather-aux-value,
+body[data-design-preview="graphite"] .weather-stat-value,
+body[data-design-preview="graphite"] .weather-forecast-temp,
+body[data-design-preview="graphite"] .menu-name,
+body[data-design-preview="graphite"] .menu-action-name,
+body[data-design-preview="graphite"] .menu-highlight-name,
+body[data-design-preview="graphite"] .charger-name,
+body[data-design-preview="graphite"] .departure-destination,
+body[data-design-preview="graphite"] .sports-matchup,
+body[data-design-preview="graphite"] .activity-name,
+body[data-design-preview="graphite"] .stat-value {
+  color: #f5f5f7;
+  text-shadow: none;
+}
+
+body[data-design-preview="graphite"] .weather-condition,
+body[data-design-preview="graphite"] .weather-aux-label,
+body[data-design-preview="graphite"] .weather-stat-label,
+body[data-design-preview="graphite"] .weather-forecast-condition,
+body[data-design-preview="graphite"] .menu-category,
+body[data-design-preview="graphite"] .menu-desc,
+body[data-design-preview="graphite"] .menu-highlight-category,
+body[data-design-preview="graphite"] .charger-meta,
+body[data-design-preview="graphite"] .departure-time,
+body[data-design-preview="graphite"] .sports-meta,
+body[data-design-preview="graphite"] .sports-location,
+body[data-design-preview="graphite"] .activity-meta,
+body[data-design-preview="graphite"] .stat-label,
+body[data-design-preview="graphite"] .card-note {
+  color: #aeaeb2;
+}
+
+body[data-design-preview="graphite"] .quick-link,
+body[data-design-preview="graphite"] .temp-toggle-inline,
+body[data-design-preview="graphite"] .menu-collapse-btn,
+body[data-design-preview="graphite"] .toggle-slider {
+  background: rgba(72, 72, 74, 0.78);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #0a84ff;
+}
+
+body[data-design-preview="graphite"] .about-inline-link,
+body[data-design-preview="graphite"] .weather-meta a {
+  color: #64d2ff;
+}
+
+body[data-design-preview="graphite"] .weather-details-toggle {
+  color: #f5f5f7;
+}
+
+body[data-design-preview="graphite"] .weather-details-indicator {
+  color: #0a84ff;
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(72, 72, 74, 0.82);
+}
+
+body[data-design-preview="graphite"] .temp-unit,
+body[data-design-preview="graphite"] .toggle-label {
+  color: #aeaeb2;
+}
+
+body[data-design-preview="graphite"] .temp-unit.active {
+  color: #f5f5f7;
+}
+
+body[data-design-preview="graphite"] .plug.in-use,
+body[data-design-preview="graphite"] .departure-eta {
+  color: #ff6961;
+  border-color: rgba(255, 105, 97, 0.28);
+  background: rgba(255, 105, 97, 0.12);
+}
+
+body[data-design-preview="graphite"] .plug.available {
+  color: #63e27e;
+  border-color: rgba(99, 226, 126, 0.26);
+  background: rgba(99, 226, 126, 0.11);
+}
+
+@media (max-width: 720px) {
+  body[data-design-preview] { padding: 0.75rem; }
+
+  body[data-design-preview] .dashboard,
+  body[data-design-preview] .main-grid,
+  body[data-design-preview] .stack {
+    gap: 0.75rem;
+  }
+
+  body[data-design-preview] #evExpandable.open .expandable-content {
+    max-height: none;
+    overflow: visible;
+  }
+}

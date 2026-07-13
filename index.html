@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Cambridge Dashboard</title>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="design-reviews/apple-preview-themes.css?v=2" rel="stylesheet" />
   <style>
     :root {
       --bg-clear-day: linear-gradient(155deg, #edf4ff 0%, #dbe8f8 47%, #c9d8ea 100%);
@@ -2201,6 +2202,13 @@
 </head>
 
 <body>
+  <script>
+    (() => {
+      const previewDesign = new URLSearchParams(window.location.search).get("design");
+      const availableDesigns = ["cupertino", "glass", "graphite"];
+      document.body.dataset.designPreview = availableDesigns.includes(previewDesign) ? previewDesign : "glass";
+    })();
+  </script>
   <div class="weather-bg">
     <div class="ai-bg" id="aiBackground"></div>
     <div class="sun"></div>

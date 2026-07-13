@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cambridge Dashboard - Apple Design Review</title>
+  <style>
+    :root {
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      color: #1d1d1f;
+      background: #f5f5f7;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #f5f5f7;
+    }
+
+    button, select { font: inherit; }
+
+    .review-bar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: minmax(190px, 1fr) auto auto;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      background: rgba(250, 250, 252, 0.86);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+    }
+
+    .title {
+      min-width: 0;
+      font-size: 13px;
+      font-weight: 650;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .segmented {
+      display: inline-flex;
+      gap: 2px;
+      padding: 3px;
+      border-radius: 8px;
+      background: rgba(118, 118, 128, 0.12);
+    }
+
+    .segment {
+      min-width: 92px;
+      height: 32px;
+      padding: 0 12px;
+      border: 0;
+      border-radius: 6px;
+      color: #515154;
+      background: transparent;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .segment[aria-selected="true"] {
+      color: #1d1d1f;
+      background: #fff;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.13);
+    }
+
+    .device-select {
+      height: 38px;
+      padding: 0 30px 0 10px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      color: #1d1d1f;
+      background: #fff;
+      font-size: 12px;
+    }
+
+    .concept-note {
+      width: min(100% - 32px, 1280px);
+      margin: 14px auto 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 18px;
+      color: #6e6e73;
+      font-size: 12px;
+    }
+
+    .concept-note strong {
+      color: #1d1d1f;
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .preview-stage {
+      width: min(100% - 32px, 1440px);
+      margin: 0 auto 24px;
+      transition: width 220ms ease;
+    }
+
+    .preview-stage[data-device="tablet"] { width: min(100% - 32px, 900px); }
+    .preview-stage[data-device="mobile"] { width: min(100% - 24px, 390px); }
+
+    .browser-frame {
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.16);
+    }
+
+    .frame-top {
+      height: 34px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 0 12px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+      background: #f2f2f4;
+    }
+
+    .frame-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #c7c7cc;
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      height: calc(100vh - 150px);
+      min-height: 620px;
+      border: 0;
+      background: #f5f5f7;
+    }
+
+    @media (max-width: 840px) {
+      .review-bar { grid-template-columns: 1fr auto; }
+      .title { display: none; }
+
+      .segmented {
+        max-width: calc(100vw - 112px);
+        overflow-x: auto;
+      }
+
+      .segment { min-width: 82px; }
+
+      .concept-note {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      iframe { height: calc(100vh - 178px); }
+    }
+  </style>
+</head>
+<body>
+  <header class="review-bar">
+    <div class="title">Cambridge Dashboard Design Review</div>
+    <div class="segmented" role="tablist" aria-label="Design concepts">
+      <button class="segment" type="button" role="tab" aria-selected="false" data-design="cupertino">Cupertino</button>
+      <button class="segment" type="button" role="tab" aria-selected="true" data-design="glass">Vibrant Glass</button>
+      <button class="segment" type="button" role="tab" aria-selected="false" data-design="graphite">Graphite</button>
+    </div>
+    <select class="device-select" id="deviceSelect" aria-label="Preview size">
+      <option value="desktop">Desktop</option>
+      <option value="tablet">Tablet</option>
+      <option value="mobile">Mobile</option>
+    </select>
+  </header>
+
+  <div class="concept-note">
+    <strong id="conceptTitle">Vibrant Glass</strong>
+    <span id="conceptDescription">Weather-led color, brighter translucency, and a more dimensional Apple feel.</span>
+  </div>
+
+  <main class="preview-stage" id="previewStage" data-device="desktop">
+    <div class="browser-frame">
+      <div class="frame-top" aria-hidden="true">
+        <span class="frame-dot"></span>
+        <span class="frame-dot"></span>
+        <span class="frame-dot"></span>
+      </div>
+      <iframe id="dashboardPreview" title="Cambridge Dashboard preview" src="../index.html?design=glass"></iframe>
+    </div>
+  </main>
+
+  <script>
+    const concepts = {
+      cupertino: {
+        title: "Cupertino",
+        description: "Quiet system surfaces, precise contrast, and restrained depth."
+      },
+      glass: {
+        title: "Vibrant Glass",
+        description: "Weather-led color, brighter translucency, and a more dimensional Apple feel."
+      },
+      graphite: {
+        title: "Graphite",
+        description: "Dark neutral materials with crisp type and focused status colors."
+      }
+    };
+
+    const tabs = Array.from(document.querySelectorAll("[data-design]"));
+    const preview = document.getElementById("dashboardPreview");
+    const previewStage = document.getElementById("previewStage");
+    const title = document.getElementById("conceptTitle");
+    const description = document.getElementById("conceptDescription");
+    const deviceSelect = document.getElementById("deviceSelect");
+
+    function showConcept(design) {
+      const concept = concepts[design];
+      if (!concept) return;
+
+      tabs.forEach((tab) => {
+        tab.setAttribute("aria-selected", String(tab.dataset.design === design));
+      });
+      title.textContent = concept.title;
+      description.textContent = concept.description;
+      preview.src = `../index.html?design=${design}`;
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => showConcept(tab.dataset.design));
+    });
+
+    deviceSelect.addEventListener("change", () => {
+      previewStage.dataset.device = deviceSelect.value;
+    });
+  </script>
+</body>
+</html>
