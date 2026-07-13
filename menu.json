@@ -18,12 +18,14 @@
     "Plant Power": {
       "name": "Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust",
       "description": "",
-      "price": "$8.95"
+      "price": "$8.95",
+      "imageUrl": "assets/menu-generated/daily-2026w28-monday-plant-power.png"
     },
     "Action": {
       "name": "Jerk Chicken Wings, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers and Shallots",
       "description": "",
-      "price": "$11.95"
+      "price": "$11.95",
+      "imageUrl": "assets/menu-generated/daily-2026w28-monday-action.png"
     }
   },
   "Tuesday": {
@@ -172,18 +174,30 @@
           "name": "Grilled Swordfish, Mango Salsa, Jasmine Rice, Asparagus",
           "imageUrl": "assets/menu-generated/daily-2026w27-friday-action.png"
         }
+      ],
+      "Monday": [
+        {
+          "category": "Plant Power",
+          "name": "Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust",
+          "imageUrl": "assets/menu-generated/daily-2026w28-monday-plant-power.png"
+        },
+        {
+          "category": "Action",
+          "name": "Jerk Chicken Wings, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers and Shallots",
+          "imageUrl": "assets/menu-generated/daily-2026w28-monday-action.png"
+        }
       ]
     },
     "weeklyHighlights": {
-      "Carving": "assets/menu-generated/weekly-2026w27-carving.png",
-      "Plant Power": "assets/menu-generated/weekly-2026w27-plant-power.png",
-      "Action": "assets/menu-generated/weekly-2026w27-action.png"
+      "Carving": "assets/menu-generated/weekly-2026w28-carving.png",
+      "Plant Power": "assets/menu-generated/weekly-2026w28-plant-power.png",
+      "Action": "assets/menu-generated/weekly-2026w28-action.png"
     },
     "sourceUrl": "https://cafe.sebastians.com/sebclients/3130alewife.jpg",
     "sourceType": "image/jpeg",
     "sourceHash": "31a023540c8548bedc90e32b9c92d4345e8c0a79f82fc9f4929fb44646f225f4",
-    "sourceFetchedAt": "2026-07-09T20:19:15+00:00",
+    "sourceFetchedAt": "2026-07-13T12:35:02+00:00",
     "extractionModel": "gemini-2.5-flash-lite",
-    "updatedAt": "2026-07-10T12:27:41+00:00"
+    "updatedAt": "2026-07-13T12:35:02+00:00"
   }
 }
