@@ -416,6 +416,10 @@ def is_cauliflower_flatbread_item(category: str, item: dict) -> bool:
 
 def get_reusable_image_paths(category: str, item: dict, assets_dir: Path) -> list[Path]:
     archive_dir = get_archive_dir_for_assets(assets_dir)
+    item_archive_path = archive_dir / f"{get_menu_image_archive_key(item)}.png"
+    if item_archive_path.exists():
+        return [item_archive_path]
+
     if is_cauliflower_flatbread_item(category, item):
         path = archive_dir / CAULIFLOWER_FLATBREAD_ARCHIVE_NAME
         if not path.exists():
