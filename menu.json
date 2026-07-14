@@ -186,6 +186,13 @@
           "name": "Jerk Chicken Wings, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers and Shallots",
           "imageUrl": "assets/menu-generated/daily-2026w28-monday-action.png"
         }
+      ],
+      "Tuesday": [
+        {
+          "category": "Taco Tuesday",
+          "name": "Taco Tuesday Bowl",
+          "imageUrl": "assets/menu-generated/daily-2026w28-tuesday-taco-tuesday.png"
+        }
       ]
     },
     "weeklyHighlights": {
@@ -198,6 +205,6 @@
     "sourceHash": "31a023540c8548bedc90e32b9c92d4345e8c0a79f82fc9f4929fb44646f225f4",
     "sourceFetchedAt": "2026-07-13T12:35:02+00:00",
     "extractionModel": "gemini-2.5-flash-lite",
-    "updatedAt": "2026-07-13T12:35:02+00:00"
+    "updatedAt": "2026-07-14T11:27:12+00:00"
   }
 }
