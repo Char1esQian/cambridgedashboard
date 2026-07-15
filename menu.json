@@ -84,7 +84,8 @@
     "Action": {
       "name": "Lo Mein Noodles, Sesame Garlic Sauce, Chicken, Shrimp, Vegetables",
       "description": "",
-      "price": "$11.95"
+      "price": "$11.95",
+      "imageUrl": "assets/menu-generated/daily-2026w28-wednesday-action.png"
     }
   },
   "Thursday": {
@@ -193,6 +194,13 @@
           "name": "Taco Tuesday Bowl",
           "imageUrl": "assets/menu-generated/daily-2026w28-tuesday-taco-tuesday.png"
         }
+      ],
+      "Wednesday": [
+        {
+          "category": "Action",
+          "name": "Lo Mein Noodles, Sesame Garlic Sauce, Chicken, Shrimp, Vegetables",
+          "imageUrl": "assets/menu-generated/daily-2026w28-wednesday-action.png"
+        }
       ]
     },
     "weeklyHighlights": {
@@ -205,6 +213,6 @@
     "sourceHash": "31a023540c8548bedc90e32b9c92d4345e8c0a79f82fc9f4929fb44646f225f4",
     "sourceFetchedAt": "2026-07-13T12:35:02+00:00",
     "extractionModel": "gemini-2.5-flash-lite",
-    "updatedAt": "2026-07-14T11:27:12+00:00"
+    "updatedAt": "2026-07-15T11:38:03+00:00"
   }
 }
