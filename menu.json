@@ -108,7 +108,7 @@
       "name": "Chicken Ranch Flatbread/Cauliflower Crust",
       "description": "",
       "price": "$8.95",
-      "imageUrl": "assets/menu-generated/daily-2026w27-thursday-carving.png"
+      "imageUrl": "assets/menu-generated/daily-2026w28-thursday-carving.png"
     },
     "Charred": {
       "name": "Creamy Parmesan Polenta, Herb-Roasted Spring Vegetables",
@@ -119,7 +119,7 @@
       "name": "Chicken, Broccoli, Penne, Alfredo Sauce",
       "description": "",
       "price": "$11.95",
-      "imageUrl": "assets/menu-generated/daily-2026w27-thursday-action.png"
+      "imageUrl": "assets/menu-generated/daily-2026w28-thursday-action.png"
     }
   },
   "Friday": {
@@ -161,12 +161,12 @@
         {
           "category": "Carving",
           "name": "Chicken Ranch Flatbread/Cauliflower Crust",
-          "imageUrl": "assets/menu-generated/daily-2026w27-thursday-carving.png"
+          "imageUrl": "assets/menu-generated/daily-2026w28-thursday-carving.png"
         },
         {
           "category": "Action",
           "name": "Chicken, Broccoli, Penne, Alfredo Sauce",
-          "imageUrl": "assets/menu-generated/daily-2026w27-thursday-action.png"
+          "imageUrl": "assets/menu-generated/daily-2026w28-thursday-action.png"
         }
       ],
       "Friday": [
@@ -213,6 +213,6 @@
     "sourceHash": "31a023540c8548bedc90e32b9c92d4345e8c0a79f82fc9f4929fb44646f225f4",
     "sourceFetchedAt": "2026-07-13T12:35:02+00:00",
     "extractionModel": "gemini-2.5-flash-lite",
-    "updatedAt": "2026-07-15T11:38:03+00:00"
+    "updatedAt": "2026-07-16T11:43:06+00:00"
   }
 }
