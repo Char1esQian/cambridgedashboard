@@ -110,7 +110,7 @@ def slugify(value: str) -> str:
 
 
 def normalize_price(value: str) -> str:
-    return str(value or "").replace("\u2013", "-").replace("Ã¢â‚¬â€œ", "-").strip()
+    return str(value or "").replace("\u2013", "-").replace("â€“", "-").strip()
 
 
 def parse_stringified_dict(value):
@@ -900,4 +900,3 @@ def main():
 
 if __name__ == "__main__":
     sys.exit(main())
-
