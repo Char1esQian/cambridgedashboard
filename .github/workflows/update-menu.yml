@@ -76,4 +76,3 @@ jobs:
           else
             echo "- No content changes detected." >> "$GITHUB_STEP_SUMMARY"
           fi
-
