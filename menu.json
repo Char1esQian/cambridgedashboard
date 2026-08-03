@@ -6,9 +6,9 @@
       "price": "$2.90-$4.95"
     },
     "Soup": {
-      "name": "Escarole and Bean",
+      "name": "Turkey and Andouille Gumbo",
       "description": "",
-      "price": "$2.90-$3.95"
+      "price": "$2.90-$3.85"
     },
     "Deli": {
       "name": "Tofu Bahn Mi, Pickled Vegetables, Spicy Aioli",
@@ -19,13 +19,13 @@
       "name": "Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust",
       "description": "",
       "price": "$8.95",
-      "imageUrl": "assets/menu-generated/daily-2026w29-monday-plant-power.png"
+      "imageUrl": "assets/menu-generated/daily-2026w31-monday-plant-power.png"
     },
     "Action": {
-      "name": "Mongolian Beef and Broccoli Stir-Fry, Jasmine Rice",
+      "name": "Buckwheat Soba Noodles, Sauces, Chicken, Shrimp, Vegetables",
       "description": "",
-      "price": "$12.95",
-      "imageUrl": "assets/menu-generated/daily-2026w29-monday-action.png"
+      "price": "$11.95",
+      "imageUrl": "assets/menu-generated/daily-2026w31-monday-action.png"
     }
   },
   "Tuesday": {
@@ -40,17 +40,17 @@
       "price": "$2.90-$3.85"
     },
     "Deli": {
-      "name": "Smoked Salmon, Capers, Cucumber, Red Onion, Cream Cheese, Dill",
+      "name": "Ham and Brie, Bulkie Roll",
       "description": "",
       "price": "$8.25"
     },
     "Carving": {
-      "name": "Buffalo Chicken Mac and Cheese",
+      "name": "Baked Penne Primavera, Mozzarella, Grilled and Roasted Vegetables, Pesto",
       "description": "",
-      "price": "$11.95"
+      "price": "$10.95"
     },
     "Charred": {
-      "name": "Chicken, Bacon, Mozzarella Flatbread/Cauliflower Crust",
+      "name": "Chicken, Broccoli, Mozzarella Flatbread/Cauliflower Crust",
       "description": "",
       "price": "$8.95"
     },
@@ -82,10 +82,10 @@
       "price": "$8.95"
     },
     "Action": {
-      "name": "Grilled Salmon, Israeli Couscous, Tomatoes, Cucumber, Mint, Shallot",
+      "name": "Risotto Bar: Asparagus, Tomatoes, Peas and Mushrooms, Chicken, Shrimp",
       "description": "",
-      "price": "$12.95",
-      "imageUrl": "assets/menu-generated/daily-2026w29-wednesday-action.png"
+      "price": "$11.95",
+      "imageUrl": "assets/menu-generated/daily-2026w31-wednesday-action.png"
     }
   },
   "Thursday": {
@@ -110,16 +110,16 @@
       "price": "$8.95"
     },
     "Carving": {
-      "name": "Pork Loin Roast, Rosemary, Sour Cherry/Cranberry Sauce, Sweet Potatoes, Green Beans",
+      "name": "Pulled Pork Sandwich, Coleslaw, Green Beans",
       "description": "",
       "price": "$11.95",
-      "imageUrl": "assets/menu-generated/daily-2026w29-thursday-carving.png"
+      "imageUrl": "assets/menu-generated/daily-2026w31-thursday-carving.png"
     },
     "Action": {
-      "name": "Spaghetti, Broccoli Rabe, Cherry Tomatoes, Roasted Onion, Zucchini, Chicken, Parmesan",
+      "name": "Jerk Chicken, Rasta Pasta, Spiced Cream and Sweet Pepper Sauce",
       "description": "",
       "price": "$11.95",
-      "imageUrl": "assets/menu-generated/daily-2026w29-thursday-action.png"
+      "imageUrl": "assets/menu-generated/daily-2026w31-thursday-action.png"
     }
   },
   "Friday": {
@@ -144,10 +144,10 @@
       "price": "$8.95"
     },
     "Action": {
-      "name": "Black Bass Fillet, Coconut Rice, Pinto Beans, Pico de Gallo",
+      "name": "Grilled Salmon, Shrimp and Cucumber Salad, Brown Rice, Honey-Lime Vinaigrette",
       "description": "",
       "price": "$12.95",
-      "imageUrl": "assets/menu-generated/daily-2026w29-friday-action.png"
+      "imageUrl": "assets/menu-generated/daily-2026w31-friday-action.png"
     }
   },
   "_generated": {
@@ -161,58 +161,58 @@
         {
           "category": "Plant Power",
           "name": "Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust",
-          "imageUrl": "assets/menu-generated/daily-2026w29-monday-plant-power.png"
+          "imageUrl": "assets/menu-generated/daily-2026w31-monday-plant-power.png"
         },
         {
           "category": "Action",
-          "name": "Mongolian Beef and Broccoli Stir-Fry, Jasmine Rice",
-          "imageUrl": "assets/menu-generated/daily-2026w29-monday-action.png"
+          "name": "Buckwheat Soba Noodles, Sauces, Chicken, Shrimp, Vegetables",
+          "imageUrl": "assets/menu-generated/daily-2026w31-monday-action.png"
         }
       ],
       "Tuesday": [
         {
           "category": "Taco Tuesday",
           "name": "Taco Tuesday Bowl",
-          "imageUrl": "assets/menu-generated/daily-2026w29-tuesday-taco-tuesday.png"
+          "imageUrl": "assets/menu-generated/daily-2026w31-tuesday-taco-tuesday.png"
         }
       ],
       "Wednesday": [
         {
           "category": "Action",
-          "name": "Grilled Salmon, Israeli Couscous, Tomatoes, Cucumber, Mint, Shallot",
-          "imageUrl": "assets/menu-generated/daily-2026w29-wednesday-action.png"
+          "name": "Risotto Bar: Asparagus, Tomatoes, Peas and Mushrooms, Chicken, Shrimp",
+          "imageUrl": "assets/menu-generated/daily-2026w31-wednesday-action.png"
         }
       ],
       "Thursday": [
         {
           "category": "Carving",
-          "name": "Pork Loin Roast, Rosemary, Sour Cherry/Cranberry Sauce, Sweet Potatoes, Green Beans",
-          "imageUrl": "assets/menu-generated/daily-2026w29-thursday-carving.png"
+          "name": "Pulled Pork Sandwich, Coleslaw, Green Beans",
+          "imageUrl": "assets/menu-generated/daily-2026w31-thursday-carving.png"
         },
         {
           "category": "Action",
-          "name": "Spaghetti, Broccoli Rabe, Cherry Tomatoes, Roasted Onion, Zucchini, Chicken, Parmesan",
-          "imageUrl": "assets/menu-generated/daily-2026w29-thursday-action.png"
+          "name": "Jerk Chicken, Rasta Pasta, Spiced Cream and Sweet Pepper Sauce",
+          "imageUrl": "assets/menu-generated/daily-2026w31-thursday-action.png"
         }
       ],
       "Friday": [
         {
           "category": "Action",
-          "name": "Black Bass Fillet, Coconut Rice, Pinto Beans, Pico de Gallo",
-          "imageUrl": "assets/menu-generated/daily-2026w29-friday-action.png"
+          "name": "Grilled Salmon, Shrimp and Cucumber Salad, Brown Rice, Honey-Lime Vinaigrette",
+          "imageUrl": "assets/menu-generated/daily-2026w31-friday-action.png"
         }
       ]
     },
     "weeklyHighlights": {
-      "Carving": "assets/menu-generated/weekly-2026w29-carving.png",
-      "Plant Power": "assets/menu-generated/weekly-2026w29-plant-power.png",
-      "Action": "assets/menu-generated/weekly-2026w29-action.png"
+      "Carving": "assets/menu-generated/weekly-2026w31-carving.png",
+      "Plant Power": "assets/menu-generated/weekly-2026w31-plant-power.png",
+      "Action": "assets/menu-generated/weekly-2026w31-action.png"
     },
-    "sourceUrl": "https://www.corp.sebastians.com/_files/ugd/eb7882_33149610d17b473ab242162ffcb71871.pdf",
+    "sourceUrl": "https://www.corp.sebastians.com/_files/ugd/eb7882_28bce270a583439489be4bb105e0f45f.pdf",
     "sourceType": "application/pdf",
-    "sourceHash": "8d0079e0abe12b531750301cd7bc9f6f7a32cedde299fe8f825d4728d51f4528",
-    "sourceFetchedAt": "2026-07-20T15:33:48+00:00",
+    "sourceHash": "a129fedcc71eea2effdb8bb3452bdfad9d7fe224f1ad02744b1118cb66c0df07",
+    "sourceFetchedAt": "2026-08-03T14:01:23+00:00",
     "extractionModel": "codex-multimodal",
-    "updatedAt": "2026-07-20T15:43:12+00:00"
+    "updatedAt": "2026-08-03T14:11:42+00:00"
   }
 }
