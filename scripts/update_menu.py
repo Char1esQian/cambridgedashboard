@@ -87,11 +87,11 @@ For each menu item, provide:
 Return ONLY valid JSON in this exact format, no markdown code blocks.
 """
 
-FOOD_PHOTO_PROMPT_TEMPLATE = """Photoreal food product photo: a single black rectangular meal-prep container with a clear lid slightly open, on a clean off-white table. Modern cafeteria background, heavily blurred chairs, soft daylight from left, shallow depth of field, minimal/neutral colors, lots of negative space, slightly top-down view (around 35 to 45 degrees), crisp focus on food so ingredients are clearly visible.
+FOOD_PHOTO_PROMPT_TEMPLATE = """Photorealistic documentary-style office cafeteria lunch photo, not commercial food photography: a single ordinary black plastic takeout tray with a clear lid slightly open, on a clean off-white laminate table. The softly blurred background should suggest a practical workplace cafeteria. Use flat, everyday ambient lighting, a slightly top-down view (around 35 to 45 degrees), moderate depth of field, and neutral, slightly muted colors. The food must be clear and recognizable, with believable phone-camera realism rather than a polished advertisement.
 
-Meal based on: {item_name}. Proteins: {proteins_list}. Ingredients: {ingredients_list}. Base/crust: {base_or_crust}. Sauce: {sauce_or_none}. {protein_layout_instruction} Make it realistic, neatly arranged inside the tray, appetizing, no props.
+Meal based on: {item_name}. Proteins: {proteins_list}. Ingredients: {ingredients_list}. Base/crust: {base_or_crust}. Sauce: {sauce_or_none}. {protein_layout_instruction} Show a normal office-cafeteria portion plated by staff: modest, slightly uneven and compacted, with naturally irregular ingredient distribution, a little sauce pooling or smearing where appropriate, and occasional browned edges. Keep it fresh and edible-looking, but ordinary rather than luxurious. No decorative garnish, precise symmetry, restaurant plating, or styling props.
 
-Negative: text, logos, labels, watermarks, hands/people, utensils, clutter, cartoon/anime, oversaturated, distorted container/lid.
+Negative: fine-dining presentation, food-stylist perfection, glossy advertising look, dramatic lighting, heroic steam, excessive garnish, oversized portions, pristine geometric arrangement, text, logos, labels, watermarks, hands/people, utensils, clutter, cartoon/anime, oversaturated colors, distorted container/lid, spoiled or unsafe-looking food.
 """
 
 TUESDAY_TACO_SPECIAL = {
