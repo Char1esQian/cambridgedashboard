@@ -6,7 +6,7 @@
       "price": "$2.90-$4.95"
     },
     "Soup": {
-      "name": "Italian Wedding: Tiny Meatballs, Greens",
+      "name": "Turkey and Andouille Gumbo",
       "description": "",
       "price": "$2.90-$3.85"
     },
@@ -19,18 +19,18 @@
       "name": "Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust",
       "description": "",
       "price": "$8.95",
-      "imageUrl": "assets/menu-generated/daily-2026w33-monday-plant-power.png"
+      "imageUrl": "assets/menu-generated/daily-2026w35-monday-plant-power.png"
     },
     "Action": {
-      "name": "Chicken and/or Vegetable Vindaloo, Basmati Rice, Cauliflower and Peas",
+      "name": "Jerk Chicken, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers, Shallots",
       "description": "",
       "price": "$11.95",
-      "imageUrl": "assets/menu-generated/daily-2026w33-monday-action.png"
+      "imageUrl": "assets/menu-generated/daily-2026w35-monday-action.png"
     }
   },
   "Tuesday": {
     "Breakfast": {
-      "name": "Ham, Egg, Bacon, English Muffin",
+      "name": "Ham, Egg, Tomato, English Muffin",
       "description": "",
       "price": "$2.90-$4.95"
     },
@@ -45,17 +45,17 @@
       "price": "$8.25"
     },
     "Carving": {
-      "name": "Coq au Vin: Chicken in Red Wine, Bacon, Mushrooms, Onions, Mashed Potatoes",
+      "name": "Shrimp Creole, Peppers, Onions, Tomato, Steamed Rice",
       "description": "",
-      "price": "$11.95"
+      "price": "$12.95"
     },
-    "Charred": {
+    "Pizza": {
       "name": "Chicken, Broccoli, Mozzarella Flatbread/Cauliflower Crust",
       "description": "",
       "price": "$8.95"
     },
     "Action": {
-      "name": "Taco Tuesday, Chicken, Beef, Assorted Toppings, Tortillas",
+      "name": "Taco Tuesday, Chicken, Beef, Rice, Beans, Assorted Toppings, Tortillas",
       "description": "",
       "price": "$11.95"
     }
@@ -76,23 +76,29 @@
       "description": "",
       "price": "$8.25"
     },
-    "Charred": {
+    "Pizza": {
       "name": "Hawaiian: Ham, Pineapple Flatbread/Cauliflower Crust",
       "description": "",
       "price": "$8.95"
     },
-    "Action": {
-      "name": "Pasta Bar: Cheese Tortellini or Roasted Vegetable Ravioli, Sauces, Chicken, Shrimp, Vegetables",
+    "Carving": {
+      "name": "Grilled Chicken Thigh, Scallions, Roasted Red Onions, Tabbouleh",
       "description": "",
       "price": "$11.95",
-      "imageUrl": "assets/menu-generated/daily-2026w33-wednesday-action.png"
+      "imageUrl": "assets/menu-generated/daily-2026w35-wednesday-carving.png"
+    },
+    "Action": {
+      "name": "Scallion Soba Buckwheat Noodles, Chicken, Shrimp, Vegetables",
+      "description": "",
+      "price": "$11.95",
+      "imageUrl": "assets/menu-generated/daily-2026w35-wednesday-action.png"
     }
   },
   "Thursday": {
     "Breakfast": {
-      "name": "Smoke Salmon, Cream Cheese, Dill, Capers, Bulkie or Bagel",
+      "name": "Egg, American, Bulkie Roll",
       "description": "",
-      "price": "$8.25"
+      "price": "$2.90-$4.95"
     },
     "Soup": {
       "name": "Spicy Bean and Corn",
@@ -100,26 +106,25 @@
       "price": "$2.90-$3.85"
     },
     "Deli": {
-      "name": "Cubano: Ham, Pork, Swiss, Pickles, Mustard, Sub Roll",
+      "name": "Meatball Parmesan, Provolone, Marinara, Sub Roll",
       "description": "",
       "price": "$8.25"
     },
-    "Charred": {
+    "Pizza": {
       "name": "Chicken Ranch Flatbread/Cauliflower Crust",
       "description": "",
       "price": "$8.95"
     },
-    "Carving": {
-      "name": "Beef Tri-Tip, Chimichurri, Roasted Potatoes, Onions",
+    "Charred": {
+      "name": "Creamy Parmesan Polenta, Roasted Summer Vegetables",
       "description": "",
-      "price": "$11.95",
-      "imageUrl": "assets/menu-generated/daily-2026w33-thursday-carving.png"
+      "price": "$11.95"
     },
     "Action": {
-      "name": "Fried Rice, Shrimp, Chicken, Tofu, Pork, Egg, Vegetables",
+      "name": "Chicken, Broccoli, Penne, Alfredo Sauce or Pesto",
       "description": "",
       "price": "$11.95",
-      "imageUrl": "assets/menu-generated/daily-2026w33-thursday-action.png"
+      "imageUrl": "assets/menu-generated/daily-2026w35-thursday-action.png"
     }
   },
   "Friday": {
@@ -138,16 +143,16 @@
       "description": "",
       "price": "$8.25"
     },
-    "Charred": {
+    "Pizza": {
       "name": "Create Your Own Flatbread/Cauliflower Crust",
       "description": "",
       "price": "$8.95"
     },
     "Action": {
-      "name": "Grilled Swordfish Kabob, Mango Salsa, Jasmine Rice",
+      "name": "Chef's Choice Fresh Fish, Surprise Accompaniments",
       "description": "",
       "price": "$12.95",
-      "imageUrl": "assets/menu-generated/daily-2026w33-friday-action.png"
+      "imageUrl": "assets/menu-generated/daily-2026w35-friday-action.png"
     }
   },
   "_generated": {
@@ -161,58 +166,58 @@
         {
           "category": "Plant Power",
           "name": "Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust",
-          "imageUrl": "assets/menu-generated/daily-2026w33-monday-plant-power.png"
+          "imageUrl": "assets/menu-generated/daily-2026w35-monday-plant-power.png"
         },
         {
           "category": "Action",
-          "name": "Chicken and/or Vegetable Vindaloo, Basmati Rice, Cauliflower and Peas",
-          "imageUrl": "assets/menu-generated/daily-2026w33-monday-action.png"
+          "name": "Jerk Chicken, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers, Shallots",
+          "imageUrl": "assets/menu-generated/daily-2026w35-monday-action.png"
         }
       ],
       "Tuesday": [
         {
           "category": "Taco Tuesday",
           "name": "Taco Tuesday Bowl",
-          "imageUrl": "assets/menu-generated/daily-2026w33-tuesday-taco-tuesday.png"
+          "imageUrl": "assets/menu-generated/daily-2026w35-tuesday-taco-tuesday.png"
         }
       ],
       "Wednesday": [
         {
+          "category": "Carving",
+          "name": "Grilled Chicken Thigh, Scallions, Roasted Red Onions, Tabbouleh",
+          "imageUrl": "assets/menu-generated/daily-2026w35-wednesday-carving.png"
+        },
+        {
           "category": "Action",
-          "name": "Pasta Bar: Cheese Tortellini or Roasted Vegetable Ravioli, Sauces, Chicken, Shrimp, Vegetables",
-          "imageUrl": "assets/menu-generated/daily-2026w33-wednesday-action.png"
+          "name": "Scallion Soba Buckwheat Noodles, Chicken, Shrimp, Vegetables",
+          "imageUrl": "assets/menu-generated/daily-2026w35-wednesday-action.png"
         }
       ],
       "Thursday": [
         {
-          "category": "Carving",
-          "name": "Beef Tri-Tip, Chimichurri, Roasted Potatoes, Onions",
-          "imageUrl": "assets/menu-generated/daily-2026w33-thursday-carving.png"
-        },
-        {
           "category": "Action",
-          "name": "Fried Rice, Shrimp, Chicken, Tofu, Pork, Egg, Vegetables",
-          "imageUrl": "assets/menu-generated/daily-2026w33-thursday-action.png"
+          "name": "Chicken, Broccoli, Penne, Alfredo Sauce or Pesto",
+          "imageUrl": "assets/menu-generated/daily-2026w35-thursday-action.png"
         }
       ],
       "Friday": [
         {
           "category": "Action",
-          "name": "Grilled Swordfish Kabob, Mango Salsa, Jasmine Rice",
-          "imageUrl": "assets/menu-generated/daily-2026w33-friday-action.png"
+          "name": "Chef's Choice Fresh Fish, Surprise Accompaniments",
+          "imageUrl": "assets/menu-generated/daily-2026w35-friday-action.png"
         }
       ]
     },
     "weeklyHighlights": {
-      "Carving": "assets/menu-generated/weekly-2026w33-carving.png",
-      "Plant Power": "assets/menu-generated/weekly-2026w33-plant-power.png",
-      "Action": "assets/menu-generated/weekly-2026w33-action.png"
+      "Carving": "assets/menu-generated/weekly-2026w35-carving.png",
+      "Plant Power": "assets/menu-generated/weekly-2026w35-plant-power.png",
+      "Action": "assets/menu-generated/weekly-2026w35-action.png"
     },
-    "sourceUrl": "https://www.corp.sebastians.com/_files/ugd/eb7882_43e7546feffc4476b5803b01e9c6d38b.pdf",
+    "sourceUrl": "https://www.corp.sebastians.com/_files/ugd/eb7882_5981fda6d99f4dab96ff9d05fbde6c31.pdf",
     "sourceType": "application/pdf",
-    "sourceHash": "80837537e539956dce7fe14261624d7e00eb787cf8423d46bb02f1896b1fde97",
-    "sourceFetchedAt": "2026-08-10T13:49:42+00:00",
+    "sourceHash": "2e4c5688531067d20c7d5159a8a765fb70e2783868b8958d55d8065906e2eb3d",
+    "sourceFetchedAt": "2026-08-24T13:47:17+00:00",
     "extractionModel": "codex-multimodal",
-    "updatedAt": "2026-08-10T14:02:16+00:00"
+    "updatedAt": "2026-08-24T14:00:12+00:00"
   }
 }
