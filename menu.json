@@ -19,7 +19,7 @@
       "name": "Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust",
       "description": "",
       "price": "$8.95",
-      "imageUrl": "assets/menu-generated/daily-2026w35-monday-plant-power.png"
+      "imageUrl": "assets/menu-generated/daily-2026w35-monday-plant-power-v2.png"
     },
     "Action": {
       "name": "Jerk Chicken, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers, Shallots",
@@ -166,7 +166,7 @@
         {
           "category": "Plant Power",
           "name": "Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust",
-          "imageUrl": "assets/menu-generated/daily-2026w35-monday-plant-power.png"
+          "imageUrl": "assets/menu-generated/daily-2026w35-monday-plant-power-v2.png"
         },
         {
           "category": "Action",
@@ -210,7 +210,7 @@
     },
     "weeklyHighlights": {
       "Carving": "assets/menu-generated/weekly-2026w35-carving.png",
-      "Plant Power": "assets/menu-generated/weekly-2026w35-plant-power.png",
+      "Plant Power": "assets/menu-generated/weekly-2026w35-plant-power-v2.png",
       "Action": "assets/menu-generated/weekly-2026w35-action.png"
     },
     "sourceUrl": "https://www.corp.sebastians.com/_files/ugd/eb7882_5981fda6d99f4dab96ff9d05fbde6c31.pdf",
@@ -218,6 +218,6 @@
     "sourceHash": "2e4c5688531067d20c7d5159a8a765fb70e2783868b8958d55d8065906e2eb3d",
     "sourceFetchedAt": "2026-08-24T13:47:17+00:00",
     "extractionModel": "codex-multimodal",
-    "updatedAt": "2026-08-24T14:00:12+00:00"
+    "updatedAt": "2026-08-24T15:48:09+00:00"
   }
 }
