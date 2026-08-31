@@ -6,7 +6,7 @@
       "price": "$2.90-$4.95"
     },
     "Soup": {
-      "name": "Turkey and Andouille Gumbo",
+      "name": "Chicken Creole",
       "description": "",
       "price": "$2.90-$3.85"
     },
@@ -19,13 +19,13 @@
       "name": "Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust",
       "description": "",
       "price": "$8.95",
-      "imageUrl": "assets/menu-generated/daily-2026w35-monday-plant-power-v2.png"
+      "imageUrl": "assets/menu-generated/daily-2026w36-monday-plant-power.png"
     },
     "Action": {
-      "name": "Jerk Chicken, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers, Shallots",
+      "name": "Mongolian Beef and Broccoli Stir-Fry, Jasmine Rice",
       "description": "",
-      "price": "$11.95",
-      "imageUrl": "assets/menu-generated/daily-2026w35-monday-action.png"
+      "price": "$12.95",
+      "imageUrl": "assets/menu-generated/daily-2026w36-monday-action.png"
     }
   },
   "Tuesday": {
@@ -35,27 +35,27 @@
       "price": "$2.90-$4.95"
     },
     "Soup": {
-      "name": "Lentil and Spinach",
+      "name": "Italian Wedding",
       "description": "",
       "price": "$2.90-$3.85"
     },
     "Deli": {
-      "name": "Buffalo Chicken Wrap, Romaine, Blue Cheese",
+      "name": "Smoked Salmon, Capers, Cucumber, Red Onion, Cream Cheese, Dill",
       "description": "",
       "price": "$8.25"
     },
     "Carving": {
-      "name": "Shrimp Creole, Peppers, Onions, Tomato, Steamed Rice",
+      "name": "Buffalo Chicken Mac and Cheese",
       "description": "",
-      "price": "$12.95"
+      "price": "$11.95"
     },
-    "Pizza": {
-      "name": "Chicken, Broccoli, Mozzarella Flatbread/Cauliflower Crust",
+    "Charred": {
+      "name": "Chicken, Bacon, Mozzarella Flatbread/Cauliflower Crust",
       "description": "",
       "price": "$8.95"
     },
     "Action": {
-      "name": "Taco Tuesday, Chicken, Beef, Rice, Beans, Assorted Toppings, Tortillas",
+      "name": "Taco Tuesday, Chicken, Beef, Assorted Toppings, Tortillas",
       "description": "",
       "price": "$11.95"
     }
@@ -76,22 +76,16 @@
       "description": "",
       "price": "$8.25"
     },
-    "Pizza": {
+    "Charred": {
       "name": "Hawaiian: Ham, Pineapple Flatbread/Cauliflower Crust",
       "description": "",
       "price": "$8.95"
     },
-    "Carving": {
-      "name": "Grilled Chicken Thigh, Scallions, Roasted Red Onions, Tabbouleh",
-      "description": "",
-      "price": "$11.95",
-      "imageUrl": "assets/menu-generated/daily-2026w35-wednesday-carving.png"
-    },
     "Action": {
-      "name": "Scallion Soba Buckwheat Noodles, Chicken, Shrimp, Vegetables",
+      "name": "Grilled Spice-Rubbed Salmon, Tabbouleh, Lemon-Oregano Vinaigrette",
       "description": "",
-      "price": "$11.95",
-      "imageUrl": "assets/menu-generated/daily-2026w35-wednesday-action.png"
+      "price": "$12.95",
+      "imageUrl": "assets/menu-generated/daily-2026w36-wednesday-action.png"
     }
   },
   "Thursday": {
@@ -106,25 +100,26 @@
       "price": "$2.90-$3.85"
     },
     "Deli": {
-      "name": "Meatball Parmesan, Provolone, Marinara, Sub Roll",
+      "name": "Chicken Parmesan Sub",
       "description": "",
       "price": "$8.25"
     },
-    "Pizza": {
+    "Charred": {
       "name": "Chicken Ranch Flatbread/Cauliflower Crust",
       "description": "",
       "price": "$8.95"
     },
-    "Charred": {
-      "name": "Creamy Parmesan Polenta, Roasted Summer Vegetables",
-      "description": "",
-      "price": "$11.95"
-    },
-    "Action": {
-      "name": "Chicken, Broccoli, Penne, Alfredo Sauce or Pesto",
+    "Carving": {
+      "name": "Pork Loin Roast, Sour Cherry/Cranberry Sauce, Sweet Potatoes, Zucchini",
       "description": "",
       "price": "$11.95",
-      "imageUrl": "assets/menu-generated/daily-2026w35-thursday-action.png"
+      "imageUrl": "assets/menu-generated/daily-2026w36-thursday-carving.png"
+    },
+    "Action": {
+      "name": "Spaghetti, Broccoli Rabe, Cherry Tomatoes, Roasted Onion, Zucchini, Chicken, Parmesan",
+      "description": "",
+      "price": "$11.95",
+      "imageUrl": "assets/menu-generated/daily-2026w36-thursday-action.png"
     }
   },
   "Friday": {
@@ -143,16 +138,16 @@
       "description": "",
       "price": "$8.25"
     },
-    "Pizza": {
+    "Charred": {
       "name": "Create Your Own Flatbread/Cauliflower Crust",
       "description": "",
       "price": "$8.95"
     },
     "Action": {
-      "name": "Chef's Choice Fresh Fish, Surprise Accompaniments",
+      "name": "Grilled Salmon Fillet, Vegetable Lo Mein Noodles",
       "description": "",
       "price": "$12.95",
-      "imageUrl": "assets/menu-generated/daily-2026w35-friday-action.png"
+      "imageUrl": "assets/menu-generated/daily-2026w36-friday-action.png"
     }
   },
   "_generated": {
@@ -166,58 +161,58 @@
         {
           "category": "Plant Power",
           "name": "Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust",
-          "imageUrl": "assets/menu-generated/daily-2026w35-monday-plant-power-v2.png"
+          "imageUrl": "assets/menu-generated/daily-2026w36-monday-plant-power.png"
         },
         {
           "category": "Action",
-          "name": "Jerk Chicken, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers, Shallots",
-          "imageUrl": "assets/menu-generated/daily-2026w35-monday-action.png"
+          "name": "Mongolian Beef and Broccoli Stir-Fry, Jasmine Rice",
+          "imageUrl": "assets/menu-generated/daily-2026w36-monday-action.png"
         }
       ],
       "Tuesday": [
         {
           "category": "Taco Tuesday",
           "name": "Taco Tuesday Bowl",
-          "imageUrl": "assets/menu-generated/daily-2026w35-tuesday-taco-tuesday.png"
+          "imageUrl": "assets/menu-generated/daily-2026w36-tuesday-taco-tuesday.png"
         }
       ],
       "Wednesday": [
         {
-          "category": "Carving",
-          "name": "Grilled Chicken Thigh, Scallions, Roasted Red Onions, Tabbouleh",
-          "imageUrl": "assets/menu-generated/daily-2026w35-wednesday-carving.png"
-        },
-        {
           "category": "Action",
-          "name": "Scallion Soba Buckwheat Noodles, Chicken, Shrimp, Vegetables",
-          "imageUrl": "assets/menu-generated/daily-2026w35-wednesday-action.png"
+          "name": "Grilled Spice-Rubbed Salmon, Tabbouleh, Lemon-Oregano Vinaigrette",
+          "imageUrl": "assets/menu-generated/daily-2026w36-wednesday-action.png"
         }
       ],
       "Thursday": [
         {
+          "category": "Carving",
+          "name": "Pork Loin Roast, Sour Cherry/Cranberry Sauce, Sweet Potatoes, Zucchini",
+          "imageUrl": "assets/menu-generated/daily-2026w36-thursday-carving.png"
+        },
+        {
           "category": "Action",
-          "name": "Chicken, Broccoli, Penne, Alfredo Sauce or Pesto",
-          "imageUrl": "assets/menu-generated/daily-2026w35-thursday-action.png"
+          "name": "Spaghetti, Broccoli Rabe, Cherry Tomatoes, Roasted Onion, Zucchini, Chicken, Parmesan",
+          "imageUrl": "assets/menu-generated/daily-2026w36-thursday-action.png"
         }
       ],
       "Friday": [
         {
           "category": "Action",
-          "name": "Chef's Choice Fresh Fish, Surprise Accompaniments",
-          "imageUrl": "assets/menu-generated/daily-2026w35-friday-action.png"
+          "name": "Grilled Salmon Fillet, Vegetable Lo Mein Noodles",
+          "imageUrl": "assets/menu-generated/daily-2026w36-friday-action.png"
         }
       ]
     },
     "weeklyHighlights": {
-      "Carving": "assets/menu-generated/weekly-2026w35-carving.png",
-      "Plant Power": "assets/menu-generated/weekly-2026w35-plant-power-v2.png",
-      "Action": "assets/menu-generated/weekly-2026w35-action.png"
+      "Carving": "assets/menu-generated/weekly-2026w36-carving.png",
+      "Plant Power": "assets/menu-generated/weekly-2026w36-plant-power.png",
+      "Action": "assets/menu-generated/weekly-2026w36-action.png"
     },
-    "sourceUrl": "https://www.corp.sebastians.com/_files/ugd/eb7882_5981fda6d99f4dab96ff9d05fbde6c31.pdf",
+    "sourceUrl": "user-supplied://Bistro%20Menu%20Week%20of%2008.31.26.pdf",
     "sourceType": "application/pdf",
-    "sourceHash": "2e4c5688531067d20c7d5159a8a765fb70e2783868b8958d55d8065906e2eb3d",
-    "sourceFetchedAt": "2026-08-24T13:47:17+00:00",
+    "sourceHash": "d1ef956ea962519ede7bed646ee7a2877d3a573825936897e112c69095252b12",
+    "sourceFetchedAt": "2026-08-31T17:24:52+00:00",
     "extractionModel": "codex-multimodal",
-    "updatedAt": "2026-08-24T15:48:09+00:00"
+    "updatedAt": "2026-08-31T17:24:52+00:00"
   }
 }
