@@ -824,12 +824,57 @@
     }
 
     #menuDay {
-      margin-left: auto;
       font-size: 0.76rem;
       color: var(--text-muted);
       font-weight: 700;
       letter-spacing: 0.05em;
       text-transform: uppercase;
+      min-width: 5.6rem;
+      text-align: center;
+    }
+
+    .menu-day-nav {
+      margin-left: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.34rem;
+    }
+
+    .menu-page-btn {
+      border: 1px solid rgba(16, 32, 50, 0.2);
+      background: rgba(255, 255, 255, 0.72);
+      color: #1b446f;
+      border-radius: 999px;
+      width: 28px;
+      height: 28px;
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 160ms ease, border-color 160ms ease, color 160ms ease, opacity 160ms ease;
+    }
+
+    .menu-page-btn svg {
+      width: 14px;
+      height: 14px;
+      display: block;
+    }
+
+    .menu-page-btn:hover:not(:disabled) {
+      background: rgba(31, 111, 235, 0.12);
+      border-color: rgba(31, 111, 235, 0.35);
+      color: var(--accent);
+    }
+
+    .menu-page-btn:disabled {
+      cursor: default;
+      opacity: 0.34;
+    }
+
+    .menu-page-btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
     }
 
     .menu-collapse-btn {
@@ -839,6 +884,7 @@
       border-radius: 999px;
       width: 28px;
       height: 28px;
+      flex: 0 0 auto;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -2130,6 +2176,23 @@
         padding: 0.95rem;
       }
 
+      #menuCard .card-header {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+      }
+
+      #menuCard .menu-day-nav {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        justify-self: center;
+        margin-left: 0;
+      }
+
+      #menuCard .menu-collapse-btn {
+        grid-column: 3;
+        grid-row: 1;
+      }
+
       #menuContent,
       .stations-grid {
         grid-template-columns: 1fr;
@@ -2395,8 +2458,12 @@
         <div class="card" id="menuCard">
           <div class="card-header">
             <div class="card-icon icon-menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 2v7c0 1.1.9 2 2 2h0a2 2 0 0 0 2-2V2"/><path d="M5 11v11"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg></div>
-            <span class="card-title">Today's Menu</span>
-            <span id="menuDay"></span>
+            <span class="card-title" id="menuTitle">Today's Menu</span>
+            <div class="menu-day-nav" aria-label="Choose menu day">
+              <button class="menu-page-btn" id="menuPrevDayBtn" type="button" aria-label="Previous menu day" onclick="turnMenuPage(-1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg></button>
+              <span id="menuDay" aria-live="polite"></span>
+              <button class="menu-page-btn" id="menuNextDayBtn" type="button" aria-label="Next menu day" onclick="turnMenuPage(1)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg></button>
+            </div>
             <button class="menu-collapse-btn" id="menuCollapseBtn" type="button" aria-label="Toggle menu panel" aria-controls="menuPanelBody" aria-expanded="true" onclick="toggleMenuPanel()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button>
           </div>
           <div class="menu-panel-body" id="menuPanelBody">
@@ -2460,6 +2527,12 @@
     const MENU_PANEL_COLLAPSED_KEY = "menuPanelCollapsed";
     const MENU_ACTION_IMAGE_URL = "assets/menu-action-placeholder.png";
     const WEEKEND_NO_MENU_IMAGE_URL = "assets/menu-weekend-no-items-boston-vibe.png";
+    const MENU_WEEKDAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+    const currentCalendarDayIndex = new Date().getDay();
+    let selectedMenuDayIndex = currentCalendarDayIndex >= 1 && currentCalendarDayIndex <= 5
+      ? currentCalendarDayIndex - 1
+      : currentCalendarDayIndex === 6 ? MENU_WEEKDAYS.length - 1 : 0;
+    let weeklyMenuData = null;
     const BOSTON_TEAM_NAMES = new Set([
       "Boston Celtics",
       "Boston Bruins",
@@ -4287,57 +4360,60 @@
       return WEATHER_REFRESH_MIN_MS + Math.floor(Math.random() * (span + 1));
     }
 
-    async function fetchMenu() {
-      const menuUrl = `menu.json?ts=${Date.now()}`;
-      const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-      const today = weekdays[new Date().getDay()];
-      const isWeekend = today === "Saturday" || today === "Sunday";
-      document.getElementById("menuDay").textContent = today;
-      try {
-        const res = await fetch(menuUrl, { cache: "no-store" });
-        if (!res.ok) throw new Error(`Menu request failed: ${res.status}`);
-        const data = await res.json();
-        const todayMenu = data[today];
-        if (!todayMenu) {
-          document.getElementById("menuContent").innerHTML = `<span class="loading">No menu for ${today}</span>`;
-          updateMenuActionItem([]);
-          if (isWeekend) {
-            const label = document.getElementById("menuActionName");
-            if (label) label.textContent = "Weekend";
-            setMenuHighlightGrid([{ category: "Weekend", name: "No menu items", imageUrl: WEEKEND_NO_MENU_IMAGE_URL }]);
-            setMenuImageStatus(`Weekend: no menu items available for ${today}.`, false);
-          } else {
-            setMenuImageStatus(`No menu items available for ${today}.`, true);
-          }
-          return;
-        }
-        const entries = Object.entries(todayMenu).map(([category, item]) => [category, normalizeMenuItemForDisplay(item)]);
-        const byCategory = new Map(entries.map(([category, item]) => [String(category).toLowerCase(), { category, item }]));
-        const dailyMetaRaw = data && data._generated && data._generated.dailyHighlights ? data._generated.dailyHighlights[today] : null;
-        const dailyMeta = normalizeDailyHighlightMeta(dailyMetaRaw);
-        let highlightItems = [];
-        if (dailyMeta.length) {
-          highlightItems = dailyMeta.map(meta => {
-            const category = String((meta && meta.category) || "").trim();
-            const matched = byCategory.get(category.toLowerCase());
-            const item = matched ? matched.item : null;
-            const fallbackItem = item || normalizeMenuItemForDisplay(meta || {});
-            return {
-              category: category || (matched ? matched.category : "Highlight"),
-              name: fallbackItem.name || String((meta && meta.name) || "Menu highlight"),
-              imageUrl: String((meta && meta.imageUrl) || fallbackItem.imageUrl || "")
-            };
-          }).filter(it => it.name || it.imageUrl);
-        }
-        if (!highlightItems.length) {
-          highlightItems = pickActionMenuItems(entries).map(entry => ({
-            category: entry.category,
-            name: entry.item.name,
-            imageUrl: entry.item.imageUrl || ""
-          }));
-        }
-        updateMenuActionItem(highlightItems);
-        document.getElementById("menuContent").innerHTML = entries.map(([category, item]) => `
+    function updateMenuPageControls(day) {
+      const today = MENU_WEEKDAYS[currentCalendarDayIndex - 1];
+      const title = document.getElementById("menuTitle");
+      const previousButton = document.getElementById("menuPrevDayBtn");
+      const nextButton = document.getElementById("menuNextDayBtn");
+      document.getElementById("menuDay").textContent = day;
+      if (title) title.textContent = day === today ? "Today's Menu" : `${day}'s Menu`;
+      if (previousButton) previousButton.disabled = selectedMenuDayIndex === 0;
+      if (nextButton) nextButton.disabled = selectedMenuDayIndex === MENU_WEEKDAYS.length - 1;
+    }
+
+    function renderMenuDay(day) {
+      if (!weeklyMenuData) return;
+      updateMenuPageControls(day);
+      const dayMenu = weeklyMenuData[day];
+      if (!dayMenu || !Object.keys(dayMenu).length) {
+        const closedDay = weeklyMenuData._generated && weeklyMenuData._generated.closedDays
+          ? weeklyMenuData._generated.closedDays[day]
+          : null;
+        const message = closedDay && closedDay.message ? closedDay.message : `No menu for ${day}`;
+        document.getElementById("menuContent").innerHTML = `<span class="loading">${escapeHtml(message)}</span>`;
+        updateMenuActionItem([]);
+        setMenuImageStatus(message, false);
+        return;
+      }
+      const entries = Object.entries(dayMenu).map(([category, item]) => [category, normalizeMenuItemForDisplay(item)]);
+      const byCategory = new Map(entries.map(([category, item]) => [String(category).toLowerCase(), { category, item }]));
+      const dailyMetaRaw = weeklyMenuData && weeklyMenuData._generated && weeklyMenuData._generated.dailyHighlights
+        ? weeklyMenuData._generated.dailyHighlights[day]
+        : null;
+      const dailyMeta = normalizeDailyHighlightMeta(dailyMetaRaw);
+      let highlightItems = [];
+      if (dailyMeta.length) {
+        highlightItems = dailyMeta.map(meta => {
+          const category = String((meta && meta.category) || "").trim();
+          const matched = byCategory.get(category.toLowerCase());
+          const item = matched ? matched.item : null;
+          const fallbackItem = item || normalizeMenuItemForDisplay(meta || {});
+          return {
+            category: category || (matched ? matched.category : "Highlight"),
+            name: fallbackItem.name || String((meta && meta.name) || "Menu highlight"),
+            imageUrl: String((meta && meta.imageUrl) || fallbackItem.imageUrl || "")
+          };
+        }).filter(it => it.name || it.imageUrl);
+      }
+      if (!highlightItems.length) {
+        highlightItems = pickActionMenuItems(entries).map(entry => ({
+          category: entry.category,
+          name: entry.item.name,
+          imageUrl: entry.item.imageUrl || ""
+        }));
+      }
+      updateMenuActionItem(highlightItems);
+      document.getElementById("menuContent").innerHTML = entries.map(([category, item]) => `
           <div class="menu-item">
             <div class="menu-category">${category}</div>
             <div class="menu-name">${item.name}</div>
@@ -4345,6 +4421,23 @@
             <div class="menu-price">${item.price || "Market Price"}</div>
           </div>
         `).join("");
+    }
+
+    function turnMenuPage(direction) {
+      const nextIndex = Math.max(0, Math.min(MENU_WEEKDAYS.length - 1, selectedMenuDayIndex + direction));
+      if (nextIndex === selectedMenuDayIndex || !weeklyMenuData) return;
+      selectedMenuDayIndex = nextIndex;
+      renderMenuDay(MENU_WEEKDAYS[selectedMenuDayIndex]);
+    }
+
+    async function fetchMenu() {
+      const menuUrl = `menu.json?ts=${Date.now()}`;
+      updateMenuPageControls(MENU_WEEKDAYS[selectedMenuDayIndex]);
+      try {
+        const res = await fetch(menuUrl, { cache: "no-store" });
+        if (!res.ok) throw new Error(`Menu request failed: ${res.status}`);
+        weeklyMenuData = await res.json();
+        renderMenuDay(MENU_WEEKDAYS[selectedMenuDayIndex]);
       } catch (err) {
         document.getElementById("menuContent").innerHTML = `<span class="loading">Unable to load menu</span>`;
         updateMenuActionItem([]);
