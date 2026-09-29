@@ -12,6 +12,7 @@ This runbook supplements `scripts/update_menu.py` and the Codex automation. The 
 ## Images
 
 1. Select every daily and weekly highlight in the same weekly run.
+   On Tuesday, include the Carving item image alongside the fixed Taco Tuesday bowl when a Carving item is listed.
 2. Resolve the item archive slug before generation. Reuse approved archive images and the fixed Taco Tuesday reference; generate only genuine cache misses.
 3. Use the ordinary office-cafeteria style in `FOOD_PHOTO_PROMPT_TEMPLATE`: realistic but modest portions, slightly uneven staff plating, practical lighting, and no fine-dining or advertising polish.
 4. Inspect each new image before approval. Reject unrelated dishes, illustrations, text or logos, malformed packaging, unsafe-looking food, dimensions below 1024 pixels on an intended axis, and suspiciously small files.

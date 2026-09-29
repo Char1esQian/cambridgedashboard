@@ -20,7 +20,12 @@
     "Breakfast": { "name": "Ham, Egg, Tomato, English Muffin", "description": "", "price": "$2.90-$4.95" },
     "Soup": { "name": "Lentil and Spinach", "description": "", "price": "$2.90-$3.85" },
     "Deli": { "name": "Buffalo Chicken Wrap", "description": "", "price": "$8.25" },
-    "Carving": { "name": "Eggplant Rollatini, Ricotta and Spinach Filling, Marinara Sauce", "description": "", "price": "$10.95" },
+    "Carving": {
+      "name": "Eggplant Rollatini, Ricotta and Spinach Filling, Marinara Sauce",
+      "description": "",
+      "price": "$10.95",
+      "imageUrl": "assets/menu-generated/daily-2026w40-tuesday-carving.png"
+    },
     "Charred": { "name": "Chicken, Broccoli, Mozzarella Flatbread/Cauliflower Crust", "description": "", "price": "$8.95" },
     "Action": { "name": "Taco Tuesday, Chicken, Beef, Assorted Toppings, Tortillas", "description": "", "price": "$11.95" }
   },
@@ -80,7 +85,8 @@
         { "category": "Action", "name": "Wing Bar: Chicken Wings, Roasted Potatoes, Sauces, Carrots and Celery, Blue Cheese Dressing", "imageUrl": "assets/menu-generated/daily-2026w40-monday-action.png" }
       ],
       "Tuesday": [
-        { "category": "Taco Tuesday", "name": "Taco Tuesday Bowl", "imageUrl": "assets/menu-generated/daily-2026w40-tuesday-taco-tuesday.png" }
+        { "category": "Carving", "name": "Eggplant Rollatini, Ricotta and Spinach Filling, Marinara Sauce", "imageUrl": "assets/menu-generated/daily-2026w40-tuesday-carving.png" },
+        { "category": "Taco Tuesday", "name": "Taco Tuesday Bowl", "imageUrl": "assets/menu-generated/daily-2026w40-tuesday-taco-tuesday-v2.png" }
       ],
       "Wednesday": [
         { "category": "Carving", "name": "Beef Pot Roast, Rosemary and Garlic Mashed Potatoes, Green Beans", "imageUrl": "assets/menu-generated/daily-2026w40-wednesday-carving.png" },
@@ -104,6 +110,6 @@
     "sourceHash": "75472f12ebb5ee706ffd7e62c100680d4f7355e1ce099951948791d0b8d258a3",
     "sourceFetchedAt": "2026-09-29T15:13:37Z",
     "extractionModel": "codex-multimodal",
-    "updatedAt": "2026-09-29T15:20:00Z"
+    "updatedAt": "2026-09-29T15:41:17Z"
   }
 }

@@ -624,6 +624,26 @@ def generate_daily_highlights(menu_data: dict, assets_dir: Path, week_key: str, 
         if not isinstance(day_menu, dict) or not day_menu:
             continue
         if day == "Tuesday":
+            generated[day] = []
+            carving_category, carving_item = find_category_entry(day_menu, "Carving")
+            if carving_category and carving_item:
+                carving_filename = f"daily-{week_key}-{slugify(day)}-{slugify(carving_category)}.png"
+                carving_output_path = assets_dir / carving_filename
+                generate_or_reuse_food_photo_image(
+                    carving_category, carving_item, carving_output_path, image_api_key, assets_dir
+                )
+                carving_image_url = to_repo_relative_url(carving_output_path)
+                carving_item["imageUrl"] = carving_image_url
+                generated[day].append({
+                    "category": carving_category,
+                    "name": str(carving_item.get("name") or ""),
+                    "imageUrl": carving_image_url,
+                })
+                print(
+                    f"Generated daily highlight: {day} / {carving_category} -> {carving_image_url}",
+                    file=sys.stderr,
+                )
+
             category = TUESDAY_TACO_SPECIAL["category"]
             item = dict(TUESDAY_TACO_SPECIAL["item"])
             filename = f"daily-{week_key}-{slugify(day)}-{slugify(category)}.png"
@@ -641,11 +661,11 @@ def generate_daily_highlights(menu_data: dict, assets_dir: Path, week_key: str, 
                 render_fallback_tray_image(output_path)
 
             image_url = to_repo_relative_url(output_path)
-            generated[day] = [{
+            generated[day].append({
                 "category": category,
                 "name": str(item.get("name") or ""),
                 "imageUrl": image_url,
-            }]
+            })
             print(f"Generated daily highlight: {day} / {category} -> {image_url}", file=sys.stderr)
             continue
 
