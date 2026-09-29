@@ -86,7 +86,7 @@
       ],
       "Tuesday": [
         { "category": "Carving", "name": "Eggplant Rollatini, Ricotta and Spinach Filling, Marinara Sauce", "imageUrl": "assets/menu-generated/daily-2026w40-tuesday-carving.png" },
-        { "category": "Taco Tuesday", "name": "Taco Tuesday Bowl", "imageUrl": "assets/menu-generated/daily-2026w40-tuesday-taco-tuesday-v2.png" }
+        { "category": "Taco Tuesday", "name": "Taco Tuesday Bowl", "imageUrl": "assets/menu-generated/daily-2026w40-tuesday-taco-tuesday-v3.png" }
       ],
       "Wednesday": [
         { "category": "Carving", "name": "Beef Pot Roast, Rosemary and Garlic Mashed Potatoes, Green Beans", "imageUrl": "assets/menu-generated/daily-2026w40-wednesday-carving.png" },
@@ -110,6 +110,6 @@
     "sourceHash": "75472f12ebb5ee706ffd7e62c100680d4f7355e1ce099951948791d0b8d258a3",
     "sourceFetchedAt": "2026-09-29T15:13:37Z",
     "extractionModel": "codex-multimodal",
-    "updatedAt": "2026-09-29T15:41:17Z"
+    "updatedAt": "2026-09-29T15:53:45Z"
   }
 }
