@@ -1,72 +1,73 @@
 {
   "Monday": {
     "Breakfast": { "name": "Croissant, Egg, Cheese", "description": "", "price": "$2.90-$4.95" },
-    "Soup": { "name": "Turkey and Andouille Gumbo", "description": "", "price": "$2.90-$3.85" },
+    "Soup": { "name": "Vegetable Beef", "description": "", "price": "$2.90-$3.85" },
     "Deli": { "name": "Tofu Bahn Mi, Pickled Vegetables, Spicy Aioli", "description": "", "price": "$8.25" },
-    "Plant Power": { "name": "Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust", "description": "", "price": "$8.95", "imageUrl": "assets/menu-generated/daily-2026w43-monday-plant-power.png" },
-    "Action": { "name": "Jerk Chicken, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers, Shallots", "description": "", "price": "$11.95", "imageUrl": "assets/menu-generated/daily-2026w43-monday-action.png" }
+    "Plant Power": { "name": "Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust", "description": "", "price": "$8.95", "imageUrl": "assets/menu-generated/daily-2026w44-monday-plant-power.png" },
+    "Action": { "name": "Chicken Vindaloo, Spicy and Sour Curry Sauce, Basmati Rice, Carrots, Cauliflower and Okra", "description": "", "price": "$11.95", "imageUrl": "assets/menu-generated/daily-2026w44-monday-action.png" }
   },
   "Tuesday": {
     "Breakfast": { "name": "Ham, Egg, Tomato, English Muffin", "description": "", "price": "$2.90-$4.95" },
-    "Soup": { "name": "Lentil and Spinach", "description": "", "price": "$2.90-$3.85" },
-    "Deli": { "name": "Buffalo Chicken Wrap, Romaine, Blue Cheese", "description": "", "price": "$8.25" },
-    "Carving": { "name": "Shrimp Creole, Peppers, Onions, Tomato, Steamed Rice", "description": "", "price": "$12.95", "imageUrl": "assets/menu-generated/daily-2026w43-tuesday-carving.png" },
-    "Pizza": { "name": "Chicken, Broccoli, Mozzarella Flatbread/Cauliflower Crust", "description": "", "price": "$8.95" },
-    "Action": { "name": "Taco Tuesday, Chicken, Beef, Rice, Beans, Assorted Toppings, Tortillas", "description": "", "price": "$11.95" }
+    "Soup": { "name": "Cream of Broccoli", "description": "", "price": "$2.90-$3.85" },
+    "Deli": { "name": "Buffalo Chicken Wrap", "description": "", "price": "$8.25" },
+    "Charred": { "name": "Ham, Broccoli, Mozzarella Flatbread/Cauliflower Crust", "description": "", "price": "$8.95" },
+    "Carving": { "name": "Beef Pot Roast, Mushroom Gravy, Mashed Potato, Creamed Spinach", "description": "", "price": "$11.95", "imageUrl": "assets/menu-generated/daily-2026w44-tuesday-carving.png" },
+    "Action": { "name": "Taco Tuesday, Chicken, Beef, Vegetables, Assorted Toppings, Corn Tortillas", "description": "", "price": "$11.95" }
   },
   "Wednesday": {
     "Breakfast": { "name": "Egg, Sausage, Cheddar, Croissant", "description": "", "price": "$2.90-$4.95" },
-    "Soup": { "name": "Vegan Minestrone", "description": "", "price": "$2.90-$3.85" },
+    "Soup": { "name": "Pasta e Fagioli", "description": "", "price": "$2.90-$3.85" },
     "Deli": { "name": "Portabello Mushroom, Balsamic Glaze, Mozzarella, Tomato", "description": "", "price": "$8.25" },
-    "Pizza": { "name": "Hawaiian: Ham, Pineapple Flatbread/Cauliflower Crust", "description": "", "price": "$8.95" },
-    "Action": { "name": "Rice Noodles, Peanut Sauce, Chicken, Shrimp", "description": "", "price": "$11.95", "imageUrl": "assets/menu-generated/daily-2026w43-wednesday-action.png" }
+    "Charred": { "name": "Hawaiian: Ham, Pineapple Flatbread/Cauliflower Crust", "description": "", "price": "$8.95" },
+    "Action": { "name": "Scampi: Shrimp, Chicken, Zucchini, Tomatoes, Penne, Garlic, White Wine Sauce", "description": "", "price": "$11.95", "imageUrl": "assets/menu-generated/daily-2026w44-wednesday-action.png" }
   },
   "Thursday": {
-    "Breakfast": { "name": "Egg, American, Bulkie Roll", "description": "", "price": "$2.90-$4.95" },
+    "Breakfast": { "name": "Egg, American, Bagel", "description": "", "price": "$2.90-$4.95" },
     "Soup": { "name": "Spicy Bean and Corn", "description": "", "price": "$2.90-$3.85" },
-    "Deli": { "name": "Meatball Parmesan, Provolone, Marinara, Sub Roll", "description": "", "price": "$8.25" },
-    "Pizza": { "name": "Chicken Ranch Flatbread/Cauliflower Crust", "description": "", "price": "$8.95" },
-    "Charred": { "name": "Pork Loin, Cherry-Cranberry Sauce, Mashed Potatoes", "description": "", "price": "$11.95" },
-    "Action": { "name": "Pasta Bar: Cheese Tortellini, Roasted Vegetable Ravioli, Chicken, Shrimp, Marinara, Pesto", "description": "", "price": "$11.95", "imageUrl": "assets/menu-generated/daily-2026w43-thursday-action.png" }
+    "Deli": { "name": "Cubano: Ham, Pork, Swiss, Pickles, Mustard, Sub Roll", "description": "", "price": "$8.25" },
+    "Charred": { "name": "Chicken Ranch Flatbread/Cauliflower Crust", "description": "", "price": "$8.95" },
+    "Carving": { "name": "Baked Pasta, Marinara, Sweet Sausage, Ricotta Cheese", "description": "", "price": "$9.95", "imageUrl": "assets/menu-generated/daily-2026w44-thursday-carving.png" },
+    "Action": { "name": "Omelet Bar: Cage-Free Egg Omelet, Cheeses, Vegetables, Meats, Home Fries", "description": "", "price": "$12.95", "imageUrl": "assets/menu-generated/daily-2026w44-thursday-action.png" }
   },
   "Friday": {
     "Breakfast": { "name": "Ham, Egg, Swiss, Croissant", "description": "", "price": "$2.90-$4.95" },
     "Soup": { "name": "New England Clam Chowder", "description": "", "price": "$3.65-$4.35" },
     "Deli": { "name": "Tuna Melt: Tomato, American, Multi Grain", "description": "", "price": "$8.25" },
-    "Pizza": { "name": "Create Your Own Flatbread/Cauliflower Crust", "description": "", "price": "$8.95" },
-    "Action": { "name": "Grilled Swordfish, Mango Salsa, Jasmine Rice", "description": "", "price": "$12.95", "imageUrl": "assets/menu-generated/daily-2026w43-friday-action.png" }
+    "Charred": { "name": "Create Your Own Flatbread/Cauliflower Crust", "description": "", "price": "$8.95" },
+    "Action": { "name": "Grilled Salmon Fillet, Wild Rice, Swiss Chard, Lemon Butter", "description": "", "price": "$12.95", "imageUrl": "assets/menu-generated/daily-2026w44-friday-action.png" }
   },
   "_generated": {
     "priorityOrder": ["Carving", "Plant Power", "Action"],
     "dailyHighlights": {
       "Monday": [
-        { "category": "Plant Power", "name": "Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust", "imageUrl": "assets/menu-generated/daily-2026w43-monday-plant-power.png" },
-        { "category": "Action", "name": "Jerk Chicken, Rasta Pasta, Spiced Cream Sauce, Sweet Peppers, Shallots", "imageUrl": "assets/menu-generated/daily-2026w43-monday-action.png" }
+        { "category": "Plant Power", "name": "Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust", "imageUrl": "assets/menu-generated/daily-2026w44-monday-plant-power.png" },
+        { "category": "Action", "name": "Chicken Vindaloo, Spicy and Sour Curry Sauce, Basmati Rice, Carrots, Cauliflower and Okra", "imageUrl": "assets/menu-generated/daily-2026w44-monday-action.png" }
       ],
       "Tuesday": [
-        { "category": "Carving", "name": "Shrimp Creole, Peppers, Onions, Tomato, Steamed Rice", "imageUrl": "assets/menu-generated/daily-2026w43-tuesday-carving.png" },
-        { "category": "Taco Tuesday", "name": "Taco Tuesday Bowl", "imageUrl": "assets/menu-generated/daily-2026w43-tuesday-taco-tuesday.png" }
+        { "category": "Carving", "name": "Beef Pot Roast, Mushroom Gravy, Mashed Potato, Creamed Spinach", "imageUrl": "assets/menu-generated/daily-2026w44-tuesday-carving.png" },
+        { "category": "Taco Tuesday", "name": "Taco Tuesday Bowl", "imageUrl": "assets/menu-generated/daily-2026w44-tuesday-taco-tuesday.png" }
       ],
       "Wednesday": [
-        { "category": "Action", "name": "Rice Noodles, Peanut Sauce, Chicken, Shrimp", "imageUrl": "assets/menu-generated/daily-2026w43-wednesday-action.png" }
+        { "category": "Action", "name": "Scampi: Shrimp, Chicken, Zucchini, Tomatoes, Penne, Garlic, White Wine Sauce", "imageUrl": "assets/menu-generated/daily-2026w44-wednesday-action.png" }
       ],
       "Thursday": [
-        { "category": "Action", "name": "Pasta Bar: Cheese Tortellini, Roasted Vegetable Ravioli, Chicken, Shrimp, Marinara, Pesto", "imageUrl": "assets/menu-generated/daily-2026w43-thursday-action.png" }
+        { "category": "Carving", "name": "Baked Pasta, Marinara, Sweet Sausage, Ricotta Cheese", "imageUrl": "assets/menu-generated/daily-2026w44-thursday-carving.png" },
+        { "category": "Action", "name": "Omelet Bar: Cage-Free Egg Omelet, Cheeses, Vegetables, Meats, Home Fries", "imageUrl": "assets/menu-generated/daily-2026w44-thursday-action.png" }
       ],
       "Friday": [
-        { "category": "Action", "name": "Grilled Swordfish, Mango Salsa, Jasmine Rice", "imageUrl": "assets/menu-generated/daily-2026w43-friday-action.png" }
+        { "category": "Action", "name": "Grilled Salmon Fillet, Wild Rice, Swiss Chard, Lemon Butter", "imageUrl": "assets/menu-generated/daily-2026w44-friday-action.png" }
       ]
     },
     "weeklyHighlights": {
-      "Carving": "assets/menu-generated/weekly-2026w43-carving.png",
-      "Plant Power": "assets/menu-generated/weekly-2026w43-plant-power.png",
-      "Action": "assets/menu-generated/weekly-2026w43-action.png"
+      "Carving": "assets/menu-generated/weekly-2026w44-carving.png",
+      "Plant Power": "assets/menu-generated/weekly-2026w44-plant-power.png",
+      "Action": "assets/menu-generated/weekly-2026w44-action.png"
     },
     "sourceUrl": "https://cafe.sebastians.com/sebclients/3130alewife.jpg",
     "sourceType": "image/jpeg",
-    "sourceHash": "339790297567d817d67b4da70a3ca51cb853ec4b0d200b3ab7c844b5ceb67a87",
-    "sourceFetchedAt": "2026-10-20T15:03:15Z",
+    "sourceHash": "22d83fe234f84d9b47c11afe56efda759632a54c123d0eaceb2dd872c4816c35",
+    "sourceFetchedAt": "2026-10-28T14:22:15Z",
     "extractionModel": "codex-multimodal",
-    "updatedAt": "2026-10-20T15:03:15Z"
+    "updatedAt": "2026-10-28T14:22:15Z"
   }
 }
