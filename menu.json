@@ -6,7 +6,7 @@
       "price": "$2.90-$4.95"
     },
     "Soup": {
-      "name": "Chicken and Andouille Gumbo",
+      "name": "Chicken Creole",
       "description": "",
       "price": "$2.90-$3.85"
     },
@@ -19,13 +19,13 @@
       "name": "Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust",
       "description": "",
       "price": "$8.95",
-      "imageUrl": "assets/menu-generated/daily-2026w46-monday-plant-power.png"
+      "imageUrl": "assets/menu-generated/daily-2026w47-monday-plant-power.png"
     },
     "Action": {
-      "name": "Jerk Chicken, Rasta Pasta, Spiced Cream and Sweet Pepper Sauce",
+      "name": "Spaghetti, Broccoli Rabe, Cherry Tomatoes, Roasted Onion, Zucchini, Chicken, Parmesan",
       "description": "",
-      "price": "$11.95",
-      "imageUrl": "assets/menu-generated/daily-2026w46-monday-action.png"
+      "price": "$12.95",
+      "imageUrl": "assets/menu-generated/daily-2026w47-monday-action.png"
     }
   },
   "Tuesday": {
@@ -35,23 +35,23 @@
       "price": "$2.90-$4.95"
     },
     "Soup": {
-      "name": "Lentil and Spinach",
+      "name": "Cream of Broccoli",
       "description": "",
       "price": "$2.90-$3.85"
     },
     "Deli": {
-      "name": "Ham and Brie, Bulkie Roll",
+      "name": "Smoked Salmon, Capers, Cucumber, Red Onion, Cream Cheese, Dill",
       "description": "",
       "price": "$8.25"
     },
     "Carving": {
-      "name": "Cheddar, Spinach and Mushroom Strata (Savory Bread Pudding)",
+      "name": "Buffalo Chicken Mac and Cheese",
       "description": "",
-      "price": "$10.95",
-      "imageUrl": "assets/menu-generated/daily-2026w46-tuesday-carving.png"
+      "price": "$11.95",
+      "imageUrl": "assets/menu-generated/daily-2026w47-tuesday-carving.png"
     },
     "Charred": {
-      "name": "Chicken, Broccoli, Mozzarella Flatbread/Cauliflower Crust",
+      "name": "Chicken, Bacon, Mozzarella Flatbread/Cauliflower Crust",
       "description": "",
       "price": "$8.95"
     },
@@ -83,10 +83,10 @@
       "price": "$8.95"
     },
     "Action": {
-      "name": "Chicken Piccata, Lemon, Capers, Butter, Broccoli Rabe, Pasta",
+      "name": "Sole a la Meuniere: Brown Butter, Lemon, Wild Rice Pilaf",
       "description": "",
-      "price": "$11.95",
-      "imageUrl": "assets/menu-generated/daily-2026w46-wednesday-action.png"
+      "price": "$12.95",
+      "imageUrl": "assets/menu-generated/daily-2026w47-wednesday-action.png"
     }
   },
   "Thursday": {
@@ -111,16 +111,16 @@
       "price": "$8.95"
     },
     "Carving": {
-      "name": "Puerto Rican-Style Pork 'Pernil', Rice, Pigeon Peas, Plantains",
+      "name": "Pork Loin Roast, Sour Cherry/Cranberry Sauce, Sweet Potatoes, Zucchini",
       "description": "",
       "price": "$11.95",
-      "imageUrl": "assets/menu-generated/daily-2026w46-thursday-carving.png"
+      "imageUrl": "assets/menu-generated/daily-2026w47-thursday-carving.png"
     },
     "Action": {
-      "name": "General Tso's Chicken, Vegetable Lo Mein",
+      "name": "Chicken Vindaloo, Basmati Rice, Mango Chutney",
       "description": "",
       "price": "$11.95",
-      "imageUrl": "assets/menu-generated/daily-2026w46-thursday-action.png"
+      "imageUrl": "assets/menu-generated/daily-2026w47-thursday-action.png"
     }
   },
   "Friday": {
@@ -145,10 +145,10 @@
       "price": "$8.95"
     },
     "Action": {
-      "name": "Grilled Salmon, Shrimp and Cucumber Salad, Brown Rice, Honey-Lime Vinaigrette",
+      "name": "Grilled Swordfish and Vegetable Kabobs, Rice Pilaf",
       "description": "",
       "price": "$12.95",
-      "imageUrl": "assets/menu-generated/daily-2026w46-friday-action.png"
+      "imageUrl": "assets/menu-generated/daily-2026w47-friday-action.png"
     }
   },
   "_generated": {
@@ -162,63 +162,63 @@
         {
           "category": "Plant Power",
           "name": "Spinach, Mushroom, Caramelized Onion, Pesto, Flatbread/Cauliflower Crust",
-          "imageUrl": "assets/menu-generated/daily-2026w46-monday-plant-power.png"
+          "imageUrl": "assets/menu-generated/daily-2026w47-monday-plant-power.png"
         },
         {
           "category": "Action",
-          "name": "Jerk Chicken, Rasta Pasta, Spiced Cream and Sweet Pepper Sauce",
-          "imageUrl": "assets/menu-generated/daily-2026w46-monday-action.png"
+          "name": "Spaghetti, Broccoli Rabe, Cherry Tomatoes, Roasted Onion, Zucchini, Chicken, Parmesan",
+          "imageUrl": "assets/menu-generated/daily-2026w47-monday-action.png"
         }
       ],
       "Tuesday": [
         {
           "category": "Carving",
-          "name": "Cheddar, Spinach and Mushroom Strata (Savory Bread Pudding)",
-          "imageUrl": "assets/menu-generated/daily-2026w46-tuesday-carving.png"
+          "name": "Buffalo Chicken Mac and Cheese",
+          "imageUrl": "assets/menu-generated/daily-2026w47-tuesday-carving.png"
         },
         {
           "category": "Taco Tuesday",
           "name": "Taco Tuesday Bowl",
-          "imageUrl": "assets/menu-generated/daily-2026w46-tuesday-taco-tuesday.png"
+          "imageUrl": "assets/menu-generated/daily-2026w47-tuesday-taco-tuesday.png"
         }
       ],
       "Wednesday": [
         {
           "category": "Action",
-          "name": "Chicken Piccata, Lemon, Capers, Butter, Broccoli Rabe, Pasta",
-          "imageUrl": "assets/menu-generated/daily-2026w46-wednesday-action.png"
+          "name": "Sole a la Meuniere: Brown Butter, Lemon, Wild Rice Pilaf",
+          "imageUrl": "assets/menu-generated/daily-2026w47-wednesday-action.png"
         }
       ],
       "Thursday": [
         {
           "category": "Carving",
-          "name": "Puerto Rican-Style Pork 'Pernil', Rice, Pigeon Peas, Plantains",
-          "imageUrl": "assets/menu-generated/daily-2026w46-thursday-carving.png"
+          "name": "Pork Loin Roast, Sour Cherry/Cranberry Sauce, Sweet Potatoes, Zucchini",
+          "imageUrl": "assets/menu-generated/daily-2026w47-thursday-carving.png"
         },
         {
           "category": "Action",
-          "name": "General Tso's Chicken, Vegetable Lo Mein",
-          "imageUrl": "assets/menu-generated/daily-2026w46-thursday-action.png"
+          "name": "Chicken Vindaloo, Basmati Rice, Mango Chutney",
+          "imageUrl": "assets/menu-generated/daily-2026w47-thursday-action.png"
         }
       ],
       "Friday": [
         {
           "category": "Action",
-          "name": "Grilled Salmon, Shrimp and Cucumber Salad, Brown Rice, Honey-Lime Vinaigrette",
-          "imageUrl": "assets/menu-generated/daily-2026w46-friday-action.png"
+          "name": "Grilled Swordfish and Vegetable Kabobs, Rice Pilaf",
+          "imageUrl": "assets/menu-generated/daily-2026w47-friday-action.png"
         }
       ]
     },
     "weeklyHighlights": {
-      "Carving": "assets/menu-generated/weekly-2026w46-carving.png",
-      "Plant Power": "assets/menu-generated/weekly-2026w46-plant-power.png",
-      "Action": "assets/menu-generated/weekly-2026w46-action.png"
+      "Carving": "assets/menu-generated/weekly-2026w47-carving.png",
+      "Plant Power": "assets/menu-generated/weekly-2026w47-plant-power.png",
+      "Action": "assets/menu-generated/weekly-2026w47-action.png"
     },
     "sourceUrl": "https://cafe.sebastians.com/sebclients/3130alewife.jpg",
     "sourceType": "image/jpeg",
-    "sourceHash": "b4b7367dc273313be65c2f4133c0a2b48c50b5516ff32cbc4681c66a3d187160",
-    "sourceFetchedAt": "2026-11-09T14:50:03Z",
+    "sourceHash": "b35200e1a678c42a6388f6ee60f326a132a93f24933f0a41267c09c155fab059",
+    "sourceFetchedAt": "2026-11-16T14:52:47Z",
     "extractionModel": "codex-multimodal",
-    "updatedAt": "2026-11-09T14:50:03Z"
+    "updatedAt": "2026-11-16T14:52:47Z"
   }
 }
